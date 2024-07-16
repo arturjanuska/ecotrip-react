@@ -1,0 +1,27 @@
+.field-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.field-container label {
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16.1px;
+	text-align: left;
+	color: #7a7776;
+}
+
+.field-container p {
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 13.8px;
+	text-align: left;
+	color: #7a777680;
+}
+
+.w-360 {
+	width: 360px;
+}

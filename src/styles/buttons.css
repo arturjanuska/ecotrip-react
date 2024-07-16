@@ -1,0 +1,41 @@
+.primary-button {
+	color: #9aa61e;
+	background-color: #fff;
+	border: 1px solid #9aa61e !important;
+}
+
+.primary-button:hover {
+	background-color: #9aa61e;
+	color: #ffffff;
+	border: 1px solid #9aa61e !important;
+}
+
+.secondary-button {
+	background-color: #9aa61e;
+	color: #ffffff;
+	border: 1px solid #9aa61e !important;
+}
+
+.secondary-button:hover {
+	color: #9aa61e;
+	background-color: #fff;
+	border: 1px solid #9aa61e !important;
+}
+
+.btn {
+	min-width: min-content;
+	width: 360px;
+	padding: 12px 0;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.btn span {
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 16.1px;
+	text-align: center;
+	text-transform: uppercase;
+}

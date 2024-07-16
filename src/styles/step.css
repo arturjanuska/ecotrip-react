@@ -1,0 +1,26 @@
+.step-columns {
+	display: flex;
+	align-items: flex-start;
+	margin: 36px 0;
+}
+
+.title-column {
+	width: 33%;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.title-column span {
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 16.1px;
+	text-align: left;
+	color: #7a7776;
+}
+
+.content-column {
+	width: 740px;
+	box-sizing: border-box;
+	padding: 0;
+}
