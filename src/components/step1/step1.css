@@ -95,3 +95,9 @@
 	align-content: center;
 	justify-content: flex-end;
 }
+
+@media (max-width: 768px) {
+	.address-form-section-wrapper {
+		flex-direction: column;
+	}
+}

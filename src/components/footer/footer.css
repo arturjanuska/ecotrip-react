@@ -141,3 +141,33 @@
 .copyright {
 	color: #7a7776;
 }
+
+@media (max-width: 768px) {
+	.footer-container {
+		max-width: 360px;
+		padding: 50px 0;
+	}
+
+	.footer-sections {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+	}
+
+	.link-list-container {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 40px;
+	}
+
+	.link-list-list {
+		width: 100%;
+		align-items: center;
+	}
+
+	.link-list-title {
+		margin-bottom: 20px;
+	}
+}

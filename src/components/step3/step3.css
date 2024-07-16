@@ -18,3 +18,14 @@
 	gap: 16px;
 	width: 100%;
 }
+
+@media (max-width: 768px) {
+	.date-fields-container {
+		width: 100%;
+		flex-direction: column;
+	}
+
+	.w-half {
+		width: 100%;
+	}
+}

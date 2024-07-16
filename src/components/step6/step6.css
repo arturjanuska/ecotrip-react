@@ -12,10 +12,43 @@
 	margin-bottom: 24px;
 }
 
+.payer-email {
+	width: 100%;
+	margin-bottom: 14px;
+}
+
 .invoice-form-container {
 	display: flex;
 	margin-bottom: 30px;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	row-gap: 30px;
+}
+
+.order-price-container {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
+}
+
+.order-price {
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16.1px;
+	text-align: right;
+	color: #7a7776;
+	margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+	.payer-info-container {
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	.payer-email {
+		margin-bottom: 40px;
+	}
 }

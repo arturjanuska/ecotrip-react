@@ -5,3 +5,9 @@
 	justify-content: space-between;
 	row-gap: 30px;
 }
+
+@media (max-width: 768px) {
+	.client-form-container {
+		flex-direction: column;
+	}
+}

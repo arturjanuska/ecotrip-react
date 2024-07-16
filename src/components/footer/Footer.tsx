@@ -63,9 +63,6 @@ const Footer = () => {
 						<LinkList
 							list={secondColumnList}
 							title='Pervežimai užsienyje'
-							style={{
-								width: '24%',
-							}}
 						/>
 						<div className='link-list-container'>
 							<h2 className='link-list-title'>Kontaktai</h2>
@@ -92,7 +89,7 @@ const Footer = () => {
 							<News />
 						</div>
 					</div>
-					<p className='copyright'>@ 2023 ecotrip.lt | Visos teisės saugomos</p>
+					<p className='copyright'>@ 2024 ecotrip.lt | Visos teisės saugomos</p>
 				</div>
 			</div>
 		</div>

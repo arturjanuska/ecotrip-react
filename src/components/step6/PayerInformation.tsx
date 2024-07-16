@@ -54,11 +54,7 @@ const PayerInformation = ({}: PayerInformationProps) => {
 						/>
 					</FieldContainer>
 				</div>
-				<div
-					style={{
-						width: '100%',
-						marginBottom: '14px',
-					}}>
+				<div className='payer-email'>
 					<FieldContainer
 						label='Mokėtojo el. paštas'
 						description='Užsakymo ir mokėjimo patvirtinimai bus išsiųsti į šį elektroninį paštą.'

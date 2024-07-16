@@ -25,3 +25,13 @@
 .w-360 {
 	width: 360px;
 }
+
+@media (max-width: 768px) {
+	.w-360 {
+		width: 100%;
+	}
+
+	.w-full {
+		width: 100%;
+	}
+}

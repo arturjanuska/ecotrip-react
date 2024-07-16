@@ -49,3 +49,11 @@
 	outline: none;
 	outline-offset: 0px;
 }
+
+@media (max-width: 768px) {
+	.custom-textarea textarea {
+		max-width: 100%;
+		min-width: 100%;
+		min-height: 80px;
+	}
+}

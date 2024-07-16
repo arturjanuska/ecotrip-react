@@ -24,3 +24,18 @@
 	box-sizing: border-box;
 	padding: 0;
 }
+
+@media (max-width: 768px) {
+	.step-columns {
+		flex-direction: column;
+	}
+
+	.title-column {
+		width: 100%;
+		margin-bottom: 34px;
+	}
+
+	.content-column {
+		width: 100%;
+	}
+}

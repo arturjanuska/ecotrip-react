@@ -18,7 +18,11 @@ input[type='checkbox'] {
 	appearance: none;
 	-webkit-appearance: none;
 	width: 1.2rem;
+	min-width: 1.2rem;
+	max-width: 1.2rem;
 	height: 1.2rem;
+	min-height: 1.2rem;
+	max-height: 1.2rem;
 	background-color: #fff;
 	border: 1px solid #0000001a;
 	border-radius: 5px;
@@ -42,4 +46,10 @@ input[type='checkbox']:checked {
 
 input[type='checkbox']:checked:after {
 	display: block;
+}
+
+@media (max-width: 768px) {
+	.form-control .label {
+		gap: 2px;
+	}
 }
