@@ -9,21 +9,25 @@ const services: ServiceProps[] = [
 		title: 'Standartinės siuntos',
 		desc: 'Įprastos kainos',
 		icon: faHouse,
+		value: 'standartShipment',
 	},
 	{
 		title: 'Siuntos su adreso paslauga',
 		desc: 'Papildomai nuo €0 / vnt.',
 		icon: faImage,
+		value: 'shipmentWithAddressService',
 	},
 	{
 		title: 'Prekės nupirkimo paslauga',
 		desc: 'Papildomai nuo €5 / vnt.',
 		icon: faInstagram,
+		value: 'productPurchaseService',
 	},
 	{
 		title: 'Prekės pardavimo paslauga',
 		desc: 'Papildomai nuo €10 / vnt.',
 		icon: faBell,
+		value: 'productSalesService',
 	},
 ];
 

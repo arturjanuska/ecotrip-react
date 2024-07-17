@@ -8,6 +8,7 @@ export type ServiceProps = {
 	title: string;
 	desc: string;
 	icon: IconDefinition;
+	value: string;
 };
 
 export type ServiceCardProps = {

@@ -7,10 +7,14 @@ import OrderPrice from './OrderPrice';
 import SecondaryButton from '../SecondaryButton';
 import './step6.css';
 import Link from '../Link';
+import { Control } from 'react-hook-form';
+import { FormType } from '../../utils/formTypes';
 
-type PayerInformationProps = {};
+type Props = {
+	control: Control<FormType, any>;
+};
 
-const PayerInformation = ({}: PayerInformationProps) => {
+const PayerInformation = ({ control }: Props) => {
 	const payerOptions = [
 		{
 			value: 'thePayerIsTheSender',
@@ -62,6 +66,8 @@ const PayerInformation = ({}: PayerInformationProps) => {
 						<CustomInput
 							placeholder='Įveskite mokėtojo el. paštą'
 							type='text'
+							control={control}
+							name='customerInformation.email'
 						/>
 					</FieldContainer>
 				</div>

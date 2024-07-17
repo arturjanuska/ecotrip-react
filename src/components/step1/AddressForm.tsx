@@ -1,41 +1,24 @@
-import { useForm } from 'react-hook-form';
+import { Control, UseFormSetValue } from 'react-hook-form';
 import Step from '../Step';
-import { Address } from '../../utils/types';
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import SecondaryButton from '../SecondaryButton';
 import { SearchBox } from './SearchBox';
 import './step1.css';
 import ServiceSection from './ServiceSection';
-
-type AddressFormProps = {
-	addressFrom: string;
-	addressTo: string;
-};
+import { FormType } from '../../utils/formTypes';
 
 const AddressForm = ({
 	setValue,
+	control,
 }: {
-	setValue: (name: Address, value: string) => void;
+	setValue: UseFormSetValue<FormType>;
+	control: Control<FormType, any>;
 }) => {
-	// const { register, setValue, watch, getValues, handleSubmit } =
-	// 	useForm<AddressFormProps>({
-	// 		defaultValues: {},
-	// 	});
-
-	// const form = watch();
-	// console.log('form ===', form);
-
-	// const onTestClick = () => {
-	// 	const values = getValues();
-	// 	console.log('values ===', values);
-	// };
-
-	// const onSubmit = (data: AddressFormProps) => {
-	// 	console.log('data', data);
-	// };
-
-	const onChange = (name: Address, value: string) => {
+	const onChange = (
+		name: 'pickupAddress' | 'deliveryAddress',
+		value: string
+	) => {
 		setValue(name, value);
 	};
 
@@ -48,7 +31,7 @@ const AddressForm = ({
 					label='Paėmimo adresas:'
 					description='Adresas iš kur paįmama siunta arba perduodama EcoTrip komandai.'>
 					<SearchBox
-						name={Address.From}
+						name={'pickupAddress'}
 						defaultValue=''
 						onChange={onChange}
 						placeholder='Įveskite gatvę, namo numerį, miestą'
@@ -60,6 +43,8 @@ const AddressForm = ({
 					<CustomInput
 						type='text'
 						placeholder='Pašto kodas'
+						name='pickupAddressZipCode'
+						control={control}
 					/>
 				</FieldContainer>
 			</div>
@@ -69,7 +54,7 @@ const AddressForm = ({
 					label='Pristatymo adresas:'
 					description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'>
 					<SearchBox
-						name={Address.To}
+						name={'deliveryAddress'}
 						defaultValue=''
 						onChange={onChange}
 						placeholder='Įveskite gatvę, namo numerį, miestą'
@@ -81,6 +66,8 @@ const AddressForm = ({
 					<CustomInput
 						type='text'
 						placeholder='Pašto kodas'
+						name='deliveryAddressZipCode'
+						control={control}
 					/>
 				</FieldContainer>
 			</div>

@@ -1,13 +1,13 @@
 import usePlacesAutocomplete from 'use-places-autocomplete';
 import { useGoogleMapsScript, Libraries } from 'use-google-maps-script';
-import { Address, OptionType } from '../../utils/types';
+import { OptionType } from '../../utils/types';
 import StyledSelect from '../StyledSelect';
 
 interface ISearchBoxProps {
 	defaultValue: string;
-	name: Address;
+	name: 'pickupAddress' | 'deliveryAddress';
 	placeholder?: string;
-	onChange: (name: Address, value: string) => void;
+	onChange: (name: 'pickupAddress' | 'deliveryAddress', value: string) => void;
 }
 
 const libraries: Libraries = ['places'];

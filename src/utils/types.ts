@@ -143,11 +143,6 @@ export enum SizeUnits {
 	CubicMetre = 'm3',
 }
 
-export enum Address {
-	From = 'addressFrom',
-	To = 'addressTo',
-}
-
 export type AddressesFormType = {
 	addressFrom: { label: string; value: string } | null;
 	addressTo: { label: string; value: string } | null;
