@@ -1,4 +1,4 @@
-import { Control, UseFormSetValue } from 'react-hook-form';
+import { Control, UseFormReturn, UseFormSetValue } from 'react-hook-form';
 import Step from '../Step';
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
@@ -7,24 +7,74 @@ import { SearchBox } from './SearchBox';
 import './step1.css';
 import ServiceSection from './ServiceSection';
 import { FormType } from '../../utils/formTypes';
+import { useEffect } from 'react';
 
 const AddressForm = ({
   setValue,
   control,
   selectedService,
-  formData,
+  methods,
 }: {
   setValue: UseFormSetValue<FormType>;
   control: Control<FormType, any>;
   selectedService: string;
-  formData: FormType;
+  methods: UseFormReturn<FormType, any, undefined>;
 }) => {
   const onChange = (
     name: 'pickupAddress' | 'deliveryAddress',
     value: string
   ) => {
+    if (name === 'pickupAddress') {
+      setValue('pickupAddressZipCode', '');
+    }
+    if (name === 'deliveryAddress') {
+      setValue('deliveryAddressZipCode', '');
+    }
     setValue(name, value);
   };
+
+  const handleOnClear = (name: 'pickupAddress' | 'deliveryAddress') => {
+    if (name === 'pickupAddress') {
+      setValue('pickupAddressZipCode', '');
+    }
+    if (name === 'deliveryAddress') {
+      setValue('deliveryAddressZipCode', '');
+    }
+  };
+
+  function findUKPostcode(address: string) {
+    const postcodePattern = /\b[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}\b/;
+
+    const match = address.match(postcodePattern);
+
+    if (match) {
+      return match[0];
+    } else {
+      return null;
+    }
+  }
+
+  const selectedPickupAddress = methods.watch('pickupAddress');
+  const selectedDeliveryAddress = methods.watch('deliveryAddress');
+
+  console.log('selectedPickupAddress ===> ', selectedPickupAddress);
+  console.log('selectedDeliveryAddress ===> ', selectedDeliveryAddress);
+
+  useEffect(() => {
+    if (selectedPickupAddress) {
+      const postCode = findUKPostcode(selectedPickupAddress);
+
+      setValue('pickupAddressZipCode', postCode);
+    }
+  }, [selectedPickupAddress]);
+
+  useEffect(() => {
+    if (selectedDeliveryAddress) {
+      const postCode = findUKPostcode(selectedDeliveryAddress);
+
+      setValue('deliveryAddressZipCode', postCode);
+    }
+  }, [selectedDeliveryAddress]);
 
   return (
     <Step title='Paėmimo ir pristatymo adresai' step={1}>
@@ -38,6 +88,7 @@ const AddressForm = ({
             defaultValue=''
             onChange={onChange}
             placeholder='Įveskite gatvę, namo numerį, miestą'
+            onClear={handleOnClear}
           />
         </FieldContainer>
         <FieldContainer
@@ -63,6 +114,7 @@ const AddressForm = ({
             defaultValue=''
             onChange={onChange}
             placeholder='Įveskite gatvę, namo numerį, miestą'
+            onClear={handleOnClear}
           />
         </FieldContainer>
         <FieldContainer

@@ -303,9 +303,9 @@ const SingleShimpentForm = ({
                   {volumeErrorMessages.length !== 0 &&
                     volumeErrorMessages
                       .filter((mes) => mes !== undefined)
-                      .map((err) => {
+                      .map((err, index) => {
                         return (
-                          <div className='error'>
+                          <div className='error' key={index}>
                             <span>Šių parametrų siuntos neaptarnaujame. </span>{' '}
                             {err}
                           </div>

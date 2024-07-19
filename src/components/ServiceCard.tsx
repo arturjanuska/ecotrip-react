@@ -1,13 +1,10 @@
-import {
-  faCircleCheck,
-  IconDefinition,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type ServiceProps = {
   title: string;
   desc: string;
-  icon: IconDefinition;
+  icon: React.ReactNode;
   value: string;
 };
 
@@ -28,7 +25,7 @@ const ServiceCard = ({ service, onSelect, selected }: ServiceCardProps) => {
       onClick={onSelect}
     >
       <div className='service-info'>
-        <FontAwesomeIcon icon={service.icon} size='2xl' color='#9AA61E' />
+        {service.icon}
         <div className='service-description'>
           <span className='card-title'>{service.title}</span>
           <span className='card-description'>{service.desc}</span>

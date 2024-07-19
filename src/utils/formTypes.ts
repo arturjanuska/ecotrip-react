@@ -16,9 +16,9 @@ export type ShipmentProps = {
 export type FormType = {
   direction: 'UK-LT' | 'LT-UK';
   pickupAddress: string;
-  pickupAddressZipCode: string;
+  pickupAddressZipCode: string | null;
   deliveryAddress: string;
-  deliveryAddressZipCode: string;
+  deliveryAddressZipCode: string | null;
   service: string;
   shipments: ShipmentProps[];
   dates: {

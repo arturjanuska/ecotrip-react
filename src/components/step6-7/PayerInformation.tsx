@@ -85,7 +85,7 @@ const PayerInformation = ({ control, step, stepLabel }: Props) => {
             <span>
               Aš esu susipažinęs(-usi) ir sutinku su{' '}
               <Link
-                href='/'
+                href='https://ecotrip.lt/siuntos-pakavimo-ir-zenklinimo-taisykles/'
                 text='EcoTrip siuntos pakavimo ir ženklinimo taisyklėmis'
               />
             </span>
@@ -93,7 +93,10 @@ const PayerInformation = ({ control, step, stepLabel }: Props) => {
           <ControlledCheckboxWithLabel control={control} name='transportRules'>
             <span>
               Aš esu susipažinęs(-usi) ir sutinku su{' '}
-              <Link href='/' text='EcoTrip vežimo taisyklėmis' />
+              <Link
+                href='https://ecotrip.lt/vezimo-taisykles/'
+                text='EcoTrip vežimo taisyklėmis'
+              />
             </span>
           </ControlledCheckboxWithLabel>
         </div>

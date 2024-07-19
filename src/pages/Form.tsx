@@ -12,15 +12,17 @@ import { useForm } from 'react-hook-form';
 
 const Form = () => {
   const methods = useForm<FormType>({
-    // shouldUnregister: true,
     defaultValues: {
       service: 'standartShipment',
     },
+    shouldUnregister: true,
   });
 
   const selectedService = methods.watch('service');
 
   const formData = methods.watch();
+
+  console.log('formData ===> ', formData);
 
   return (
     <form className='main'>
@@ -35,7 +37,7 @@ const Form = () => {
           setValue={methods.setValue}
           control={methods.control}
           selectedService={selectedService}
-          formData={formData}
+          methods={methods}
         />
         <Divider />
         <Shipments
