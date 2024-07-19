@@ -3,24 +3,23 @@ import { fetchWrapper } from './fetchWrapper';
 import type { OptionType } from './types';
 
 const useCategories = () => {
-	const [categories, setCategories] = useState<OptionType[]>([]);
+  const [categories, setCategories] = useState<OptionType[]>([]);
 
-	const getCategoriesSelectOptions = async () => {
-		const response = await fetchWrapper('ecotrip-pricelist', {
-			httpOptions: {
-				method: 'GET',
-			},
-		});
+  const getCategoriesSelectOptions = async () => {
+    const response = await fetchWrapper('ecotrip-pricelist', {
+      httpOptions: {
+        method: 'GET',
+      },
+    });
 
-		const data = await response.json();
-		console.log('data', data);
-		setCategories(data);
-	};
+    const data = await response.json();
+    setCategories(data);
+  };
 
-	useEffect(() => {
-		getCategoriesSelectOptions();
-	}, []);
+  useEffect(() => {
+    getCategoriesSelectOptions();
+  }, []);
 
-	return categories;
+  return categories;
 };
 export default useCategories;

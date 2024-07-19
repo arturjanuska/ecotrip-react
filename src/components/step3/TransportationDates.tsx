@@ -1,56 +1,44 @@
-import { useState } from 'react';
 import Step from '../Step';
 import Datepicker from '../Datepicker';
 import getDateOptions from '../../utils/getDateOptions';
 import './step3.css';
+import { UseFormReturn } from 'react-hook-form';
+import { FormType } from '../../utils/formTypes';
 
-type TransportationDatesProps = {};
+type TransportationDatesProps = {
+  methods: UseFormReturn<FormType, any, undefined>;
+};
 
-const TransportationDates = ({}: TransportationDatesProps) => {
-	const [selectedYear, setSelectedYear] = useState<string>('');
-	const [selectedMonth, setSelectedMonth] = useState<string>('');
-	const [selectedDay, setSelectedDay] = useState<string>('');
+const TransportationDates = ({ methods }: TransportationDatesProps) => {
+  const selectedMonth = methods.watch('dates.from.month');
 
-	const options = getDateOptions(selectedMonth);
+  const options = getDateOptions(selectedMonth?.value || null);
 
-	const handleDateChange = (date: 'year' | 'month' | 'day', value: string) => {
-		switch (date) {
-			case 'year':
-				setSelectedYear(value);
-				break;
-			case 'month':
-				setSelectedMonth(value);
-				break;
-			case 'day':
-				setSelectedDay(value);
-				break;
-			default:
-				break;
-		}
-	};
+  // const setValue = methods.setValue;
 
-	return (
-		<Step
-			step={3}
-			title='Siuntos pervežimo datos'>
-			<>
-				<div className='date-fields-container'>
-					<Datepicker
-						className='w-half'
-						fiedsDisabled={false}
-						label='Siuntos paėmimo data'
-						handleDateChange={handleDateChange}
-						options={options}
-					/>
-					<Datepicker
-						className='w-half'
-						fiedsDisabled={true}
-						label='Siuntos pristatymo data (numatoma)'
-					/>
-				</div>
-			</>
-		</Step>
-	);
+  return (
+    <Step step={3} title='Siuntos pervežimo datos'>
+      <>
+        <div className='date-fields-container'>
+          <Datepicker
+            className='w-half'
+            fiedsDisabled={false}
+            label='Siuntos paėmimo data'
+            options={options}
+            control={methods.control}
+            name='from'
+          />
+          <Datepicker
+            className='w-half'
+            fiedsDisabled={true}
+            label='Siuntos pristatymo data (numatoma)'
+            control={methods.control}
+            name='to'
+          />
+        </div>
+      </>
+    </Step>
+  );
 };
 
 export default TransportationDates;

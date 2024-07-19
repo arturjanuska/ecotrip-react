@@ -11,41 +11,67 @@ import { FormType } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
 
 const Form = () => {
-	const methods = useForm<FormType>({
-		shouldUnregister: true,
-		defaultValues: {},
-	});
+  const methods = useForm<FormType>({
+    // shouldUnregister: true,
+    defaultValues: {
+      service: 'standartShipment',
+    },
+  });
 
-	const formData = methods.watch();
-	console.log('formData ===', formData);
+  const selectedService = methods.watch('service');
 
-	return (
-		<form className='main'>
-			<div
-				style={{
-					marginBottom: '70px',
-				}}>
-				<Breadcrumds />
-				<Divider />
-				<AddressForm
-					setValue={methods.setValue}
-					control={methods.control}
-				/>
-				<Divider />
-				<Shipments />
-				<Divider />
-				<TransportationDates />
-				<Divider />
-				<SenderInformation control={methods.control} />
-				<Divider />
-				<RecipientInformation control={methods.control} />
-				<Divider />
-				<RansomPayeeInformation control={methods.control} />
-				<Divider />
-				<PayerInformation control={methods.control} />
-			</div>
-		</form>
-	);
+  const formData = methods.watch();
+
+  return (
+    <form className='main'>
+      <div
+        style={{
+          marginBottom: '70px',
+        }}
+      >
+        <Breadcrumds />
+        <Divider />
+        <AddressForm
+          setValue={methods.setValue}
+          control={methods.control}
+          selectedService={selectedService}
+          formData={formData}
+        />
+        <Divider />
+        <Shipments
+          control={methods.control}
+          formData={formData}
+          selectedService={selectedService}
+        />
+        <Divider />
+        <TransportationDates methods={methods} />
+        <Divider />
+        <SenderInformation
+          control={methods.control}
+          stepLabel={
+            selectedService === 'productSalesService'
+              ? 'Siuntos paėmimo / pardavėjo informacija'
+              : 'Siuntos paėmimo / siuntėjo informacija'
+          }
+        />
+        <Divider />
+        <RecipientInformation control={methods.control} />
+        {selectedService === 'productSalesService' && (
+          <>
+            <Divider />
+            <RansomPayeeInformation control={methods.control} />
+          </>
+        )}
+
+        <Divider />
+        <PayerInformation
+          control={methods.control}
+          step={selectedService === 'productSalesService' ? 7 : 6}
+          stepLabel={'Užsakovo informacija'}
+        />
+      </div>
+    </form>
+  );
 };
 
 export default Form;
