@@ -1,4 +1,4 @@
-import { Control, useFieldArray } from 'react-hook-form';
+import { Control, useFieldArray, UseFormReturn } from 'react-hook-form';
 import Step from '../Step';
 import SingleShimpentForm from './SingleShimpentForm';
 import { FormType } from '../../utils/formTypes';
@@ -9,12 +9,14 @@ import './step2.css';
 const Shipments = ({
   control,
   selectedService,
+  methods,
 }: {
   control: Control<FormType>;
   formData: FormType;
   selectedService: string;
+  methods: UseFormReturn<FormType, any, undefined>;
 }) => {
-  const { fields, append, remove } = useFieldArray<FormType>({
+  const { fields, append, remove, prepend } = useFieldArray<FormType>({
     control,
     name: 'shipments',
   });
@@ -37,7 +39,7 @@ const Shipments = ({
           {fields.length > 0 &&
             fields.map((field, index) => {
               return (
-                <div className='form-control' key={index}>
+                <div className='form-control' key={field.id}>
                   <SingleShimpentForm
                     key={field.id}
                     shipmentNumber={index + 1}
@@ -46,6 +48,8 @@ const Shipments = ({
                     index={index}
                     removeShipment={removeShipment}
                     selectedService={selectedService}
+                    setValue={methods.setValue}
+                    methods={methods}
                   />
                 </div>
               );
@@ -61,7 +65,16 @@ const Shipments = ({
             className='add-shipment-button'
             type='button'
             onClick={() => {
-              append({ category: null });
+              append({
+                category:
+                  selectedService === 'parcelForceShipment'
+                    ? {
+                        label: 'Siuntos',
+                        value: 'shipments',
+                      }
+                    : null,
+                amount: 1,
+              });
             }}
           >
             Pridėti papildomą siuntą

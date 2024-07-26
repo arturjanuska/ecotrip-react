@@ -11,6 +11,9 @@ export type ShipmentProps = {
   productType?: OptionType | null;
   size?: OptionType | RangeSizeType | null;
   orderedShipmentNumber?: string;
+  specification?: OptionType | null;
+  estimatedPrice?: string;
+  amount: number;
 };
 
 export type FormType = {

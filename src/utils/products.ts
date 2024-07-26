@@ -18,7 +18,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.08,
     weight: 28,
-    specification: false,
+    specification: {
+      label: 'Be padangu',
+      value: 'withoutTires',
+    },
     price: 60,
   },
   {
@@ -36,7 +39,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.24,
     weight: 40,
-    specification: true,
+    specification: {
+      label: 'Su padangom',
+      value: 'withTires',
+    },
     price: 70,
   },
   {
@@ -54,7 +60,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.1,
     weight: 32,
-    specification: false,
+    specification: {
+      label: 'Be padangu',
+      value: 'withoutTires',
+    },
     price: 80,
   },
   {
@@ -72,7 +81,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.3,
     weight: 48,
-    specification: true,
+    specification: {
+      label: 'Su padangom',
+      value: 'withTires',
+    },
     price: 90,
   },
   {
@@ -90,7 +102,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.12,
     weight: 40,
-    specification: false,
+    specification: {
+      label: 'Be padangu',
+      value: 'withoutTires',
+    },
     price: 100,
   },
   {
@@ -108,7 +123,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.36,
     weight: 60,
-    specification: true,
+    specification: {
+      label: 'Su padangom',
+      value: 'withTires',
+    },
     price: 110,
   },
   {
@@ -126,7 +144,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.14,
     weight: 48,
-    specification: false,
+    specification: {
+      label: 'Be padangu',
+      value: 'withoutTires',
+    },
     price: 120,
   },
   {
@@ -144,7 +165,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.44,
     weight: 72,
-    specification: true,
+    specification: {
+      label: 'Su padangom',
+      value: 'withTires',
+    },
     price: 130,
   },
   // Kita sub kategorija
@@ -156,11 +180,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: Fiat 500',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Mikro automobiliai',
+      label: 'Mikro automobiliai, pvz: Fiat 500',
       value: 'microCars',
     },
     volume: 0.15,
@@ -174,11 +198,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: VW Polo',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Subkompaktiniai automobiliai',
+      label: 'Subkompaktiniai automobiliai, pvz: VW Polo',
       value: 'subcompactCars',
     },
     volume: 0.18,
@@ -192,11 +216,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: VW Golf',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Kompaktiniai automobiliai',
+      label: 'Kompaktiniai automobiliai, pvz: VW Golf',
       value: 'compactCars',
     },
     volume: 0.2,
@@ -210,11 +234,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: VW Passat',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Vidutinio dydžio automobiliai',
+      label: 'Vidutinio dydžio automobiliai, pvz: VW Passat',
       value: 'midSizeCars',
     },
     volume: 0.25,
@@ -228,11 +252,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: MB S Class',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Dideli automobiliai',
+      label: 'Dideli automobiliai, pvz: MB S Class',
       value: 'bigCars',
     },
     volume: 0.3,
@@ -246,11 +270,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: BMW X5',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Visureigiai',
+      label: 'Visureigiai, pvz: BMW X5',
       value: 'suvs',
     },
     volume: 0.35,
@@ -264,11 +288,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: Ford Ranger',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Pikapai',
+      label: 'Pikapai, pvz: Ford Ranger',
       value: 'pickupTrucks',
     },
     volume: 0.4,
@@ -282,11 +306,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio durys, pvz: VW Caravelle',
+      label: 'Automobilio durys',
       value: 'doors',
     },
     size: {
-      label: 'Mikroautobusai',
+      label: 'Mikroautobusai, pvz: VW Caravelle',
       value: 'minibuses',
     },
     volume: 0.45,
@@ -305,10 +329,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'Automobilio salonas',
       value: 'interior',
     },
-    size: {
-      label: 'Mikro automobiliai',
-      value: 'microCars',
-    },
+    size: null,
     callManager: true,
     volume: 0,
     weight: 0,
@@ -327,15 +348,12 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'Automobilio ketvirtis',
       value: 'carQuarter',
     },
-    size: {
-      label: 'Mikro automobiliai',
-      value: 'microCars',
-    },
+    size: null,
     callManager: true,
     volume: 0,
     weight: 0,
     specification: null,
-    price: 120,
+    price: 0,
   },
 
   // bumper
@@ -345,11 +363,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: Fiat 500',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Mikro automobiliai',
+      label: 'Mikro automobiliai, pvz: Fiat 500',
       value: 'microCars',
     },
     volume: 0.12,
@@ -363,11 +381,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: VW Polo',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Subkompaktiniai automobiliai',
+      label: 'Subkompaktiniai automobiliai, pvz: VW Polo',
       value: 'subcompactCars',
     },
     volume: 0.15,
@@ -381,11 +399,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: VW Golf',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Kompaktiniai automobiliai',
+      label: 'Kompaktiniai automobiliai, pvz: VW Golf',
       value: 'compactCars',
     },
     volume: 0.18,
@@ -399,11 +417,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: VW Passat',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Vidutinio dydžio automobiliai',
+      label: 'Vidutinio dydžio automobiliai, pvz: VW Passat',
       value: 'midSizeCars',
     },
     volume: 0.22,
@@ -417,11 +435,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: MB S Class',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Dideli automobiliai',
+      label: 'Dideli automobiliai, pvz: MB S Class',
       value: 'bigCars',
     },
     volume: 0.25,
@@ -435,11 +453,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: BMW X5',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Visureigiai',
+      label: 'Visureigiai, pvz: BMW X5',
       value: 'suvs',
     },
     volume: 0.28,
@@ -453,11 +471,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: Ford Ranger',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Pikapai',
+      label: 'Pikapai, pvz: Ford Ranger',
       value: 'pickupTrucks',
     },
     volume: 0.3,
@@ -471,11 +489,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio buferis, pvz: VW Caravelle',
+      label: 'Automobilio buferis',
       value: 'bumper',
     },
     size: {
-      label: 'Mikroautobusai',
+      label: 'Mikroautobusai, pvz: VW Caravelle',
       value: 'minibuses',
     },
     volume: 0.35,
@@ -490,11 +508,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz:Fiat 500',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Mikro automobiliai',
+      label: 'Mikro automobiliai, pvz: Fiat 500',
       value: 'microCars',
     },
     volume: 0.12,
@@ -508,11 +526,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz: VW Polo',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Subkompaktiniai automobiliai',
+      label: 'Subkompaktiniai automobiliai, pvz: VW Polo',
       value: 'subcompactCars',
     },
     volume: 0.15,
@@ -526,11 +544,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz: VW Golf',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Kompaktiniai automobiliai',
+      label: 'Kompaktiniai automobiliai, pvz: VW Golf',
       value: 'compactCars',
     },
     volume: 0.18,
@@ -544,11 +562,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz: VW Passat',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Vidutinio dydžio automobiliai',
+      label: 'Vidutinio dydžio automobiliai, pvz: VW Passat',
       value: 'midSizeCars',
     },
     volume: 0.22,
@@ -562,11 +580,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz: MB S Class',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Dideli automobiliai',
+      label: 'Dideli automobiliai, pvz: MB S Class',
       value: 'bigCars',
     },
     volume: 0.25,
@@ -580,11 +598,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz: BMW X5',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Visureigiai',
+      label: 'Visureigiai, pvz: BMW X5',
       value: 'suvs',
     },
     volume: 0.28,
@@ -598,11 +616,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz: Ford Ranger',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Pikapai',
+      label: 'Pikapai, pvz: Ford Ranger',
       value: 'pickupTrucks',
     },
     volume: 0.3,
@@ -616,11 +634,11 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       value: 'automotiveGoods',
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis, pvz: VW Caravelle',
+      label: 'Automobilio priekinis/galinis dangtis',
       value: 'cover',
     },
     size: {
-      label: 'Mikroautobusai',
+      label: 'Mikroautobusai, pvz: VW Caravelle',
       value: 'minibuses',
     },
     volume: 0.35,
@@ -646,7 +664,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.14,
     weight: 75,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 80,
   },
   {
@@ -664,7 +685,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.14,
     weight: 85,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 120,
   },
   {
@@ -682,7 +706,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.18,
     weight: 100,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 100,
   },
   {
@@ -700,7 +727,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.18,
     weight: 115,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 170,
   },
   {
@@ -718,7 +748,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.23,
     weight: 125,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 120,
   },
   {
@@ -736,7 +769,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.23,
     weight: 145,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 200,
   },
   {
@@ -754,7 +790,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.29,
     weight: 155,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 150,
   },
   {
@@ -772,7 +811,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.29,
     weight: 180,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 250,
   },
   {
@@ -790,7 +832,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.36,
     weight: 190,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 180,
   },
   {
@@ -808,7 +853,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.36,
     weight: 220,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 300,
   },
   {
@@ -826,7 +874,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.45,
     weight: 215,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 200,
   },
   {
@@ -844,7 +895,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.45,
     weight: 250,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 350,
   },
   {
@@ -862,7 +916,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.54,
     weight: 250,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 230,
   },
   {
@@ -880,7 +937,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.54,
     weight: 290,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 370,
   },
   {
@@ -898,7 +958,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.63,
     weight: 300,
-    specification: false,
+    specification: {
+      label: 'Tuscias',
+      value: 'empty',
+    },
     price: 250,
   },
   {
@@ -916,12 +979,15 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.63,
     weight: 340,
-    specification: true,
+    specification: {
+      label: 'Pilnas',
+      value: 'full',
+    },
     price: 400,
   },
 
   // transmision
-  // specification: true => Mechanine
+  // specification: true => Mechanine pavarų dėžė
   // specification: false => Automatine
   {
     category: {
@@ -938,7 +1004,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.3,
     weight: 30,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 50,
   },
   {
@@ -956,7 +1025,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.025,
     weight: 25,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 45,
   },
   {
@@ -974,7 +1046,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.035,
     weight: 40,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 65,
   },
   {
@@ -992,7 +1067,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.03,
     weight: 35,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 50,
   },
   {
@@ -1010,7 +1088,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.4,
     weight: 50,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 75,
   },
   {
@@ -1028,7 +1109,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.035,
     weight: 45,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 60,
   },
   {
@@ -1046,7 +1130,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.045,
     weight: 60,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 85,
   },
   {
@@ -1064,7 +1151,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.4,
     weight: 55,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 75,
   },
   {
@@ -1082,7 +1172,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.05,
     weight: 70,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 120,
   },
   {
@@ -1100,7 +1193,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.045,
     weight: 65,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 85,
   },
   {
@@ -1118,7 +1214,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.055,
     weight: 80,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 120,
   },
   {
@@ -1136,7 +1235,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.05,
     weight: 75,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 120,
   },
   {
@@ -1154,7 +1256,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.06,
     weight: 90,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 120,
   },
   {
@@ -1172,7 +1277,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.055,
     weight: 85,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 120,
   },
   {
@@ -1190,7 +1298,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.07,
     weight: 100,
-    specification: false,
+    specification: {
+      label: 'Automatine pavarų dėžė',
+      value: 'automatic',
+    },
     price: 120,
   },
   {
@@ -1208,7 +1319,10 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.06,
     weight: 95,
-    specification: true,
+    specification: {
+      label: 'Mechanine pavarų dėžė',
+      value: 'manual',
+    },
     price: 120,
   },
 ];
@@ -2415,7 +2529,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     },
     productType: null,
     size: {
-      from: 41,
+      from: 40,
       to: 42,
     },
     volume: 0.1,
@@ -2563,6 +2677,38 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     specification: null,
     // skaiciuojama pagal kubus 1 kubinis metras 200 eu  aukshtis*plotis*gylis
     price: 200,
+  },
+  {
+    category: {
+      label: 'Buitinė technika',
+      value: 'householdAppliances',
+    },
+    productType: {
+      label: 'Pramoninė džiovyklė',
+      value: 'industrialDryer',
+    },
+    volume: 0.4,
+    weight: 40,
+    size: null,
+    specification: null,
+    // skaiciuojama pagal kubus 1 kubinis metras 200 eu  aukshtis*plotis*gylis
+    price: 70,
+  },
+  {
+    category: {
+      label: 'Buitinė technika',
+      value: 'householdAppliances',
+    },
+    productType: {
+      label: 'Pramoninė indaplovė',
+      value: 'industrialDishwasher',
+    },
+    volume: 0.35,
+    weight: 40,
+    size: null,
+    specification: null,
+    // skaiciuojama pagal kubus 1 kubinis metras 200 eu  aukshtis*plotis*gylis
+    price: 60,
   },
   // Skalbimo mašina washingMachine
   {
@@ -2787,7 +2933,10 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.7,
     weight: 150,
-    specification: false,
+    specification: {
+      label: 'Be surinkimo krepšio',
+      value: 'withoutAssemblyBag',
+    },
     price: 200,
   },
   {
@@ -2805,7 +2954,10 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 1.2,
     weight: 200,
-    specification: false,
+    specification: {
+      label: 'Be surinkimo krepšio',
+      value: 'withoutAssemblyBag',
+    },
     price: 230,
   },
   {
@@ -2823,7 +2975,10 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 1.6,
     weight: 250,
-    specification: false,
+    specification: {
+      label: 'Be surinkimo krepšio',
+      value: 'withoutAssemblyBag',
+    },
     price: 280,
   },
   {
@@ -2841,7 +2996,10 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 0.85,
     weight: 160,
-    specification: true,
+    specification: {
+      label: 'Su surinkimo krepšiu',
+      value: 'withAssemblyBag',
+    },
     price: 240,
   },
   {
@@ -2859,7 +3017,10 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 1.25,
     weight: 210,
-    specification: true,
+    specification: {
+      label: 'Su surinkimo krepšiu',
+      value: 'withAssemblyBag',
+    },
     price: 270,
   },
   {
@@ -2877,7 +3038,10 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     },
     volume: 1.7,
     weight: 260,
-    specification: true,
+    specification: {
+      label: 'Su surinkimo krepšiu',
+      value: 'withAssemblyBag',
+    },
     price: 320,
   },
   {
@@ -2955,7 +3119,6 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 4,
     },
     specification: null,
-    visualInfo: null,
     price: 35,
   },
   {
@@ -2969,7 +3132,6 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 14,
     },
     specification: null,
-    visualInfo: null,
     price: 40,
   },
   {
@@ -2983,7 +3145,6 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 29,
     },
     specification: null,
-    visualInfo: null,
     price: 45,
   },
   {
@@ -2997,7 +3158,6 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 34,
     },
     specification: null,
-    visualInfo: null,
     price: 0, // 1.5 * size(kg)
     surcharge: 10, // %
   },
@@ -3012,7 +3172,6 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 49,
     },
     specification: null,
-    visualInfo: null,
     price: 0, // 1.49 * size(kg)
     surcharge: 10, // %
   },
@@ -3027,7 +3186,6 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 99,
     },
     specification: null,
-    visualInfo: null,
     price: 0, // 1.46 * size(kg)
     surcharge: 10, // %
   },
@@ -3042,7 +3200,6 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: Infinity,
     },
     specification: null,
-    visualInfo: null,
     price: 0, // 1.35 * size(kg)
     surcharge: 10, // %
   },
@@ -3062,7 +3219,6 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
       to: 0.99,
     },
     specification: null,
-    visualInfo: null,
     price: 200,
   },
   {
@@ -3076,7 +3232,6 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
       to: 2.99,
     },
     specification: null,
-    visualInfo: null,
     price: 170,
   },
   {
@@ -3090,7 +3245,6 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
       to: 4.99,
     },
     specification: null,
-    visualInfo: null,
     price: 150,
   },
   {
@@ -3104,7 +3258,6 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
       to: 9.99,
     },
     specification: null,
-    visualInfo: null,
     price: 130,
   },
   {
@@ -3118,7 +3271,6 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
       to: Infinity,
     },
     specification: null,
-    visualInfo: null,
     price: 115,
   },
 ];
@@ -3212,3 +3364,300 @@ export const getSizeOptionsFromProductList = (
 // Coliai
 // KG
 // M3
+
+export const getSizeOptionsBySelectedProductType = (
+  category?: string,
+  productType?: string
+) => {
+  if (category && productType) {
+    const filteredProductsByCategoryAndType = allProducts
+      .filter((product) => product.category.value === category)
+      .filter((item) => item.productType?.value === productType)
+      .map((item) => {
+        if (!item.size) return null;
+        if (item.size.to || item.size.from) {
+          // addition logic
+          return {
+            label: convertRangeSizeToOptionType(productType, item.size),
+            value: convertRangeSizeToOptionType(productType, item.size),
+          };
+        } else if (item.size.value || item.size.label) {
+          return {
+            label: item.size.label,
+            value: item.size.value,
+          };
+        }
+      });
+
+    return filteredProductsByCategoryAndType.length > 1
+      ? getUniqueOptions(
+          (filteredProductsByCategoryAndType.filter(
+            (item) => !!item
+          ) as OptionType[]) ?? []
+        )
+      : [];
+  }
+  return [];
+};
+
+export const getSpecificationOptionsBySelectedProduct = (
+  category?: string,
+  productType?: string,
+  size?: string
+) => {
+  if (!category || !productType) return [];
+
+  const filteredByCategoryAndType = allProducts
+    .filter((product) => product.category.value === category)
+    .filter((item) => item.productType?.value === productType)
+    .filter((item) => item.specification !== null)
+    .map((item) => item.specification);
+
+  return filteredByCategoryAndType.length > 1
+    ? getUniqueOptions(filteredByCategoryAndType as OptionType[])
+    : [];
+};
+
+const convertRangeSizeToOptionType = (
+  productType: string,
+  size: { from: number; to: number }
+) => {
+  const { from, to } = size;
+  switch (productType) {
+    case 'setOfWheels':
+      if (from === 0 && to === 15) {
+        return '<R16';
+      } else if (from === 16 && to === 17) {
+        return 'R16 - R18';
+      } else if (from === 18 && to === 21) {
+        return 'R19 - R22';
+      } else if (from === 22 && to === Infinity) {
+        return '>R22';
+      }
+      return '';
+    case 'engine':
+    case 'gearbox':
+      if (from === 0 && to === 999) {
+        return '>1000 cm3';
+      }
+      if (from === 1000 && to === 1499) {
+        return '1000 - 1500 cm3';
+      }
+      if (from === 1500 && to === 1999) {
+        return '1500 - 2000 cm3';
+      }
+      if (from === 2000 && to === 2499) {
+        return '2000 - 2500 cm3';
+      }
+      if (from === 2500 && to === 2999) {
+        return '2500 - 3000 cm3';
+      }
+      if (from === 3000 && to === 3499) {
+        return '3000 - 3500 cm3';
+      }
+      if (from === 3500 && to === 3999) {
+        return '3500 - 4000 cm3';
+      }
+      if (from === 4000 && to === Infinity) {
+        return '>4000 cm3';
+      }
+      return '';
+    case 'scooterMoped':
+      if (from === 0 && to === 49) {
+        return '<49 cm3';
+      }
+      if (from === 50 && to === 124) {
+        return '50 - 125 cm3';
+      }
+      if (from === 125 && to === 249) {
+        return '125 - 250 cm3';
+      }
+      if (from === 250 && to === Infinity) {
+        return '>250 cm3';
+      }
+      return '';
+    case 'standardMotorcycle':
+      if (from === 0 && to === 499) {
+        return '<500 cm3';
+      }
+      if (from === 500 && to === 749) {
+        return '500 - 750 cm3';
+      }
+      if (from === 750 && to === 999) {
+        return '750 - 1000 cm3';
+      }
+      if (from === 1000 && to === Infinity) {
+        return '>1000 cm3';
+      }
+      return '';
+    case 'motocrossMotorcycle':
+      if (from === 0 && to === 124) {
+        return '<125 cm3';
+      }
+      if (from === 125 && to === 249) {
+        return '125 - 249 cm3';
+      }
+      if (from === 250 && to === 449) {
+        return '250 - 449 cm3';
+      }
+      if (from === 450 && to === Infinity) {
+        return '>450 cm3';
+      }
+      return '';
+    case 'touringMotorcycle':
+      if (from === 0 && to === 799) {
+        return '<800 cm3';
+      }
+      if (from === 800 && to === 1199) {
+        return '800 - 1199 cm3';
+      }
+      if (from === 1200 && to === 1599) {
+        return '1200 - 1599 cm3';
+      }
+      if (from === 1600 && to === Infinity) {
+        return '>1600 cm3';
+      }
+      return '';
+    case 'sportsMotorcycle':
+      if (from === 0 && to === 599) {
+        return '<600 cm3';
+      }
+      if (from === 600 && to === 999) {
+        return '600 - 1000 cm3';
+      }
+      if (from === 1000 && to === Infinity) {
+        return '>1000 cm3';
+      }
+      return '';
+    case 'chopper':
+      if (from === 0 && to === 799) {
+        return '<800 cm3';
+      }
+      if (from === 800 && to === 1199) {
+        return '800 - 1199 cm3';
+      }
+      if (from === 1200 && to === Infinity) {
+        return '>1200 cm3';
+      }
+      return '';
+    case 'enduro':
+      if (from === 0 && to === 249) {
+        return '<250 cm3';
+      }
+      if (from === 250 && to === 649) {
+        return '250 - 649 cm3';
+      }
+      if (from === 650 && to === 1199) {
+        return '650 - 1200 cm3';
+      }
+      if (from === 1200 && to === Infinity) {
+        return '>1200 cm3';
+      }
+      return '';
+    case 'quadBike':
+      if (from === 0 && to === 399) {
+        return '<400 cm3';
+      }
+      if (from === 400 && to === 799) {
+        return '400 - 799 cm3';
+      }
+      if (from === 800 && to === 1199) {
+        return '800 - 1200 cm3';
+      }
+      if (from === 1200 && to === Infinity) {
+        return '>1200 cm3';
+      }
+      return '';
+    case 'motorcycleEngine':
+      if (from === 0 && to === 44) {
+        return '<45 cm3';
+      }
+      if (from === 45 && to === 249) {
+        return '45 - 249 cm3';
+      }
+      if (from === 250 && to === 449) {
+        return '250 - 450 cm3';
+      }
+      if (from === 450 && to === 599) {
+        return '450 - 600 cm3';
+      }
+      if (from === 600 && to === 999) {
+        return '600 - 1000 cm3';
+      }
+      if (from === 1000 && to === 1199) {
+        return '1000 - 1200 cm3';
+      }
+      if (from === 1200 && to === 1599) {
+        return '1200 - 1600 cm3';
+      }
+      if (from === 1600 && to === Infinity) {
+        return '>1600 cm3';
+      }
+      return '';
+    case 'flatScreenTv':
+      if (from === 0 && to === 23) {
+        return '<23 inch';
+      }
+      if (from === 24 && to === 31) {
+        return '23 - 31 inch';
+      }
+      if (from === 32 && to === 39) {
+        return '32 - 39 inch';
+      }
+      if (from === 40 && to === 42) {
+        return '40 - 42 inch';
+      }
+      if (from === 43 && to === 49) {
+        return '43 - 49 inch';
+      }
+      if (from === 50 && to === 54) {
+        return '50 - 54 inch';
+      }
+      if (from === 55 && to === 64) {
+        return '55 - 64 inch';
+      }
+      if (from === 65 && to === 69) {
+        return '65 - 69 inch';
+      }
+      if (from === 70 && to === 74) {
+        return '70 - 74 inch';
+      }
+      if (from === 75 && to === 84) {
+        return '75 - 84 inch';
+      }
+      if (from === 85 && to === Infinity) {
+        return '>85 inch';
+      }
+      return '';
+    case 'smallGardenTractor':
+      if (from === 0 && to === 79) {
+        return '<79 cm';
+      }
+      return '';
+    case 'averageGardenTractor':
+      if (from === 80 && to === 119) {
+        return '80 - 119 cm';
+      }
+      return '';
+    case 'bigGardenTractor':
+      if (from === 120 && to === Infinity) {
+        return '>120 cm';
+      }
+
+      return '';
+    default:
+      return '';
+  }
+};
+
+const getUniqueOptions = (array: { value: string; label: string }[]) => {
+  return array.length > 1
+    ? array.filter(
+        (item, index, self) =>
+          index ===
+          self.findIndex(
+            (t) => t.value === item.value && t.label === item.label
+          )
+      )
+    : [];
+};
