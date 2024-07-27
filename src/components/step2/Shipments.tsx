@@ -10,11 +10,12 @@ const Shipments = ({
   control,
   selectedService,
   methods,
+  currency
 }: {
   control: Control<FormType>;
-  formData: FormType;
   selectedService: string;
-  methods: UseFormReturn<FormType, any, undefined>;
+    methods: UseFormReturn<FormType, any, undefined>;
+  currency: "€" | "£"
 }) => {
   const { fields, append, remove, prepend } = useFieldArray<FormType>({
     control,
@@ -50,6 +51,7 @@ const Shipments = ({
                     selectedService={selectedService}
                     setValue={methods.setValue}
                     methods={methods}
+                    currency={currency}
                   />
                 </div>
               );

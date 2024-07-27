@@ -53,6 +53,11 @@
 	border: 1px solid #9aa61e;
 }
 
+.service-card.disabled-card:hover {
+	cursor: auto;
+	border: 1px solid #7a777680;
+}
+
 .service-info {
 	display: flex;
 	align-items: center;
@@ -77,6 +82,11 @@
 	line-height: 16.1px;
 	text-align: left;
 	color: #7a7776;
+}
+
+.service-card.disabled-card .card-title,
+.service-card.disabled-card .card-description {
+	color: #7a777680;
 }
 
 .card-description {

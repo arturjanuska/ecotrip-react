@@ -13,96 +13,105 @@ import { useEffect, useState } from 'react';
 import generateOrderID from '../utils/generateOrderId';
 
 const Form = () => {
-  const [direction, setDirection] = useState<'LT-UK' | 'UK-LT' | null>(null);
+	const [direction, setDirection] = useState<'LT-UK' | 'UK-LT' | null>(null);
 
-  const methods = useForm<FormType>({
-    defaultValues: {
-      shipments: [
-        {
-          amount: 1,
-          category: {
-            label: 'Siuntos',
-            value: 'shipments',
-          },
-        },
-      ],
-    },
-    shouldUnregister: true,
-  });
+	const [currency, setCurrency] = useState<'€' | '£'>('€');
 
-  const selectedService = methods.watch('service');
-  const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
-  const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
+	useEffect(() => {
+		if (direction) {
+			const value = direction === 'LT-UK' ? '€' : '£';
+			setCurrency(value);
+		}
+	}, [direction]);
 
-  const orderId = generateOrderID(direction);
+	const methods = useForm<FormType>({
+		defaultValues: {
+			shipments: [
+				{
+					amount: 1,
+					category: {
+						label: 'Siuntos',
+						value: 'shipments',
+					},
+				},
+			],
+		},
+		shouldUnregister: true,
+	});
 
-  const formData = methods.watch();
+	const selectedService = methods.watch('service');
+	const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
+	const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
 
-  console.log('formData ===> ', formData);
+	const orderId = generateOrderID(direction);
 
-  const dirtyFields = methods.formState.dirtyFields;
+	const formData = methods.watch();
 
-  useEffect(() => {
-    methods.setValue('service', '');
-  }, [pickupAddressZipCode, deliveryAddressZipCode]);
+	console.log('formData ===> ', formData);
 
-  return (
-    <form className='main'>
-      <div
-        style={{
-          marginBottom: '70px',
-        }}
-      >
-        <Breadcrumds />
-        <Divider />
-        <AddressForm
-          setValue={methods.setValue}
-          control={methods.control}
-          selectedService={selectedService}
-          methods={methods}
-          direction={direction}
-          setDirection={setDirection}
-        />
-        <Divider />
-        {!!selectedService && (
-          <>
-            <Shipments
-              control={methods.control}
-              formData={formData}
-              selectedService={selectedService}
-              methods={methods}
-            />
-            <Divider />
-            <TransportationDates methods={methods} />
-            <Divider />
-            <SenderInformation
-              control={methods.control}
-              stepLabel={
-                selectedService === 'productSalesService'
-                  ? 'Siuntos paėmimo / pardavėjo informacija'
-                  : 'Siuntos paėmimo / siuntėjo informacija'
-              }
-            />
-            <Divider />
-            <RecipientInformation control={methods.control} />
-            {selectedService === 'productSalesService' && (
-              <>
-                <Divider />
-                <RansomPayeeInformation control={methods.control} />
-              </>
-            )}
+	const dirtyFields = methods.formState.dirtyFields;
 
-            <Divider />
-            <PayerInformation
-              control={methods.control}
-              step={selectedService === 'productSalesService' ? 7 : 6}
-              stepLabel={'Užsakovo informacija'}
-            />
-          </>
-        )}
-      </div>
-    </form>
-  );
+	useEffect(() => {
+		methods.setValue('service', '');
+	}, [pickupAddressZipCode, deliveryAddressZipCode]);
+
+	return (
+		<form className='main'>
+			<div
+				style={{
+					marginBottom: '70px',
+				}}>
+				<Breadcrumds />
+				<Divider />
+				<AddressForm
+					setValue={methods.setValue}
+					control={methods.control}
+					selectedService={selectedService}
+					methods={methods}
+					direction={direction}
+					setDirection={setDirection}
+					currency={currency}
+				/>
+				<Divider />
+				{!!selectedService && (
+					<>
+						<Shipments
+							control={methods.control}
+							selectedService={selectedService}
+							methods={methods}
+							currency={currency}
+						/>
+						<Divider />
+						<TransportationDates methods={methods} />
+						<Divider />
+						<SenderInformation
+							control={methods.control}
+							stepLabel={
+								selectedService === 'productSalesService'
+									? 'Siuntos paėmimo / pardavėjo informacija'
+									: 'Siuntos paėmimo / siuntėjo informacija'
+							}
+						/>
+						<Divider />
+						<RecipientInformation control={methods.control} />
+						{selectedService === 'productSalesService' && (
+							<>
+								<Divider />
+								<RansomPayeeInformation control={methods.control} />
+							</>
+						)}
+
+						<Divider />
+						<PayerInformation
+							control={methods.control}
+							step={selectedService === 'productSalesService' ? 7 : 6}
+							stepLabel={'Užsakovo informacija'}
+						/>
+					</>
+				)}
+			</div>
+		</form>
+	);
 };
 
 export default Form;

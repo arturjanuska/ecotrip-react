@@ -12,16 +12,17 @@ export type ServiceCardProps = {
   service: ServiceProps;
   onSelect: () => void;
   selected: boolean;
+  isParcelForce: boolean
 };
 
 const CheckmarkIcon = () => {
   return <FontAwesomeIcon icon={faCircleCheck} color='#9AA61E' size='lg' />;
 };
 
-const ServiceCard = ({ service, onSelect, selected }: ServiceCardProps) => {
+const ServiceCard = ({ service, onSelect, selected, isParcelForce }: ServiceCardProps) => {
   return (
     <div
-      className={`service-card ${selected ? 'active' : ''}`}
+      className={`service-card ${selected ? 'active' : ''} ${isParcelForce && service.value !== "parcelForceShipment" ? "disabled-card" : ""}`}
       onClick={onSelect}
     >
       <div className='service-info'>
