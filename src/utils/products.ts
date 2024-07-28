@@ -3145,7 +3145,7 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
 	// Size in m3
 	{
 		category: {
-			label: 'Perkraustymai',
+			label: 'Perkraustymai, baldai',
 			value: 'removals',
 		},
 		productType: null,
@@ -3158,7 +3158,7 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Perkraustymai',
+			label: 'Perkraustymai, baldai',
 			value: 'removals',
 		},
 		productType: null,
@@ -3171,7 +3171,7 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Perkraustymai',
+			label: 'Perkraustymai, baldai',
 			value: 'removals',
 		},
 		productType: null,
@@ -3184,7 +3184,7 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Perkraustymai',
+			label: 'Perkraustymai, baldai',
 			value: 'removals',
 		},
 		productType: null,
@@ -3197,7 +3197,7 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Perkraustymai',
+			label: 'Perkraustymai, baldai',
 			value: 'removals',
 		},
 		productType: null,
@@ -3335,18 +3335,21 @@ export const getSizeOptionsBySelectedProductType = (
 							productType
 						),
 					};
-				} else if (item.size.value || item.size.label) {
+				} else if (!!item.size.value || !!item.size.label) {
 					return {
 						label: item.size.label,
 						value: item.size.value,
 					};
 				}
 			});
-
+		console.log(
+			'filteredProductsByCategoryAndType ===',
+			filteredProductsByCategoryAndType
+		);
 		return filteredProductsByCategoryAndType.length > 1
 			? getUniqueOptions(
 					(filteredProductsByCategoryAndType.filter(
-						(item) => !!item
+						(item) => !!item || !!item?.value
 					) as OptionType[]) ?? []
 			  )
 			: [];
@@ -3374,12 +3377,14 @@ export const getSpecificationOptionsBySelectedProduct = (
 
 const getUniqueOptions = (array: { value: string; label: string }[]) => {
 	return array.length > 1
-		? array.filter(
-				(item, index, self) =>
-					index ===
-					self.findIndex(
-						(t) => t.value === item.value && t.label === item.label
-					)
-		  )
+		? array
+				.filter((option) => !!option.value && !!option.value)
+				.filter(
+					(item, index, self) =>
+						index ===
+						self.findIndex(
+							(t) => t.value === item.value && t.label === item.label
+						)
+				)
 		: [];
 };

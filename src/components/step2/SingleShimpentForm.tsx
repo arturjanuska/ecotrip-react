@@ -13,55 +13,73 @@ import {
 	motorcyclesAndAccessoriesCategoryProductTypesOptions,
 } from '../../utils/products';
 import ControlledStyledSelect from '../ControlledStyledSelect';
-import {
-	Control,
-	FieldArrayWithId,
-	UseFormReturn,
-	UseFormSetValue,
-	useWatch,
-} from 'react-hook-form';
+import { Control, UseFormSetValue, useWatch } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { OptionType } from '../../utils/types';
 import PrimaryButton from '../PrimaryButton';
-import UncontrolledInput from '../UncontrolledInput';
 import useCalculatePrice from './useCalculatePrice';
 
 type Props = {
 	shipmentNumber: number;
 	control: Control<FormType>;
-	field: FieldArrayWithId<FormType, 'shipments', 'id'>;
 	index: number;
 	removeShipment: (index: number) => void;
 	selectedService: string;
 	setValue: UseFormSetValue<FormType>;
-	methods: UseFormReturn<FormType, any, undefined>;
 	currency: '€' | '£';
 };
 
 const SingleShimpentForm = ({
 	shipmentNumber,
 	control,
-	field,
 	index,
 	removeShipment,
 	selectedService,
 	setValue,
-	methods,
 	currency,
 }: Props) => {
-	const [length, setLength] = useState<string>('');
-	const [width, setWidth] = useState<string>('');
-	const [height, setHeight] = useState<string>('');
-
-	const [orderedShipmentNumber, setOrderedShipmentNumber] =
-		useState<string>('');
-	const [shipmentPrice, setShipmentPrice] = useState<string>('');
-	const [purchasePriceOfTheItem, setPurchasePriceOfTheItem] =
-		useState<string>('');
-
 	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
 		{}
 	);
+
+	const categoriesWithProductType = [
+		'automotiveGoods',
+		'householdAppliances',
+		'bicyclesAndScooters',
+		'motorcyclesAndAccessories',
+		'goodsForChildren',
+		'gardenEquipment',
+	];
+
+	const productTypesThatNeedsPriceCalculation = ['fridge', 'freezer'];
+
+	const getOptionsBySelectedCategory = (
+		selectedCategory: OptionType | null
+	): OptionType[] => {
+		if (
+			!!selectedCategory &&
+			categoriesWithProductType.includes(selectedCategory.value)
+		) {
+			switch (selectedCategory.value) {
+				case 'automotiveGoods':
+					return automotiveGoodsCategoryProductTypesOptions as OptionType[];
+				case 'householdAppliances':
+					return householdAppliancesCategoryProductTypesOptions as OptionType[];
+				case 'bicyclesAndScooters':
+					return bicyclesAndScootersCategoryProductTypesOptions as OptionType[];
+				case 'motorcyclesAndAccessories':
+					return motorcyclesAndAccessoriesCategoryProductTypesOptions as OptionType[];
+				case 'goodsForChildren':
+					return goodsForChildrenCategoryProductTypesOptions as OptionType[];
+				case 'gardenEquipment':
+					return gardenEquipmentCategoryProductTypesOptions as OptionType[];
+				default:
+					return [];
+			}
+		} else {
+			return [];
+		}
+	};
 
 	const handleValidation = (field: string, value: string) => {
 		const getErrorMessage = (field: string, value: string) => {
@@ -110,60 +128,12 @@ const SingleShimpentForm = ({
 		});
 	};
 
-	const handleVolumneInputChange = (field: string, value: string) => {
-		const regex = /^-?\d*\.?\d*$/;
-
-		if (value && !regex.test(value)) {
-			return;
-		}
-
-		handleValidation(field, value);
-
-		if (field === 'length') {
-			if (!value) {
-				setLength('');
-				return;
-			}
-			setLength(value);
-		}
-		if (field === 'width') {
-			if (!value) {
-				setWidth('');
-				return;
-			}
-			setWidth(value);
-		}
-		if (field === 'height') {
-			if (!value) {
-				setHeight('');
-				return;
-			}
-			setHeight(value);
-		}
-	};
-
-	const handleShipmentNumberChange = (value: string) => {
-		handleValidation('orderedShipmentNumber', value);
-
-		setOrderedShipmentNumber(value);
-	};
-
-	const handleShipmentPriceChange = (value: string) => {
-		handleValidation('shipmentPrice', value);
-
-		setShipmentPrice(value);
-	};
-
-	const handlePurchasePriceChange = (value: string) => {
-		handleValidation('purchasePriceOfTheItem', value);
-
-		setPurchasePriceOfTheItem(value);
-	};
-
 	const selectedCategory = useWatch({
 		control,
 		name: `shipments.${index}.category`,
 	});
+
+	const productTypeOptions = getOptionsBySelectedCategory(selectedCategory);
 
 	const selectedProductType = useWatch({
 		control,
@@ -195,16 +165,42 @@ const SingleShimpentForm = ({
 		name: `shipments.${index}.purchasePriceOfTheItem`,
 	});
 
-	const sizeOptions =
-		getSizeOptionsBySelectedProductType(
-			selectedCategory?.value,
-			selectedProductType?.value
-		) ?? [];
+	const showSizeOptions = (
+		options: OptionType[],
+		productTypeValue: string | undefined,
+		productTypeOptions: OptionType[]
+	) => {
+		const sizeOptionsCopy = options ? options : [];
+		if (sizeOptionsCopy.length > 0) {
+			if (productTypeValue && productTypeOptions.length > 0) {
+				console.log('returninam Cia 1');
+				return true;
+			}
+			if (!productTypeValue && productTypeOptions.length > 0) {
+				console.log('returninam Cia 2');
+				return false;
+			}
+			if (!productTypeValue && productTypeOptions.length === 0) {
+				return false;
+			}
+			return true;
+		} else {
+			return false;
+		}
+	};
 
-	const specificationOptions = getSpecificationOptionsBySelectedProduct(
+	const sizeOptions = getSizeOptionsBySelectedProductType(
 		selectedCategory?.value,
 		selectedProductType?.value
 	);
+
+	const specificationOptions =
+		selectedCategory?.value !== 'shipments'
+			? getSpecificationOptionsBySelectedProduct(
+					selectedCategory?.value,
+					selectedProductType?.value
+			  )
+			: [];
 
 	const selectedSize = useWatch({
 		control,
@@ -239,45 +235,6 @@ const SingleShimpentForm = ({
 
 	console.log('estimatedPrice ===> ', estimatedPrice);
 
-	const categoriesWithProductType = [
-		'automotiveGoods',
-		'householdAppliances',
-		'bicyclesAndScooters',
-		'motorcyclesAndAccessories',
-		'goodsForChildren',
-		'gardenEquipment',
-	];
-
-	const getOptionsBySelectedCategory = (
-		selectedCategory: OptionType | null
-	): OptionType[] => {
-		if (
-			!!selectedCategory &&
-			categoriesWithProductType.includes(selectedCategory.value)
-		) {
-			switch (selectedCategory.value) {
-				case 'automotiveGoods':
-					return automotiveGoodsCategoryProductTypesOptions as OptionType[];
-				case 'householdAppliances':
-					return householdAppliancesCategoryProductTypesOptions as OptionType[];
-				case 'bicyclesAndScooters':
-					return bicyclesAndScootersCategoryProductTypesOptions as OptionType[];
-				case 'motorcyclesAndAccessories':
-					return motorcyclesAndAccessoriesCategoryProductTypesOptions as OptionType[];
-				case 'goodsForChildren':
-					return goodsForChildrenCategoryProductTypesOptions as OptionType[];
-				case 'gardenEquipment':
-					return gardenEquipmentCategoryProductTypesOptions as OptionType[];
-				default:
-					return [];
-			}
-		} else {
-			return [];
-		}
-	};
-
-	const productTypeOptions = getOptionsBySelectedCategory(selectedCategory);
-
 	const productTypesWithRequiredManagerCall = ['interior', 'carQuarter'];
 
 	const volumeErrorMessages = [
@@ -302,12 +259,19 @@ const SingleShimpentForm = ({
 						name={`shipments.${index}.category`}
 						control={control}
 						options={[...categoriesOptions]}
+						isClearable
 						defaultValue={{
 							label: 'Siuntos kategorija',
 							value: 'Siuntos kategorija',
 						}}
 						placeholder='Siuntos kategoriją'
 						isDisabled={selectedService === 'parcelForceShipment'}
+						onChange={() => {
+							setValue(`shipments.${index}.productType`, null);
+							setValue(`shipments.${index}.size`, null);
+							setValue(`shipments.${index}.specification`, null);
+							setValue(`shipments.${index}.amount`, 1);
+						}}
 					/>
 				</FieldContainer>
 				<p className='estimated-price'>
@@ -322,21 +286,23 @@ const SingleShimpentForm = ({
 				{selectedCategory?.value === 'shipments' ||
 				selectedCategory?.value === 'removals' ? (
 					<>
-						{selectedCategory?.value !== 'removals' && (
-							<FieldContainer
-								label={`Nr. ${shipmentNumber} siuntos svoris (kg)`}
-								description={
-									(field.size as unknown as number) > 100
-										? 'Jūsų siuta/-os sunkesnė/-ės nei 35 kg. Kadangi mūsų kurjeriai dirba po vieną, jam gali prireikti pagalbos pakraunant ar iškraunant sunkias siuntas. Prašome užtikrinti, kad atvykus kurjeriui būtų kas padeda ją pakrauti ar iškrauti. Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
-										: 'Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
-								}>
-								<CustomInput
-									name={`shipments.${index}.size`}
-									control={control}
-									placeholder='Siuntos svoris'
-								/>
-							</FieldContainer>
-						)}
+						<FieldContainer
+							label={`Nr. ${shipmentNumber} siuntos svoris (kg)`}
+							description={
+								typeof selectedSize === 'string' &&
+								!isNaN(Number(selectedSize)) &&
+								Number(selectedSize) > 35
+									? 'Jūsų siuta/-os sunkesnė/-ės nei 35 kg. Kadangi mūsų kurjeriai dirba po vieną, jam gali prireikti pagalbos pakraunant ar iškraunant sunkias siuntas. Prašome užtikrinti, kad atvykus kurjeriui būtų kas padeda ją pakrauti ar iškrauti. Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
+									: 'Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
+							}>
+							<CustomInput
+								name={`shipments.${index}.size`}
+								control={control}
+								placeholder='Siuntos svoris'
+								type='number'
+							/>
+						</FieldContainer>
+
 						<FieldContainer
 							label={`Nr. ${shipmentNumber} siuntos išmatavimai ${
 								selectedCategory?.value === 'removals'
@@ -355,39 +321,30 @@ const SingleShimpentForm = ({
 										name={`shipments.${index}.length`}
 										control={control}
 										placeholder='Ilgis'
+										type='number'
 										onChange={(e) => {
 											handleValidation('length', e.target.value);
 										}}
-										// onChange={(e) => {
-										// 	handleVolumneInputChange('length', e.target.value);
-										// }}
-										// value={length}
 										isError={!!errorMessages.length}
 									/>
 									<CustomInput
 										name={`shipments.${index}.width`}
 										control={control}
 										placeholder='Plotis'
+										type='number'
 										onChange={(e) => {
 											handleValidation('width', e.target.value);
 										}}
-										// onChange={(e) => {
-										// 	handleVolumneInputChange('width', e.target.value);
-										// }}
-										// value={width}
 										isError={!!errorMessages.width}
 									/>
 									<CustomInput
-										name={`shipments.${index}.height`}
+										name={`shipments[${index}].height`}
 										control={control}
 										placeholder='Aukštis'
+										type='number'
 										onChange={(e) => {
 											handleValidation('height', e.target.value);
 										}}
-										// onChange={(e) => {
-										// 	handleVolumneInputChange('height', e.target.value);
-										// }}
-										// value={height}
 										isError={!!errorMessages.height}
 									/>
 								</div>
@@ -420,10 +377,6 @@ const SingleShimpentForm = ({
 										onChange={(e) => {
 											handleValidation('orderedShipmentNumber', e.target.value);
 										}}
-										// onChange={(e) => {
-										// 	handleShipmentNumberChange(e.target.value);
-										// }}
-										// value={orderedShipmentNumber}
 									/>
 									{orderedShipmentNumberErrorMessage && (
 										<div className='errors'>
@@ -445,13 +398,10 @@ const SingleShimpentForm = ({
 										name={`shipments.${index}.shipmentPrice`}
 										control={control}
 										isError={!!shipmentPriceErrorMessage}
+										type='number'
 										onChange={(e) => {
 											handleValidation('shipmentPrice', e.target.value);
 										}}
-										// onChange={(e) => {
-										// 	handleShipmentPriceChange(e.target.value);
-										// }}
-										// value={shipmentPrice}
 									/>
 									{shipmentPriceErrorMessage && (
 										<div className='errors'>
@@ -472,6 +422,7 @@ const SingleShimpentForm = ({
 									<CustomInput
 										name={`shipments.${index}.purchasePriceOfTheItem`}
 										control={control}
+										type='number'
 										isError={!!purchasePriceOfTheItemErrorMessage}
 										onChange={(e) => {
 											handleValidation(
@@ -479,10 +430,6 @@ const SingleShimpentForm = ({
 												e.target.value
 											);
 										}}
-										// onChange={(e) => {
-										// 	handlePurchasePriceChange(e.target.value);
-										// }}
-										// value={purchasePriceOfTheItem}
 									/>
 									{purchasePriceOfTheItemErrorMessage && (
 										<div className='errors'>
@@ -511,12 +458,13 @@ const SingleShimpentForm = ({
 								<ControlledStyledSelect
 									name={`shipments.${index}.productType`}
 									control={control}
+									isClearable
 									options={productTypeOptions}
 									placeholder='Siuntos tipas'
-									// onChange={() => {
-									//   setValue(`shipments.${index}.size`, null);
-									//   setValue(`shipments.${index}.specification`, null);
-									// }}
+									onChange={() => {
+										setValue(`shipments.${index}.size`, null);
+										setValue(`shipments.${index}.specification`, null);
+									}}
 								/>
 							</FieldContainer>
 						)}
@@ -524,15 +472,23 @@ const SingleShimpentForm = ({
 							selectedProductType?.value ?? ''
 						) ? (
 							<>
-								{sizeOptions.length > 0 ? (
+								{showSizeOptions(
+									sizeOptions ?? [],
+									selectedProductType?.value,
+									productTypeOptions ?? []
+								) && sizeOptions.length > 0 ? (
 									<FieldContainer
 										label={`Nr. ${shipmentNumber} siuntos dydis`}
 										description=''>
 										<ControlledStyledSelect
 											name={`shipments.${index}.size`}
+											isClearable
 											control={control}
 											options={sizeOptions}
 											placeholder='Siuntos dydis'
+											onChange={() => {
+												setValue(`shipments.${index}.specification`, null);
+											}}
 										/>
 									</FieldContainer>
 								) : null}
@@ -543,6 +499,7 @@ const SingleShimpentForm = ({
 										description=''>
 										<ControlledStyledSelect
 											name={`shipments.${index}.specification`}
+											isClearable
 											control={control}
 											options={specificationOptions}
 											placeholder='Siuntos specifikacija'
@@ -555,6 +512,7 @@ const SingleShimpentForm = ({
 										description=''>
 										<CustomInput
 											name={`shipments.${index}.amount`}
+											type='number'
 											control={control}
 											placeholder='Siuntos kiekis'
 											defaultValue={1}

@@ -29,10 +29,8 @@ const Form = () => {
 			shipments: [
 				{
 					amount: 1,
-					category: {
-						label: 'Siuntos',
-						value: 'shipments',
-					},
+					category: null,
+					estimatedPrice: '0.00',
 				},
 			],
 		},
