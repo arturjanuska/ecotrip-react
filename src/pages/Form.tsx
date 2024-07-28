@@ -11,31 +11,26 @@ import { FormType } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import generateOrderID from '../utils/generateOrderId';
+import { schema } from '../utils/validation/schema';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Form = () => {
-	const [direction, setDirection] = useState<'LT-UK' | 'UK-LT' | null>(null);
-
 	const [currency, setCurrency] = useState<'€' | '£'>('€');
-
-	useEffect(() => {
-		if (direction) {
-			const value = direction === 'LT-UK' ? '€' : '£';
-			setCurrency(value);
-		}
-	}, [direction]);
 
 	const methods = useForm<FormType>({
 		defaultValues: {
-			shipments: [
-				{
-					amount: 1,
-					category: null,
-					estimatedPrice: '0.00',
-				},
-			],
+			packagingAndLabelingRules: false,
+			transportRules: false,
 		},
 		shouldUnregister: true,
+		resolver: yupResolver(schema),
 	});
+
+	const direction = methods.watch('direction');
+
+	const formErrors = methods.formState.errors;
+
+	console.log('formErrors ===', formErrors);
 
 	const selectedService = methods.watch('service');
 	const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
@@ -53,8 +48,21 @@ const Form = () => {
 		methods.setValue('service', '');
 	}, [pickupAddressZipCode, deliveryAddressZipCode]);
 
+	const onSubmit = (data: FormType) => {
+		console.log('data ===', data);
+	};
+
+	useEffect(() => {
+		if (direction) {
+			const value = direction === 'LT-UK' ? '€' : '£';
+			setCurrency(value);
+		}
+	}, [direction]);
+
 	return (
-		<form className='main'>
+		<form
+			className='main'
+			onSubmit={methods.handleSubmit(onSubmit)}>
 			<div
 				style={{
 					marginBottom: '70px',
@@ -67,8 +75,8 @@ const Form = () => {
 					selectedService={selectedService}
 					methods={methods}
 					direction={direction}
-					setDirection={setDirection}
 					currency={currency}
+					formErrors={formErrors}
 				/>
 				<Divider />
 				{!!selectedService && (
@@ -80,7 +88,10 @@ const Form = () => {
 							currency={currency}
 						/>
 						<Divider />
-						<TransportationDates methods={methods} />
+						<TransportationDates
+							methods={methods}
+							formErrors={formErrors}
+						/>
 						<Divider />
 						<SenderInformation
 							control={methods.control}
@@ -89,13 +100,20 @@ const Form = () => {
 									? 'Siuntos paėmimo / pardavėjo informacija'
 									: 'Siuntos paėmimo / siuntėjo informacija'
 							}
+							formErrors={formErrors}
 						/>
 						<Divider />
-						<RecipientInformation control={methods.control} />
+						<RecipientInformation
+							control={methods.control}
+							formErrors={formErrors}
+						/>
 						{selectedService === 'productSalesService' && (
 							<>
 								<Divider />
-								<RansomPayeeInformation control={methods.control} />
+								<RansomPayeeInformation
+									control={methods.control}
+									formErrors={formErrors}
+								/>
 							</>
 						)}
 
@@ -104,6 +122,7 @@ const Form = () => {
 							control={methods.control}
 							step={selectedService === 'productSalesService' ? 7 : 6}
 							stepLabel={'Užsakovo informacija'}
+							formErrors={formErrors}
 						/>
 					</>
 				)}

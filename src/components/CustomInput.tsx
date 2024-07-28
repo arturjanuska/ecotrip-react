@@ -9,15 +9,10 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	isError?: boolean;
 	onChange?: (value: any) => void;
 	isNumberInput?: boolean;
+	onBlur?: (e: Event) => void;
 };
 
-const CustomInput = ({
-	name,
-	control,
-	isError,
-	isNumberInput = false,
-	...props
-}: InputProps) => {
+const CustomInput = ({ name, control, isError, ...props }: InputProps) => {
 	return (
 		<>
 			<Controller

@@ -4,6 +4,10 @@ import { allProducts } from '../../utils/products';
 import { UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { convertOptionTypeToRangeSize } from '../../utils/convertSizeOptions';
+import {
+	calculateShipmentPrice,
+	calculateVolume,
+} from '../../utils/calculateShipmentPrice';
 
 type Props = {
 	category: OptionType | null;
@@ -13,6 +17,11 @@ type Props = {
 	specification?: OptionType | null;
 	setValue: UseFormSetValue<FormType>;
 	name: string;
+	weight?: string;
+	length?: string;
+	width?: string;
+	height?: string;
+	pricePerUnit?: number;
 };
 
 const useCalculatePrice = ({
@@ -23,8 +32,43 @@ const useCalculatePrice = ({
 	specification,
 	setValue,
 	name,
+	weight,
+	length,
+	width,
+	height,
 }: Props) => {
 	useEffect(() => {
+		if (
+			(category && category.value === 'removals') ||
+			(productType && productType.value === 'fridge') ||
+			(productType && productType.value === 'freezer')
+		) {
+			if (length && width && height) {
+				const price = calculateVolume({
+					length,
+					width,
+					height,
+					categoryValue: category?.value,
+					amount,
+				});
+
+				// @ts-ignore
+				setValue(name, price);
+				return;
+			}
+			return;
+		}
+
+		if (category && category.value === 'shipments') {
+			if (weight) {
+				const price = calculateShipmentPrice({ weight, amount });
+				// @ts-ignore
+				setValue(name, price);
+				return;
+			}
+			return;
+		}
+
 		let filteredProducts = allProducts;
 
 		if (category && category.value) {
@@ -72,13 +116,11 @@ const useCalculatePrice = ({
 		}
 
 		let product = null;
-		console.log('filteredProducts ===', filteredProducts);
+
 		if (filteredProducts.length === 1) {
 			product = filteredProducts[0];
 		}
-
 		const productPrice = product ? product.price * Number(amount) : 0;
-
 		const finalPrice = productPrice.toFixed(2) ?? '0.00';
 		// @ts-ignore
 		setValue(name, finalPrice);
@@ -87,6 +129,10 @@ const useCalculatePrice = ({
 		JSON.stringify(size),
 		JSON.stringify(specification),
 		amount,
+		weight,
+		length,
+		width,
+		height,
 	]);
 };
 

@@ -22,7 +22,7 @@ export type ShipmentProps = {
 };
 
 export type FormType = {
-	direction: 'UK-LT' | 'LT-UK';
+	direction: 'UK-LT' | 'LT-UK' | null;
 	pickupAddress: string;
 	pickupAddressZipCode: string | null;
 	deliveryAddress: string;

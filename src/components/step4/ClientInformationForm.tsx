@@ -2,13 +2,14 @@ import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import CustomTextarea from '../CustomTextarea';
 import './step4.css';
-import { Control } from 'react-hook-form';
+import { Control, FieldErrors } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 
 type Props = {
 	client: 'sender' | 'recipient' | 'ransomPayee';
 	control: Control<FormType, any>;
 	subName: string;
+	formErrors: FieldErrors<FormType>;
 };
 
 const ClientInformationForm = ({ client, control, subName }: Props) => {
@@ -80,8 +81,7 @@ const ClientInformationForm = ({ client, control, subName }: Props) => {
 					</FieldContainer>
 					<FieldContainer
 						label={`${value} adresas`}
-						description={getAddressDescription(client)}
-					>
+						description={getAddressDescription(client)}>
 						<CustomInput
 							placeholder={`Įveskite gatvę, namo numerį, miestą`}
 							control={control}
@@ -90,8 +90,7 @@ const ClientInformationForm = ({ client, control, subName }: Props) => {
 					</FieldContainer>
 					<FieldContainer
 						label={`${value} pašto kodas`}
-						description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą. Pasitikrinkite ar teisingas pašto kodas.'
-					>
+						description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą. Pasitikrinkite ar teisingas pašto kodas.'>
 						<CustomInput
 							placeholder={`Pašto kodas`}
 							control={control}

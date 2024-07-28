@@ -3210,6 +3210,22 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
 	},
 ];
 
+export const palettesCategoryProducts: CommonProductTypeExample[] = [
+	{
+		category: {
+			label: 'Paletes',
+			value: 'palettes',
+		},
+		productType: null,
+		size: null,
+		callManager: true,
+		volume: 0,
+		weight: 0,
+		specification: null,
+		price: 0,
+	},
+];
+
 export const allProducts: CommonProductTypeExample[] = [
 	...automotiveGoodsCategoryProducts,
 	...bicyclesAndScootersCategoryProducts,
@@ -3220,6 +3236,7 @@ export const allProducts: CommonProductTypeExample[] = [
 	...gardenEquipmentCategoryProducts,
 	...shipmentsCategoryProducts,
 	...removalsCategoryProducts,
+	...palettesCategoryProducts,
 ];
 
 export const categoriesOptions: AnyOptionType[] = getOptions(

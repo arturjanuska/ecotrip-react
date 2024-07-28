@@ -2,6 +2,7 @@ import Select, { Props } from 'react-select';
 import React, { forwardRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
+import SimpleTextError from './SimpleTextError';
 
 const customStyles = {
 	// @ts-ignore
@@ -88,7 +89,7 @@ const ControlledStyledSelect = forwardRef(
 						);
 					}}
 				/>
-				{/* <SimpleTextError message={props.errorMessage} /> */}
+				<SimpleTextError message={props.errorMessage} />
 			</>
 		);
 	}

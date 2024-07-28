@@ -225,6 +225,10 @@ const SingleShimpentForm = ({
 		specification: selectedSpecification,
 		setValue,
 		name: `shipments.${index}.estimatedPrice`,
+		weight: selectedSize,
+		length: selectedLength,
+		width: selectedWidth,
+		height: selectedHeight,
 	});
 
 	const estimatedPrice =
@@ -232,8 +236,6 @@ const SingleShimpentForm = ({
 			control,
 			name: `shipments.${index}.estimatedPrice`,
 		}) ?? '0.00';
-
-	console.log('estimatedPrice ===> ', estimatedPrice);
 
 	const productTypesWithRequiredManagerCall = ['interior', 'carQuarter'];
 
@@ -271,6 +273,7 @@ const SingleShimpentForm = ({
 							setValue(`shipments.${index}.size`, null);
 							setValue(`shipments.${index}.specification`, null);
 							setValue(`shipments.${index}.amount`, 1);
+							setValue(`shipments.${index}.estimatedPrice`, '0.00');
 						}}
 					/>
 				</FieldContainer>
@@ -283,25 +286,131 @@ const SingleShimpentForm = ({
 				</p>
 			</div>
 			<div className='right-column'>
+				{productTypeOptions.length > 0 && (
+					<FieldContainer
+						label={`Nr. ${shipmentNumber} siuntos tipas`}
+						description={`${
+							productTypesWithRequiredManagerCall.includes(
+								selectedProductType?.value ?? ''
+							)
+								? 'Susisiekite su vadybininku'
+								: ''
+						}`}>
+						<ControlledStyledSelect
+							name={`shipments.${index}.productType`}
+							control={control}
+							isClearable
+							options={productTypeOptions}
+							placeholder='Siuntos tipas'
+							onChange={() => {
+								setValue(`shipments.${index}.size`, null);
+								setValue(`shipments.${index}.specification`, null);
+								setValue(`shipments.${index}.estimatedPrice`, '0.00');
+							}}
+						/>
+					</FieldContainer>
+				)}
+				{selectedCategory?.value === 'flatScreenTv' ? (
+					<>
+						<FieldContainer
+							label={`Nr. ${shipmentNumber} siuntos dydis`}
+							description=''>
+							<ControlledStyledSelect
+								name={`shipments.${index}.size`}
+								isClearable
+								control={control}
+								options={sizeOptions}
+								placeholder='Siuntos dydis'
+								onChange={() => {
+									setValue(`shipments.${index}.specification`, null);
+								}}
+							/>
+						</FieldContainer>
+					</>
+				) : null}
+				{productTypesThatNeedsPriceCalculation.includes(
+					selectedProductType?.value ?? ''
+				) ? (
+					<FieldContainer
+						label={`Nr. ${shipmentNumber} siuntos išmatavimai metrais`}
+						description={''}>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								gap: '8px',
+							}}>
+							<div className='volume-fields-container'>
+								<CustomInput
+									name={`shipments.${index}.length`}
+									control={control}
+									placeholder='Ilgis'
+									type='number'
+									onChange={(e) => {
+										handleValidation('length', e.target.value);
+									}}
+									isError={!!errorMessages.length}
+								/>
+								<CustomInput
+									name={`shipments.${index}.width`}
+									control={control}
+									placeholder='Plotis'
+									type='number'
+									onChange={(e) => {
+										handleValidation('width', e.target.value);
+									}}
+									isError={!!errorMessages.width}
+								/>
+								<CustomInput
+									name={`shipments.${index}.height`}
+									control={control}
+									placeholder='Aukštis'
+									type='number'
+									onChange={(e) => {
+										handleValidation('height', e.target.value);
+									}}
+									isError={!!errorMessages.height}
+								/>
+							</div>
+							<div className='errors'>
+								{volumeErrorMessages.length !== 0 &&
+									volumeErrorMessages
+										.filter((mes) => mes !== undefined)
+										.map((err, index) => {
+											return (
+												<div
+													className='error'
+													key={index}>
+													<span>Šių parametrų siuntos neaptarnaujame. </span>{' '}
+													{err}
+												</div>
+											);
+										})}
+							</div>
+						</div>
+					</FieldContainer>
+				) : null}
 				{selectedCategory?.value === 'shipments' ||
 				selectedCategory?.value === 'removals' ? (
 					<>
-						<FieldContainer
-							label={`Nr. ${shipmentNumber} siuntos svoris (kg)`}
-							description={
-								typeof selectedSize === 'string' &&
-								!isNaN(Number(selectedSize)) &&
-								Number(selectedSize) > 35
-									? 'Jūsų siuta/-os sunkesnė/-ės nei 35 kg. Kadangi mūsų kurjeriai dirba po vieną, jam gali prireikti pagalbos pakraunant ar iškraunant sunkias siuntas. Prašome užtikrinti, kad atvykus kurjeriui būtų kas padeda ją pakrauti ar iškrauti. Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
-									: 'Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
-							}>
-							<CustomInput
-								name={`shipments.${index}.size`}
-								control={control}
-								placeholder='Siuntos svoris'
-								type='number'
-							/>
-						</FieldContainer>
+						{selectedCategory?.value === 'shipments' ? (
+							<FieldContainer
+								label={`Nr. ${shipmentNumber} siuntos svoris (kg)`}
+								description={
+									typeof selectedSize === 'string' &&
+									!isNaN(Number(selectedSize)) &&
+									Number(selectedSize) > 35
+										? 'Jūsų siuta/-os sunkesnė/-ės nei 35 kg. Kadangi mūsų kurjeriai dirba po vieną, jam gali prireikti pagalbos pakraunant ar iškraunant sunkias siuntas. Prašome užtikrinti, kad atvykus kurjeriui būtų kas padeda ją pakrauti ar iškrauti. Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
+										: 'Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
+								}>
+								<CustomInput
+									name={`shipments.${index}.size`}
+									control={control}
+									placeholder='Siuntos svoris'
+									type='number'
+								/>
+							</FieldContainer>
+						) : null}
 
 						<FieldContainer
 							label={`Nr. ${shipmentNumber} siuntos išmatavimai ${
@@ -338,7 +447,7 @@ const SingleShimpentForm = ({
 										isError={!!errorMessages.width}
 									/>
 									<CustomInput
-										name={`shipments[${index}].height`}
+										name={`shipments.${index}.height`}
 										control={control}
 										placeholder='Aukštis'
 										type='number'
@@ -445,29 +554,6 @@ const SingleShimpentForm = ({
 					</>
 				) : (
 					<>
-						{productTypeOptions.length > 0 && (
-							<FieldContainer
-								label={`Nr. ${shipmentNumber} siuntos tipas`}
-								description={`${
-									productTypesWithRequiredManagerCall.includes(
-										selectedProductType?.value ?? ''
-									)
-										? 'Susisiekite su vadybininku'
-										: ''
-								}`}>
-								<ControlledStyledSelect
-									name={`shipments.${index}.productType`}
-									control={control}
-									isClearable
-									options={productTypeOptions}
-									placeholder='Siuntos tipas'
-									onChange={() => {
-										setValue(`shipments.${index}.size`, null);
-										setValue(`shipments.${index}.specification`, null);
-									}}
-								/>
-							</FieldContainer>
-						)}
 						{!productTypesWithRequiredManagerCall.includes(
 							selectedProductType?.value ?? ''
 						) ? (
@@ -509,13 +595,23 @@ const SingleShimpentForm = ({
 								{selectedCategory?.value ? (
 									<FieldContainer
 										label={`Nr. ${shipmentNumber} siuntos kiekis`}
-										description=''>
+										description={`${
+											selectedCategory.value === 'palettes'
+												? 'Susisiekite su vadibininku'
+												: ''
+										}`}>
 										<CustomInput
 											name={`shipments.${index}.amount`}
 											type='number'
 											control={control}
 											placeholder='Siuntos kiekis'
 											defaultValue={1}
+											onBlur={(e) => {
+												const value = e.target.value;
+												if (!value) {
+													setValue(`shipments.${index}.amount`, 1);
+												}
+											}}
 										/>
 									</FieldContainer>
 								) : null}

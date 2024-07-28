@@ -1,4 +1,9 @@
-import { Control, UseFormReturn, UseFormSetValue } from 'react-hook-form';
+import {
+	Control,
+	FieldErrors,
+	UseFormReturn,
+	UseFormSetValue,
+} from 'react-hook-form';
 import Step from '../Step';
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
@@ -15,16 +20,16 @@ const AddressForm = ({
 	selectedService,
 	methods,
 	direction,
-	setDirection,
 	currency,
+	formErrors,
 }: {
 	setValue: UseFormSetValue<FormType>;
 	control: Control<FormType, any>;
 	selectedService: string;
 	methods: UseFormReturn<FormType, any, undefined>;
 	direction: 'LT-UK' | 'UK-LT' | null;
-	setDirection: React.Dispatch<React.SetStateAction<'LT-UK' | 'UK-LT' | null>>;
 	currency: '€' | '£';
+	formErrors: FieldErrors<FormType>;
 }) => {
 	const onChange = (
 		name: 'pickupAddress' | 'deliveryAddress',
@@ -149,10 +154,9 @@ const AddressForm = ({
 				selectedPickupAddressPostcode,
 				selectedDeliveryAddressPostcode
 			);
-
-			setDirection(dir);
+			setValue('direction', dir);
 		} else {
-			setDirection(null);
+			setValue('direction', null);
 		}
 	}, [
 		selectedPickupAddress,

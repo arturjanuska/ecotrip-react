@@ -2,14 +2,15 @@ import Step from '../Step';
 import ClientInformationForm from '../step4/ClientInformationForm';
 import FieldContainer from '../FieldContainer';
 import StyledSelect from '../StyledSelect';
-import { Control } from 'react-hook-form';
+import { Control, FieldErrors } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 
 type Props = {
 	control: Control<FormType, any>;
+	formErrors: FieldErrors<FormType>;
 };
 
-const RansomPayeeInformation = ({ control }: Props) => {
+const RansomPayeeInformation = ({ control, formErrors }: Props) => {
 	return (
 		<Step
 			step={6}
