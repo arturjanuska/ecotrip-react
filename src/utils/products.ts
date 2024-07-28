@@ -3342,10 +3342,6 @@ export const getSizeOptionsBySelectedProductType = (
 					};
 				}
 			});
-		console.log(
-			'filteredProductsByCategoryAndType ===',
-			filteredProductsByCategoryAndType
-		);
 		return filteredProductsByCategoryAndType.length > 1
 			? getUniqueOptions(
 					(filteredProductsByCategoryAndType.filter(
