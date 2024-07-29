@@ -4,6 +4,7 @@ import CustomTextarea from '../CustomTextarea';
 import './step4.css';
 import { Control, FieldErrors } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
+import { getError } from '../../utils/validation/getError';
 
 type Props = {
 	client: 'sender' | 'recipient' | 'ransomPayee';
@@ -12,7 +13,12 @@ type Props = {
 	formErrors: FieldErrors<FormType>;
 };
 
-const ClientInformationForm = ({ client, control, subName }: Props) => {
+const ClientInformationForm = ({
+	client,
+	control,
+	subName,
+	formErrors,
+}: Props) => {
 	const getSubject = (client: Props['client']) => {
 		switch (client) {
 			case 'sender':
@@ -53,48 +59,54 @@ const ClientInformationForm = ({ client, control, subName }: Props) => {
 				<div className='client-form-container'>
 					<FieldContainer label={`${value} vardas`}>
 						<CustomInput
-							placeholder={`Įveskite ${value.toLowerCase()} vardą`}
+							placeholder={`Įveskite ${value.toLowerCase()} vardą *`}
 							control={control}
 							name={`${subName}.firstName`}
+							errorMessage={getError(`${subName}.firstName`, formErrors)}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} pavardė`}>
 						<CustomInput
-							placeholder={`Įveskite ${value.toLowerCase()} pavardę`}
+							placeholder={`Įveskite ${value.toLowerCase()} pavardę *`}
 							control={control}
 							name={`${subName}.lastName`}
+							errorMessage={getError(`${subName}.lastName`, formErrors)}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} telefonas`}>
 						<CustomInput
-							placeholder={`Įveskite ${value.toLowerCase()} telefoną`}
+							placeholder={`Įveskite ${value.toLowerCase()} telefoną *`}
 							control={control}
 							name={`${subName}.phoneNumber`}
+							errorMessage={getError(`${subName}.phoneNumber`, formErrors)}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} el. paštas`}>
 						<CustomInput
-							placeholder={`Įveskite ${value.toLowerCase()} el. paštą`}
+							placeholder={`Įveskite ${value.toLowerCase()} el. paštą *`}
 							control={control}
 							name={`${subName}.email`}
+							errorMessage={getError(`${subName}.email`, formErrors)}
 						/>
 					</FieldContainer>
 					<FieldContainer
 						label={`${value} adresas`}
 						description={getAddressDescription(client)}>
 						<CustomInput
-							placeholder={`Įveskite gatvę, namo numerį, miestą`}
+							placeholder={`Įveskite gatvę, namo numerį, miestą *`}
 							control={control}
 							name={`${subName}.address`}
+							errorMessage={getError(`${subName}.address`, formErrors)}
 						/>
 					</FieldContainer>
 					<FieldContainer
 						label={`${value} pašto kodas`}
 						description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą. Pasitikrinkite ar teisingas pašto kodas.'>
 						<CustomInput
-							placeholder={`Pašto kodas`}
+							placeholder={`Pašto kodas *`}
 							control={control}
 							name={`${subName}.zipCode`}
+							errorMessage={getError(`${subName}.zipCode`, formErrors)}
 						/>
 					</FieldContainer>
 				</div>

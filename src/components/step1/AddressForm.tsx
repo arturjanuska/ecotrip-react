@@ -179,6 +179,7 @@ const AddressForm = ({
 						onChange={onChange}
 						placeholder='Įveskite gatvę, namo numerį, miestą'
 						onClear={handleOnClear}
+						errorMessage={formErrors.pickupAddress}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -189,6 +190,7 @@ const AddressForm = ({
 						placeholder='Pašto kodas'
 						name='pickupAddressZipCode'
 						control={control}
+						errorMessage={formErrors.pickupAddressZipCode}
 					/>
 				</FieldContainer>
 			</div>
@@ -203,6 +205,7 @@ const AddressForm = ({
 						onChange={onChange}
 						placeholder='Įveskite gatvę, namo numerį, miestą'
 						onClear={handleOnClear}
+						errorMessage={formErrors.deliveryAddress}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -213,6 +216,7 @@ const AddressForm = ({
 						placeholder='Pašto kodas'
 						name='deliveryAddressZipCode'
 						control={control}
+						errorMessage={formErrors.deliveryAddressZipCode}
 					/>
 				</FieldContainer>
 			</div>

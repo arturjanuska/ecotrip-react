@@ -1,7 +1,9 @@
 import FieldContainer from './FieldContainer';
 import ControlledStyledSelect from './ControlledStyledSelect';
-import { Control, FieldErrors } from 'react-hook-form';
+import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
+import { getError } from '../utils/validation/getError';
+import { OptionType } from '../utils/types';
 
 type Props = {
 	fiedsDisabled: boolean;
@@ -15,6 +17,9 @@ type Props = {
 	control: Control<FormType, any>;
 	name: string;
 	formErrors: FieldErrors<FormType>;
+	calculateDeliveryDates?: (selectedDay: string) => void;
+	resetToDates: () => void;
+	setValue?: UseFormSetValue<FormType>;
 };
 
 const Datepicker = ({
@@ -25,17 +30,10 @@ const Datepicker = ({
 	control,
 	name,
 	formErrors,
+	calculateDeliveryDates,
+	resetToDates,
+	setValue,
 }: Props) => {
-	const getError = (name: string, errors: FieldErrors<FormType>) => {
-		const result = name
-			.split('.')
-			.reduce((acc, part) => acc && acc[part], errors)?.message;
-
-		console.log('result ===', result);
-
-		return result ?? undefined;
-	};
-
 	return (
 		<FieldContainer
 			label={label}
@@ -52,6 +50,12 @@ const Datepicker = ({
 						control={control}
 						name={`dates.${name}.year`}
 						errorMessage={getError(`dates.${name}.year.value`, formErrors)}
+						needMargin={true}
+						onChange={(value: OptionType) => {
+							setValue?.('dates.from.day', null);
+							setValue?.('dates.from.month', null);
+							resetToDates();
+						}}
 					/>
 				</div>
 				<div
@@ -64,7 +68,12 @@ const Datepicker = ({
 						isDisabled={fiedsDisabled}
 						control={control}
 						name={`dates.${name}.month`}
-						errorMessage={`${formErrors}.dates.${name}.month.value.message`}
+						errorMessage={getError(`dates.${name}.month.value`, formErrors)}
+						needMargin={true}
+						onChange={() => {
+							setValue?.('dates.from.day', null);
+							resetToDates();
+						}}
 					/>
 				</div>
 				<div
@@ -77,7 +86,11 @@ const Datepicker = ({
 						isDisabled={fiedsDisabled}
 						control={control}
 						name={`dates.${name}.day`}
-						errorMessage={`${formErrors}.dates.${name}.day.value.message`}
+						errorMessage={getError(`dates.${name}.day.value`, formErrors)}
+						needMargin={true}
+						onChange={(newValue: OptionType) => {
+							calculateDeliveryDates?.(newValue.value);
+						}}
 					/>
 				</div>
 			</div>

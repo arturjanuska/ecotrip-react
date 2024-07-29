@@ -18,6 +18,7 @@ const RecipientInformation = ({ control, formErrors }: Props) => {
 				client='recipient'
 				control={control}
 				subName='recipientInformation'
+				formErrors={formErrors}
 			/>
 		</Step>
 	);

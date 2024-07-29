@@ -11,7 +11,7 @@ import { FormType } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import generateOrderID from '../utils/generateOrderId';
-import { schema } from '../utils/validation/schema';
+import { getValidationSchema } from '../utils/validation/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const Form = () => {
@@ -19,11 +19,21 @@ const Form = () => {
 
 	const methods = useForm<FormType>({
 		defaultValues: {
+			invoiceRequired: false,
 			packagingAndLabelingRules: false,
 			transportRules: false,
 		},
 		shouldUnregister: true,
-		resolver: yupResolver(schema),
+		resolver: yupResolver(getValidationSchema()),
+	});
+
+	const service = methods.watch('service');
+	const invoiceNeeded = methods.watch('invoiceRequired');
+
+	const validationSchema = getValidationSchema(service, invoiceNeeded);
+
+	const { watch } = useForm({
+		resolver: yupResolver(validationSchema),
 	});
 
 	const direction = methods.watch('direction');
@@ -86,11 +96,13 @@ const Form = () => {
 							selectedService={selectedService}
 							methods={methods}
 							currency={currency}
+							formErrors={formErrors}
 						/>
 						<Divider />
 						<TransportationDates
 							methods={methods}
 							formErrors={formErrors}
+							direction={direction}
 						/>
 						<Divider />
 						<SenderInformation
@@ -101,6 +113,8 @@ const Form = () => {
 									: 'Siuntos paėmimo / siuntėjo informacija'
 							}
 							formErrors={formErrors}
+							setValue={methods.setValue}
+							selectedService={service}
 						/>
 						<Divider />
 						<RecipientInformation

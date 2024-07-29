@@ -13,11 +13,17 @@ import {
 	motorcyclesAndAccessoriesCategoryProductTypesOptions,
 } from '../../utils/products';
 import ControlledStyledSelect from '../ControlledStyledSelect';
-import { Control, UseFormSetValue, useWatch } from 'react-hook-form';
+import {
+	Control,
+	FieldErrors,
+	UseFormSetValue,
+	useWatch,
+} from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { OptionType } from '../../utils/types';
 import PrimaryButton from '../PrimaryButton';
 import useCalculatePrice from './useCalculatePrice';
+import { getError } from '../../utils/validation/getError';
 
 type Props = {
 	shipmentNumber: number;
@@ -27,6 +33,7 @@ type Props = {
 	selectedService: string;
 	setValue: UseFormSetValue<FormType>;
 	currency: '€' | '£';
+	formErrors: FieldErrors<FormType>;
 };
 
 const SingleShimpentForm = ({
@@ -37,6 +44,7 @@ const SingleShimpentForm = ({
 	selectedService,
 	setValue,
 	currency,
+	formErrors,
 }: Props) => {
 	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
 		{}
@@ -85,16 +93,34 @@ const SingleShimpentForm = ({
 		const getErrorMessage = (field: string, value: string) => {
 			switch (field) {
 				case 'length':
-					if (Number(value) > 420)
-						return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne ilgesni kaip 420 cm kroviniai.';
+					if (
+						selectedService === 'parcelForceShipment' &&
+						Number(value) > 110
+					) {
+						return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne ilgesni kaip 110 cm kroviniai.';
+					} else {
+						if (Number(value) > 420)
+							return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne ilgesni kaip 420 cm kroviniai.';
+					}
 					break;
 				case 'width':
-					if (Number(value) > 200)
-						return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne platesni kaip 200 cm kroviniai.';
+					if (selectedService === 'parcelForceShipment' && Number(value) > 70) {
+						return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne platesni kaip 70 cm kroviniai.';
+					} else {
+						if (Number(value) > 200)
+							return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne platesni kaip 200 cm kroviniai.';
+					}
 					break;
 				case 'height':
-					if (Number(value) > 200)
-						return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne aukstesni kaip 200 cm kroviniai.';
+					if (
+						selectedService === 'parcelForceShipment' &&
+						Number(value) > 110
+					) {
+						return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne aukstesni kaip 110 cm kroviniai.';
+					} else {
+						if (Number(value) > 200)
+							return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne aukstesni kaip 200 cm kroviniai.';
+					}
 					break;
 				case 'orderedShipmentNumber':
 					if (!value)
@@ -107,6 +133,10 @@ const SingleShimpentForm = ({
 				case 'purchasePriceOfTheItem':
 					if (!value)
 						return 'Suveskite parduodamos prekės kainą, kurią EcoTrip kurjeriui perduos siuntos gavėjas.';
+					break;
+				case 'volume':
+					if (Number(value) > 300)
+						return 'Siuntos apimtis skaičiuojama automatiškai pagal formulę: ilgis + plotis*2 + aukštis*2 < 300 cm - viršijus nepatarnaujame.';
 					break;
 				default:
 					return '';
@@ -173,11 +203,9 @@ const SingleShimpentForm = ({
 		const sizeOptionsCopy = options ? options : [];
 		if (sizeOptionsCopy.length > 0) {
 			if (productTypeValue && productTypeOptions.length > 0) {
-				console.log('returninam Cia 1');
 				return true;
 			}
 			if (!productTypeValue && productTypeOptions.length > 0) {
-				console.log('returninam Cia 2');
 				return false;
 			}
 			if (!productTypeValue && productTypeOptions.length === 0) {
@@ -267,7 +295,12 @@ const SingleShimpentForm = ({
 							value: 'Siuntos kategorija',
 						}}
 						placeholder='Siuntos kategoriją'
-						isDisabled={selectedService === 'parcelForceShipment'}
+						isDisabled={
+							selectedService === 'parcelForceShipment' ||
+							selectedService === 'shipmentWithAddressService' ||
+							selectedService === 'productSalesService' ||
+							selectedService === 'productPurchaseService'
+						}
 						onChange={() => {
 							setValue(`shipments.${index}.productType`, null);
 							setValue(`shipments.${index}.size`, null);
@@ -349,7 +382,7 @@ const SingleShimpentForm = ({
 									onChange={(e) => {
 										handleValidation('length', e.target.value);
 									}}
-									isError={!!errorMessages.length}
+									errorMessage={errorMessages.length}
 								/>
 								<CustomInput
 									name={`shipments.${index}.width`}
@@ -359,7 +392,7 @@ const SingleShimpentForm = ({
 									onChange={(e) => {
 										handleValidation('width', e.target.value);
 									}}
-									isError={!!errorMessages.width}
+									errorMessage={errorMessages.width}
 								/>
 								<CustomInput
 									name={`shipments.${index}.height`}
@@ -369,7 +402,7 @@ const SingleShimpentForm = ({
 									onChange={(e) => {
 										handleValidation('height', e.target.value);
 									}}
-									isError={!!errorMessages.height}
+									errorMessage={errorMessages.height}
 								/>
 							</div>
 							<div className='errors'>
@@ -408,6 +441,7 @@ const SingleShimpentForm = ({
 									control={control}
 									placeholder='Siuntos svoris'
 									type='number'
+									errorMessage={getError(`shipments.${index}.size`, formErrors)}
 								/>
 							</FieldContainer>
 						) : null}
@@ -418,7 +452,11 @@ const SingleShimpentForm = ({
 									? 'metrais'
 									: 'centimetrais'
 							}`}
-							description={''}>
+							description={
+								selectedService === 'parcelForceShipment'
+									? 'Maksimalus Parcel Force siuntos ilgis 110 cm, plotis 70 cm, aukštis 110 cm. Didesnių išmatavimų neaptarnaujame.'
+									: ''
+							}>
 							<div
 								style={{
 									display: 'flex',
@@ -434,6 +472,7 @@ const SingleShimpentForm = ({
 										onChange={(e) => {
 											handleValidation('length', e.target.value);
 										}}
+										// errorMessage={errorMessages.length}
 										isError={!!errorMessages.length}
 									/>
 									<CustomInput
@@ -444,6 +483,7 @@ const SingleShimpentForm = ({
 										onChange={(e) => {
 											handleValidation('width', e.target.value);
 										}}
+										// errorMessage={errorMessages.width}
 										isError={!!errorMessages.width}
 									/>
 									<CustomInput
@@ -454,6 +494,7 @@ const SingleShimpentForm = ({
 										onChange={(e) => {
 											handleValidation('height', e.target.value);
 										}}
+										// errorMessage={errorMessages.height}
 										isError={!!errorMessages.height}
 									/>
 								</div>
@@ -474,6 +515,22 @@ const SingleShimpentForm = ({
 								</div>
 							</div>
 						</FieldContainer>
+
+						{selectedService === 'parcelForceShipment' ? (
+							<FieldContainer
+								label={`Nr. ${shipmentNumber} siuntos apimtis (max 300 cm)`}>
+								<CustomInput
+									name={`shipments.${index}.volume`}
+									control={control}
+									errorMessage={errorMessages.volume}
+									type='number'
+									onChange={(e) => {
+										handleValidation('volume', e.target.value);
+									}}
+								/>
+							</FieldContainer>
+						) : null}
+
 						{selectedService === 'shipmentWithAddressService' && (
 							<FieldContainer
 								label='Užsakytos siuntos numeris (Amazon UK, eBay ir kt.) *'
@@ -482,7 +539,8 @@ const SingleShimpentForm = ({
 									<CustomInput
 										name={`shipments.${index}.orderedShipmentNumber`}
 										control={control}
-										isError={!!errorMessages.orderedShipmentNumber}
+										errorMessage={errorMessages.orderedShipmentNumber}
+										placeholder='Siuntos numeris'
 										onChange={(e) => {
 											handleValidation('orderedShipmentNumber', e.target.value);
 										}}
@@ -506,7 +564,8 @@ const SingleShimpentForm = ({
 									<CustomInput
 										name={`shipments.${index}.shipmentPrice`}
 										control={control}
-										isError={!!shipmentPriceErrorMessage}
+										errorMessage={shipmentPriceErrorMessage}
+										placeholder='Įveskite prekės sumą'
 										type='number'
 										onChange={(e) => {
 											handleValidation('shipmentPrice', e.target.value);
@@ -531,8 +590,9 @@ const SingleShimpentForm = ({
 									<CustomInput
 										name={`shipments.${index}.purchasePriceOfTheItem`}
 										control={control}
+										placeholder='Įveskite siuntos/prekės kainą'
 										type='number'
-										isError={!!purchasePriceOfTheItemErrorMessage}
+										errorMessage={purchasePriceOfTheItemErrorMessage}
 										onChange={(e) => {
 											handleValidation(
 												'purchasePriceOfTheItem',
@@ -575,6 +635,10 @@ const SingleShimpentForm = ({
 											onChange={() => {
 												setValue(`shipments.${index}.specification`, null);
 											}}
+											errorMessage={getError(
+												`shipments.${index}.size`,
+												formErrors
+											)}
 										/>
 									</FieldContainer>
 								) : null}
@@ -589,6 +653,10 @@ const SingleShimpentForm = ({
 											control={control}
 											options={specificationOptions}
 											placeholder='Siuntos specifikacija'
+											errorMessage={getError(
+												`shipments.${index}.specification`,
+												formErrors
+											)}
 										/>
 									</FieldContainer>
 								) : null}

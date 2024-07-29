@@ -455,6 +455,21 @@ const ServiceSection = ({
 					href='/'
 					text='Sužinoti daugiau apie papildomas paslaugas ir kaip jomis naudotis'
 				/>
+
+				{selectedService === 'parcelForceShipment' ? (
+					<div className='service-section-sub-text'>
+						<span>
+							Dėl pasirinkto UK adreso, jūsų siuntą siųsime per partnerius
+							(Parcel Force), galimas maksimalus siuntos svoris iki 30 kg ir
+							privalomas pakavimas dėžėse. Jei sutinkate su sąlygomis tęskite
+							siuntos įvedimą.{' '}
+						</span>
+						<Link
+							href='/'
+							text='Plačiau apie Parcel Force siuntas rasite čia.'
+						/>
+					</div>
+				) : null}
 			</div>
 		</div>
 	);

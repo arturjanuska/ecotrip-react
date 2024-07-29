@@ -2,17 +2,25 @@ import React from 'react';
 import '../styles/input.css';
 import { Control, Controller } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
+import SimpleTextError from './SimpleTextError';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	name: string;
 	control: Control<FormType, any>;
-	isError?: boolean;
+	errorMessage?: string;
 	onChange?: (value: any) => void;
 	isNumberInput?: boolean;
 	onBlur?: (e: Event) => void;
+	isError?: boolean;
 };
 
-const CustomInput = ({ name, control, isError, ...props }: InputProps) => {
+const CustomInput = ({
+	name,
+	control,
+	errorMessage,
+	isError = false,
+	...props
+}: InputProps) => {
 	return (
 		<>
 			<Controller
@@ -27,7 +35,10 @@ const CustomInput = ({ name, control, isError, ...props }: InputProps) => {
 					};
 
 					return (
-						<div className={`input-container ${isError ? 'error-input' : ''}`}>
+						<div
+							className={`input-container ${
+								errorMessage || isError ? 'error-input' : ''
+							}`}>
 							<input
 								{...field}
 								{...props}
@@ -37,6 +48,7 @@ const CustomInput = ({ name, control, isError, ...props }: InputProps) => {
 					);
 				}}
 			/>
+			<SimpleTextError message={errorMessage} />
 		</>
 	);
 };

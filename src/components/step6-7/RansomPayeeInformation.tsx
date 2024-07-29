@@ -34,6 +34,7 @@ const RansomPayeeInformation = ({ control, formErrors }: Props) => {
 						client='ransomPayee'
 						control={control}
 						subName='ransomPayeeInformation'
+						formErrors={formErrors}
 					/>
 				</div>
 			</>

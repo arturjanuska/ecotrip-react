@@ -1,5 +1,5 @@
 import Select, { Props } from 'react-select';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
 import SimpleTextError from './SimpleTextError';
@@ -25,30 +25,36 @@ const customStyles = {
 		textAlign: 'left',
 	}),
 	// @ts-ignore
-	singleValue: (provided, state) => ({
-		...provided,
-		color: '#7a7776',
-		fontSize: '14px',
-		fontWeight: '400',
-		lineHeight: '16.1px',
-		textAlign: 'left',
-	}),
+	singleValue: (provided, state) => {
+		return {
+			...provided,
+			color: '#7a7776',
+			fontSize: '14px',
+			fontWeight: '400',
+			lineHeight: '16.1px',
+			textAlign: 'left',
+		};
+	},
 	// @ts-ignore
-	valueContainer: (provided, state) => ({
-		...provided,
-	}),
+	valueContainer: (provided, state) => {
+		return {
+			...provided,
+		};
+	},
 	// @ts-ignore
-	control: (provided, state) => ({
-		...provided,
-		border: '1px solid #0000001A',
-		'&:hover': {
-			border: state.isFocused ? '1px solid #9aa61e' : '1px solid #0000001A',
-		},
-		'&:focus-within': {
-			border: '1px solid #9aa61e',
-			boxShadow: 'none',
-		},
-	}),
+	control: (provided, state) => {
+		return {
+			...provided,
+			border: '1px solid #0000001A',
+			'&:hover': {
+				border: state.isFocused ? '1px solid #9aa61e' : '1px solid #0000001A',
+			},
+			'&:focus-within': {
+				border: '1px solid #9aa61e',
+				boxShadow: 'none',
+			},
+		};
+	},
 };
 
 const ControlledStyledSelect = forwardRef(
@@ -59,6 +65,7 @@ const ControlledStyledSelect = forwardRef(
 			name: string;
 			control: Control<FormType>;
 			onChange?: (value: any) => void;
+			needMargin?: boolean;
 		},
 		ref: any
 	) => {
@@ -75,11 +82,74 @@ const ControlledStyledSelect = forwardRef(
 							}
 						};
 						return (
-							<div className='w-100'>
+							<div
+								className='w-100'
+								style={
+									props.needMargin
+										? {
+												marginBottom: '10px',
+										  }
+										: {}
+								}>
 								<Select
 									{...field}
 									{...props}
-									styles={customStyles}
+									styles={{
+										// @ts-ignore
+										placeholder: (provided, state) => ({
+											...provided,
+											color: '#7a777680',
+											fontFamily: 'Arial',
+											fontSize: '14px',
+											fontWeight: '400',
+											lineHeight: '16.1px',
+											textAlign: 'left',
+										}),
+										// @ts-ignore
+										option: (provided, state) => ({
+											...provided,
+											color: '#7a7776',
+											fontSize: '14px',
+											fontWeight: '400',
+											lineHeight: '16.1px',
+											textAlign: 'left',
+										}),
+										// @ts-ignore
+										singleValue: (provided, state) => {
+											return {
+												...provided,
+												color: '#7a7776',
+												fontSize: '14px',
+												fontWeight: '400',
+												lineHeight: '16.1px',
+												textAlign: 'left',
+											};
+										},
+										// @ts-ignore
+										valueContainer: (provided, state) => {
+											return {
+												...provided,
+											};
+										},
+										// @ts-ignore
+										control: (provided, state) => {
+											return {
+												...provided,
+												border: props.errorMessage
+													? '1px solid #ff0000'
+													: '1px solid #0000001A',
+												'&:hover': {
+													border: state.isFocused
+														? '1px solid #9aa61e'
+														: '1px solid #0000001A',
+												},
+												'&:focus-within': {
+													border: '1px solid #9aa61e',
+													boxShadow: 'none',
+												},
+											};
+										},
+									}}
 									ref={ref}
 									placeholder={props.placeholder}
 									aria-label={`${props.name}`}

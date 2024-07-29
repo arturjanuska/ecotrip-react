@@ -1,4 +1,9 @@
-import { Control, useFieldArray, UseFormReturn } from 'react-hook-form';
+import {
+	Control,
+	FieldErrors,
+	useFieldArray,
+	UseFormReturn,
+} from 'react-hook-form';
 import Step from '../Step';
 import SingleShimpentForm from './SingleShimpentForm';
 import { FormType } from '../../utils/formTypes';
@@ -11,11 +16,13 @@ const Shipments = ({
 	selectedService,
 	methods,
 	currency,
+	formErrors,
 }: {
 	control: Control<FormType>;
 	selectedService: string;
 	methods: UseFormReturn<FormType, any, undefined>;
 	currency: '€' | '£';
+	formErrors: FieldErrors<FormType>;
 }) => {
 	const { fields, append, remove } = useFieldArray<FormType>({
 		control,
@@ -53,6 +60,7 @@ const Shipments = ({
 										selectedService={selectedService}
 										setValue={methods.setValue}
 										currency={currency}
+										formErrors={formErrors}
 									/>
 								</div>
 							);
@@ -70,7 +78,10 @@ const Shipments = ({
 							append({
 								estimatedPrice: '0.00',
 								category:
-									selectedService === 'parcelForceShipment'
+									selectedService === 'parcelForceShipment' ||
+									selectedService === 'shipmentWithAddressService' ||
+									selectedService === 'productPurchaseService' ||
+									selectedService === 'productSalesService'
 										? {
 												label: 'Siuntos',
 												value: 'shipments',

@@ -85,7 +85,6 @@ const useCalculatePrice = ({
 
 		if (size !== null) {
 			if (size.value === size.label) {
-				console.log('category ===', category);
 				filteredProducts = filteredProducts.filter(
 					(item) =>
 						item.size.from ===
