@@ -13,8 +13,9 @@ import { FormType } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import generateOrderID from '../utils/generateOrderId';
-import { getValidationSchema } from '../utils/validation/schema';
+import { validationSchema } from '../utils/validation/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 
 const Form = () => {
 	const [currency, setCurrency] = useState<'€' | '£'>('€');
@@ -24,20 +25,24 @@ const Form = () => {
 			invoiceRequired: false,
 			packagingAndLabelingRules: false,
 			transportRules: false,
+			customerInformation: {
+				paymentMethod: {
+					label: 'Grynais',
+					value: 'cash',
+				},
+				payerOfTheShipment: {
+					label: 'Mokėtojas yra siuntėjas',
+					value: 'thePayerIsTheSender',
+				}
+			}
 		},
 		shouldUnregister: true,
 		// @ts-ignore
-		resolver: yupResolver(getValidationSchema()),
+		resolver: yupResolver(validationSchema),
 	});
 
 	const service = methods.watch('service');
 	const invoiceNeeded = methods.watch('invoiceRequired');
-
-	const validationSchema = getValidationSchema(service, invoiceNeeded);
-
-	const { watch } = useForm({
-		resolver: yupResolver(validationSchema),
-	});
 
 	const direction = methods.watch('direction');
 
@@ -132,11 +137,20 @@ const Form = () => {
 								/>
 							</>
 						)}
+						{selectedService === 'productPurchaseService' && (
+							<>
+								<Divider />
+								<ProductPurchaseServiceInformation
+									control={methods.control}
+									formErrors={formErrors}
+								/>
+							</>
+						)}
 
 						<Divider />
 						<PayerInformation
 							control={methods.control}
-							step={selectedService === 'productSalesService' ? 7 : 6}
+							step={selectedService === 'productSalesService' || selectedService === 'productPurchaseService' ? 7 : 6}
 							stepLabel={'Užsakovo informacija'}
 							formErrors={formErrors}
 							methods={methods}

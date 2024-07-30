@@ -3045,7 +3045,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
 	// Siuntos shipments
 	{
 		category: {
-			label: 'Siuntos',
+			label: 'Standartinės siuntos',
 			value: 'shipments',
 		},
 		productType: null,
@@ -3058,7 +3058,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Siuntos',
+			label: 'Standartinės siuntos',
 			value: 'shipments',
 		},
 		productType: null,
@@ -3071,7 +3071,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Siuntos',
+			label: 'Standartinės siuntos',
 			value: 'shipments',
 		},
 		productType: null,
@@ -3084,7 +3084,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Siuntos',
+			label: 'Standartinės siuntos',
 			value: 'shipments',
 		},
 		productType: null,
@@ -3098,7 +3098,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Siuntos',
+			label: 'Standartinės siuntos',
 			value: 'shipments',
 		},
 		productType: null,
@@ -3112,7 +3112,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Siuntos',
+			label: 'Standartinės siuntos',
 			value: 'shipments',
 		},
 		productType: null,
@@ -3126,7 +3126,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
 	},
 	{
 		category: {
-			label: 'Siuntos',
+			label: 'Standartinės siuntos',
 			value: 'shipments',
 		},
 		productType: null,

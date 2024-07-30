@@ -69,6 +69,15 @@ export type FormType = {
 		zipCode: string;
 		additionInformation: string;
 	};
+	purchaseInformation: {
+		firstName: string;
+		lastName: string;
+		phoneNumber: string;
+		email: string;
+		address: string;
+		zipCode: string;
+		additionInformation: string;
+	};
 	customerInformation: {
 		payerOfTheShipment: OptionType;
 		paymentMethod: OptionType;

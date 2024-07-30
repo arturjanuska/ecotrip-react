@@ -76,15 +76,18 @@ const Shipments = ({
 							append({
 								estimatedPrice: '0.00',
 								category:
-									selectedService === 'parcelForceShipment' ||
+									selectedService === 'parcelForceShipment' ? {
+										label: "Parcel Force siunta",
+										value: "shipments"
+									} :
 										selectedService === 'shipmentWithAddressService' ||
-										selectedService === 'productPurchaseService' ||
-										selectedService === 'productSalesService'
-										? {
-											label: 'Siuntos',
-											value: 'shipments',
-										}
-										: null,
+											selectedService === 'productPurchaseService' ||
+											selectedService === 'productSalesService'
+											? {
+												label: 'Standartinės siuntos',
+												value: 'shipments',
+											}
+											: null,
 								amount: 1,
 							});
 						}}>

@@ -38,6 +38,14 @@ const PayerInformation = ({ control, step, stepLabel, formErrors, methods, curre
 			label: 'Grynais',
 			value: 'cash',
 		},
+		{
+			label: 'Kortele',
+			value: 'card',
+		},
+		{
+			label: 'Bankiniu pavedimu (juridiniams asmenims)',
+			value: 'bankTransfer',
+		},
 	];
 
 	const shipments = methods.watch("shipments")
@@ -63,9 +71,6 @@ const PayerInformation = ({ control, step, stepLabel, formErrors, methods, curre
 
 	const orderPrice = getOrderPrice(shipments)
 
-	console.log('shipments ===', shipments);
-	console.log('isAllShipmentsAreValid ===', shipmentsWithEmptyEstimatedPrice);
-
 	return (
 		<Step
 			step={step}
@@ -76,7 +81,6 @@ const PayerInformation = ({ control, step, stepLabel, formErrors, methods, curre
 						label='Kas yra siuntos užsakovas?'
 						description='Prašome iš anksto nurodyti, kas bus atsakingas už siuntos apmokėjimą, kad vėliau nebūtų nesusipratimų ar papildomų klausimų po užsakymo.'>
 						<ControlledStyledSelect
-							isClearable
 							placeholder='Kas yra siuntos užsakovas?'
 							name='customerInformation.payerOfTheShipment'
 							options={payerOptions}
@@ -91,7 +95,6 @@ const PayerInformation = ({ control, step, stepLabel, formErrors, methods, curre
 						label='Pasirinkite apmokėjimo būdą'
 						description='Prašome pasirinkti ir nurodyti atsiskaitymo būdą, kuris jums yra patogus ir teisingas.'>
 						<ControlledStyledSelect
-							isClearable
 							placeholder='Pasirinkite apmokėjimo būdą'
 							name='customerInformation.paymentMethod'
 							options={paymentMethodOptions}
@@ -122,6 +125,7 @@ const PayerInformation = ({ control, step, stepLabel, formErrors, methods, curre
 					currency={currency}
 					control={control}
 					formErrors={formErrors}
+					methods={methods}
 				/>
 				<div className='checkboxes-container'>
 					<ControlledCheckboxWithLabel

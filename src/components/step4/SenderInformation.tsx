@@ -31,8 +31,6 @@ const SenderInformation = ({
 				'EcoTrip UK, 216 Halbutt St, Dagenham, UK'
 			);
 			setValue(`senderInformation.zipCode`, 'RM9 5AA');
-			// setValue(`pickupAddress`, 'EcoTrip UK, 216 Halbutt St, Dagenham, UK');
-			// setValue(`pickupAddressZipCode`, 'RM9 5AA');
 		} else {
 			setValue(`senderInformation.firstName`, '');
 			setValue(`senderInformation.lastName`, '');

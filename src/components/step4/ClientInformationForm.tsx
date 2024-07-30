@@ -8,7 +8,7 @@ import { FormType } from '../../utils/formTypes';
 import { getError } from '../../utils/validation/getError';
 
 type Props = {
-	client: 'sender' | 'recipient' | 'ransomPayee';
+	client: 'sender' | 'recipient' | 'ransomPayee' | "purchaseInformation";
 	control: Control<FormType, any>;
 	subName: string;
 	formErrors: FieldErrors<FormType>;
@@ -33,6 +33,9 @@ const ClientInformationForm = ({
 			case 'ransomPayee':
 				return 'Išpirkos gavėjo';
 
+			case 'purchaseInformation':
+				return 'Pinigus perduodančio';
+
 			default:
 				return 'Siuntėjo';
 		}
@@ -47,6 +50,9 @@ const ClientInformationForm = ({
 				return 'Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.';
 
 			case 'ransomPayee':
+				return 'Adresas, kur perduodami pinigai EcoTrip kurjeriui.';
+
+			case 'purchaseInformation':
 				return 'Adresas, kur perduodami pinigai EcoTrip kurjeriui.';
 
 			default:

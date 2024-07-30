@@ -1,31 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
-import CheckboxWithLabel from '../CheckboxWithLabel';
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import { getError } from '../../utils/validation/getError';
-import { Control, FieldErrors } from 'react-hook-form';
+import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
+import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 
 type InvoiceProps = {
 	control: Control<FormType, any>;
 	formErrors: FieldErrors<FormType>;
+	methods: UseFormReturn<FormType, any, undefined>
+
 };
 
-const Invoice = ({ control, formErrors }: InvoiceProps) => {
-	const [needInvoice, setNeedInvoice] = useState(false);
+const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
+	const needInvoice = methods.watch("invoiceRequired")
 
 	return (
 		<>
-			<CheckboxWithLabel
-				style={{
-					marginBottom: needInvoice ? '30px' : '8px',
-				}}
-				onChange={(e) => {
-					setNeedInvoice(e.target.checked);
-				}}>
+			<ControlledCheckboxWithLabel
+				control={control}
+				name='invoiceRequired'>
 				<span>Reikalinga sąskaita faktūra</span>
-			</CheckboxWithLabel>
+			</ControlledCheckboxWithLabel>
+
 			{needInvoice ? (
 				<div className='invoice-form-container'>
 					<FieldContainer label='Įmonės pavadinimas'>

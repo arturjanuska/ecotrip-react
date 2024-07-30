@@ -278,12 +278,21 @@ const SingleShimpentForm = ({
 					<ControlledStyledSelect
 						name={`shipments.${index}.category`}
 						control={control}
-						options={[...categoriesOptions]}
+						options={categoriesOptions.map((option) => {
+							if (option.value === "shipments" && selectedService === "parcelForceShipment") {
+								return {
+									label: "Parcel Force siunta",
+									value: "shipments"
+								}
+							} else {
+								return option
+							}
+						})}
 						isClearable
-						defaultValue={{
-							label: 'Siuntos kategorija',
-							value: 'Siuntos kategorija',
-						}}
+						// defaultValue={{
+						// 	label: 'Siuntos kategorija',
+						// 	value: 'Siuntos kategorija',
+						// }}
 						placeholder='Siuntos kategoriją'
 						isDisabled={
 							selectedService === 'parcelForceShipment' ||
