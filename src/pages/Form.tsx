@@ -139,6 +139,8 @@ const Form = () => {
 							step={selectedService === 'productSalesService' ? 7 : 6}
 							stepLabel={'Užsakovo informacija'}
 							formErrors={formErrors}
+							methods={methods}
+							currency={currency}
 						/>
 					</>
 				)}

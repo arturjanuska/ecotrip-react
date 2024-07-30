@@ -6,8 +6,8 @@ import OrderPrice from './OrderPrice';
 import SecondaryButton from '../SecondaryButton';
 import './step6.css';
 import Link from '../Link';
-import { Control, FieldErrors } from 'react-hook-form';
-import { FormType } from '../../utils/formTypes';
+import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
+import { FormType, ShipmentProps } from '../../utils/formTypes';
 import ControlledStyledSelect from '../ControlledStyledSelect';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { getError } from '../../utils/validation/getError';
@@ -17,9 +17,11 @@ type Props = {
 	step: number;
 	stepLabel: string;
 	formErrors: FieldErrors<FormType>;
+	methods: UseFormReturn<FormType, any, undefined>
+	currency: '€' | '£'
 };
 
-const PayerInformation = ({ control, step, stepLabel, formErrors }: Props) => {
+const PayerInformation = ({ control, step, stepLabel, formErrors, methods, currency }: Props) => {
 	const payerOptions = [
 		{
 			label: 'Mokėtojas yra siuntėjas',
@@ -37,6 +39,32 @@ const PayerInformation = ({ control, step, stepLabel, formErrors }: Props) => {
 			value: 'cash',
 		},
 	];
+
+	const shipments = methods.watch("shipments")
+
+
+	const shipmentsWithEmptyEstimatedPrice = shipments.filter((item) => {
+		if (item.estimatedPrice === "0.00") {
+			return true
+		}
+	})
+
+
+	const getOrderPrice = (shipmentsArray: ShipmentProps[]) => {
+		let price = 0
+
+		for (let i = 0; i < shipmentsArray.length; i++) {
+			const shipmentPrice = shipmentsArray[i].estimatedPrice;
+			price += Number(shipmentPrice)
+		}
+
+		return price ?? "0.00"
+	}
+
+	const orderPrice = getOrderPrice(shipments)
+
+	console.log('shipments ===', shipments);
+	console.log('isAllShipmentsAreValid ===', shipmentsWithEmptyEstimatedPrice);
 
 	return (
 		<Step
@@ -90,7 +118,8 @@ const PayerInformation = ({ control, step, stepLabel, formErrors }: Props) => {
 					</FieldContainer>
 				</div>
 				<OrderPrice
-					sum={324}
+					sum={orderPrice}
+					currency={currency}
 					control={control}
 					formErrors={formErrors}
 				/>
@@ -128,7 +157,7 @@ const PayerInformation = ({ control, step, stepLabel, formErrors }: Props) => {
 						display: 'flex',
 						justifyContent: 'flex-end',
 					}}>
-					<SecondaryButton type='submit'>
+					<SecondaryButton type={`${shipmentsWithEmptyEstimatedPrice.length > 0 || shipments.length === 0 ? "button" : "submit"}`} isDisabled={shipmentsWithEmptyEstimatedPrice.length > 0 || shipments.length === 0}>
 						<span>PatvirtinTi užsakymą</span>
 					</SecondaryButton>
 				</div>

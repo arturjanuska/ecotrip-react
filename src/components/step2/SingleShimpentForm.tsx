@@ -418,7 +418,9 @@ const SingleShimpentForm = ({
 						{selectedCategory?.value === 'shipments' ? (
 							<FieldContainer
 								label={`Nr. ${shipmentNumber} siuntos svoris (kg)`}
-								description={
+								description={selectedService === 'parcelForceShipment' && typeof selectedSize === 'string' &&
+									!isNaN(Number(selectedSize)) &&
+									Number(selectedSize) > 30 ? "Apgailestaujame, tačiau sunkesnius uz 30 kg krovinius neaptarnaujame." :
 									typeof selectedSize === 'string' &&
 										!isNaN(Number(selectedSize)) &&
 										Number(selectedSize) > 35
@@ -431,6 +433,9 @@ const SingleShimpentForm = ({
 									placeholder='Siuntos svoris'
 									type='number'
 									errorMessage={getError(`shipments.${index}.size`, formErrors)}
+									onChange={(e) => {
+										handleValidation('weight', e.target.value);
+									}}
 								/>
 							</FieldContainer>
 						) : null}

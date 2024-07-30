@@ -7,13 +7,14 @@ type Props = {
   sum: number;
   control: Control<FormType, any>;
   formErrors: FieldErrors<FormType>
+  currency: '€' | '£'
 };
 
-const OrderPrice = ({ sum, control, formErrors }: Props) => {
+const OrderPrice = ({ sum, control, formErrors, currency }: Props) => {
   return (
     <div className='order-price-container'>
       <p className='order-price'>
-        Numatoma viso užsakymo kaina: <strong>€{sum.toFixed(2)}</strong>
+        Numatoma viso užsakymo kaina: <strong>{currency}{sum.toFixed(2)}</strong>
       </p>
       <Invoice control={control} formErrors={formErrors} />
     </div>

@@ -43,7 +43,7 @@ const Datepicker = ({
 						flex: '1 1 0%',
 					}}>
 					<ControlledStyledSelect
-						placeholder='YYYY'
+						placeholder='Metai'
 						options={options?.years || []}
 						isDisabled={fiedsDisabled}
 						control={control}
@@ -63,7 +63,7 @@ const Datepicker = ({
 						flex: '1 1 0%',
 					}}>
 					<ControlledStyledSelect
-						placeholder='MM'
+						placeholder='Mėnuo'
 						options={options?.months || []}
 						isDisabled={fiedsDisabled}
 						control={control}
@@ -81,7 +81,7 @@ const Datepicker = ({
 						flex: '1 1 0%',
 					}}>
 					<ControlledStyledSelect
-						placeholder='DD'
+						placeholder='Diena'
 						options={options?.days || []}
 						isDisabled={fiedsDisabled}
 						control={control}
