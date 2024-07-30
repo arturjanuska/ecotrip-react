@@ -17,7 +17,6 @@ type Props = {
 	control: Control<FormType, any>;
 	name: string;
 	formErrors: FieldErrors<FormType>;
-	calculateDeliveryDates?: (selectedDay: string) => void;
 	resetToDates: () => void;
 	setValue?: UseFormSetValue<FormType>;
 };
@@ -30,7 +29,6 @@ const Datepicker = ({
 	control,
 	name,
 	formErrors,
-	calculateDeliveryDates,
 	resetToDates,
 	setValue,
 }: Props) => {
@@ -88,9 +86,6 @@ const Datepicker = ({
 						name={`dates.${name}.day`}
 						errorMessage={getError(`dates.${name}.day.value`, formErrors)}
 						needMargin={true}
-						onChange={(newValue: OptionType) => {
-							calculateDeliveryDates?.(newValue.value);
-						}}
 					/>
 				</div>
 			</div>

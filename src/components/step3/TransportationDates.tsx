@@ -4,7 +4,7 @@ import getDateOptions from '../../utils/getDateOptions';
 import './step3.css';
 import { FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
-import { OptionType } from '../../utils/types';
+import useDeliveryDate from '../../utils/useDeliveryDate';
 
 type TransportationDatesProps = {
 	methods: UseFormReturn<FormType, any, undefined>;
@@ -38,21 +38,23 @@ const TransportationDates = ({
 	const monthFrom = watch('dates.from.month.value');
 	const dayFrom = watch('dates.from.day.value');
 
-	const yearTo = watch('dates.to.year.value');
-	const monthTo = watch('dates.to.month.value');
-	const dayTo = watch('dates.to.day.value');
-
 	const resetToDates = () => {
 		setValue('dates.to.year', null);
 		setValue('dates.to.month', null);
 		setValue('dates.to.day', null);
 	};
 
-	const calculateDeliveryDates = (selectedDay: string) => {
-		console.log('yearFrom ===', yearFrom);
-		console.log('monthFrom ===', monthFrom);
-		console.log('selectedDay ===', selectedDay);
-	};
+	const pickupDate =
+		yearFrom && monthFrom && dayFrom
+			? `${yearFrom}/${monthFrom}/${dayFrom}`
+			: '';
+
+	useDeliveryDate({
+		pickupDate,
+		direction,
+		setValue,
+		dayFrom,
+	});
 
 	const options = getDateOptions({
 		selectedMonth: monthFrom || null,
@@ -74,7 +76,6 @@ const TransportationDates = ({
 						name='from'
 						formErrors={formErrors}
 						resetToDates={resetToDates}
-						calculateDeliveryDates={calculateDeliveryDates}
 						setValue={setValue}
 					/>
 					<Datepicker
