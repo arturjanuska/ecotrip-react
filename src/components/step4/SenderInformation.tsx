@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import Step from '../Step';
 import ClientInformationForm from './ClientInformationForm';
@@ -23,13 +24,15 @@ const SenderInformation = ({
 		if (selectedService === 'shipmentWithAddressService') {
 			setValue(`senderInformation.firstName`, 'EcoTrip UK');
 			setValue(`senderInformation.lastName`, '-');
-			setValue(`senderInformation.phoneNumber`, '+44 7456 739633 (EcoTrip UK)');
+			setValue(`senderInformation.phoneNumber`, '+44 7456 739633');
 			setValue(`senderInformation.email`, 'info@ecotrip.lt');
 			setValue(
 				`senderInformation.address`,
 				'EcoTrip UK, 216 Halbutt St, Dagenham, UK'
 			);
 			setValue(`senderInformation.zipCode`, 'RM9 5AA');
+			// setValue(`pickupAddress`, 'EcoTrip UK, 216 Halbutt St, Dagenham, UK');
+			// setValue(`pickupAddressZipCode`, 'RM9 5AA');
 		} else {
 			setValue(`senderInformation.firstName`, '');
 			setValue(`senderInformation.lastName`, '');
@@ -49,6 +52,9 @@ const SenderInformation = ({
 				control={control}
 				subName='senderInformation'
 				formErrors={formErrors}
+				isShipmentWithAddressServiceSelected={
+					selectedService === 'shipmentWithAddressService'
+				}
 			/>
 		</Step>
 	);

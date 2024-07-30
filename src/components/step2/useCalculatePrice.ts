@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect } from 'react';
 import { OptionType } from '../../utils/types';
 import { allProducts } from '../../utils/products';
@@ -87,12 +88,14 @@ const useCalculatePrice = ({
 			if (size.value === size.label) {
 				filteredProducts = filteredProducts.filter(
 					(item) =>
+						// @ts-ignore
 						item.size.from ===
 							convertOptionTypeToRangeSize(
 								productType?.value ?? '',
 								size.value,
 								category?.value ?? ''
 							)?.from &&
+						// @ts-ignore
 						item.size.to ===
 							convertOptionTypeToRangeSize(
 								productType?.value ?? '',
@@ -103,6 +106,7 @@ const useCalculatePrice = ({
 			} else {
 				filteredProducts = filteredProducts.filter(
 					(item) =>
+						// @ts-ignore
 						item.size.label === size.label && item.size.value === size.value
 				);
 			}

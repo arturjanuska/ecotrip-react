@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import CustomTextarea from '../CustomTextarea';
@@ -11,6 +12,7 @@ type Props = {
 	control: Control<FormType, any>;
 	subName: string;
 	formErrors: FieldErrors<FormType>;
+	isShipmentWithAddressServiceSelected?: boolean;
 };
 
 const ClientInformationForm = ({
@@ -18,6 +20,7 @@ const ClientInformationForm = ({
 	control,
 	subName,
 	formErrors,
+	isShipmentWithAddressServiceSelected,
 }: Props) => {
 	const getSubject = (client: Props['client']) => {
 		switch (client) {
@@ -53,6 +56,9 @@ const ClientInformationForm = ({
 
 	const value = getSubject(client);
 
+	const isFieldsDisabled =
+		isShipmentWithAddressServiceSelected && client === 'sender';
+
 	return (
 		<>
 			<div>
@@ -63,6 +69,7 @@ const ClientInformationForm = ({
 							control={control}
 							name={`${subName}.firstName`}
 							errorMessage={getError(`${subName}.firstName`, formErrors)}
+							disabled={isFieldsDisabled}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} pavardė`}>
@@ -71,6 +78,7 @@ const ClientInformationForm = ({
 							control={control}
 							name={`${subName}.lastName`}
 							errorMessage={getError(`${subName}.lastName`, formErrors)}
+							disabled={isFieldsDisabled}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} telefonas`}>
@@ -79,6 +87,7 @@ const ClientInformationForm = ({
 							control={control}
 							name={`${subName}.phoneNumber`}
 							errorMessage={getError(`${subName}.phoneNumber`, formErrors)}
+							disabled={isFieldsDisabled}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} el. paštas`}>
@@ -87,6 +96,7 @@ const ClientInformationForm = ({
 							control={control}
 							name={`${subName}.email`}
 							errorMessage={getError(`${subName}.email`, formErrors)}
+							disabled={isFieldsDisabled}
 						/>
 					</FieldContainer>
 					<FieldContainer
@@ -97,6 +107,7 @@ const ClientInformationForm = ({
 							control={control}
 							name={`${subName}.address`}
 							errorMessage={getError(`${subName}.address`, formErrors)}
+							disabled={isFieldsDisabled}
 						/>
 					</FieldContainer>
 					<FieldContainer
@@ -107,6 +118,7 @@ const ClientInformationForm = ({
 							control={control}
 							name={`${subName}.zipCode`}
 							errorMessage={getError(`${subName}.zipCode`, formErrors)}
+							disabled={isFieldsDisabled}
 						/>
 					</FieldContainer>
 				</div>

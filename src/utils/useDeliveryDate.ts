@@ -4,7 +4,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { FormType } from './formTypes';
-import { monthNames } from '../components/step3/TransportationDates';
+import { monthNames } from '../components/step3/monthNames';
 
 type Props = {
 	pickupDate: string;

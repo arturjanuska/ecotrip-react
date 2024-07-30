@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ClientInformationForm from '../step4/ClientInformationForm';
 import Step from '../Step';
 import '../step4/step4.css';

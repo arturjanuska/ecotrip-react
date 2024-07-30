@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
 import Datepicker from '../Datepicker';
 import getDateOptions from '../../utils/getDateOptions';
@@ -9,23 +10,8 @@ import useDeliveryDate from '../../utils/useDeliveryDate';
 type TransportationDatesProps = {
 	methods: UseFormReturn<FormType, any, undefined>;
 	formErrors: FieldErrors<FormType>;
-	direction: 'LT-UK' | 'UK-LT';
+	direction: 'LT-UK' | 'UK-LT' | null;
 };
-
-export const monthNames = [
-	'sausio',
-	'vasario',
-	'kovo',
-	'balandžio',
-	'gegužės',
-	'birželio',
-	'liepos',
-	'rugpjūčio',
-	'rugsėjo',
-	'spalio',
-	'lapkričio',
-	'gruodžio',
-];
 
 const TransportationDates = ({
 	methods,

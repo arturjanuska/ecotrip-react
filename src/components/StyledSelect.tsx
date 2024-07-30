@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Select, { Props } from 'react-select';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
+import SimpleTextError from './SimpleTextError';
 
 const customStyles = {
   // @ts-ignore
@@ -66,7 +69,7 @@ export default forwardRef(
           {...props}
           aria-label={`${props.name}`}
         />
-        {/* <SimpleTextError message={props.errorMessage} /> */}
+        <SimpleTextError message={props.errorMessage} />
       </div>
     );
   }

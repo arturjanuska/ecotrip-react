@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { CSSProperties } from 'react';
 import { Controller } from 'react-hook-form';
 import '../styles/checkbox.css';
@@ -36,9 +37,8 @@ const ControlledCheckboxWithLabel = ({
 									{...field}
 									{...rest}
 									type='checkbox'
-									className={`checkbox checkbox-primary ${
-										errorMessage ? 'error' : ''
-									}`}
+									className={`checkbox checkbox-primary ${errorMessage ? 'error' : ''
+										}`}
 									checked={field.value} // Ensure the checkbox is controlled by react-hook-form
 								/>
 								<div className='custom-label-text'>{children}</div>

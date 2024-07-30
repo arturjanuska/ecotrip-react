@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { monthNames } from '../components/step3/TransportationDates';
+import { monthNames } from '../components/step3/monthNames';
 
 const getDateOptions = ({
 	selectedMonth,

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import AddressForm from '../components/step1/AddressForm';
 import Breadcrumds from '../components/Breadcrumds';
 import Divider from '../components/Divider';
@@ -24,6 +26,7 @@ const Form = () => {
 			transportRules: false,
 		},
 		shouldUnregister: true,
+		// @ts-ignore
 		resolver: yupResolver(getValidationSchema()),
 	});
 
@@ -52,7 +55,6 @@ const Form = () => {
 
 	console.log('formData ===> ', formData);
 
-	const dirtyFields = methods.formState.dirtyFields;
 
 	useEffect(() => {
 		methods.setValue('service', '');

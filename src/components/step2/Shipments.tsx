@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
 	Control,
 	FieldErrors,
@@ -29,8 +30,6 @@ const Shipments = ({
 		name: 'shipments',
 	});
 
-	const watchShipments = methods.watch('shipments');
-
 	const removeShipment = (index: number) => {
 		remove(index);
 	};
@@ -38,11 +37,10 @@ const Shipments = ({
 	return (
 		<Step
 			step={2}
-			title={`Siuntos suvedimas ${
-				selectedService === 'shipmentWithAddressService'
-					? '(EcoTrip adreso pasl.)'
-					: ''
-			}`}>
+			title={`Siuntos suvedimas ${selectedService === 'shipmentWithAddressService'
+				? '(EcoTrip adreso pasl.)'
+				: ''
+				}`}>
 			<div className='shipments-column-wrapper'>
 				<div className='shipments-column-container'>
 					{fields.length > 0 &&
@@ -79,13 +77,13 @@ const Shipments = ({
 								estimatedPrice: '0.00',
 								category:
 									selectedService === 'parcelForceShipment' ||
-									selectedService === 'shipmentWithAddressService' ||
-									selectedService === 'productPurchaseService' ||
-									selectedService === 'productSalesService'
+										selectedService === 'shipmentWithAddressService' ||
+										selectedService === 'productPurchaseService' ||
+										selectedService === 'productSalesService'
 										? {
-												label: 'Siuntos',
-												value: 'shipments',
-										  }
+											label: 'Siuntos',
+											value: 'shipments',
+										}
 										: null,
 								amount: 1,
 							});

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import FieldContainer from './FieldContainer';
 import ControlledStyledSelect from './ControlledStyledSelect';
 import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
 import { getError } from '../utils/validation/getError';
-import { OptionType } from '../utils/types';
 
 type Props = {
 	fiedsDisabled: boolean;
@@ -49,7 +50,8 @@ const Datepicker = ({
 						name={`dates.${name}.year`}
 						errorMessage={getError(`dates.${name}.year.value`, formErrors)}
 						needMargin={true}
-						onChange={(value: OptionType) => {
+						// @ts-ignore
+						onChange={() => {
 							setValue?.('dates.from.day', null);
 							setValue?.('dates.from.month', null);
 							resetToDates();

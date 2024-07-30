@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
@@ -10,7 +11,6 @@ import { FormType } from '../../utils/formTypes';
 import ControlledStyledSelect from '../ControlledStyledSelect';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { getError } from '../../utils/validation/getError';
-import SimpleTextError from '../SimpleTextError';
 
 type Props = {
 	control: Control<FormType, any>;
@@ -92,6 +92,7 @@ const PayerInformation = ({ control, step, stepLabel, formErrors }: Props) => {
 				<OrderPrice
 					sum={324}
 					control={control}
+					formErrors={formErrors}
 				/>
 				<div className='checkboxes-container'>
 					<ControlledCheckboxWithLabel

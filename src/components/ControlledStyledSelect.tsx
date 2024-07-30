@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Select, { Props } from 'react-select';
 import { forwardRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
@@ -87,8 +90,8 @@ const ControlledStyledSelect = forwardRef(
 								style={
 									props.needMargin
 										? {
-												marginBottom: '10px',
-										  }
+											marginBottom: '10px',
+										}
 										: {}
 								}>
 								<Select

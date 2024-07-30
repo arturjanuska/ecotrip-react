@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
 	Control,
 	FieldErrors,
@@ -102,9 +103,9 @@ const AddressForm = ({
 		checkParcelForcePostcodes(
 			direction
 				? [
-						selectedPickupAddressPostcode as string,
-						selectedDeliveryAddressPostcode as string,
-				  ]
+					selectedPickupAddressPostcode as string,
+					selectedDeliveryAddressPostcode as string,
+				]
 				: []
 		) || false;
 
@@ -179,7 +180,7 @@ const AddressForm = ({
 						onChange={onChange}
 						placeholder='Įveskite gatvę, namo numerį, miestą'
 						onClear={handleOnClear}
-						errorMessage={formErrors.pickupAddress}
+						errorMessage={formErrors.pickupAddress?.message}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -190,7 +191,7 @@ const AddressForm = ({
 						placeholder='Pašto kodas'
 						name='pickupAddressZipCode'
 						control={control}
-						errorMessage={formErrors.pickupAddressZipCode}
+						errorMessage={formErrors.pickupAddressZipCode?.message}
 					/>
 				</FieldContainer>
 			</div>
@@ -205,7 +206,7 @@ const AddressForm = ({
 						onChange={onChange}
 						placeholder='Įveskite gatvę, namo numerį, miestą'
 						onClear={handleOnClear}
-						errorMessage={formErrors.deliveryAddress}
+						errorMessage={formErrors.deliveryAddress?.message}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -216,7 +217,7 @@ const AddressForm = ({
 						placeholder='Pašto kodas'
 						name='deliveryAddressZipCode'
 						control={control}
-						errorMessage={formErrors.deliveryAddressZipCode}
+						errorMessage={formErrors.deliveryAddressZipCode?.message}
 					/>
 				</FieldContainer>
 			</div>

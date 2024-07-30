@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from 'react';
 import CheckboxWithLabel from '../CheckboxWithLabel';
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import { getError } from '../../utils/validation/getError';
-import { FieldErrors } from 'react-hook-form';
+import { Control, FieldErrors } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 
 type InvoiceProps = {
-	control: any;
+	control: Control<FormType, any>;
 	formErrors: FieldErrors<FormType>;
 };
 

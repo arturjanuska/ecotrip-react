@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import '../styles/input.css';
 import { Control, Controller } from 'react-hook-form';
@@ -36,9 +38,9 @@ const CustomInput = ({
 
 					return (
 						<div
-							className={`input-container ${
-								errorMessage || isError ? 'error-input' : ''
-							}`}>
+							className={`input-container ${errorMessage || isError ? 'error-input' : ''
+								}`}>
+							{/* @ts-expect-error */}
 							<input
 								{...field}
 								{...props}

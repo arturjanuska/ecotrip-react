@@ -9,6 +9,7 @@ interface ISearchBoxProps {
   placeholder?: string;
   onChange: (name: 'pickupAddress' | 'deliveryAddress', value: string) => void;
   onClear: (name: 'pickupAddress' | 'deliveryAddress') => void;
+  errorMessage?: string;
 }
 
 const libraries: Libraries = ['places'];
@@ -19,6 +20,7 @@ export const SearchBox = ({
   onChange,
   placeholder,
   onClear,
+  errorMessage,
 }: ISearchBoxProps) => {
   const { isLoaded, loadError } = useGoogleMapsScript({
     googleMapsApiKey: 'AIzaSyCB42EkwaC9P-8-XV6zSqLiLWalfvqgHIA',
@@ -35,6 +37,7 @@ export const SearchBox = ({
       onChange={onChange}
       placeholder={placeholder}
       onClear={onClear}
+      errorMessage={errorMessage}
     />
   );
 };
@@ -45,12 +48,13 @@ const ReadySearchBox = ({
   onChange,
   placeholder,
   onClear,
+  errorMessage,
 }: ISearchBoxProps) => {
   const {
     ready,
     value,
     setValue,
-    suggestions: { status, data },
+    suggestions: { data },
     clearSuggestions,
   } = usePlacesAutocomplete({
     debounce: 300,
@@ -89,13 +93,14 @@ const ReadySearchBox = ({
         options={
           data
             ? data.map((place) => ({
-                label: place.description as string,
-                value: place.description as string,
-              }))
+              label: place.description as string,
+              value: place.description as string,
+            }))
             : []
         }
         defaultInputValue=''
         placeholder={placeholder}
+        errorMessage={errorMessage}
       />
     </div>
   );
