@@ -14,153 +14,156 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import generateOrderID from '../utils/generateOrderId';
 import { validationSchema } from '../utils/validation/schema';
-import { yupResolver } from '@hookform/resolvers/yup';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Form = () => {
-	const [currency, setCurrency] = useState<'€' | '£'>('€');
+  const [currency, setCurrency] = useState<'€' | '£'>('€');
 
-	const methods = useForm<FormType>({
-		defaultValues: {
-			invoiceRequired: false,
-			packagingAndLabelingRules: false,
-			transportRules: false,
-			customerInformation: {
-				paymentMethod: {
-					label: 'Grynais',
-					value: 'cash',
-				},
-				payerOfTheShipment: {
-					label: 'Mokėtojas yra siuntėjas',
-					value: 'thePayerIsTheSender',
-				}
-			}
-		},
-		shouldUnregister: true,
-		// @ts-ignore
-		resolver: yupResolver(validationSchema),
-	});
+  const methods = useForm<FormType>({
+    defaultValues: {
+      invoiceRequired: false,
+      packagingAndLabelingRules: false,
+      transportRules: false,
+      customerInformation: {
+        paymentMethod: {
+          label: 'Grynais',
+          value: 'cash',
+        },
+        payerOfTheShipment: {
+          label: 'Mokėtojas yra siuntėjas',
+          value: 'thePayerIsTheSender',
+        },
+      },
+    },
+    shouldUnregister: true,
+    // @ts-ignore
+    resolver: yupResolver(validationSchema),
+  });
 
-	const service = methods.watch('service');
-	const invoiceNeeded = methods.watch('invoiceRequired');
+  const service = methods.watch('service');
+  const invoiceNeeded = methods.watch('invoiceRequired');
 
-	const direction = methods.watch('direction');
+  const direction = methods.watch('direction');
 
-	const formErrors = methods.formState.errors;
+  const formErrors = methods.formState.errors;
 
-	console.log('formErrors ===', formErrors);
+  console.log('formErrors ===', formErrors);
 
-	const selectedService = methods.watch('service');
-	const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
-	const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
+  const selectedService = methods.watch('service');
+  const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
+  const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
 
-	const orderId = generateOrderID(direction);
+  const orderId = generateOrderID(direction);
 
-	const formData = methods.watch();
+  const formData = methods.watch();
 
-	console.log('formData ===> ', formData);
+  console.log('formData ===> ', formData);
 
+  useEffect(() => {
+    methods.setValue('service', '');
+  }, [pickupAddressZipCode, deliveryAddressZipCode]);
 
-	useEffect(() => {
-		methods.setValue('service', '');
-	}, [pickupAddressZipCode, deliveryAddressZipCode]);
+  const onSubmit = (data: FormType) => {
+    console.log('data ===', data);
+  };
 
-	const onSubmit = (data: FormType) => {
-		console.log('data ===', data);
-	};
+  useEffect(() => {
+    if (direction) {
+      const value = direction === 'LT-UK' ? '€' : '£';
+      setCurrency(value);
+    }
+  }, [direction]);
 
-	useEffect(() => {
-		if (direction) {
-			const value = direction === 'LT-UK' ? '€' : '£';
-			setCurrency(value);
-		}
-	}, [direction]);
+  return (
+    <form className='main' onSubmit={methods.handleSubmit(onSubmit)}>
+      <div
+        style={{
+          marginBottom: '70px',
+        }}
+      >
+        <Breadcrumds />
+        <Divider />
+        <AddressForm
+          setValue={methods.setValue}
+          control={methods.control}
+          selectedService={selectedService}
+          methods={methods}
+          direction={direction}
+          currency={currency}
+          formErrors={formErrors}
+        />
+        <Divider />
+        {!!selectedService && (
+          <>
+            <Shipments
+              control={methods.control}
+              selectedService={selectedService}
+              methods={methods}
+              currency={currency}
+              formErrors={formErrors}
+            />
+            <Divider />
+            <TransportationDates
+              methods={methods}
+              formErrors={formErrors}
+              direction={direction}
+            />
+            <Divider />
+            <SenderInformation
+              control={methods.control}
+              stepLabel={
+                selectedService === 'productSalesService'
+                  ? 'Siuntos paėmimo / pardavėjo informacija'
+                  : 'Siuntos paėmimo / siuntėjo informacija'
+              }
+              formErrors={formErrors}
+              setValue={methods.setValue}
+              selectedService={service}
+            />
+            <Divider />
+            <RecipientInformation
+              control={methods.control}
+              formErrors={formErrors}
+            />
+            {selectedService === 'productSalesService' && (
+              <>
+                <Divider />
+                <RansomPayeeInformation
+                  control={methods.control}
+                  formErrors={formErrors}
+                />
+              </>
+            )}
+            {selectedService === 'productPurchaseService' && (
+              <>
+                <Divider />
+                <ProductPurchaseServiceInformation
+                  control={methods.control}
+                  formErrors={formErrors}
+                />
+              </>
+            )}
 
-	return (
-		<form
-			className='main'
-			onSubmit={methods.handleSubmit(onSubmit)}>
-			<div
-				style={{
-					marginBottom: '70px',
-				}}>
-				<Breadcrumds />
-				<Divider />
-				<AddressForm
-					setValue={methods.setValue}
-					control={methods.control}
-					selectedService={selectedService}
-					methods={methods}
-					direction={direction}
-					currency={currency}
-					formErrors={formErrors}
-				/>
-				<Divider />
-				{!!selectedService && (
-					<>
-						<Shipments
-							control={methods.control}
-							selectedService={selectedService}
-							methods={methods}
-							currency={currency}
-							formErrors={formErrors}
-						/>
-						<Divider />
-						<TransportationDates
-							methods={methods}
-							formErrors={formErrors}
-							direction={direction}
-						/>
-						<Divider />
-						<SenderInformation
-							control={methods.control}
-							stepLabel={
-								selectedService === 'productSalesService'
-									? 'Siuntos paėmimo / pardavėjo informacija'
-									: 'Siuntos paėmimo / siuntėjo informacija'
-							}
-							formErrors={formErrors}
-							setValue={methods.setValue}
-							selectedService={service}
-						/>
-						<Divider />
-						<RecipientInformation
-							control={methods.control}
-							formErrors={formErrors}
-						/>
-						{selectedService === 'productSalesService' && (
-							<>
-								<Divider />
-								<RansomPayeeInformation
-									control={methods.control}
-									formErrors={formErrors}
-								/>
-							</>
-						)}
-						{selectedService === 'productPurchaseService' && (
-							<>
-								<Divider />
-								<ProductPurchaseServiceInformation
-									control={methods.control}
-									formErrors={formErrors}
-								/>
-							</>
-						)}
-
-						<Divider />
-						<PayerInformation
-							control={methods.control}
-							step={selectedService === 'productSalesService' || selectedService === 'productPurchaseService' ? 7 : 6}
-							stepLabel={'Užsakovo informacija'}
-							formErrors={formErrors}
-							methods={methods}
-							currency={currency}
-						/>
-					</>
-				)}
-			</div>
-		</form>
-	);
+            <Divider />
+            <PayerInformation
+              control={methods.control}
+              step={
+                selectedService === 'productSalesService' ||
+                selectedService === 'productPurchaseService'
+                  ? 7
+                  : 6
+              }
+              stepLabel={'Užsakovo informacija'}
+              formErrors={formErrors}
+              methods={methods}
+              currency={currency}
+            />
+          </>
+        )}
+      </div>
+    </form>
+  );
 };
 
 export default Form;
