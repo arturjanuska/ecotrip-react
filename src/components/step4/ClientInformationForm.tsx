@@ -8,11 +8,13 @@ import { FormType } from '../../utils/formTypes';
 import { getError } from '../../utils/validation/getError';
 
 type Props = {
-	client: 'sender' | 'recipient' | 'ransomPayee' | "purchaseInformation";
+	client: 'sender' | 'recipient' | 'ransomPayee' | 'purchaseInformation';
 	control: Control<FormType, any>;
 	subName: string;
 	formErrors: FieldErrors<FormType>;
 	isShipmentWithAddressServiceSelected?: boolean;
+	validationRules?: { [key: string]: { required: string } };
+	service?: string;
 };
 
 const ClientInformationForm = ({
@@ -21,6 +23,7 @@ const ClientInformationForm = ({
 	subName,
 	formErrors,
 	isShipmentWithAddressServiceSelected,
+	validationRules,
 }: Props) => {
 	const getSubject = (client: Props['client']) => {
 		switch (client) {
@@ -76,6 +79,7 @@ const ClientInformationForm = ({
 							name={`${subName}.firstName`}
 							errorMessage={getError(`${subName}.firstName`, formErrors)}
 							disabled={isFieldsDisabled}
+							rules={validationRules?.firstName}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} pavardė`}>
@@ -85,6 +89,7 @@ const ClientInformationForm = ({
 							name={`${subName}.lastName`}
 							errorMessage={getError(`${subName}.lastName`, formErrors)}
 							disabled={isFieldsDisabled}
+							rules={validationRules?.lastName}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} telefonas`}>
@@ -94,6 +99,7 @@ const ClientInformationForm = ({
 							name={`${subName}.phoneNumber`}
 							errorMessage={getError(`${subName}.phoneNumber`, formErrors)}
 							disabled={isFieldsDisabled}
+							rules={validationRules?.phoneNumber}
 						/>
 					</FieldContainer>
 					<FieldContainer label={`${value} el. paštas`}>
@@ -103,6 +109,7 @@ const ClientInformationForm = ({
 							name={`${subName}.email`}
 							errorMessage={getError(`${subName}.email`, formErrors)}
 							disabled={isFieldsDisabled}
+							rules={validationRules?.email}
 						/>
 					</FieldContainer>
 					<FieldContainer
@@ -114,6 +121,7 @@ const ClientInformationForm = ({
 							name={`${subName}.address`}
 							errorMessage={getError(`${subName}.address`, formErrors)}
 							disabled={isFieldsDisabled}
+							rules={validationRules?.address}
 						/>
 					</FieldContainer>
 					<FieldContainer
@@ -125,6 +133,7 @@ const ClientInformationForm = ({
 							name={`${subName}.zipCode`}
 							errorMessage={getError(`${subName}.zipCode`, formErrors)}
 							disabled={isFieldsDisabled}
+							rules={validationRules?.zipCode}
 						/>
 					</FieldContainer>
 				</div>

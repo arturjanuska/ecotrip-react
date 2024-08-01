@@ -4,6 +4,7 @@ import Step from '../Step';
 import ClientInformationForm from './ClientInformationForm';
 import { FormType } from '../../utils/formTypes';
 import { useEffect } from 'react';
+import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type SenderInformationProps = {
 	control: Control<FormType, any>;
@@ -41,6 +42,10 @@ const SenderInformation = ({
 		}
 	}, [selectedService]);
 
+	const validationRules = useCustomValidation({});
+
+	const senderValidationRules = validationRules.senderInformation;
+
 	return (
 		<Step
 			title={stepLabel}
@@ -53,6 +58,7 @@ const SenderInformation = ({
 				isShipmentWithAddressServiceSelected={
 					selectedService === 'shipmentWithAddressService'
 				}
+				validationRules={senderValidationRules}
 			/>
 		</Step>
 	);

@@ -2,16 +2,26 @@
 import Step from '../Step';
 import ClientInformationForm from '../step4/ClientInformationForm';
 import FieldContainer from '../FieldContainer';
-import StyledSelect from '../StyledSelect';
 import { Control, FieldErrors } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
+import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import ControlledStyledSelect from '../ControlledStyledSelect';
 
 type Props = {
 	control: Control<FormType, any>;
 	formErrors: FieldErrors<FormType>;
+	selectedService: string;
 };
 
-const RansomPayeeInformation = ({ control, formErrors }: Props) => {
+const RansomPayeeInformation = ({
+	control,
+	formErrors,
+	selectedService,
+}: Props) => {
+	const validationRules = useCustomValidation({ service: selectedService });
+
+	const ransomPayeeValidationRules = validationRules.ransomPayeeInformation;
+
 	return (
 		<Step
 			step={6}
@@ -24,9 +34,15 @@ const RansomPayeeInformation = ({ control, formErrors }: Props) => {
 					<FieldContainer
 						label='Kas yra siuntos/prekės išpirkos gavėjas?'
 						description='Nurodykite, kam ir kokiu adresu grąžinti iš siuntos gavėjos surinktą pinigų sumą. Įprastai tai yra siuntos siuntėjas.'>
-						<StyledSelect
+						<ControlledStyledSelect
 							name='ransomRecipient'
 							options={[]}
+							control={control}
+							rules={
+								ransomPayeeValidationRules
+									? ransomPayeeValidationRules.ransomRecipient
+									: undefined
+							}
 						/>
 					</FieldContainer>
 				</div>
@@ -36,6 +52,11 @@ const RansomPayeeInformation = ({ control, formErrors }: Props) => {
 						control={control}
 						subName='ransomPayeeInformation'
 						formErrors={formErrors}
+						validationRules={
+							ransomPayeeValidationRules
+								? ransomPayeeValidationRules
+								: undefined
+						}
 					/>
 				</div>
 			</>

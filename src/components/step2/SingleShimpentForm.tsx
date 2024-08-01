@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import {
@@ -24,6 +25,7 @@ import { OptionType } from '../../utils/types';
 import PrimaryButton from '../PrimaryButton';
 import useCalculatePrice from './useCalculatePrice';
 import { getError } from '../../utils/validation/getError';
+import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type Props = {
 	shipmentNumber: number;
@@ -34,6 +36,11 @@ type Props = {
 	setValue: UseFormSetValue<FormType>;
 	currency: '€' | '£';
 	formErrors: FieldErrors<FormType>;
+	disableRemoveButton: boolean;
+	errorMessages: Record<string, string>;
+	setErrorMessages: React.Dispatch<
+		React.SetStateAction<Record<string, string>>
+	>;
 };
 
 const SingleShimpentForm = ({
@@ -45,11 +52,10 @@ const SingleShimpentForm = ({
 	setValue,
 	currency,
 	formErrors,
+	disableRemoveButton,
+	errorMessages,
+	setErrorMessages,
 }: Props) => {
-	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
-		{}
-	);
-
 	const categoriesWithProductType = [
 		'automotiveGoods',
 		'householdAppliances',
@@ -138,6 +144,10 @@ const SingleShimpentForm = ({
 					if (Number(value) > 300)
 						return 'Siuntos apimtis skaičiuojama automatiškai pagal formulę: ilgis + plotis*2 + aukštis*2 < 300 cm - viršijus nepatarnaujame.';
 					break;
+				case 'weight':
+					if (Number(value) > 30 && selectedService === 'parcelForceShipment')
+						return 'Apgailestaujame, tačiau sunkesnius uz 30 kg krovinius neaptarnaujame.';
+					break;
 				default:
 					return '';
 			}
@@ -157,6 +167,11 @@ const SingleShimpentForm = ({
 			return newErrors;
 		});
 	};
+
+	const shipment = useWatch({
+		control,
+		name: `shipments.${index}`,
+	});
 
 	const selectedCategory = useWatch({
 		control,
@@ -215,9 +230,9 @@ const SingleShimpentForm = ({
 	const specificationOptions =
 		selectedCategory?.value !== 'shipments'
 			? getSpecificationOptionsBySelectedProduct(
-				selectedCategory?.value,
-				selectedProductType?.value
-			)
+					selectedCategory?.value,
+					selectedProductType?.value
+			  )
 			: [];
 
 	const selectedSize = useWatch({
@@ -233,6 +248,11 @@ const SingleShimpentForm = ({
 	const amount = useWatch({
 		control,
 		name: `shipments.${index}.amount`,
+	});
+
+	const validationRules = useCustomValidation({
+		service: selectedService,
+		formShipment: shipment,
 	});
 
 	useCalculatePrice({
@@ -278,21 +298,22 @@ const SingleShimpentForm = ({
 					<ControlledStyledSelect
 						name={`shipments.${index}.category`}
 						control={control}
+						rules={validationRules.shipments.category}
 						options={categoriesOptions.map((option) => {
-							if (option.value === "shipments" && selectedService === "parcelForceShipment") {
+							// @ts-ignore
+							if (
+								option.value === 'shipments' &&
+								selectedService === 'parcelForceShipment'
+							) {
 								return {
-									label: "Parcel Force siunta",
-									value: "shipments"
-								}
+									label: 'Parcel Force siunta',
+									value: 'shipments',
+								};
 							} else {
-								return option
+								return option;
 							}
 						})}
 						isClearable
-						// defaultValue={{
-						// 	label: 'Siuntos kategorija',
-						// 	value: 'Siuntos kategorija',
-						// }}
 						placeholder='Siuntos kategoriją'
 						isDisabled={
 							selectedService === 'parcelForceShipment' ||
@@ -321,16 +342,22 @@ const SingleShimpentForm = ({
 				{productTypeOptions.length > 0 && (
 					<FieldContainer
 						label={`Nr. ${shipmentNumber} siuntos tipas`}
-						description={`${productTypesWithRequiredManagerCall.includes(
-							selectedProductType?.value ?? ''
-						)
-							? 'Susisiekite su vadybininku'
-							: ''
-							}`}>
+						description={`${
+							productTypesWithRequiredManagerCall.includes(
+								selectedProductType?.value ?? ''
+							)
+								? 'Susisiekite su vadybininku'
+								: ''
+						}`}>
 						<ControlledStyledSelect
 							name={`shipments.${index}.productType`}
 							control={control}
 							isClearable
+							rules={validationRules.shipments.productType}
+							errorMessage={getError(
+								`shipments.${index}.productType`,
+								formErrors
+							)}
 							options={productTypeOptions}
 							placeholder='Siuntos tipas'
 							onChange={() => {
@@ -355,6 +382,8 @@ const SingleShimpentForm = ({
 								onChange={() => {
 									setValue(`shipments.${index}.specification`, null);
 								}}
+								rules={validationRules.shipments.size}
+								errorMessage={getError(`shipments.${index}.size`, formErrors)}
 							/>
 						</FieldContainer>
 					</>
@@ -380,7 +409,11 @@ const SingleShimpentForm = ({
 									onChange={(e) => {
 										handleValidation('length', e.target.value);
 									}}
-									errorMessage={errorMessages.length}
+									rules={validationRules.shipments.length}
+									errorMessage={getError(
+										`shipments.${index}.length`,
+										formErrors
+									)}
 								/>
 								<CustomInput
 									name={`shipments.${index}.width`}
@@ -390,7 +423,11 @@ const SingleShimpentForm = ({
 									onChange={(e) => {
 										handleValidation('width', e.target.value);
 									}}
-									errorMessage={errorMessages.width}
+									rules={validationRules.shipments.width}
+									errorMessage={getError(
+										`shipments.${index}.width`,
+										formErrors
+									)}
 								/>
 								<CustomInput
 									name={`shipments.${index}.height`}
@@ -400,7 +437,11 @@ const SingleShimpentForm = ({
 									onChange={(e) => {
 										handleValidation('height', e.target.value);
 									}}
-									errorMessage={errorMessages.height}
+									rules={validationRules.shipments.height}
+									errorMessage={getError(
+										`shipments.${index}.height`,
+										formErrors
+									)}
 								/>
 							</div>
 							<div className='errors'>
@@ -422,17 +463,16 @@ const SingleShimpentForm = ({
 					</FieldContainer>
 				) : null}
 				{selectedCategory?.value === 'shipments' ||
-					selectedCategory?.value === 'removals' ? (
+				selectedCategory?.value === 'removals' ? (
 					<>
 						{selectedCategory?.value === 'shipments' ? (
 							<FieldContainer
 								label={`Nr. ${shipmentNumber} siuntos svoris (kg)`}
-								description={selectedService === 'parcelForceShipment' && typeof selectedSize === 'string' &&
-									!isNaN(Number(selectedSize)) &&
-									Number(selectedSize) > 30 ? "Apgailestaujame, tačiau sunkesnius uz 30 kg krovinius neaptarnaujame." :
+								description={
+									selectedService !== 'parcelForceShipment' &&
 									typeof selectedSize === 'string' &&
-										!isNaN(Number(selectedSize)) &&
-										Number(selectedSize) > 35
+									!isNaN(Number(selectedSize)) &&
+									Number(selectedSize) > 35
 										? 'Jūsų siuta/-os sunkesnė/-ės nei 35 kg. Kadangi mūsų kurjeriai dirba po vieną, jam gali prireikti pagalbos pakraunant ar iškraunant sunkias siuntas. Prašome užtikrinti, kad atvykus kurjeriui būtų kas padeda ją pakrauti ar iškrauti. Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
 										: 'Įveskite siuntos svorį apytiksliai. Kai atiduosite siuntą, ji bus pasverta dar kartą patikslinimui. '
 								}>
@@ -441,7 +481,11 @@ const SingleShimpentForm = ({
 									control={control}
 									placeholder='Siuntos svoris'
 									type='number'
-									errorMessage={getError(`shipments.${index}.size`, formErrors)}
+									rules={validationRules.shipments.size}
+									errorMessage={
+										errorMessages.weight ||
+										getError(`shipments.${index}.size`, formErrors)
+									}
 									onChange={(e) => {
 										handleValidation('weight', e.target.value);
 									}}
@@ -450,10 +494,11 @@ const SingleShimpentForm = ({
 						) : null}
 
 						<FieldContainer
-							label={`Nr. ${shipmentNumber} siuntos išmatavimai ${selectedCategory?.value === 'removals'
-								? 'metrais'
-								: 'centimetrais'
-								}`}
+							label={`Nr. ${shipmentNumber} siuntos išmatavimai ${
+								selectedCategory?.value === 'removals'
+									? 'metrais'
+									: 'centimetrais'
+							}`}
 							description={
 								selectedService === 'parcelForceShipment'
 									? 'Maksimalus Parcel Force siuntos ilgis 110 cm, plotis 70 cm, aukštis 110 cm. Didesnių išmatavimų neaptarnaujame.'
@@ -474,7 +519,11 @@ const SingleShimpentForm = ({
 										onChange={(e) => {
 											handleValidation('length', e.target.value);
 										}}
-										// errorMessage={errorMessages.length}
+										rules={validationRules.shipments.length}
+										errorMessage={getError(
+											`shipments.${index}.length`,
+											formErrors
+										)}
 										isError={!!errorMessages.length}
 									/>
 									<CustomInput
@@ -485,7 +534,11 @@ const SingleShimpentForm = ({
 										onChange={(e) => {
 											handleValidation('width', e.target.value);
 										}}
-										// errorMessage={errorMessages.width}
+										rules={validationRules.shipments.width}
+										errorMessage={getError(
+											`shipments.${index}.width`,
+											formErrors
+										)}
 										isError={!!errorMessages.width}
 									/>
 									<CustomInput
@@ -496,7 +549,11 @@ const SingleShimpentForm = ({
 										onChange={(e) => {
 											handleValidation('height', e.target.value);
 										}}
-										// errorMessage={errorMessages.height}
+										rules={validationRules.shipments.height}
+										errorMessage={getError(
+											`shipments.${index}.height`,
+											formErrors
+										)}
 										isError={!!errorMessages.height}
 									/>
 								</div>
@@ -524,11 +581,16 @@ const SingleShimpentForm = ({
 								<CustomInput
 									name={`shipments.${index}.volume`}
 									control={control}
-									errorMessage={errorMessages.volume}
 									type='number'
+									placeholder='Apimtis'
 									onChange={(e) => {
 										handleValidation('volume', e.target.value);
 									}}
+									rules={validationRules.shipments.volume}
+									errorMessage={
+										errorMessages.volume ||
+										getError(`shipments.${index}.volume`, formErrors)
+									}
 								/>
 							</FieldContainer>
 						) : null}
@@ -541,11 +603,15 @@ const SingleShimpentForm = ({
 									<CustomInput
 										name={`shipments.${index}.orderedShipmentNumber`}
 										control={control}
-										errorMessage={errorMessages.orderedShipmentNumber}
 										placeholder='Siuntos numeris'
 										onChange={(e) => {
 											handleValidation('orderedShipmentNumber', e.target.value);
 										}}
+										rules={validationRules.shipments.orderedShipmentNumber}
+										errorMessage={getError(
+											`shipments.${index}.orderedShipmentNumber`,
+											formErrors
+										)}
 									/>
 									{orderedShipmentNumberErrorMessage && (
 										<div className='errors'>
@@ -566,12 +632,16 @@ const SingleShimpentForm = ({
 									<CustomInput
 										name={`shipments.${index}.shipmentPrice`}
 										control={control}
-										errorMessage={shipmentPriceErrorMessage}
 										placeholder='Įveskite prekės sumą'
 										type='number'
 										onChange={(e) => {
 											handleValidation('shipmentPrice', e.target.value);
 										}}
+										rules={validationRules.shipments.shipmentPrice}
+										errorMessage={getError(
+											`shipments.${index}.shipmentPrice`,
+											formErrors
+										)}
 									/>
 									{shipmentPriceErrorMessage && (
 										<div className='errors'>
@@ -594,13 +664,17 @@ const SingleShimpentForm = ({
 										control={control}
 										placeholder='Įveskite siuntos/prekės kainą'
 										type='number'
-										errorMessage={purchasePriceOfTheItemErrorMessage}
 										onChange={(e) => {
 											handleValidation(
 												'purchasePriceOfTheItem',
 												e.target.value
 											);
 										}}
+										rules={validationRules.shipments.purchasePriceOfTheItem}
+										errorMessage={getError(
+											`shipments.${index}.purchasePriceOfTheItem`,
+											formErrors
+										)}
 									/>
 									{purchasePriceOfTheItemErrorMessage && (
 										<div className='errors'>
@@ -637,6 +711,7 @@ const SingleShimpentForm = ({
 											onChange={() => {
 												setValue(`shipments.${index}.specification`, null);
 											}}
+											rules={validationRules.shipments.size}
 											errorMessage={getError(
 												`shipments.${index}.size`,
 												formErrors
@@ -645,7 +720,7 @@ const SingleShimpentForm = ({
 									</FieldContainer>
 								) : null}
 								{!!selectedProductType?.value &&
-									specificationOptions.length > 0 ? (
+								specificationOptions.length > 0 ? (
 									<FieldContainer
 										label={`Nr. ${shipmentNumber} siuntos specifikacija`}
 										description=''>
@@ -655,6 +730,7 @@ const SingleShimpentForm = ({
 											control={control}
 											options={specificationOptions}
 											placeholder='Siuntos specifikacija'
+											rules={validationRules.shipments.specification}
 											errorMessage={getError(
 												`shipments.${index}.specification`,
 												formErrors
@@ -665,10 +741,11 @@ const SingleShimpentForm = ({
 								{selectedCategory?.value ? (
 									<FieldContainer
 										label={`Nr. ${shipmentNumber} siuntos kiekis`}
-										description={`${selectedCategory.value === 'palettes'
-											? 'Susisiekite su vadibininku'
-											: ''
-											}`}>
+										description={`${
+											selectedCategory.value === 'palettes'
+												? 'Susisiekite su vadibininku'
+												: ''
+										}`}>
 										<CustomInput
 											name={`shipments.${index}.amount`}
 											type='number'
@@ -681,6 +758,11 @@ const SingleShimpentForm = ({
 													setValue(`shipments.${index}.amount`, 1);
 												}
 											}}
+											rules={validationRules.shipments.amount}
+											errorMessage={getError(
+												`shipments.${index}.amount`,
+												formErrors
+											)}
 										/>
 									</FieldContainer>
 								) : null}
@@ -694,7 +776,8 @@ const SingleShimpentForm = ({
 					onClick={() => removeShipment(index)}
 					style={{
 						marginTop: '24px',
-					}}>
+					}}
+					disabled={disableRemoveButton}>
 					Pašalinti siuntą {shipmentNumber}
 				</PrimaryButton>
 			</div>

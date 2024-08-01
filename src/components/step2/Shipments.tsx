@@ -9,7 +9,6 @@ import Step from '../Step';
 import SingleShimpentForm from './SingleShimpentForm';
 import { FormType } from '../../utils/formTypes';
 import PrimaryButton from '../PrimaryButton';
-import SecondaryButton from '../SecondaryButton';
 import './step2.css';
 
 const Shipments = ({
@@ -18,12 +17,18 @@ const Shipments = ({
 	methods,
 	currency,
 	formErrors,
+	errorMessages,
+	setErrorMessages,
 }: {
 	control: Control<FormType>;
 	selectedService: string;
 	methods: UseFormReturn<FormType, any, undefined>;
 	currency: '€' | '£';
 	formErrors: FieldErrors<FormType>;
+	errorMessages: Record<string, string>;
+	setErrorMessages: React.Dispatch<
+		React.SetStateAction<Record<string, string>>
+	>;
 }) => {
 	const { fields, append, remove } = useFieldArray<FormType>({
 		control,
@@ -34,13 +39,16 @@ const Shipments = ({
 		remove(index);
 	};
 
+	const disableRemoveButton = fields.length === 1;
+
 	return (
 		<Step
 			step={2}
-			title={`Siuntos suvedimas ${selectedService === 'shipmentWithAddressService'
-				? '(EcoTrip adreso pasl.)'
-				: ''
-				}`}>
+			title={`Siuntos suvedimas ${
+				selectedService === 'shipmentWithAddressService'
+					? '(EcoTrip adreso pasl.)'
+					: ''
+			}`}>
 			<div className='shipments-column-wrapper'>
 				<div className='shipments-column-container'>
 					{fields.length > 0 &&
@@ -59,6 +67,9 @@ const Shipments = ({
 										setValue={methods.setValue}
 										currency={currency}
 										formErrors={formErrors}
+										disableRemoveButton={disableRemoveButton}
+										errorMessages={errorMessages}
+										setErrorMessages={setErrorMessages}
 									/>
 								</div>
 							);
@@ -76,26 +87,24 @@ const Shipments = ({
 							append({
 								estimatedPrice: '0.00',
 								category:
-									selectedService === 'parcelForceShipment' ? {
-										label: "Parcel Force siunta",
-										value: "shipments"
-									} :
-										selectedService === 'shipmentWithAddressService' ||
-											selectedService === 'productPurchaseService' ||
-											selectedService === 'productSalesService'
-											? {
+									selectedService === 'parcelForceShipment'
+										? {
+												label: 'Parcel Force siunta',
+												value: 'shipments',
+										  }
+										: selectedService === 'shipmentWithAddressService' ||
+										  selectedService === 'productPurchaseService' ||
+										  selectedService === 'productSalesService'
+										? {
 												label: 'Standartinės siuntos',
 												value: 'shipments',
-											}
-											: null,
+										  }
+										: null,
 								amount: 1,
 							});
 						}}>
 						Pridėti papildomą siuntą
 					</PrimaryButton>
-					<SecondaryButton type='button'>
-						Paskaičiuoti Užsakymo kainą
-					</SecondaryButton>
 				</div>
 			</div>
 		</Step>

@@ -4,7 +4,7 @@ import FieldContainer from './FieldContainer';
 import ControlledStyledSelect from './ControlledStyledSelect';
 import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
-import { getError } from '../utils/validation/getError';
+import { useCustomValidation } from '../utils/validation/useCustomValidation';
 
 type Props = {
 	fiedsDisabled: boolean;
@@ -33,6 +33,8 @@ const Datepicker = ({
 	resetToDates,
 	setValue,
 }: Props) => {
+	const validationRules = useCustomValidation({});
+
 	return (
 		<FieldContainer
 			label={label}
@@ -48,8 +50,17 @@ const Datepicker = ({
 						isDisabled={fiedsDisabled}
 						control={control}
 						name={`dates.${name}.year`}
-						errorMessage={getError(`dates.${name}.year.value`, formErrors)}
+						errorMessage={
+							name === 'from'
+								? formErrors.dates?.from?.year?.message
+								: formErrors.dates?.to?.year?.message
+						}
 						needMargin={true}
+						rules={
+							name === 'from'
+								? validationRules.dates.from.year
+								: validationRules.dates.to.year
+						}
 						// @ts-ignore
 						onChange={() => {
 							setValue?.('dates.from.day', null);
@@ -68,8 +79,17 @@ const Datepicker = ({
 						isDisabled={fiedsDisabled}
 						control={control}
 						name={`dates.${name}.month`}
-						errorMessage={getError(`dates.${name}.month.value`, formErrors)}
+						errorMessage={
+							name === 'from'
+								? formErrors.dates?.from?.month?.message
+								: formErrors.dates?.to?.month?.message
+						}
 						needMargin={true}
+						rules={
+							name === 'from'
+								? validationRules.dates.from.month
+								: validationRules.dates.to.month
+						}
 						onChange={() => {
 							setValue?.('dates.from.day', null);
 							resetToDates();
@@ -86,8 +106,17 @@ const Datepicker = ({
 						isDisabled={fiedsDisabled}
 						control={control}
 						name={`dates.${name}.day`}
-						errorMessage={getError(`dates.${name}.day.value`, formErrors)}
+						errorMessage={
+							name === 'from'
+								? formErrors.dates?.from?.day?.message
+								: formErrors.dates?.to?.day?.message
+						}
 						needMargin={true}
+						rules={
+							name === 'from'
+								? validationRules.dates.from.day
+								: validationRules.dates.to.day
+						}
 					/>
 				</div>
 			</div>

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import '../styles/input.css';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, RegisterOptions } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
 import SimpleTextError from './SimpleTextError';
 
@@ -14,6 +14,12 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	isNumberInput?: boolean;
 	onBlur?: (e: Event) => void;
 	isError?: boolean;
+	rules?:
+		| Omit<
+				RegisterOptions<FormType, keyof FormType>,
+				'disabled' | 'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+		  >
+		| undefined;
 };
 
 const CustomInput = ({
@@ -24,34 +30,44 @@ const CustomInput = ({
 	...props
 }: InputProps) => {
 	return (
-		<>
-			<Controller
-				name={name as keyof FormType}
-				control={control}
-				render={({ field }) => {
-					const handleChange = (e: any) => {
-						if (props.onChange) {
-							props.onChange(e);
-						}
-						field.onChange(e);
-					};
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '10px',
+				alignItems: 'flex-start',
+			}}>
+			<>
+				<Controller
+					name={name as keyof FormType}
+					control={control}
+					rules={props.rules}
+					render={({ field }) => {
+						const handleChange = (e: any) => {
+							if (props.onChange) {
+								props.onChange(e);
+							}
+							field.onChange(e);
+						};
 
-					return (
-						<div
-							className={`input-container ${errorMessage || isError ? 'error-input' : ''
+						return (
+							<div
+								className={`input-container ${
+									errorMessage || isError ? 'error-input' : ''
 								}`}>
-							{/* @ts-expect-error */}
-							<input
-								{...field}
-								{...props}
-								onChange={handleChange}
-							/>
-						</div>
-					);
-				}}
-			/>
+								{/* @ts-expect-error */}
+								<input
+									{...field}
+									{...props}
+									onChange={handleChange}
+								/>
+							</div>
+						);
+					}}
+				/>
+			</>
 			<SimpleTextError message={errorMessage} />
-		</>
+		</div>
 	);
 };
 

@@ -52,7 +52,6 @@ const useCalculatePrice = ({
 					categoryValue: category?.value,
 					amount,
 				});
-
 				// @ts-ignore
 				setValue(name, price);
 				return;
@@ -61,12 +60,10 @@ const useCalculatePrice = ({
 		}
 
 		if (category && category.value === 'shipments') {
-			if (weight) {
-				const price = calculateShipmentPrice({ weight, amount });
-				// @ts-ignore
-				setValue(name, price);
-				return;
-			}
+			const price = calculateShipmentPrice({ weight, amount });
+			// @ts-ignore
+			setValue(name, price);
+
 			return;
 		}
 

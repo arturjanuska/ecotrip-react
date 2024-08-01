@@ -3,14 +3,15 @@ import '../styles/buttons.css';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 	children: React.ReactNode;
-	isDisabled?: boolean
 };
 
 const SecondaryButton = (props: ButtonProps) => {
 	return (
 		<button
 			{...props}
-			className={`btn secondary-button ${props.className} ${props.isDisabled ? "disabled" : ""}`}>
+			className={`btn secondary-button ${props.className} ${
+				props.disabled ? 'disabled' : ''
+			}`}>
 			<span>{props.children}</span>
 		</button>
 	);

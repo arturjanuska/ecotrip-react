@@ -4,6 +4,7 @@ import Step from '../Step';
 import '../step4/step4.css';
 import { Control, FieldErrors } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
+import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type Props = {
 	control: Control<FormType, any>;
@@ -11,6 +12,10 @@ type Props = {
 };
 
 const RecipientInformation = ({ control, formErrors }: Props) => {
+	const validationRules = useCustomValidation({});
+
+	const recipientValidationRules = validationRules.recipientInformation;
+
 	return (
 		<Step
 			title='Siuntos pristatymo / gavėjo informacija'
@@ -20,6 +25,7 @@ const RecipientInformation = ({ control, formErrors }: Props) => {
 				control={control}
 				subName='recipientInformation'
 				formErrors={formErrors}
+				validationRules={recipientValidationRules}
 			/>
 		</Step>
 	);

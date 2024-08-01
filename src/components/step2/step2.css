@@ -29,8 +29,8 @@
 
 .volume-fields-container {
 	display: flex;
-	align-items: center;
 	gap: 20px;
+	align-items: flex-start;
 }
 
 .errors {

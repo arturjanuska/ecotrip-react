@@ -14,6 +14,7 @@ import ServiceSection from './ServiceSection';
 import { FormType } from '../../utils/formTypes';
 import { useEffect } from 'react';
 import { checkParcelForcePostcodes } from '../../utils/checkPostCodes';
+import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 const AddressForm = ({
 	setValue,
@@ -91,6 +92,8 @@ const AddressForm = ({
 		}
 	};
 
+	const validationRules = useCustomValidation({});
+
 	const selectedPickupAddress = methods.watch('pickupAddress');
 	const selectedPickupAddressPostcode = methods.watch('pickupAddressZipCode');
 
@@ -103,9 +106,9 @@ const AddressForm = ({
 		checkParcelForcePostcodes(
 			direction
 				? [
-					selectedPickupAddressPostcode as string,
-					selectedDeliveryAddressPostcode as string,
-				]
+						selectedPickupAddressPostcode as string,
+						selectedDeliveryAddressPostcode as string,
+				  ]
 				: []
 		) || false;
 
@@ -181,6 +184,7 @@ const AddressForm = ({
 						placeholder='Įveskite gatvę, namo numerį, miestą'
 						onClear={handleOnClear}
 						errorMessage={formErrors.pickupAddress?.message}
+						rules={validationRules.pickupAddress}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -192,6 +196,7 @@ const AddressForm = ({
 						name='pickupAddressZipCode'
 						control={control}
 						errorMessage={formErrors.pickupAddressZipCode?.message}
+						rules={validationRules.pickupAddressZipCode}
 					/>
 				</FieldContainer>
 			</div>
@@ -207,6 +212,7 @@ const AddressForm = ({
 						placeholder='Įveskite gatvę, namo numerį, miestą'
 						onClear={handleOnClear}
 						errorMessage={formErrors.deliveryAddress?.message}
+						rules={validationRules.deliveryAddress}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -218,6 +224,7 @@ const AddressForm = ({
 						name='deliveryAddressZipCode'
 						control={control}
 						errorMessage={formErrors.deliveryAddressZipCode?.message}
+						rules={validationRules.deliveryAddressZipCode}
 					/>
 				</FieldContainer>
 			</div>

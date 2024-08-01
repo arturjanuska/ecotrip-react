@@ -15,17 +15,6 @@
 	color: #ffffff;
 	border: 1px solid #9aa61e !important;
 }
-.secondary-button.disabled {
-	background-color: #fff;
-	color: rgba(122, 119, 118, 1);
-	border: 1px solid rgba(122, 119, 118, 1) !important;
-}
-
-.secondary-button.disabled:hover {
-	background-color: #fff;
-	color: rgba(122, 119, 118, 1);
-	border: 1px solid rgba(122, 119, 118, 1) !important;
-}
 
 .secondary-button:hover {
 	color: #9aa61e;
@@ -49,4 +38,20 @@
 	line-height: 16.1px;
 	text-align: center;
 	text-transform: uppercase;
+}
+
+.btn.disabled span {
+	color: rgba(122, 119, 118, 1);
+}
+
+.btn.disabled {
+	background-color: #fff !important;
+	color: rgba(122, 119, 118, 1) !important;
+	border: 1px solid rgba(122, 119, 118, 1) !important;
+}
+
+.btn.disabled:hover {
+	background-color: #fff !important;
+	color: rgba(122, 119, 118, 1) !important;
+	border: 1px solid rgba(122, 119, 118, 1) !important;
 }

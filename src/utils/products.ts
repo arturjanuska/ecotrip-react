@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { CommonProductTypeExample, OptionType, RangeSizeType } from './types';
+import { CommonProductTypeExample, OptionType } from './types';
 import { AnyOptionType, getOptions } from './getOptions';
 import { convertRangeSizeToOptionType } from './convertSizeOptions';
 

@@ -33,8 +33,6 @@ const useDeliveryDate = ({
 			const deliveryDays = direction === 'UK-LT' ? [2, 3] : [5, 6];
 
 			const findNextValidDay = (date: Dayjs, validDays: number[]) => {
-				console.log('date ===', date);
-				console.log('validDays ===', validDays);
 				while (!validDays.includes(date.day())) {
 					date = date.add(1, 'day');
 				}
@@ -44,6 +42,7 @@ const useDeliveryDate = ({
 			const pickupDateEnd = dayjs(
 				`${pickupYear}-${pickupMonth}-${pickupEnd.toString().padStart(2, '0')}`
 			);
+
 			const deliveryStartDate = findNextValidDay(
 				pickupDateEnd.add(1, 'day'),
 				deliveryDays

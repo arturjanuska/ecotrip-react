@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import Select, { Props } from 'react-select';
 import { forwardRef } from 'react';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, RegisterOptions } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
 import SimpleTextError from './SimpleTextError';
 
@@ -69,6 +69,12 @@ const ControlledStyledSelect = forwardRef(
 			control: Control<FormType>;
 			onChange?: (value: any) => void;
 			needMargin?: boolean;
+			rules?:
+				| Omit<
+						RegisterOptions<FormType, keyof FormType>,
+						'disabled' | 'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+				  >
+				| undefined;
 		},
 		ref: any
 	) => {
@@ -77,6 +83,7 @@ const ControlledStyledSelect = forwardRef(
 				<Controller
 					name={props.name as keyof FormType}
 					control={props.control}
+					rules={props.rules}
 					render={({ field }) => {
 						const handleChange = (value: any) => {
 							field.onChange(value);
@@ -90,8 +97,8 @@ const ControlledStyledSelect = forwardRef(
 								style={
 									props.needMargin
 										? {
-											marginBottom: '10px',
-										}
+												marginBottom: '10px',
+										  }
 										: {}
 								}>
 								<Select

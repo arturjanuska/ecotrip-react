@@ -1,20 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
-import { getError } from '../../utils/validation/getError';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
+import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type InvoiceProps = {
 	control: Control<FormType, any>;
 	formErrors: FieldErrors<FormType>;
-	methods: UseFormReturn<FormType, any, undefined>
-
+	methods: UseFormReturn<FormType, any, undefined>;
 };
 
 const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
-	const needInvoice = methods.watch("invoiceRequired")
+	const needInvoice = methods.watch('invoiceRequired');
+
+	const validationRules = useCustomValidation({
+		invoiceNeeded: needInvoice,
+	});
 
 	return (
 		<>
@@ -31,10 +34,8 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
 							placeholder='Įveskite įmonės pavadinimą *'
 							control={control}
 							name='invoiceInformation.companyName'
-							errorMessage={getError(
-								'invoiceInformation.companyName',
-								formErrors
-							)}
+							errorMessage={formErrors.invoiceInformation?.companyName?.message}
+							rules={validationRules.invoiceInformation?.companyName}
 						/>
 					</FieldContainer>
 					<FieldContainer label='Įmonės kodas'>
@@ -42,10 +43,8 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
 							placeholder='Įveskite įmonės kodą *'
 							name='invoiceInformation.companyCode'
 							control={control}
-							errorMessage={getError(
-								'invoiceInformation.companyCode',
-								formErrors
-							)}
+							errorMessage={formErrors.invoiceInformation?.companyCode?.message}
+							rules={validationRules.invoiceInformation?.companyCode}
 						/>
 					</FieldContainer>
 					<FieldContainer label='PVM mokėtojo kodas'>
@@ -53,7 +52,8 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
 							placeholder='Įveskite PVM mokėtojo kodą *'
 							name='invoiceInformation.pvmCode'
 							control={control}
-							errorMessage={getError('invoiceInformation.pvmCode', formErrors)}
+							errorMessage={formErrors.invoiceInformation?.pvmCode?.message}
+							rules={validationRules.invoiceInformation?.pvmCode}
 						/>
 					</FieldContainer>
 					<FieldContainer label='Įmonės el. paštas'>
@@ -61,10 +61,10 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
 							placeholder='Įveskite įmonės el paštą *'
 							control={control}
 							name='invoiceInformation.companyEmail'
-							errorMessage={getError(
-								'invoiceInformation.companyEmail',
-								formErrors
-							)}
+							errorMessage={
+								formErrors.invoiceInformation?.companyEmail?.message
+							}
+							rules={validationRules.invoiceInformation?.companyEmail}
 						/>
 					</FieldContainer>
 					<FieldContainer label='Įmonės adresas'>
@@ -72,10 +72,10 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
 							placeholder='Įveskite įmonės adresą *'
 							control={control}
 							name='invoiceInformation.companyAddress'
-							errorMessage={getError(
-								'invoiceInformation.companyAddress',
-								formErrors
-							)}
+							errorMessage={
+								formErrors.invoiceInformation?.companyAddress?.message
+							}
+							rules={validationRules.invoiceInformation?.companyAddress}
 						/>
 					</FieldContainer>
 				</div>

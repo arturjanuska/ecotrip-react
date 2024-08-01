@@ -3,28 +3,43 @@ import Step from '../Step';
 import ClientInformationForm from '../step4/ClientInformationForm';
 import { Control, FieldErrors } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
+import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type Props = {
-  control: Control<FormType, any>;
-  formErrors: FieldErrors<FormType>;
+	control: Control<FormType, any>;
+	formErrors: FieldErrors<FormType>;
+	selectedService: string;
 };
-const ProductPurchaseServiceInformation = ({ control, formErrors }: Props) => {
-  return (
-    <Step
-      step={6}
-      title='Siuntos/prekės išpirkos gavėjo informacija'>
-      <>
-        <div>
-          <ClientInformationForm
-            client='purchaseInformation'
-            control={control}
-            subName='purchaseInformation'
-            formErrors={formErrors}
-          />
-        </div>
-      </>
-    </Step>
-  )
-}
+const ProductPurchaseServiceInformation = ({
+	control,
+	formErrors,
+	selectedService,
+}: Props) => {
+	const validationRules = useCustomValidation({ service: selectedService }) as {
+		[key: string]: any;
+	};
 
-export default ProductPurchaseServiceInformation
+	const purchaseValidationRules = validationRules.purchaseInformation;
+
+	return (
+		<Step
+			step={6}
+			title='Siuntos/prekės išpirkos gavėjo informacija'>
+			<>
+				<div>
+					<ClientInformationForm
+						client='purchaseInformation'
+						control={control}
+						subName='purchaseInformation'
+						formErrors={formErrors}
+						validationRules={
+							purchaseValidationRules ? purchaseValidationRules : undefined
+						}
+					/>
+				</div>
+			</>
+		</Step>
+	);
+};
+
+export default ProductPurchaseServiceInformation;

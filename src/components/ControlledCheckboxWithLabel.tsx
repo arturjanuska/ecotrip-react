@@ -1,16 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { CSSProperties } from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, RegisterOptions } from 'react-hook-form';
 import '../styles/checkbox.css';
 import SimpleTextError from './SimpleTextError';
+import { FormType } from '../utils/formTypes';
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
 	children: React.ReactNode | Element;
 	className?: string;
 	style?: CSSProperties;
-	name: string;
+	name: keyof FormType;
 	control: any;
 	errorMessage?: string;
+	rules?:
+		| Omit<
+				RegisterOptions<FormType, keyof FormType>,
+				'disabled' | 'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+		  >
+		| undefined;
 };
 
 const ControlledCheckboxWithLabel = ({
@@ -20,12 +27,14 @@ const ControlledCheckboxWithLabel = ({
 	name,
 	control,
 	errorMessage,
+	rules,
 	...rest
 }: Props) => {
 	return (
 		<Controller
 			name={name}
 			control={control}
+			rules={rules}
 			render={({ field }) => {
 				return (
 					<>
@@ -37,9 +46,11 @@ const ControlledCheckboxWithLabel = ({
 									{...field}
 									{...rest}
 									type='checkbox'
-									className={`checkbox checkbox-primary ${errorMessage ? 'error' : ''
-										}`}
-									checked={field.value} // Ensure the checkbox is controlled by react-hook-form
+									className={`checkbox checkbox-primary ${
+										errorMessage ? 'error' : ''
+									}`}
+									checked={field.value}
+									defaultChecked={false}
 								/>
 								<div className='custom-label-text'>{children}</div>
 							</label>
