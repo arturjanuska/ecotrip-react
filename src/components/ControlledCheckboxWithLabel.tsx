@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { CSSProperties } from 'react';
 import { Controller, RegisterOptions } from 'react-hook-form';
@@ -49,6 +51,7 @@ const ControlledCheckboxWithLabel = ({
 									className={`checkbox checkbox-primary ${
 										errorMessage ? 'error' : ''
 									}`}
+									// @ts-ignore
 									checked={field.value}
 									defaultChecked={false}
 								/>

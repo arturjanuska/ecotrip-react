@@ -19,18 +19,6 @@ export const checkPostCodes = ({ address }: CheckPostCodesProps) => {
 		};
 	});
 
-	const filteredPostcodes: string[] = UK_POST_CODES.map((obj) => obj.postcode)
-		.filter((code) => {
-			const postCodesArray: string[] = [];
-			if (postCodesArray.includes(code)) {
-				return false;
-			} else {
-				postCodesArray.push(code);
-			}
-			return postCodesArray;
-		})
-		.sort((a, b) => a.localeCompare(b));
-
 	const fromObj = formattedData.find((obj) => obj.direction === 'from');
 
 	foundPostcode =

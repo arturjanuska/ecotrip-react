@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import usePlacesAutocomplete from 'use-places-autocomplete';
+import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
 import { useGoogleMapsScript, Libraries } from 'use-google-maps-script';
 import { OptionType } from '../../utils/types';
 import StyledSelect from '../StyledSelect';
@@ -91,6 +91,7 @@ const ReadySearchBox = ({
 				}}
 				onChange={(newValue, actionMeta) => {
 					const val = newValue as unknown as OptionType;
+					console.log('val ===', val);
 					if (actionMeta.action === 'clear') {
 						onClear(name);
 					} else {

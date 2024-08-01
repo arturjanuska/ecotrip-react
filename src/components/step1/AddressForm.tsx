@@ -187,6 +187,7 @@ const AddressForm = ({
 						onClear={handleOnClear}
 						errorMessage={formErrors.pickupAddress?.message}
 						rules={validationRules.pickupAddress}
+						control={control}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -215,6 +216,7 @@ const AddressForm = ({
 						onClear={handleOnClear}
 						errorMessage={formErrors.deliveryAddress?.message}
 						rules={validationRules.deliveryAddress}
+						control={control}
 					/>
 				</FieldContainer>
 				<FieldContainer

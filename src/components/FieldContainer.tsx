@@ -9,13 +9,7 @@ type Props = {
 	width?: 'full' | 'half';
 };
 
-const FieldContainer = ({
-	label,
-	children,
-	description,
-	className,
-	width = 'half',
-}: Props) => {
+const FieldContainer = ({ label, children, description, className }: Props) => {
 	return (
 		<div className={`field-container ${className ? className : ''}`}>
 			{label ? <label htmlFor=''>{label}</label> : null}

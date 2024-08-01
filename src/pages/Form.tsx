@@ -12,7 +12,7 @@ import PayerInformation from '../components/step6-7/PayerInformation';
 import { FormType } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import generateOrderID from '../utils/generateOrderId';
+// import generateOrderID from '../utils/generateOrderId';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 import { transformFormDataToEndpoint } from '../utils/transformFormDataToEndpoint';
 
@@ -53,9 +53,9 @@ const Form = () => {
 	const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
 	const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
 
-	const orderId = generateOrderID(direction);
+	// const orderId = generateOrderID(direction);
 
-	const formData = methods.watch();
+	// const formData = methods.watch();
 
 	useEffect(() => {
 		methods.setValue('service', '');

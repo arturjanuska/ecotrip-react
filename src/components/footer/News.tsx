@@ -1,8 +1,6 @@
 import SecondaryButton from '../SecondaryButton';
 
-type Props = {};
-
-const News = (props: Props) => {
+const News = () => {
 	return (
 		<div className='news-container'>
 			<div className='news-headings'>

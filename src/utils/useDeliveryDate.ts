@@ -23,7 +23,7 @@ const useDeliveryDate = ({
 		const getDeliveryDate = ({ pickupDate, direction, setValue }: Props) => {
 			if (!pickupDate || !direction) return;
 
-			const [pickupStart, pickupEnd] = pickupDate
+			const [_, pickupEnd] = pickupDate
 				.split(' - ')
 				.map((day) => parseInt(day, 10));
 
