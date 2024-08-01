@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { CommonProductTypeExample, OptionType } from './types';
 import { AnyOptionType, getOptions } from './getOptions';
@@ -3302,6 +3303,7 @@ export const getSizeOptionsBySelectedProductType = (
 			.filter((item) => item.productType?.value === productType)
 			.map((item) => {
 				if (!item.size) return null;
+				// @ts-ignore
 				if (item.size.to || item.size.from) {
 					return {
 						label: convertRangeSizeToOptionType(
@@ -3317,9 +3319,12 @@ export const getSizeOptionsBySelectedProductType = (
 							productType
 						),
 					};
+					// @ts-ignore
 				} else if (item.size.value || item.size.label) {
 					return {
+						// @ts-ignore
 						label: item.size.label,
+						// @ts-ignore
 						value: item.size.value,
 					};
 				}
@@ -3337,6 +3342,7 @@ export const getSizeOptionsBySelectedProductType = (
 			.filter((product) => product.category.value === category)
 			.map((item) => {
 				if (!item.size) return null;
+				// @ts-ignore
 				if (item.size.to || item.size.from) {
 					return {
 						label: convertRangeSizeToOptionType(
@@ -3352,9 +3358,12 @@ export const getSizeOptionsBySelectedProductType = (
 							productType
 						),
 					};
+					// @ts-ignore
 				} else if (!!item.size.value || !!item.size.label) {
 					return {
+						// @ts-ignore
 						label: item.size.label,
+						// @ts-ignore
 						value: item.size.value,
 					};
 				}
@@ -3362,6 +3371,7 @@ export const getSizeOptionsBySelectedProductType = (
 		return filteredProductsByCategoryAndType.length > 1
 			? getUniqueOptions(
 					(filteredProductsByCategoryAndType.filter(
+						// @ts-ignore
 						(item) => !!item || !!item?.value
 					) as OptionType[]) ?? []
 			  )
@@ -3372,8 +3382,7 @@ export const getSizeOptionsBySelectedProductType = (
 
 export const getSpecificationOptionsBySelectedProduct = (
 	category?: string,
-	productType?: string,
-	size?: string
+	productType?: string
 ) => {
 	if (!category || !productType) return [];
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import usePlacesAutocomplete from 'use-places-autocomplete';
 import { useGoogleMapsScript, Libraries } from 'use-google-maps-script';
 import { OptionType } from '../../utils/types';
@@ -59,7 +60,6 @@ const ReadySearchBox = ({
 	placeholder,
 	onClear,
 	errorMessage,
-	rules,
 }: ISearchBoxProps) => {
 	const {
 		ready,

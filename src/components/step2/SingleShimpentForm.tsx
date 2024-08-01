@@ -1,5 +1,7 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import {
@@ -300,8 +302,8 @@ const SingleShimpentForm = ({
 						control={control}
 						rules={validationRules.shipments.category}
 						options={categoriesOptions.map((option) => {
-							// @ts-ignore
 							if (
+								// @ts-ignore
 								option.value === 'shipments' &&
 								selectedService === 'parcelForceShipment'
 							) {
@@ -753,6 +755,7 @@ const SingleShimpentForm = ({
 											placeholder='Siuntos kiekis'
 											defaultValue={1}
 											onBlur={(e) => {
+												// @ts-ignore
 												const value = e.target?.value as unknown as string;
 												if (!value) {
 													setValue(`shipments.${index}.amount`, 1);
