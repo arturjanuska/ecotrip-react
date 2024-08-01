@@ -134,12 +134,14 @@ const PayerInformation = ({
 
 		const finalPrice = price * discountPercentage;
 
-		methods.setValue('estimatedShipmentPrice', finalPrice ?? 0);
+		console.log('finalPrice ===', finalPrice);
+
+		methods.setValue('estimatedShipmentPrice', finalPrice.toFixed(2) ?? '0.00');
 	};
 
 	useEffect(() => {
 		getOrderPrice(shipments);
-	}, [shipments.length, shipments]);
+	}, [shipments.length, JSON.stringify(shipments), payer, service]);
 
 	const orderPrice = methods.watch('estimatedShipmentPrice');
 
