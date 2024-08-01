@@ -60,6 +60,10 @@ const PayerInformation = ({
 
 	const shipments = methods.watch('shipments');
 
+	const service = methods.watch('service');
+
+	const payer = methods.watch('customerInformation.payerOfTheShipment.value');
+
 	const shipmentsWithEmptyEstimatedPrice = shipments.filter((item) => {
 		if (item.estimatedPrice === '0.00' || !item.estimatedPrice) {
 			return true;
@@ -67,6 +71,16 @@ const PayerInformation = ({
 	});
 
 	const validationRules = useCustomValidation({});
+
+	const getDiscountPercentage = (itemsCount: number) => {
+		if (itemsCount === 0 || itemsCount === 1) return 1;
+
+		if (itemsCount === 2) return 1.05;
+		if (itemsCount === 3) return 1.1;
+		if (itemsCount === 4) return 1.15;
+		if (itemsCount > 4) return 1.2;
+		return 1;
+	};
 
 	const getOrderPrice = (shipmentsArray: ShipmentProps[]) => {
 		let price = 0;
@@ -76,7 +90,51 @@ const PayerInformation = ({
 			price += Number(shipmentPrice);
 		}
 
-		methods.setValue('estimatedShipmentPrice', price ?? 0);
+		if (service === 'shipmentWithAddressService') {
+			price = price + 5;
+		}
+
+		if (service === 'productPurchaseService') {
+			// is savu
+			if (payer === 'thePayerIsTheSender') {
+				const threePercentOfThePrice = (price * 3) / 100;
+				if (threePercentOfThePrice < 5) {
+					price = price + 5;
+				} else {
+					price = price + threePercentOfThePrice;
+				}
+			}
+			// klientas
+			if (payer === 'thePayerIsTheRecipient') {
+				const twoPercentOfThePrice = (price * 2) / 100;
+				if (twoPercentOfThePrice < 15) {
+					price = price + 15;
+				} else if (twoPercentOfThePrice > 50) {
+					price = price + 50;
+				} else {
+					price = price + twoPercentOfThePrice;
+				}
+			}
+		}
+
+		if (service === 'productSalesService') {
+			const twoPercentOfThePrice = (price * 2) / 100;
+			if (twoPercentOfThePrice < 15) {
+				price = price + 15;
+			} else if (twoPercentOfThePrice > 50) {
+				price = price + 50;
+			} else {
+				price = price + twoPercentOfThePrice;
+			}
+		}
+
+		const discountPercentage = getDiscountPercentage(
+			shipmentsArray.length || 0
+		);
+
+		const finalPrice = price * discountPercentage;
+
+		methods.setValue('estimatedShipmentPrice', finalPrice ?? 0);
 	};
 
 	useEffect(() => {
