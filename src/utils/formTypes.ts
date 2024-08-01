@@ -23,6 +23,7 @@ export type ShipmentProps = {
 
 export type FormType = {
   direction: 'UK-LT' | 'LT-UK' | null;
+  currency: '€' | '£';
   pickupAddress: string;
   pickupAddressZipCode: string | null;
   deliveryAddress: string;
@@ -93,4 +94,5 @@ export type FormType = {
   };
   packagingAndLabelingRules: boolean;
   transportRules: boolean;
+  estimatedShipmentPrice: number;
 };

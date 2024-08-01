@@ -16,15 +16,15 @@ import generateOrderID from '../utils/generateOrderId';
 import { validationSchema } from '../utils/validation/schema';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { transformFormDataToEndpoint } from '../utils/transformFormDataToEndpoint';
 
 const Form = () => {
-  const [currency, setCurrency] = useState<'€' | '£'>('€');
-
   const methods = useForm<FormType>({
     defaultValues: {
       invoiceRequired: false,
       packagingAndLabelingRules: false,
       transportRules: false,
+      currency: '€',
       customerInformation: {
         paymentMethod: {
           label: 'Grynais',
@@ -38,8 +38,10 @@ const Form = () => {
     },
     shouldUnregister: true,
     // @ts-ignore
-    resolver: yupResolver(validationSchema),
+    // resolver: yupResolver(validationSchema),
   });
+
+  const currency = methods.watch('currency');
 
   const service = methods.watch('service');
   const invoiceNeeded = methods.watch('invoiceRequired');
@@ -64,14 +66,28 @@ const Form = () => {
     methods.setValue('service', '');
   }, [pickupAddressZipCode, deliveryAddressZipCode]);
 
-  const onSubmit = (data: FormType) => {
+  const onSubmit = async (data: FormType) => {
     console.log('data ===', data);
+    const transformedData = transformFormDataToEndpoint(data);
+
+    const response = await fetch(
+      'https://api.uzsakymas.ecotrip.lt/api/orders',
+      {
+        method: 'POST', // Specify the request method
+        headers: {
+          'Content-Type': 'application/json', // Set the content type to JSON
+        },
+        body: JSON.stringify(transformedData), // Co
+      }
+    );
+
+    console.log('response ===> ', response);
   };
 
   useEffect(() => {
     if (direction) {
       const value = direction === 'LT-UK' ? '€' : '£';
-      setCurrency(value);
+      methods.setValue('currency', value);
     }
   }, [direction]);
 
