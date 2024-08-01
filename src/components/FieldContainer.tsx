@@ -17,10 +17,7 @@ const FieldContainer = ({
 	width = 'half',
 }: Props) => {
 	return (
-		<div
-			className={`field-container ${className ? className : ''} ${
-				width === 'half' ? 'w-360' : 'w-full'
-			}`}>
+		<div className={`field-container ${className ? className : ''}`}>
 			{label ? <label htmlFor=''>{label}</label> : null}
 			{children}
 			{description ? <p>{description}</p> : null}

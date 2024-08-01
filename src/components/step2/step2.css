@@ -70,3 +70,9 @@
 	text-align: left;
 	color: #7a7776;
 }
+
+@media (max-width: 768px) {
+	.single-shipment-container {
+		flex-direction: column;
+	}
+}

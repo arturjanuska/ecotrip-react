@@ -11,7 +11,7 @@ export const calculateShipmentPrice = ({ weight = '0', amount }: Props) => {
 	if (!weight) return;
 	let price = 0;
 	const value = Number(weight);
-	if (value <= 1) {
+	if (value <= 1 && value !== 0) {
 		price = 25;
 	}
 	if (value > 1 && value <= 5) {

@@ -1,13 +1,23 @@
 .client-form-container {
 	display: flex;
 	margin-bottom: 30px;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	row-gap: 30px;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.client-form-row {
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
 @media (max-width: 768px) {
 	.client-form-container {
+		flex-direction: column;
+	}
+
+	.client-form-row {
+		display: flex;
 		flex-direction: column;
 	}
 }

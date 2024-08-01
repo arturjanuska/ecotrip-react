@@ -126,19 +126,22 @@ const PayerInformation = ({
 					</FieldContainer>
 				</div>
 				<div className='payer-email'>
-					<FieldContainer
-						label='Mokėtojo el. paštas'
-						description='Užsakymo ir mokėjimo patvirtinimai bus išsiųsti į šį elektroninį paštą.'
-						width='full'>
-						<CustomInput
-							placeholder='Įveskite mokėtojo el. paštą *'
-							type='text'
-							control={control}
-							name='customerInformation.email'
-							errorMessage={formErrors.customerInformation?.email?.message}
-							rules={validationRules.customerInformation.email}
-						/>
-					</FieldContainer>
+					<div className='left-column'>
+						<FieldContainer
+							label='Mokėtojo el. paštas'
+							description='Užsakymo ir mokėjimo patvirtinimai bus išsiųsti į šį elektroninį paštą.'
+							width='full'>
+							<CustomInput
+								placeholder='Įveskite mokėtojo el. paštą *'
+								type='text'
+								control={control}
+								name='customerInformation.email'
+								errorMessage={formErrors.customerInformation?.email?.message}
+								rules={validationRules.customerInformation.email}
+							/>
+						</FieldContainer>
+					</div>
+					<div className='right-column'></div>
 				</div>
 				<OrderPrice
 					sum={orderPrice}

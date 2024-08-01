@@ -41,6 +41,27 @@ const Shipments = ({
 
 	const disableRemoveButton = fields.length === 1;
 
+	const handleAddShipment = () => {
+		append({
+			estimatedPrice: '0.00',
+			category:
+				selectedService === 'parcelForceShipment'
+					? {
+							label: 'Parcel Force siunta',
+							value: 'shipments',
+					  }
+					: selectedService === 'shipmentWithAddressService' ||
+					  selectedService === 'productPurchaseService' ||
+					  selectedService === 'productSalesService'
+					? {
+							label: 'Standartinės siuntos',
+							value: 'shipments',
+					  }
+					: null,
+			amount: 1,
+		});
+	};
+
 	return (
 		<Step
 			step={2}
@@ -76,35 +97,25 @@ const Shipments = ({
 						})}
 				</div>
 				<div
+					className='single-shipment-container'
 					style={{
-						width: '100%',
-					}}
-					className='buttons-container'>
-					<PrimaryButton
-						className='add-shipment-button'
-						type='button'
-						onClick={() => {
-							append({
-								estimatedPrice: '0.00',
-								category:
-									selectedService === 'parcelForceShipment'
-										? {
-												label: 'Parcel Force siunta',
-												value: 'shipments',
-										  }
-										: selectedService === 'shipmentWithAddressService' ||
-										  selectedService === 'productPurchaseService' ||
-										  selectedService === 'productSalesService'
-										? {
-												label: 'Standartinės siuntos',
-												value: 'shipments',
-										  }
-										: null,
-								amount: 1,
-							});
-						}}>
-						Pridėti papildomą siuntą
-					</PrimaryButton>
+						margin: 0,
+					}}>
+					<div className='left-column'>
+						<div
+							style={{
+								width: '100%',
+							}}
+							className='buttons-container'>
+							<PrimaryButton
+								className='add-shipment-button'
+								type='button'
+								onClick={handleAddShipment}>
+								Pridėti papildomą siuntą
+							</PrimaryButton>
+						</div>
+					</div>
+					<div className='right-column'></div>
 				</div>
 			</div>
 		</Step>

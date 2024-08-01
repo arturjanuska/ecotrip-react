@@ -1,16 +1,7 @@
 .date-fields-container {
-	width: 740px;
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
-}
-
-.w-half {
-	width: 50%;
-}
-
-.w-full {
-	width: 100%;
 }
 
 .date-picker-wrapper {
@@ -23,9 +14,5 @@
 	.date-fields-container {
 		width: 100%;
 		flex-direction: column;
-	}
-
-	.w-half {
-		width: 100%;
 	}
 }

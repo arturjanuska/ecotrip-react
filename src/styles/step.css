@@ -21,7 +21,7 @@
 }
 
 .content-column {
-	width: 740px;
+	width: max(740px, 67%);
 	box-sizing: border-box;
 	padding: 0;
 }

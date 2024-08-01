@@ -773,16 +773,21 @@ const SingleShimpentForm = ({
 						) : null}
 					</>
 				)}
-
-				<PrimaryButton
-					type='button'
-					onClick={() => removeShipment(index)}
+				<div
 					style={{
-						marginTop: '24px',
+						width: '100%',
 					}}
-					disabled={disableRemoveButton}>
-					Pašalinti siuntą {shipmentNumber}
-				</PrimaryButton>
+					className='buttons-container'>
+					<PrimaryButton
+						type='button'
+						onClick={() => removeShipment(index)}
+						style={{
+							marginTop: '24px',
+						}}
+						disabled={disableRemoveButton}>
+						Pašalinti siuntą {shipmentNumber}
+					</PrimaryButton>
+				</div>
 			</div>
 		</div>
 	);

@@ -18,13 +18,12 @@ const ProductPurchaseServiceInformation = ({
 	const validationRules = useCustomValidation({ service: selectedService }) as {
 		[key: string]: any;
 	};
-
 	const purchaseValidationRules = validationRules.purchaseInformation;
 
 	return (
 		<Step
 			step={6}
-			title='Siuntos/prekės išpirkos gavėjo informacija'>
+			title='Prekės nupirkimo paslaugos informacija'>
 			<>
 				<div>
 					<ClientInformationForm

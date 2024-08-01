@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 30px;
+	gap: 20px;
 }
 
 .checkboxes-container {
@@ -13,8 +14,17 @@
 }
 
 .payer-email {
+	display: flex;
+	gap: 20px;
 	width: 100%;
 	margin-bottom: 14px;
+}
+
+.payer-email .left-column {
+	flex: 1;
+}
+.payer-email .right-column {
+	flex: 1;
 }
 
 .invoice-form-container {

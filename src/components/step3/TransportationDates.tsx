@@ -54,7 +54,7 @@ const TransportationDates = ({
 			<>
 				<div className='date-fields-container'>
 					<Datepicker
-						className='w-half'
+						// className='w-half'
 						fiedsDisabled={false}
 						label='Siuntos paėmimo data'
 						options={options}
@@ -65,7 +65,7 @@ const TransportationDates = ({
 						setValue={setValue}
 					/>
 					<Datepicker
-						className='w-half'
+						// className='w-half'
 						fiedsDisabled={true}
 						label='Siuntos pristatymo data (numatoma)'
 						control={methods.control}

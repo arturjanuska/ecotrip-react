@@ -1,4 +1,5 @@
-import React, { CSSProperties } from 'react';
+/* eslint-disable no-mixed-spaces-and-tabs */
+import { CSSProperties } from 'react';
 import Link from '../Link';
 
 type LinkListProps = {

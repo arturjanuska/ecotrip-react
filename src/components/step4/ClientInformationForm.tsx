@@ -70,8 +70,8 @@ const ClientInformationForm = ({
 
 	return (
 		<>
-			<div>
-				<div className='client-form-container'>
+			<div className='client-form-container'>
+				<div className='client-form-row'>
 					<FieldContainer label={`${value} vardas`}>
 						<CustomInput
 							placeholder={`Įveskite ${value.toLowerCase()} vardą *`}
@@ -92,6 +92,8 @@ const ClientInformationForm = ({
 							rules={validationRules?.lastName}
 						/>
 					</FieldContainer>
+				</div>
+				<div className='client-form-row'>
 					<FieldContainer label={`${value} telefonas`}>
 						<CustomInput
 							placeholder={`Įveskite ${value.toLowerCase()} telefoną *`}
@@ -112,6 +114,8 @@ const ClientInformationForm = ({
 							rules={validationRules?.email}
 						/>
 					</FieldContainer>
+				</div>
+				<div className='client-form-row'>
 					<FieldContainer
 						label={`${value} adresas`}
 						description={getAddressDescription(client)}>
@@ -137,13 +141,14 @@ const ClientInformationForm = ({
 						/>
 					</FieldContainer>
 				</div>
-				<CustomTextarea
-					label='Papildoma informacija apie paįmamą siuntą'
-					name={`${subName}.additionInformation`}
-					control={control}
-					placeholder='Pvz.: Nebusiu namie, siuntą paduos mano kaimynas. Arba siuntą rasite paėmimui galiniame kieme ir panašiai.'
-				/>
 			</div>
+
+			<CustomTextarea
+				label='Papildoma informacija apie paįmamą siuntą'
+				name={`${subName}.additionInformation`}
+				control={control}
+				placeholder='Pvz.: Nebusiu namie, siuntą paduos mano kaimynas. Arba siuntą rasite paėmimui galiniame kieme ir panašiai.'
+			/>
 		</>
 	);
 };

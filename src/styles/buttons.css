@@ -24,7 +24,7 @@
 
 .btn {
 	min-width: min-content;
-	width: 360px;
+	width: max(360px, 20%);
 	padding: 12px 0;
 	transition: 0.2s ease-in-out;
 	cursor: pointer;
