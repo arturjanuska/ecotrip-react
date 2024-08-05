@@ -426,7 +426,13 @@ const ServiceSection = ({
 		setValue('shipments', [
 			{
 				estimatedPrice: '0.00',
-				category: null,
+				category:
+					service === 'parcelForceShipment'
+						? {
+								label: 'Parcel Force siunta',
+								value: 'shipments',
+						  }
+						: { label: 'Standartinės siuntos', value: 'shipments' },
 				amount: 1,
 			},
 		]);

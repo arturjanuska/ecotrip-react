@@ -57,6 +57,8 @@ const Form = () => {
 
 	// const formData = methods.watch();
 
+	// console.log('formData ===', formData);
+
 	useEffect(() => {
 		methods.setValue('service', '');
 	}, [pickupAddressZipCode, deliveryAddressZipCode]);
