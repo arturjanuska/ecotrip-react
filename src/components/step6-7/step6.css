@@ -52,6 +52,21 @@
 	margin-bottom: 18px;
 }
 
+.discount-section .input-container {
+	flex: 0.85;
+}
+
+.discount-section .btn {
+	flex: 0.15;
+}
+
+.right-column.discount-section {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	gap: 10px;
+}
+
 @media (max-width: 768px) {
 	.payer-info-container {
 		flex-direction: column;

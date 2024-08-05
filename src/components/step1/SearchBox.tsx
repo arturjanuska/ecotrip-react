@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
+import usePlacesAutocomplete from 'use-places-autocomplete';
 import { useGoogleMapsScript, Libraries } from 'use-google-maps-script';
 import { OptionType } from '../../utils/types';
 import StyledSelect from '../StyledSelect';
@@ -71,7 +71,7 @@ const ReadySearchBox = ({
 		debounce: 300,
 		defaultValue,
 		requestOptions: {
-			componentRestrictions: { country: ['uk', 'lt'] },
+			componentRestrictions: { country: ['gb', 'lt'] },
 		},
 	});
 

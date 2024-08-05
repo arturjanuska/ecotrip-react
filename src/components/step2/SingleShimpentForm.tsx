@@ -295,7 +295,7 @@ const SingleShimpentForm = ({
 			<div className='left-column'>
 				<FieldContainer
 					label={`Pasirinkite Nr. ${shipmentNumber} siuntos kategoriją`}
-					description='Įveskite siuntos tipą. Pasirinkus siuntą pagal katalogą, automatiškai paskaičiuosime siuntimo kainą.'
+					description='Įveskite siuntos kategoriją. Pasirinkus siuntą pagal katalogą, automatiškai paskaičiuosime siuntimo kainą.'
 					className='left-column-item'>
 					<ControlledStyledSelect
 						name={`shipments.${index}.category`}
@@ -316,7 +316,7 @@ const SingleShimpentForm = ({
 							}
 						})}
 						isClearable
-						placeholder='Siuntos kategoriją'
+						placeholder='Siuntos kategorija'
 						isDisabled={
 							selectedService === 'parcelForceShipment' ||
 							selectedService === 'shipmentWithAddressService' ||

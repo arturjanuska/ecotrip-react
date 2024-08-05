@@ -10,8 +10,11 @@ import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType, ShipmentProps } from '../../utils/formTypes';
 import ControlledStyledSelect from '../ControlledStyledSelect';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import UncontrolledInput from '../UncontrolledInput';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	control: Control<FormType, any>;
@@ -32,6 +35,8 @@ const PayerInformation = ({
 	currency,
 	errorMessages,
 }: Props) => {
+	const [discountCode, setDiscountCode] = useState<string>('');
+
 	const payerOptions = [
 		{
 			label: 'Mokėtojas yra siuntėjas',
@@ -202,6 +207,22 @@ const PayerInformation = ({
 						</FieldContainer>
 					</div>
 					<div className='right-column'></div>
+				</div>
+				<div className='payer-email'>
+					<div className='left-column'></div>
+					<div className='right-column discount-section'>
+						<UncontrolledInput
+							placeholder='Iveskite nuolaidos koda'
+							isError={false}
+							onChange={(e) => {
+								setDiscountCode(e.target.value);
+							}}
+							value={discountCode}
+						/>
+						<SecondaryButton>
+							<FontAwesomeIcon icon={faCheck} />
+						</SecondaryButton>
+					</div>
 				</div>
 				<OrderPrice
 					sum={orderPrice}

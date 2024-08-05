@@ -10,13 +10,13 @@ import {
 import Step from '../Step';
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
-import { SearchBox } from './SearchBox';
 import './step1.css';
 import ServiceSection from './ServiceSection';
 import { FormType } from '../../utils/formTypes';
 import { useEffect } from 'react';
 import { checkParcelForcePostcodes } from '../../utils/checkPostCodes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import SearchBoxV2 from './newSearchBox/SearchBoxV2';
 
 const AddressForm = ({
 	setValue,
@@ -40,10 +40,12 @@ const AddressForm = ({
 		value: string
 	) => {
 		if (name === 'pickupAddress') {
-			setValue('pickupAddressZipCode', '');
+			const postCode = findPostcode(value);
+			setValue('pickupAddressZipCode', postCode);
 		}
 		if (name === 'deliveryAddress') {
-			setValue('deliveryAddressZipCode', '');
+			const postCode = findPostcode(value);
+			setValue('deliveryAddressZipCode', postCode);
 		}
 		setValue(name, value);
 	};
@@ -136,20 +138,6 @@ const AddressForm = ({
 	};
 
 	useEffect(() => {
-		if (selectedPickupAddress) {
-			const postCode = findPostcode(selectedPickupAddress);
-			setValue('pickupAddressZipCode', postCode);
-		}
-	}, [selectedPickupAddress]);
-
-	useEffect(() => {
-		if (selectedDeliveryAddress) {
-			const postCode = findPostcode(selectedDeliveryAddress);
-			setValue('deliveryAddressZipCode', postCode);
-		}
-	}, [selectedDeliveryAddress]);
-
-	useEffect(() => {
 		if (
 			selectedPickupAddress &&
 			selectedDeliveryAddress &&
@@ -179,15 +167,14 @@ const AddressForm = ({
 				<FieldContainer
 					label='Paėmimo adresas:'
 					description='Adresas iš kur paįmama siunta arba perduodama EcoTrip komandai.'>
-					<SearchBox
-						name={'pickupAddress'}
-						defaultValue=''
-						onChange={onChange}
-						placeholder='Įveskite gatvę, namo numerį, miestą'
-						onClear={handleOnClear}
-						errorMessage={formErrors.pickupAddress?.message}
-						rules={validationRules.pickupAddress}
+					<SearchBoxV2
 						control={control}
+						name={'pickupAddress'}
+						placeholder='Įveskite gatvę, namo numerį, miestą'
+						errorMessage={formErrors.pickupAddress?.message}
+						methods={methods}
+						onChange={onChange}
+						onClear={handleOnClear}
 					/>
 				</FieldContainer>
 				<FieldContainer
@@ -208,15 +195,14 @@ const AddressForm = ({
 				<FieldContainer
 					label='Pristatymo adresas:'
 					description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'>
-					<SearchBox
+					<SearchBoxV2
 						name={'deliveryAddress'}
-						defaultValue=''
-						onChange={onChange}
 						placeholder='Įveskite gatvę, namo numerį, miestą'
-						onClear={handleOnClear}
 						errorMessage={formErrors.deliveryAddress?.message}
-						rules={validationRules.deliveryAddress}
 						control={control}
+						methods={methods}
+						onChange={onChange}
+						onClear={handleOnClear}
 					/>
 				</FieldContainer>
 				<FieldContainer
