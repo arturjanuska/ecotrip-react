@@ -67,7 +67,12 @@ const ControlledStyledSelect = forwardRef(
 										// @ts-ignore
 										option: (provided, state) => ({
 											...provided,
-											color: '#7a7776',
+											backgroundColor: state.isSelected
+												? '#9aa61e'
+												: state.isFocused
+												? '#e5e5e5'
+												: '#fff',
+											color: state.isSelected ? 'white' : '#7a7776',
 											fontSize: '14px',
 											fontWeight: '400',
 											lineHeight: '16.1px',

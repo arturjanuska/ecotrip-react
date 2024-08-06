@@ -91,7 +91,8 @@ const Form = () => {
 	return (
 		<form
 			className='main'
-			onSubmit={methods.handleSubmit(onSubmit)}>
+			onSubmit={methods.handleSubmit(onSubmit)}
+			autoComplete='off'>
 			<div
 				style={{
 					marginBottom: '70px',

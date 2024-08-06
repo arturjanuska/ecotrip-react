@@ -80,10 +80,10 @@ const PayerInformation = ({
 	const getDiscountPercentage = (itemsCount: number) => {
 		if (itemsCount === 0 || itemsCount === 1) return 1;
 
-		if (itemsCount === 2) return 1.05;
-		if (itemsCount === 3) return 1.1;
-		if (itemsCount === 4) return 1.15;
-		if (itemsCount > 4) return 1.2;
+		if (itemsCount === 2) return 0.95;
+		if (itemsCount === 3) return 0.9;
+		if (itemsCount === 4) return 0.85;
+		if (itemsCount > 4) return 0.8;
 		return 1;
 	};
 
@@ -190,8 +190,8 @@ const PayerInformation = ({
 						/>
 					</FieldContainer>
 				</div>
-				<div className='payer-email'>
-					<div className='left-column'>
+				<div className='columns'>
+					<div className='left-column payer-email'>
 						<FieldContainer
 							label='Mokėtojo el. paštas'
 							description='Užsakymo ir mokėjimo patvirtinimai bus išsiųsti į šį elektroninį paštą.'
@@ -206,10 +206,10 @@ const PayerInformation = ({
 							/>
 						</FieldContainer>
 					</div>
-					<div className='right-column'></div>
+					<div className='right-column empty'></div>
 				</div>
-				<div className='payer-email'>
-					<div className='left-column'></div>
+				<div className='columns'>
+					<div className='left-column empty'></div>
 					<div className='right-column discount-section'>
 						<UncontrolledInput
 							placeholder='Iveskite nuolaidos koda'

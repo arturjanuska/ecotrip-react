@@ -13,17 +13,17 @@
 	margin-bottom: 24px;
 }
 
-.payer-email {
+.columns {
 	display: flex;
 	gap: 20px;
 	width: 100%;
 	margin-bottom: 14px;
 }
 
-.payer-email .left-column {
+.columns .left-column {
 	flex: 1;
 }
-.payer-email .right-column {
+.columns .right-column {
 	flex: 1;
 }
 
@@ -73,7 +73,16 @@
 		gap: 30px;
 	}
 
-	.payer-email {
+	.columns {
 		margin-bottom: 40px;
+	}
+
+	.columns .left-column.empty,
+	.columns .right-column.empty {
+		flex: 0;
+	}
+
+	.columns {
+		gap: 0;
 	}
 }
