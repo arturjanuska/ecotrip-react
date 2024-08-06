@@ -55,6 +55,7 @@ const Form = () => {
 
 	// const orderId = generateOrderID(direction);
 
+	// @ts-ignore
 	const formData = methods.watch();
 
 	// console.log('formData ===', formData);
