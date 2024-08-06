@@ -2,16 +2,17 @@
 import ClientInformationForm from '../step4/ClientInformationForm';
 import Step from '../Step';
 import '../step4/step4.css';
-import { Control, FieldErrors } from 'react-hook-form';
+import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type Props = {
 	control: Control<FormType, any>;
 	formErrors: FieldErrors<FormType>;
+	methods: UseFormReturn<FormType, any, undefined>;
 };
 
-const RecipientInformation = ({ control, formErrors }: Props) => {
+const RecipientInformation = ({ control, formErrors, methods }: Props) => {
 	const validationRules = useCustomValidation({});
 
 	const recipientValidationRules = validationRules.recipientInformation;
@@ -26,6 +27,7 @@ const RecipientInformation = ({ control, formErrors }: Props) => {
 				subName='recipientInformation'
 				formErrors={formErrors}
 				validationRules={recipientValidationRules}
+				methods={methods}
 			/>
 		</Step>
 	);

@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
+import {
+	Control,
+	FieldErrors,
+	UseFormReturn,
+	UseFormSetValue,
+} from 'react-hook-form';
 import Step from '../Step';
 import ClientInformationForm from './ClientInformationForm';
 import { FormType } from '../../utils/formTypes';
@@ -11,6 +16,7 @@ type SenderInformationProps = {
 	formErrors: FieldErrors<FormType>;
 	selectedService?: string;
 	setValue: UseFormSetValue<FormType>;
+	methods: UseFormReturn<FormType, any, undefined>;
 };
 
 const SenderInformation = ({
@@ -18,6 +24,7 @@ const SenderInformation = ({
 	stepLabel,
 	formErrors,
 	selectedService,
+	methods,
 }: SenderInformationProps) => {
 	const validationRules = useCustomValidation({});
 
@@ -36,6 +43,7 @@ const SenderInformation = ({
 					selectedService === 'shipmentWithAddressService'
 				}
 				validationRules={senderValidationRules}
+				methods={methods}
 			/>
 		</Step>
 	);

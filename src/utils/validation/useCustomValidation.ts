@@ -244,13 +244,6 @@ export const useCustomValidation = ({
 		customerInformation: {
 			payerOfTheShipment: { required: 'Laukas yra privalomas' },
 			paymentMethod: { required: 'Laukas yra privalomas' },
-			email: {
-				required: 'Laukas yra privalomas',
-				pattern: {
-					value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-					message: 'Neteisingas el. pašto formatas',
-				},
-			},
 		},
 		invoiceInformation: invoiceNeeded
 			? {

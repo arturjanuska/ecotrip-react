@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
 import FieldContainer from '../FieldContainer';
-import CustomInput from '../CustomInput';
 import OrderPrice from './OrderPrice';
 import SecondaryButton from '../SecondaryButton';
 import './step6.css';
@@ -139,8 +138,6 @@ const PayerInformation = ({
 
 		const finalPrice = price * discountPercentage;
 
-		console.log('finalPrice ===', finalPrice);
-
 		methods.setValue('estimatedShipmentPrice', finalPrice.toFixed(2) ?? '0.00');
 	};
 
@@ -189,24 +186,6 @@ const PayerInformation = ({
 							rules={validationRules.customerInformation.paymentMethod}
 						/>
 					</FieldContainer>
-				</div>
-				<div className='columns'>
-					<div className='left-column payer-email'>
-						<FieldContainer
-							label='Mokėtojo el. paštas'
-							description='Užsakymo ir mokėjimo patvirtinimai bus išsiųsti į šį elektroninį paštą.'
-							width='full'>
-							<CustomInput
-								placeholder='Įveskite mokėtojo el. paštą *'
-								type='text'
-								control={control}
-								name='customerInformation.email'
-								errorMessage={formErrors.customerInformation?.email?.message}
-								rules={validationRules.customerInformation.email}
-							/>
-						</FieldContainer>
-					</div>
-					<div className='right-column empty'></div>
 				</div>
 				<div className='columns'>
 					<div className='left-column empty'></div>

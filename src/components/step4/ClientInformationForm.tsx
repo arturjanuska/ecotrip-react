@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import CustomTextarea from '../CustomTextarea';
 import './step4.css';
-import { Control, FieldErrors } from 'react-hook-form';
+import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { getError } from '../../utils/validation/getError';
+import { findPostcode } from '../../utils/findPostcode';
+import SearchBoxV2 from '../step1/newSearchBox/SearchBoxV2';
 
 type Props = {
 	client: 'sender' | 'recipient' | 'ransomPayee' | 'purchaseInformation';
@@ -15,6 +18,7 @@ type Props = {
 	isShipmentWithAddressServiceSelected?: boolean;
 	validationRules?: { [key: string]: { required: string } };
 	service?: string;
+	methods: UseFormReturn<FormType, any, undefined>;
 };
 
 const ClientInformationForm = ({
@@ -24,6 +28,7 @@ const ClientInformationForm = ({
 	formErrors,
 	isShipmentWithAddressServiceSelected,
 	validationRules,
+	methods,
 }: Props) => {
 	const getSubject = (client: Props['client']) => {
 		switch (client) {
@@ -64,6 +69,15 @@ const ClientInformationForm = ({
 	};
 
 	const value = getSubject(client);
+
+	const onChange = (name: keyof FormType, value: string) => {
+		const correctedName = `${subName}.address`;
+		const postCode = findPostcode(value);
+		// @ts-ignore
+		methods.setValue(`${subName}.zipCode`, postCode);
+		// @ts-ignore
+		methods.setValue(correctedName, value);
+	};
 
 	const isFieldsDisabled =
 		isShipmentWithAddressServiceSelected && client === 'sender';
@@ -119,13 +133,15 @@ const ClientInformationForm = ({
 					<FieldContainer
 						label={`${value} adresas`}
 						description={getAddressDescription(client)}>
-						<CustomInput
-							placeholder={`Įveskite gatvę, namo numerį, miestą *`}
+						<SearchBoxV2
 							control={control}
+							// @ts-ignore
 							name={`${subName}.address`}
+							placeholder='Įveskite gatvę, namo numerį, miestą'
 							errorMessage={getError(`${subName}.address`, formErrors)}
+							methods={methods}
+							onChange={onChange}
 							disabled={isFieldsDisabled}
-							rules={validationRules?.address}
 						/>
 					</FieldContainer>
 					<FieldContainer

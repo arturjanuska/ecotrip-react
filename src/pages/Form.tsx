@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import AddressForm from '../components/step1/AddressForm';
@@ -9,7 +10,7 @@ import Shipments from '../components/step2/Shipments';
 import RecipientInformation from '../components/step5/RecipientInformation';
 import RansomPayeeInformation from '../components/step6-7/RansomPayeeInformation';
 import PayerInformation from '../components/step6-7/PayerInformation';
-import { FormType } from '../utils/formTypes';
+import { FormType, ShipmentProps } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 // import generateOrderID from '../utils/generateOrderId';
@@ -59,6 +60,25 @@ const Form = () => {
 	const formData = methods.watch();
 
 	// console.log('formData ===', formData);
+
+	const orderPrice = methods.watch('estimatedShipmentPrice');
+
+	const shipments = methods.watch('shipments');
+
+	const sumOfPurchasePrice = (items: ShipmentProps[]) => {
+		let price = 0;
+		for (const element of items) {
+			console.log('element ===', element);
+			const priceOfTheItem = Number(element.shipmentPrice)
+				? Number(element.shipmentPrice)
+				: 0;
+
+			price += priceOfTheItem;
+		}
+		return price;
+	};
+
+	const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
 
 	useEffect(() => {
 		methods.setValue('service', '');
@@ -138,11 +158,13 @@ const Form = () => {
 							formErrors={formErrors}
 							setValue={methods.setValue}
 							selectedService={service}
+							methods={methods}
 						/>
 						<Divider />
 						<RecipientInformation
 							control={methods.control}
 							formErrors={formErrors}
+							methods={methods}
 						/>
 						{selectedService === 'productSalesService' && (
 							<>
@@ -151,26 +173,31 @@ const Form = () => {
 									control={methods.control}
 									formErrors={formErrors}
 									selectedService={service}
+									methods={methods}
 								/>
 							</>
 						)}
-						{selectedService === 'productPurchaseService' && (
-							<>
-								<Divider />
-								<ProductPurchaseServiceInformation
-									control={methods.control}
-									formErrors={formErrors}
-									selectedService={service}
-								/>
-							</>
-						)}
+						{selectedService === 'productPurchaseService' &&
+							sumOfPurchasePrice(shipments) > 249 && (
+								<>
+									<Divider />
+									<ProductPurchaseServiceInformation
+										control={methods.control}
+										formErrors={formErrors}
+										selectedService={service}
+										methods={methods}
+									/>
+								</>
+							)}
 
 						<Divider />
 						<PayerInformation
 							control={methods.control}
 							step={
-								selectedService === 'productSalesService' ||
-								selectedService === 'productPurchaseService'
+								selectedService === 'productSalesService'
+									? 7
+									: selectedService === 'productPurchaseService' &&
+									  pricesOfItems > 249
 									? 7
 									: 6
 							}

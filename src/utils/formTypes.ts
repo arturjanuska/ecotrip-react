@@ -82,7 +82,6 @@ export type FormType = {
 	customerInformation: {
 		payerOfTheShipment: OptionType;
 		paymentMethod: OptionType;
-		email: string;
 	};
 	invoiceRequired: boolean;
 	invoiceInformation: {

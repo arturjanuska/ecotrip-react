@@ -431,6 +431,13 @@ const ServiceSection = ({
 		const pickupAddressPostcode = methods.getValues('pickupAddressZipCode');
 		const deliveryAddressPostcode = methods.getValues('deliveryAddressZipCode');
 
+		if (service === 'productSalesService') {
+			setValue('ransomPayeeInformation.ransomRecipient', {
+				label: 'Siuntejas',
+				value: 'sender',
+			});
+		}
+
 		if (service === 'parcelForceShipment') {
 			setValue(`senderInformation.firstName`, 'EcoTrip UK');
 			setValue(`senderInformation.lastName`, '-');

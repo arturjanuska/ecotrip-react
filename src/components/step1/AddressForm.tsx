@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import { checkParcelForcePostcodes } from '../../utils/checkPostCodes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import SearchBoxV2 from './newSearchBox/SearchBoxV2';
+import { findPostcode } from '../../utils/findPostcode';
 
 const AddressForm = ({
 	setValue,
@@ -35,10 +36,7 @@ const AddressForm = ({
 	currency: '€' | '£';
 	formErrors: FieldErrors<FormType>;
 }) => {
-	const onChange = (
-		name: 'pickupAddress' | 'deliveryAddress',
-		value: string
-	) => {
+	const onChange = (name: keyof FormType, value: string) => {
 		if (name === 'pickupAddress') {
 			const postCode = findPostcode(value);
 			setValue('pickupAddressZipCode', postCode);
@@ -50,49 +48,12 @@ const AddressForm = ({
 		setValue(name, value);
 	};
 
-	const handleOnClear = (name: 'pickupAddress' | 'deliveryAddress') => {
+	const handleOnClear = (name: keyof FormType) => {
 		if (name === 'pickupAddress') {
 			setValue('pickupAddressZipCode', '');
 		}
 		if (name === 'deliveryAddress') {
 			setValue('deliveryAddressZipCode', '');
-		}
-	};
-
-	const findPostcode = (address: string) => {
-		function findUKPostcode(address: string) {
-			const postcodePattern = /\b[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}\b/;
-
-			const match = address.match(postcodePattern);
-
-			if (match) {
-				return match[0];
-			} else {
-				return null;
-			}
-		}
-
-		function findLithuanianPostcode(address: string) {
-			const postcodePattern = /\b\d{5}\b/;
-
-			const match = address.match(postcodePattern);
-
-			if (match) {
-				return match[0];
-			} else {
-				return null;
-			}
-		}
-
-		const ukPostcode = findUKPostcode(address);
-		const ltPostcode = findLithuanianPostcode(address);
-
-		if (ukPostcode) {
-			return ukPostcode;
-		} else if (ltPostcode) {
-			return ltPostcode;
-		} else {
-			return null;
 		}
 	};
 
