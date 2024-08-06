@@ -55,7 +55,7 @@ const Form = () => {
 
 	// const orderId = generateOrderID(direction);
 
-	// const formData = methods.watch();
+	const formData = methods.watch();
 
 	// console.log('formData ===', formData);
 

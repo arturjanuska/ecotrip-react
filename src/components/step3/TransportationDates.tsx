@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
 import Datepicker from '../Datepicker';
-import getDateOptions from '../../utils/getDateOptions';
 import './step3.css';
 import { FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import useDeliveryDate from '../../utils/useDeliveryDate';
+import useDateOptions from '../../utils/useDateOptions';
 
 type TransportationDatesProps = {
 	methods: UseFormReturn<FormType, any, undefined>;
@@ -42,7 +42,7 @@ const TransportationDates = ({
 		dayFrom,
 	});
 
-	const options = getDateOptions({
+	const options = useDateOptions({
 		selectedMonth: monthFrom || null,
 		direction,
 	});

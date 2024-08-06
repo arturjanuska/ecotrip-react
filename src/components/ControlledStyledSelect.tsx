@@ -16,7 +16,7 @@ const ControlledStyledSelect = forwardRef(
 			errorMessage?: string;
 			name: string;
 			control: Control<FormType>;
-			onChange?: (value: any, actionMeta: any) => void;
+			onChange?: (value: any) => void;
 			needMargin?: boolean;
 			rules?:
 				| Omit<
@@ -35,10 +35,8 @@ const ControlledStyledSelect = forwardRef(
 					rules={props.rules}
 					render={({ field }) => {
 						const handleChange = (value: any) => {
+							props.onChange?.(value);
 							field.onChange(value);
-							if (props.onChange) {
-								props.onChange(value);
-							}
 						};
 						return (
 							<div
