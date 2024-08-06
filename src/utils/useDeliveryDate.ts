@@ -50,9 +50,8 @@ const useDeliveryDate = ({
 				pickupEndDate,
 				deliveryDays
 			).subtract(1, 'day');
-			console.log('deliveryStartDate ===', deliveryStartDate);
+
 			const deliveryEndDate = deliveryStartDate.add(1, 'day');
-			console.log('deliveryEndDate ===', deliveryEndDate);
 
 			const deliveryDate = {
 				year: deliveryStartDate.format('YYYY'),
