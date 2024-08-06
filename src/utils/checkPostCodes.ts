@@ -49,7 +49,11 @@ export const test = (postcode: string) => {
 		const outcode = match[0];
 
 		// Check if the outcode matches any postcode in the array
-		const isMatch = UK_POST_CODES.some((item) => item.postcode === outcode);
+		const isMatch = UK_POST_CODES.some(
+			(item) =>
+				item.postcode === outcode &&
+				item.basicPrice === 'Parcel force pricelist'
+		);
 
 		if (isMatch) {
 			return true;
