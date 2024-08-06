@@ -225,6 +225,7 @@ const AddressForm = ({
 					selectedService={selectedService}
 					isParcelForce={isParcelForce}
 					currency={currency}
+					methods={methods}
 				/>
 			)}
 		</Step>

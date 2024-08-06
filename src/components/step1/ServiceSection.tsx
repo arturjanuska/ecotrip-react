@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import ServiceCard, { ServiceProps } from '../ServiceCard';
 import Link from '../Link';
-import { UseFormSetValue } from 'react-hook-form';
+import { UseFormReturn, UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 
 const ServiceSection = ({
@@ -9,11 +10,13 @@ const ServiceSection = ({
 	selectedService,
 	isParcelForce,
 	currency,
+	methods,
 }: {
 	setValue: UseFormSetValue<FormType>;
 	selectedService: string;
 	isParcelForce: boolean;
 	currency: '€' | '£';
+	methods: UseFormReturn<FormType, any, undefined>;
 }) => {
 	const services: ServiceProps[] = isParcelForce
 		? [
@@ -422,6 +425,31 @@ const ServiceSection = ({
 				},
 		  ];
 
+	const prefillAddressFormFields = (service: string) => {
+		const pickupAddress = methods.getValues('pickupAddress');
+		const deliveryAddress = methods.getValues('deliveryAddress');
+		const pickupAddressPostcode = methods.getValues('pickupAddressZipCode');
+		const deliveryAddressPostcode = methods.getValues('deliveryAddressZipCode');
+
+		if (service === 'parcelForceShipment') {
+			setValue(`senderInformation.firstName`, 'EcoTrip UK');
+			setValue(`senderInformation.lastName`, '-');
+			setValue(`senderInformation.phoneNumber`, '+44 7456 739633');
+			setValue(`senderInformation.email`, 'info@ecotrip.lt');
+			setValue(
+				`senderInformation.address`,
+				'EcoTrip UK, 216 Halbutt St, Dagenham, UK'
+			);
+			setValue(`senderInformation.zipCode`, 'RM9 5AA');
+		} else {
+			setValue('senderInformation.address', pickupAddress);
+			setValue('senderInformation.zipCode', pickupAddressPostcode ?? '');
+		}
+
+		setValue('recipientInformation.address', deliveryAddress);
+		setValue('recipientInformation.zipCode', deliveryAddressPostcode ?? '');
+	};
+
 	const handleServiceSelect = (service: string) => {
 		setValue('shipments', [
 			{
@@ -437,6 +465,7 @@ const ServiceSection = ({
 			},
 		]);
 		setValue('service', service);
+		prefillAddressFormFields(service);
 	};
 
 	return (

@@ -3,7 +3,6 @@ import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import Step from '../Step';
 import ClientInformationForm from './ClientInformationForm';
 import { FormType } from '../../utils/formTypes';
-import { useEffect } from 'react';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type SenderInformationProps = {
@@ -19,29 +18,7 @@ const SenderInformation = ({
 	stepLabel,
 	formErrors,
 	selectedService,
-	setValue,
 }: SenderInformationProps) => {
-	useEffect(() => {
-		if (selectedService === 'shipmentWithAddressService') {
-			setValue(`senderInformation.firstName`, 'EcoTrip UK');
-			setValue(`senderInformation.lastName`, '-');
-			setValue(`senderInformation.phoneNumber`, '+44 7456 739633');
-			setValue(`senderInformation.email`, 'info@ecotrip.lt');
-			setValue(
-				`senderInformation.address`,
-				'EcoTrip UK, 216 Halbutt St, Dagenham, UK'
-			);
-			setValue(`senderInformation.zipCode`, 'RM9 5AA');
-		} else {
-			setValue(`senderInformation.firstName`, '');
-			setValue(`senderInformation.lastName`, '');
-			setValue(`senderInformation.phoneNumber`, '');
-			setValue(`senderInformation.email`, '');
-			setValue(`senderInformation.address`, '');
-			setValue(`senderInformation.zipCode`, '');
-		}
-	}, [selectedService]);
-
 	const validationRules = useCustomValidation({});
 
 	const senderValidationRules = validationRules.senderInformation;
