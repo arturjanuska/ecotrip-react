@@ -61,6 +61,7 @@ const Form = () => {
 
 	// console.log('formData ===', formData);
 
+	// @ts-ignore
 	const orderPrice = methods.watch('estimatedShipmentPrice');
 
 	const shipments = methods.watch('shipments');

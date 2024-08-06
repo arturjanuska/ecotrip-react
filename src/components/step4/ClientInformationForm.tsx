@@ -70,7 +70,7 @@ const ClientInformationForm = ({
 
 	const value = getSubject(client);
 
-	const onChange = (name: keyof FormType, value: string) => {
+	const onChange = (_name: keyof FormType, value: string) => {
 		const correctedName = `${subName}.address`;
 		const postCode = findPostcode(value);
 		// @ts-ignore
