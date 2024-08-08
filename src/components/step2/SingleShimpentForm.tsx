@@ -135,8 +135,8 @@ const SingleShimpentForm = ({
 						return 'Naudojatės EcoTrip adreso paslauga, nurodykite savo užsakytos siuntos numerį, kuri siunčiama per EcoTrip UK būstinę.';
 					break;
 				case 'shipmentPrice':
-					if (!value)
-						return 'Prekės kainai viršijus £300 GBP, reikalingas pinigų perdavimas EcoTrip kurjeriui iki prekės nupirkimo. Atvykstame nurodytu pinigus perduodačio asmens adresu.';
+					if (Number(value) >= 250)
+						return 'Prekės kainai viršijus £250 GBP, reikalingas pinigų perdavimas EcoTrip kurjeriui iki prekės nupirkimo. Atvykstame nurodytu pinigus perduodačio asmens adresu.';
 					break;
 				case 'purchasePriceOfTheItem':
 					if (!value)
@@ -648,7 +648,6 @@ const SingleShimpentForm = ({
 									{shipmentPriceErrorMessage && (
 										<div className='errors'>
 											<div className='error'>
-												<span>Neįvesta prekės suma. </span>{' '}
 												{shipmentPriceErrorMessage}
 											</div>
 										</div>

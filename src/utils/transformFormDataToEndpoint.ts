@@ -1,37 +1,81 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { FormType } from './formTypes';
 
 export const transformFormDataToEndpoint = (data: FormType) => {
+	console.log('data ===', data);
 	return {
-		day: data.dates.from.day?.value,
-		description: data.senderInformation.additionInformation ?? '',
+		route: data.direction,
 		estimatedPrice: {
 			value: data.estimatedShipmentPrice,
 			currency: data.currency,
 		},
-		invoice: null,
-		month: data.dates.from.month?.value,
+		invoice: data.invoiceInformation || null,
+		year: Number(data.dates.from.year?.value),
+		month: Number(data.dates.from.month?.value),
+		day: data.dates.from.day?.value,
+		// parcels: data.shipments.map((item) => ({
+		// 	weight: item.size || item.size?.value,
+		// })),
 		parcels: data.shipments.map((item) => ({
-			weight: item.size,
+			category: item.category?.label,
+			productType: item.productType?.label,
+			orderedShipmentNumber: item.orderedShipmentNumber || null,
+			specification: item.specification?.label || null,
+			estimatedPrice: Number(item.estimatedPrice),
+			amount: Number(item.amount) || 1,
+			length: Number(item.length) || null,
+			width: Number(item.width) || null,
+			height: Number(item.height) || null,
+			shipmentPrice: Number(item.shipmentPrice) || null,
+			purchasePriceOfTheItem: Number(item.purchasePriceOfTheItem) || null,
+			weight: Number(item.size) || item.size?.value,
 		})),
-		payer: 'siuntejas',
-		paymentType: 'grynais',
-		route: data.direction,
-		year: data.dates.from.year,
+		service: data.service,
+		payer: data.customerInformation.payerOfTheShipment.label,
+		paymentType: data.customerInformation.paymentMethod.label,
 		receiver: {
-			name: 'Test',
-			surname: 'Test',
-			phone: '+333333333',
-			email: 'Test2@Test2.lr',
-			address: '22222 Davis Mill Road, Germantown, MD, USA',
-			postCode: '20876',
+			name: data.recipientInformation.firstName,
+			surname: data.recipientInformation.lastName,
+			phone: data.recipientInformation.phoneNumber,
+			email: data.recipientInformation.email,
+			address: data.recipientInformation.address,
+			postCode: data.recipientInformation.zipCode,
+			description: data.recipientInformation.additionInformation ?? '', // new
 		},
 		sender: {
-			name: '222',
-			surname: 'Test',
-			phone: '+333333333',
-			email: '2222@2222.lr',
-			address: '22222 Davis Mill Road, Germantown, MD, USA',
-			postCode: '20876',
+			name: data.senderInformation.firstName,
+			surname: data.senderInformation.lastName,
+			phone: data.senderInformation.phoneNumber,
+			email: data.senderInformation.email,
+			address: data.senderInformation.address,
+			postCode: data.senderInformation.zipCode,
+			description: data.senderInformation.additionInformation ?? '', // new
 		},
+		// new
+		ransomPayee: data.ransomPayeeInformation
+			? {
+					ransomRecipient:
+						data.ransomPayeeInformation.ransomRecipient.label ?? null,
+					name: data.ransomPayeeInformation.firstName ?? null,
+					surname: data.ransomPayeeInformation.lastName ?? null,
+					phone: data.ransomPayeeInformation.phoneNumber ?? null,
+					email: data.ransomPayeeInformation.email ?? null,
+					address: data.ransomPayeeInformation.address ?? null,
+					postCode: data.ransomPayeeInformation.zipCode ?? null,
+					description: data.ransomPayeeInformation.additionInformation ?? null,
+			  }
+			: null,
+		// new
+		purchaseInformation: data.purchaseInformation
+			? {
+					name: data.purchaseInformation.firstName ?? null,
+					surname: data.purchaseInformation.lastName ?? null,
+					phone: data.purchaseInformation.phoneNumber ?? null,
+					email: data.purchaseInformation.email ?? null,
+					address: data.purchaseInformation.address ?? null,
+					postCode: data.purchaseInformation.zipCode ?? null,
+					description: data.purchaseInformation.additionInformation ?? null,
+			  }
+			: null,
 	};
 };

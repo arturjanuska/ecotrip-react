@@ -59,7 +59,7 @@ const Form = () => {
 	// @ts-ignore
 	const formData = methods.watch();
 
-	// console.log('formData ===', formData);
+	console.log('formData ===', formData);
 
 	// @ts-ignore
 	const orderPrice = methods.watch('estimatedShipmentPrice');
@@ -69,7 +69,6 @@ const Form = () => {
 	const sumOfPurchasePrice = (items: ShipmentProps[]) => {
 		let price = 0;
 		for (const element of items) {
-			console.log('element ===', element);
 			const priceOfTheItem = Number(element.shipmentPrice)
 				? Number(element.shipmentPrice)
 				: 0;
@@ -89,8 +88,10 @@ const Form = () => {
 		console.log('data ===', data);
 		const transformedData = transformFormDataToEndpoint(data);
 
+console.log('transformedData ===', transformedData);
+
 		const response = await fetch(
-			'https://api.uzsakymas.ecotrip.lt/api/orders',
+			'http://localhost:3000/api/orders',
 			{
 				method: 'POST', // Specify the request method
 				headers: {
