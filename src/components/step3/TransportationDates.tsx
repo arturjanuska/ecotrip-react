@@ -10,7 +10,7 @@ import useDateOptions from '../../utils/useDateOptions';
 type TransportationDatesProps = {
 	methods: UseFormReturn<FormType, any, undefined>;
 	formErrors: FieldErrors<FormType>;
-	direction: 'LT-UK' | 'UK-LT' | null;
+	direction: 'LT-UK' | 'UK-LT' | 'LT-LT' | null;
 };
 
 const TransportationDates = ({

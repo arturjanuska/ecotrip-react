@@ -32,7 +32,7 @@ const AddressForm = ({
 	control: Control<FormType, any>;
 	selectedService: string;
 	methods: UseFormReturn<FormType, any, undefined>;
-	direction: 'LT-UK' | 'UK-LT' | null;
+	direction: 'LT-UK' | 'UK-LT' | 'LT-LT' | null;
 	currency: '€' | '£';
 	formErrors: FieldErrors<FormType>;
 }) => {
@@ -95,6 +95,13 @@ const AddressForm = ({
 			return 'LT-UK';
 		}
 
+		if (
+			pickupPostcode.match(ltPostcodePattern) &&
+			deliveryPostcode.match(ltPostcodePattern)
+		) {
+			return 'LT-LT';
+		}
+
 		return null;
 	};
 
@@ -105,7 +112,7 @@ const AddressForm = ({
 			selectedPickupAddressPostcode &&
 			selectedDeliveryAddressPostcode
 		) {
-			const dir: 'LT-UK' | 'UK-LT' | null = getDirection(
+			const dir: 'LT-UK' | 'UK-LT' | 'LT-LT' | null = getDirection(
 				selectedPickupAddressPostcode,
 				selectedDeliveryAddressPostcode
 			);
@@ -180,7 +187,7 @@ const AddressForm = ({
 				</FieldContainer>
 			</div>
 
-			{!!direction && (
+			{direction && direction !== 'LT-LT' ? (
 				<ServiceSection
 					setValue={setValue}
 					selectedService={selectedService}
@@ -188,7 +195,7 @@ const AddressForm = ({
 					currency={currency}
 					methods={methods}
 				/>
-			)}
+			) : null}
 		</Step>
 	);
 };

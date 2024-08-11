@@ -7,7 +7,7 @@ const useDateOptions = ({
 	direction,
 }: {
 	selectedMonth: string | null;
-	direction: 'LT-UK' | 'UK-LT' | null;
+	direction: 'LT-UK' | 'UK-LT' | 'LT-LT' | null;
 }) => {
 	const [dateOptions, setDateOptions] = useState<{
 		years: {
@@ -29,7 +29,7 @@ const useDateOptions = ({
 	});
 
 	useEffect(() => {
-		if (!direction) return;
+		if (!direction || direction === 'LT-LT') return;
 
 		const calculateDateOptions = () => {
 			const pickupDays = direction === 'UK-LT' ? [5, 6] : [2, 3];

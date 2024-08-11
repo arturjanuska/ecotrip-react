@@ -7,7 +7,7 @@ import { monthNames } from '../components/step3/monthNames';
 
 type Props = {
 	pickupDate: string;
-	direction: 'UK-LT' | 'LT-UK' | null;
+	direction: 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
 	setValue: UseFormSetValue<FormType>;
 	dayFrom?: string;
 };
@@ -20,7 +20,7 @@ const useDeliveryDate = ({
 }: Props) => {
 	useEffect(() => {
 		const getDeliveryDate = () => {
-			if (!pickupDate || !direction) {
+			if (!pickupDate || !direction || direction === 'LT-LT') {
 				setValue('dates.to.year', null);
 				setValue('dates.to.month', null);
 				setValue('dates.to.day', null);
