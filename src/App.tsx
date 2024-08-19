@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import './globals.css';
 // import './output.css';
 import Form from './pages/Form';
 
 function App() {
-	return (
-		<>
-			<Form />
-		</>
-	);
+  const [sent, setSent] = useState(false);
+
+  return (
+    <>
+      <Form />
+    </>
+  );
 }
 
 export default App;
