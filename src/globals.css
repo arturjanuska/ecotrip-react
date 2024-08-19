@@ -67,6 +67,22 @@ input[type='number'] {
 	padding: 0 160px;
 }
 
+.direction-message {
+	margin-top: 40px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 12px;
+}
+
+.direction-message p {
+	font-family: Arial;
+	font-size: 18px;
+	font-weight: 400;
+	color: #7a7776;
+}
+
 @media (max-width: 768px) {
 	.container {
 		padding: 0;

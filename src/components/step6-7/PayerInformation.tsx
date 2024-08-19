@@ -147,10 +147,6 @@ const PayerInformation = ({
 
 	const orderPrice = methods.watch('estimatedShipmentPrice');
 
-	console.log('errorMessages ===', errorMessages);
-	console.log('shipmentsWithEmptyEstimatedPrice ===', shipmentsWithEmptyEstimatedPrice);
-	console.log('shipments ===', shipments);
-
 	const isDisabled =
 		Object.keys(errorMessages).length > 0 ||
 		shipmentsWithEmptyEstimatedPrice.length > 0 ||

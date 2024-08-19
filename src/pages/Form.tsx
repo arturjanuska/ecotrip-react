@@ -18,209 +18,203 @@ import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurc
 import { transformFormDataToEndpoint } from '../utils/transformFormDataToEndpoint';
 
 const Form = () => {
-  const methods = useForm<FormType>({
-    defaultValues: {
-      invoiceRequired: false,
-      packagingAndLabelingRules: false,
-      transportRules: false,
-      currency: '€',
-      customerInformation: {
-        paymentMethod: {
-          label: 'Grynais',
-          value: 'cash',
-        },
-        payerOfTheShipment: {
-          label: 'Mokėtojas yra siuntėjas',
-          value: 'thePayerIsTheSender',
-        },
-      },
-    },
-    shouldUnregister: true,
-  });
+	const methods = useForm<FormType>({
+		defaultValues: {
+			invoiceRequired: false,
+			packagingAndLabelingRules: false,
+			transportRules: false,
+			currency: '€',
+			customerInformation: {
+				paymentMethod: {
+					label: 'Grynais',
+					value: 'cash',
+				},
+				payerOfTheShipment: {
+					label: 'Mokėtojas yra siuntėjas',
+					value: 'thePayerIsTheSender',
+				},
+			},
+		},
+		shouldUnregister: true,
+	});
 
-  const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
-    {}
-  );
+	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
+		{}
+	);
 
-  const currency = methods.watch('currency');
+	const currency = methods.watch('currency');
 
-  const service = methods.watch('service');
+	const service = methods.watch('service');
 
-  const direction = methods.watch('direction');
+	const direction = methods.watch('direction');
 
-  const formErrors = methods.formState.errors;
+	const formErrors = methods.formState.errors;
 
-  const selectedService = methods.watch('service');
-  const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
-  const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
+	const selectedService = methods.watch('service');
+	const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
+	const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
 
-  // const orderId = generateOrderID(direction);
+	// const orderId = generateOrderID(direction);
 
-  // @ts-ignore
-  const formData = methods.watch();
+	// @ts-ignore
+	const formData = methods.watch();
 
-  console.log('formData ===', formData);
+	console.log('formData ===', formData);
 
-  // @ts-ignore
-  const orderPrice = methods.watch('estimatedShipmentPrice');
+	// @ts-ignore
+	const orderPrice = methods.watch('estimatedShipmentPrice');
 
-  const shipments = methods.watch('shipments');
+	const shipments = methods.watch('shipments');
 
-  const sumOfPurchasePrice = (items: ShipmentProps[]) => {
-    let price = 0;
-    for (const element of items) {
-      const priceOfTheItem = Number(element.shipmentPrice)
-        ? Number(element.shipmentPrice)
-        : 0;
+	const sumOfPurchasePrice = (items: ShipmentProps[]) => {
+		let price = 0;
+		for (const element of items) {
+			const priceOfTheItem = Number(element.shipmentPrice)
+				? Number(element.shipmentPrice)
+				: 0;
 
-      price += priceOfTheItem;
-    }
-    return price;
-  };
+			price += priceOfTheItem;
+		}
+		return price;
+	};
 
-  const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
+	const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
 
-  useEffect(() => {
-    methods.setValue('service', '');
-  }, [pickupAddressZipCode, deliveryAddressZipCode]);
+	useEffect(() => {
+		methods.setValue('service', '');
+	}, [pickupAddressZipCode, deliveryAddressZipCode]);
 
-  const onSubmit = async (data: FormType) => {
-    console.log('data ===', data);
-    const transformedData = transformFormDataToEndpoint(data);
+	const onSubmit = async (data: FormType) => {
+		const transformedData = transformFormDataToEndpoint(data);
 
-    console.log('transformedData ===', transformedData);
+		const response = await fetch('http://localhost:3000/api/orders', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(transformedData),
+		});
+	};
 
-    const response = await fetch('http://localhost:3000/api/orders', {
-      method: 'POST', // Specify the request method
-      headers: {
-        'Content-Type': 'application/json', // Set the content type to JSON
-      },
-      body: JSON.stringify(transformedData), // Co
-    });
+	useEffect(() => {
+		if (direction && direction !== 'LT-LT') {
+			const value = direction === 'LT-UK' ? '€' : '£';
+			methods.setValue('currency', value);
+		}
+	}, [direction]);
 
-    console.log('response ===> ', response);
-  };
+	return (
+		<form
+			className='main'
+			onSubmit={methods.handleSubmit(onSubmit)}
+			autoComplete='off'>
+			<div
+				style={{
+					marginBottom: '70px',
+				}}>
+				<Breadcrumds />
+				<Divider />
+				<AddressForm
+					setValue={methods.setValue}
+					control={methods.control}
+					selectedService={selectedService}
+					methods={methods}
+					direction={direction}
+					currency={currency}
+					formErrors={formErrors}
+				/>
+				<Divider />
+				{direction === 'LT-LT' ? (
+					<div className='direction-message'>
+						<p>Susisiekite su vadybininku +370 601 22060</p>
+						<p>Info@ecotrip.lt</p>
+					</div>
+				) : (
+					<>
+						{!!selectedService && (
+							<>
+								<Shipments
+									control={methods.control}
+									selectedService={selectedService}
+									methods={methods}
+									currency={currency}
+									formErrors={formErrors}
+									errorMessages={errorMessages}
+									setErrorMessages={setErrorMessages}
+								/>
+								<Divider />
+								<TransportationDates
+									methods={methods}
+									formErrors={formErrors}
+									direction={direction}
+								/>
+								<Divider />
+								<SenderInformation
+									control={methods.control}
+									stepLabel={
+										selectedService === 'productSalesService'
+											? 'Siuntos paėmimo / pardavėjo informacija'
+											: 'Siuntos paėmimo / siuntėjo informacija'
+									}
+									formErrors={formErrors}
+									setValue={methods.setValue}
+									selectedService={service}
+									methods={methods}
+								/>
+								<Divider />
+								<RecipientInformation
+									control={methods.control}
+									formErrors={formErrors}
+									methods={methods}
+								/>
+								{selectedService === 'productSalesService' && (
+									<>
+										<Divider />
+										<RansomPayeeInformation
+											control={methods.control}
+											formErrors={formErrors}
+											selectedService={service}
+											methods={methods}
+										/>
+									</>
+								)}
+								{selectedService === 'productPurchaseService' &&
+									sumOfPurchasePrice(shipments) > 249 && (
+										<>
+											<Divider />
+											<ProductPurchaseServiceInformation
+												control={methods.control}
+												formErrors={formErrors}
+												selectedService={service}
+												methods={methods}
+											/>
+										</>
+									)}
 
-  useEffect(() => {
-    if (direction && direction !== 'LT-LT') {
-      const value = direction === 'LT-UK' ? '€' : '£';
-      methods.setValue('currency', value);
-    }
-  }, [direction]);
-
-  return (
-    <form
-      className='main'
-      onSubmit={methods.handleSubmit(onSubmit)}
-      autoComplete='off'
-    >
-      <div
-        style={{
-          marginBottom: '70px',
-        }}
-      >
-        <Breadcrumds />
-        <Divider />
-        <AddressForm
-          setValue={methods.setValue}
-          control={methods.control}
-          selectedService={selectedService}
-          methods={methods}
-          direction={direction}
-          currency={currency}
-          formErrors={formErrors}
-        />
-        <Divider />
-        {direction === 'LT-LT' ? (
-          <div className='direction-message'>
-            <p>SUSISEKITE SU VADIBININKU</p>
-          </div>
-        ) : (
-          <>
-            {!!selectedService && (
-              <>
-                <Shipments
-                  control={methods.control}
-                  selectedService={selectedService}
-                  methods={methods}
-                  currency={currency}
-                  formErrors={formErrors}
-                  errorMessages={errorMessages}
-                  setErrorMessages={setErrorMessages}
-                />
-                <Divider />
-                <TransportationDates
-                  methods={methods}
-                  formErrors={formErrors}
-                  direction={direction}
-                />
-                <Divider />
-                <SenderInformation
-                  control={methods.control}
-                  stepLabel={
-                    selectedService === 'productSalesService'
-                      ? 'Siuntos paėmimo / pardavėjo informacija'
-                      : 'Siuntos paėmimo / siuntėjo informacija'
-                  }
-                  formErrors={formErrors}
-                  setValue={methods.setValue}
-                  selectedService={service}
-                  methods={methods}
-                />
-                <Divider />
-                <RecipientInformation
-                  control={methods.control}
-                  formErrors={formErrors}
-                  methods={methods}
-                />
-                {selectedService === 'productSalesService' && (
-                  <>
-                    <Divider />
-                    <RansomPayeeInformation
-                      control={methods.control}
-                      formErrors={formErrors}
-                      selectedService={service}
-                      methods={methods}
-                    />
-                  </>
-                )}
-                {selectedService === 'productPurchaseService' &&
-                  sumOfPurchasePrice(shipments) > 249 && (
-                    <>
-                      <Divider />
-                      <ProductPurchaseServiceInformation
-                        control={methods.control}
-                        formErrors={formErrors}
-                        selectedService={service}
-                        methods={methods}
-                      />
-                    </>
-                  )}
-
-                <Divider />
-                <PayerInformation
-                  control={methods.control}
-                  step={
-                    selectedService === 'productSalesService'
-                      ? 7
-                      : selectedService === 'productPurchaseService' &&
-                        pricesOfItems > 249
-                      ? 7
-                      : 6
-                  }
-                  stepLabel={'Užsakovo informacija'}
-                  formErrors={formErrors}
-                  methods={methods}
-                  currency={currency}
-                  errorMessages={errorMessages}
-                />
-              </>
-            )}
-          </>
-        )}
-      </div>
-    </form>
-  );
+								<Divider />
+								<PayerInformation
+									control={methods.control}
+									step={
+										selectedService === 'productSalesService'
+											? 7
+											: selectedService === 'productPurchaseService' &&
+											  pricesOfItems > 249
+											? 7
+											: 6
+									}
+									stepLabel={'Užsakovo informacija'}
+									formErrors={formErrors}
+									methods={methods}
+									currency={currency}
+									errorMessages={errorMessages}
+								/>
+							</>
+						)}
+					</>
+				)}
+			</div>
+		</form>
+	);
 };
 
 export default Form;
