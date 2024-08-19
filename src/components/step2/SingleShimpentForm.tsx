@@ -500,11 +500,7 @@ const SingleShimpentForm = ({
 						) : null}
 
 						<FieldContainer
-							label={`Nr. ${shipmentNumber} siuntos išmatavimai ${
-								selectedCategory?.value === 'removals'
-									? 'metrais'
-									: 'centimetrais'
-							}`}
+							label={`Nr. ${shipmentNumber} siuntos išmatavimai centimetrais`}
 							description={
 								selectedService === 'parcelForceShipment'
 									? 'Maksimalus Parcel Force siuntos ilgis 110 cm, plotis 70 cm, aukštis 110 cm. Didesnių išmatavimų neaptarnaujame.'
