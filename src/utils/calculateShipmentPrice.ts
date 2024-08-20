@@ -1,90 +1,136 @@
 type Props = {
-	weight?: string;
-	length?: string;
-	width?: string;
-	height?: string;
-	categoryValue?: string;
-	amount: number;
+  weight?: string;
+  length?: string;
+  width?: string;
+  height?: string;
+  categoryValue?: string;
+  amount: number;
 };
 
-export const calculateShipmentPrice = ({ weight = '0', amount }: Props) => {
-	if (!weight) return;
-	let price = 0;
-	const value = Number(weight);
-	if (value <= 1 && value !== 0) {
-		price = 25;
-	}
-	if (value > 1 && value <= 5) {
-		price = 35;
-	}
-	if (value > 5 && value <= 15) {
-		price = 40;
-	}
-	if (value > 15 && value <= 30) {
-		price = 45;
-	}
-	if (value > 30 && value <= 35) {
-		price = value * 1.5;
-	}
-	if (value > 35 && value <= 50) {
-		price = value * 1.49;
-		price = price * 1.05;
-	}
-	if (value > 50 && value <= 100) {
-		price = value * 1.46;
-		price = price * 1.07;
-	}
-	if (value > 100) {
-		price = value * 1.35;
-		price = price * 1.1;
-	}
+export const calculateShipmentPrice = ({
+  weight = '0',
+  length,
+  width,
+  height,
+  amount,
+}: Props) => {
+  if (!weight || !length || !width || !height)
+    return {
+      price: '0.00',
+      volume: 0,
+    };
+  let priceCalculatedByWeight = 0;
+  let priceCalculatedByVolume = 0;
+  const nWeight = Number(weight);
+  const nLengthInMeters = Number(length) / 100;
+  const nWidthInMeters = Number(width) / 100;
+  const nHeightInMeters = Number(height) / 100;
+  if (nWeight <= 1 && nWeight !== 0) {
+    priceCalculatedByWeight = 25;
+  }
+  if (nWeight > 1 && nWeight <= 5) {
+    priceCalculatedByWeight = 35;
+  }
+  if (nWeight > 5 && nWeight <= 15) {
+    priceCalculatedByWeight = 40;
+  }
+  if (nWeight > 15 && nWeight <= 30) {
+    priceCalculatedByWeight = 45;
+  }
+  if (nWeight > 30 && nWeight <= 35) {
+    priceCalculatedByWeight = nWeight * 1.5;
+  }
+  if (nWeight > 35 && nWeight <= 50) {
+    priceCalculatedByWeight = nWeight * 1.49;
+    priceCalculatedByWeight = priceCalculatedByWeight * 1.05;
+  }
+  if (nWeight > 50 && nWeight <= 100) {
+    priceCalculatedByWeight = nWeight * 1.46;
+    priceCalculatedByWeight = priceCalculatedByWeight * 1.07;
+  }
+  if (nWeight > 100) {
+    priceCalculatedByWeight = nWeight * 1.35;
+    priceCalculatedByWeight = priceCalculatedByWeight * 1.1;
+  }
 
-	price = price * amount;
-	return price.toFixed(2) ?? '0.00';
+  priceCalculatedByWeight = priceCalculatedByWeight * amount;
+
+  console.log('priceCalculatedByWeight ===> ', priceCalculatedByWeight);
+
+  const volumeInMeters = nLengthInMeters * nWidthInMeters * nHeightInMeters;
+  let pricePerUnit = 286;
+
+  if (volumeInMeters <= 0.16) {
+    pricePerUnit = 286;
+  }
+  if (volumeInMeters > 0.16 && volumeInMeters <= 0.31) {
+    pricePerUnit = 271;
+  }
+  if (volumeInMeters > 0.31 && volumeInMeters <= 0.47) {
+    pricePerUnit = 257;
+  }
+  if (volumeInMeters > 0.47 && volumeInMeters <= 0.63) {
+    pricePerUnit = 243;
+  }
+  if (volumeInMeters > 0.63) {
+    pricePerUnit = 229;
+  }
+
+  priceCalculatedByVolume = pricePerUnit * volumeInMeters * amount;
+  console.log('priceCalculatedByVolume ===> ', priceCalculatedByVolume);
+  return priceCalculatedByWeight >= priceCalculatedByVolume
+    ? {
+        price: priceCalculatedByWeight.toFixed(2) ?? '0.00',
+        volume: volumeInMeters,
+      }
+    : {
+        price: priceCalculatedByVolume.toFixed(2) ?? '0.00',
+        volume: volumeInMeters,
+      };
 };
 
 export const calculateVolume = ({
-	length,
-	width,
-	height,
-	categoryValue,
-	amount,
+  length,
+  width,
+  height,
+  categoryValue,
+  amount,
 }: Props) => {
-	if (!length || !width || !height) return;
-	let pricePerUnit = 200;
+  if (!length || !width || !height) return { price: '0.00', volume: 0 };
+  let pricePerUnit = 200;
 
-	const lengthInMeters = Number(length) / 100;
-	const widthInMeters = Number(width) / 100;
-	const heightInMeters = Number(height) / 100;
+  const lengthInMeters = Number(length) / 100;
+  const widthInMeters = Number(width) / 100;
+  const heightInMeters = Number(height) / 100;
 
-	const volume = lengthInMeters * widthInMeters * heightInMeters;
+  const volume = lengthInMeters * widthInMeters * heightInMeters;
 
-	if (categoryValue === 'removals') {
-		if (volume <= 1) {
-			pricePerUnit = 200;
-		}
-		if (volume > 1 && volume <= 2) {
-			pricePerUnit = 185;
-		}
-		if (volume > 2 && volume <= 3) {
-			pricePerUnit = 170;
-		}
-		if (volume > 3 && volume <= 5) {
-			pricePerUnit = 150;
-		}
-		if (volume > 5 && volume <= 10) {
-			pricePerUnit = 130;
-		}
-		if (volume > 10) {
-			pricePerUnit = 115;
-		}
-	}
+  if (categoryValue === 'removals') {
+    if (volume <= 1) {
+      pricePerUnit = 200;
+    }
+    if (volume > 1 && volume <= 2) {
+      pricePerUnit = 185;
+    }
+    if (volume > 2 && volume <= 3) {
+      pricePerUnit = 170;
+    }
+    if (volume > 3 && volume <= 5) {
+      pricePerUnit = 150;
+    }
+    if (volume > 5 && volume <= 10) {
+      pricePerUnit = 130;
+    }
+    if (volume > 10) {
+      pricePerUnit = 115;
+    }
+  }
 
-	const price = volume * pricePerUnit * amount;
+  const price = volume * pricePerUnit * amount;
 
-	if (price) {
-		return price.toFixed(2);
-	} else {
-		return '0.00';
-	}
+  if (price) {
+    return { price: price.toFixed(2), volume };
+  } else {
+    return { price: '0.00', volume };
+  }
 };
