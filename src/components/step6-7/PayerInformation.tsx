@@ -200,7 +200,9 @@ const PayerInformation = ({
 							}}
 							value={discountCode}
 						/>
-						<SecondaryButton>
+						<SecondaryButton
+							type='button'
+							disabled={!discountCode}>
 							<FontAwesomeIcon icon={faCheck} />
 						</SecondaryButton>
 					</div>
