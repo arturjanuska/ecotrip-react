@@ -50,7 +50,7 @@ const ServiceSection = ({
 
         {
           title: 'Siuntos su adreso paslauga',
-          desc: `Papildomai nuo ${currency}0 / vnt.`,
+          desc: `Papildomai nuo ${currency}0`,
           icon: (
             <svg
               width='34'
@@ -125,7 +125,7 @@ const ServiceSection = ({
         },
         {
           title: 'Prekės nupirkimo paslauga',
-          desc: `Papildomai nuo ${currency}5 / vnt.`,
+          desc: `Papildomai nuo ${currency}5`,
           icon: (
             <svg
               width='34'
@@ -168,7 +168,7 @@ const ServiceSection = ({
         },
         {
           title: 'Prekės pardavimo paslauga',
-          desc: `Papildomai nuo ${currency}10 / vnt.`,
+          desc: `Papildomai nuo ${currency}10`,
           icon: (
             <svg
               width='35'
@@ -256,7 +256,7 @@ const ServiceSection = ({
         },
         {
           title: 'Siuntos su adreso paslauga',
-          desc: `Papildomai nuo ${currency}0 / vnt.`,
+          desc: `Papildomai nuo ${currency}0`,
           icon: (
             <svg
               width='34'
@@ -331,7 +331,7 @@ const ServiceSection = ({
         },
         {
           title: 'Prekės nupirkimo paslauga',
-          desc: `Papildomai nuo ${currency}5 / vnt.`,
+          desc: `Papildomai nuo ${currency}5`,
           icon: (
             <svg
               width='34'
@@ -374,7 +374,7 @@ const ServiceSection = ({
         },
         {
           title: 'Prekės pardavimo paslauga',
-          desc: `Papildomai nuo ${currency}10 / vnt.`,
+          desc: `Papildomai nuo ${currency}10`,
           icon: (
             <svg
               width='35'
