@@ -55,8 +55,6 @@ export const calculateShipmentPrice = ({
 
   priceCalculatedByWeight = priceCalculatedByWeight * amount;
 
-  console.log('priceCalculatedByWeight ===> ', priceCalculatedByWeight);
-
   const volumeInMeters = nLengthInMeters * nWidthInMeters * nHeightInMeters;
   let pricePerUnit = 286;
 
@@ -77,7 +75,6 @@ export const calculateShipmentPrice = ({
   }
 
   priceCalculatedByVolume = pricePerUnit * volumeInMeters * amount;
-  console.log('priceCalculatedByVolume ===> ', priceCalculatedByVolume);
   return priceCalculatedByWeight >= priceCalculatedByVolume
     ? {
         price: priceCalculatedByWeight.toFixed(2) ?? '0.00',
