@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 import { transformFormDataToEndpoint } from '../utils/transformFormDataToEndpoint';
 
-const Form = () => {
+const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 	const methods = useForm<FormType>({
 		defaultValues: {
 			invoiceRequired: false,
@@ -42,6 +42,9 @@ const Form = () => {
 		{}
 	);
 
+	const [submitErrorMessage, setShowSubmitError] = useState<string | null>(
+		null
+	);
 	const currency = methods.watch('currency');
 
 	const service = methods.watch('service');
@@ -54,12 +57,8 @@ const Form = () => {
 	const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
 	const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
 
-	// const orderId = generateOrderID(direction);
-
 	// @ts-ignore
 	const formData = methods.watch();
-
-	console.log('formData ===', formData);
 
 	// @ts-ignore
 	const orderPrice = methods.watch('estimatedShipmentPrice');
@@ -94,6 +93,20 @@ const Form = () => {
 			},
 			body: JSON.stringify(transformedData),
 		});
+
+		console.log('response ===', response);
+
+		if (response.ok) {
+			const data = await response.json();
+			const orderId = data.orderId;
+			setShowSubmitError(null);
+			setOrderId(orderId);
+			methods.reset();
+		} else {
+			setShowSubmitError(
+				'Serverio klaida. Susisiekite su vadybininku +370 601 22060'
+			);
+		}
 	};
 
 	useEffect(() => {
@@ -207,6 +220,7 @@ const Form = () => {
 									methods={methods}
 									currency={currency}
 									errorMessages={errorMessages}
+									submitErrorMessage={submitErrorMessage}
 								/>
 							</>
 						)}

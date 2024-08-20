@@ -11,14 +11,14 @@
 }
 
 .secondary-button {
-	background-color: #9aa61e;
-	color: #ffffff;
+	background-color: #9aa61e !important;
+	color: #ffffff !important;
 	border: 1px solid #9aa61e !important;
 }
 
 .secondary-button:hover {
-	color: #9aa61e;
-	background-color: #fff;
+	color: #9aa61e !important;
+	background-color: #fff !important;
 	border: 1px solid #9aa61e !important;
 }
 
@@ -55,4 +55,14 @@
 	background-color: #fff !important;
 	color: rgba(122, 119, 118, 1) !important;
 	border: 1px solid rgba(122, 119, 118, 1) !important;
+}
+
+.btn a {
+	text-decoration: none;
+	color: #9aa61e;
+}
+
+.btn:hover a {
+	text-decoration: none;
+	color: #fff;
 }

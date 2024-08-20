@@ -1,14 +1,21 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import './globals.css';
-// import './output.css';
 import Form from './pages/Form';
+import ModalPage from './pages/ModalPage';
 
 function App() {
-	// const [sent, setSent] = useState(false);
+	const [orderId, setOrderId] = useState<string | null>(null);
 
 	return (
 		<>
-			<Form />
+			{!orderId ? (
+				<Form setOrderId={(id: string) => setOrderId(id)} />
+			) : (
+				<ModalPage
+					setOrderId={() => setOrderId(null)}
+					orderId={orderId}
+				/>
+			)}
 		</>
 	);
 }

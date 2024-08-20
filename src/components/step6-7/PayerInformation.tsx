@@ -23,6 +23,7 @@ type Props = {
 	methods: UseFormReturn<FormType, any, undefined>;
 	currency: '€' | '£';
 	errorMessages: Record<string, string>;
+	submitErrorMessage: string | null;
 };
 
 const PayerInformation = ({
@@ -33,6 +34,7 @@ const PayerInformation = ({
 	methods,
 	currency,
 	errorMessages,
+	submitErrorMessage,
 }: Props) => {
 	const [discountCode, setDiscountCode] = useState<string>('');
 
@@ -251,6 +253,13 @@ const PayerInformation = ({
 						disabled={isDisabled}>
 						<span>PatvirtinTi užsakymą</span>
 					</SecondaryButton>
+					{submitErrorMessage ? (
+						<div className='errors'>
+							<div className='error'>
+								<span>{submitErrorMessage}</span>
+							</div>
+						</div>
+					) : null}
 				</div>
 			</>
 		</Step>

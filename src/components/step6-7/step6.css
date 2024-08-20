@@ -67,6 +67,25 @@
 	gap: 10px;
 }
 
+.errors {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.error {
+	color: #7a777680;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 13.8px;
+	text-align: left;
+}
+
+.error span {
+	color: #ff0000;
+}
+
 @media (max-width: 768px) {
 	.payer-info-container {
 		flex-direction: column;
