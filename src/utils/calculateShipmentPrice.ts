@@ -56,21 +56,22 @@ export const calculateShipmentPrice = ({
   priceCalculatedByWeight = priceCalculatedByWeight * amount;
 
   const volumeInMeters = nLengthInMeters * nWidthInMeters * nHeightInMeters;
+  const volumeInCm = Number(length) * Number(width) * Number(height);
   let pricePerUnit = 286;
 
-  if (volumeInMeters <= 0.16) {
+  if (volumeInCm <= 160000) {
     pricePerUnit = 286;
   }
-  if (volumeInMeters > 0.16 && volumeInMeters <= 0.31) {
+  if (volumeInCm > 160000 && volumeInCm <= 310000) {
     pricePerUnit = 271;
   }
-  if (volumeInMeters > 0.31 && volumeInMeters <= 0.47) {
+  if (volumeInCm > 310000 && volumeInCm <= 470000) {
     pricePerUnit = 257;
   }
-  if (volumeInMeters > 0.47 && volumeInMeters <= 0.63) {
+  if (volumeInCm > 470000 && volumeInCm <= 630000) {
     pricePerUnit = 243;
   }
-  if (volumeInMeters > 0.63) {
+  if (volumeInCm > 630000) {
     pricePerUnit = 229;
   }
 
@@ -78,11 +79,11 @@ export const calculateShipmentPrice = ({
   return priceCalculatedByWeight >= priceCalculatedByVolume
     ? {
         price: priceCalculatedByWeight.toFixed(2) ?? '0.00',
-        volume: volumeInMeters,
+        volume: volumeInCm,
       }
     : {
         price: priceCalculatedByVolume.toFixed(2) ?? '0.00',
-        volume: volumeInMeters,
+        volume: volumeInCm,
       };
 };
 
