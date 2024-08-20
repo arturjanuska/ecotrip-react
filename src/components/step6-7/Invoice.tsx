@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
@@ -5,6 +6,7 @@ import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import SearchBoxV2 from '../step1/newSearchBox/SearchBoxV2';
 
 type InvoiceProps = {
 	control: Control<FormType, any>;
@@ -18,6 +20,11 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
 	const validationRules = useCustomValidation({
 		invoiceNeeded: needInvoice,
 	});
+
+	const onChange = (name: keyof FormType, value: string) => {
+		// @ts-ignore
+		methods.setValue(name, value);
+	};
 
 	return (
 		<>
@@ -68,13 +75,16 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
 						/>
 					</FieldContainer>
 					<FieldContainer label='Įmonės adresas'>
-						<CustomInput
-							placeholder='Įveskite įmonės adresą *'
+						<SearchBoxV2
 							control={control}
+							// @ts-ignore
 							name='invoiceInformation.companyAddress'
+							placeholder='Įveskite įmonės adresą *'
 							errorMessage={
 								formErrors.invoiceInformation?.companyAddress?.message
 							}
+							methods={methods}
+							onChange={onChange}
 							rules={validationRules.invoiceInformation?.companyAddress}
 						/>
 					</FieldContainer>

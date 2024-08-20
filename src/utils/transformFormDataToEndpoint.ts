@@ -26,6 +26,7 @@ export const transformFormDataToEndpoint = (data: FormType) => {
 			length: Number(item.length) || null,
 			width: Number(item.width) || null,
 			height: Number(item.height) || null,
+			volume: Number(item.volume) || null,
 			shipmentPrice: Number(item.shipmentPrice) || null,
 			purchasePriceOfTheItem: Number(item.purchasePriceOfTheItem) || null,
 			weight: item.weight || null,

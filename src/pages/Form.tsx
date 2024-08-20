@@ -94,8 +94,6 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 			body: JSON.stringify(transformedData),
 		});
 
-		console.log('response ===', response);
-
 		if (response.ok) {
 			const data = await response.json();
 			const orderId = data.orderId;

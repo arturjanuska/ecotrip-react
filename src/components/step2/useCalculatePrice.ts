@@ -23,6 +23,7 @@ type Props = {
 	width?: string;
 	height?: string;
 	pricePerUnit?: number;
+	volumePropName: string;
 };
 
 const useCalculatePrice = ({
@@ -37,6 +38,7 @@ const useCalculatePrice = ({
 	length,
 	width,
 	height,
+	volumePropName,
 }: Props) => {
 	useEffect(() => {
 		if (
@@ -124,6 +126,8 @@ const useCalculatePrice = ({
 		const finalPrice = productPrice.toFixed(2) ?? '0.00';
 		// @ts-ignore
 		setValue(name, finalPrice);
+		// @ts-ignore
+		setValue(volumePropName, product?.volume);
 	}, [
 		JSON.stringify(productType),
 		JSON.stringify(size),

@@ -53,7 +53,11 @@ export const calculateVolume = ({
 	if (!length || !width || !height) return;
 	let pricePerUnit = 200;
 
-	const volume = Number(length) * Number(width) * Number(height);
+	const lengthInMeters = Number(length) / 100;
+	const widthInMeters = Number(width) / 100;
+	const heightInMeters = Number(height) / 100;
+
+	const volume = lengthInMeters * widthInMeters * heightInMeters;
 
 	if (categoryValue === 'removals') {
 		if (volume <= 1) {

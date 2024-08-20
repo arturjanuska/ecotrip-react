@@ -270,6 +270,7 @@ const SingleShimpentForm = ({
 		specification: selectedSpecification,
 		setValue,
 		name: `shipments.${index}.estimatedPrice`,
+		volumePropName: `shipments.${index}.volume`,
 		weight,
 		length: selectedLength,
 		width: selectedWidth,
