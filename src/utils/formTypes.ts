@@ -18,6 +18,7 @@ export type ShipmentProps = {
 	width?: string;
 	weight?: string;
 	height?: string;
+	extent?: string;
 	volume?: string;
 	shipmentPrice?: string;
 	purchasePriceOfTheItem?: string;

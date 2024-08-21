@@ -19,6 +19,7 @@ type Props = {
 	validationRules?: { [key: string]: { required: string } };
 	service?: string;
 	methods: UseFormReturn<FormType, any, undefined>;
+	step?: number;
 };
 
 const ClientInformationForm = ({
@@ -29,6 +30,7 @@ const ClientInformationForm = ({
 	isShipmentWithAddressServiceSelected,
 	validationRules,
 	methods,
+	step,
 }: Props) => {
 	const getSubject = (client: Props['client']) => {
 		switch (client) {
@@ -142,6 +144,9 @@ const ClientInformationForm = ({
 							methods={methods}
 							onChange={onChange}
 							disabled={isFieldsDisabled}
+							country={
+								isShipmentWithAddressServiceSelected ? ['lt'] : ['gb', 'lt']
+							}
 						/>
 					</FieldContainer>
 					<FieldContainer
@@ -160,7 +165,11 @@ const ClientInformationForm = ({
 			</div>
 
 			<CustomTextarea
-				label='Papildoma informacija apie paįmamą siuntą'
+				label={
+					step === 5
+						? 'Papildoma informacija apie pristatomą siuntą'
+						: 'Papildoma informacija apie paimamą siuntą'
+				}
 				name={`${subName}.additionInformation`}
 				control={control}
 				placeholder='Pvz.: Nebusiu namie, siuntą paduos mano kaimynas. Arba siuntą rasite paėmimui galiniame kieme ir panašiai.'

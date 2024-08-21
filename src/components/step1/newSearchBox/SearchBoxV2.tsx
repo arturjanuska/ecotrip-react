@@ -16,7 +16,10 @@ type Props = {
 	onChange: (name: keyof FormType, value: string) => void;
 	onClear?: (name: keyof FormType) => void;
 	disabled?: boolean;
+	country?: string[];
 };
+
+const libraries: 'places'[] = ['places'];
 
 function SearchBoxV2({
 	name,
@@ -27,13 +30,14 @@ function SearchBoxV2({
 	methods,
 	disabled = false,
 	control,
+	country = ['gb', 'lt'],
 }: Props) {
 	const inputRef = useRef<null | google.maps.places.Autocomplete>(null);
 
 	const { isLoaded } = useGoogleMapsScript({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyCB42EkwaC9P-8-XV6zSqLiLWalfvqgHIA',
-		libraries: ['places'],
+		libraries,
 	});
 
 	const handleOnPlacesChanged = () => {
@@ -54,7 +58,7 @@ function SearchBoxV2({
 					onLoad={(ref) => (inputRef.current = ref)}
 					onPlaceChanged={handleOnPlacesChanged}
 					options={{
-						componentRestrictions: { country: ['gb', 'lt'] },
+						componentRestrictions: { country },
 					}}>
 					<CustomInput
 						id='autocomplete-input'

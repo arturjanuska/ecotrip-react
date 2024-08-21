@@ -10,16 +10,22 @@ type Props = {
 	control: Control<FormType, any>;
 	formErrors: FieldErrors<FormType>;
 	methods: UseFormReturn<FormType, any, undefined>;
+	stepLabel: string;
 };
 
-const RecipientInformation = ({ control, formErrors, methods }: Props) => {
+const RecipientInformation = ({
+	control,
+	formErrors,
+	methods,
+	stepLabel,
+}: Props) => {
 	const validationRules = useCustomValidation({});
 
 	const recipientValidationRules = validationRules.recipientInformation;
 
 	return (
 		<Step
-			title='Siuntos pristatymo / gavėjo informacija'
+			title={stepLabel}
 			step={5}>
 			<ClientInformationForm
 				client='recipient'
@@ -28,6 +34,7 @@ const RecipientInformation = ({ control, formErrors, methods }: Props) => {
 				formErrors={formErrors}
 				validationRules={recipientValidationRules}
 				methods={methods}
+				step={5}
 			/>
 		</Step>
 	);

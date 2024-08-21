@@ -26,7 +26,7 @@ const RansomPayeeInformation = ({
 
 	const options = [
 		{
-			label: 'Siuntejas',
+			label: 'Siuntėjas',
 			value: 'sender',
 		},
 		{

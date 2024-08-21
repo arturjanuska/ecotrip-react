@@ -25,7 +25,7 @@ const ProductPurchaseServiceInformation = ({
 	return (
 		<Step
 			step={6}
-			title='Prekės nupirkimo paslaugos informacija'>
+			title='Pinigų perdavimo prekės nupirkimui informacija'>
 			<>
 				<div>
 					<ClientInformationForm
