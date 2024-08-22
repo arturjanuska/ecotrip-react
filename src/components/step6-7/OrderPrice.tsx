@@ -9,11 +9,30 @@ type Props = {
 	formErrors: FieldErrors<FormType>;
 	currency: '€' | '£';
 	methods: UseFormReturn<FormType, any, undefined>;
+	priceDescription: { title: string; price: string }[];
 };
 
-const OrderPrice = ({ sum, control, formErrors, currency, methods }: Props) => {
+const OrderPrice = ({
+	sum,
+	control,
+	formErrors,
+	currency,
+	methods,
+	priceDescription,
+}: Props) => {
 	return (
 		<div className='order-price-container'>
+			{priceDescription.length !== 0 ? (
+				<div className='price-description-container'>
+					{priceDescription.map((item) => {
+						return (
+							<p className='price-description-row'>
+								{item.title} <strong>{item.price}</strong>
+							</p>
+						);
+					})}
+				</div>
+			) : null}
 			<p className='order-price'>
 				Numatoma viso užsakymo kaina:{' '}
 				<strong>

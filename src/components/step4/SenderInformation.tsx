@@ -17,6 +17,7 @@ type SenderInformationProps = {
 	selectedService?: string;
 	setValue: UseFormSetValue<FormType>;
 	methods: UseFormReturn<FormType, any, undefined>;
+	step: number;
 };
 
 const SenderInformation = ({
@@ -25,6 +26,7 @@ const SenderInformation = ({
 	formErrors,
 	selectedService,
 	methods,
+	step,
 }: SenderInformationProps) => {
 	const validationRules = useCustomValidation({});
 
@@ -33,7 +35,7 @@ const SenderInformation = ({
 	return (
 		<Step
 			title={stepLabel}
-			step={4}>
+			step={step}>
 			<ClientInformationForm
 				client='sender'
 				control={control}

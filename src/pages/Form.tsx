@@ -42,6 +42,11 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
 		{}
 	);
+
+	const [priceDescription, setPriceDescription] = useState<
+		{ title: string; price: string }[]
+	>([]);
+
 	const [postCodeObject, setPostCodeObject] = useState<any>(null);
 
 	const [submitErrorMessage, setShowSubmitError] = useState<string | null>(
@@ -109,6 +114,10 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		}
 	};
 
+	const showPurchaseInformation =
+		selectedService === 'productPurchaseService' &&
+		sumOfPurchasePrice(shipments) > 249;
+
 	useEffect(() => {
 		if (direction && direction !== 'LT-LT') {
 			const value = direction === 'LT-UK' ? '€' : '£';
@@ -166,6 +175,17 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 									formErrors={formErrors}
 									direction={direction}
 								/>
+								{showPurchaseInformation && (
+									<>
+										<Divider />
+										<ProductPurchaseServiceInformation
+											control={methods.control}
+											formErrors={formErrors}
+											selectedService={service}
+											methods={methods}
+										/>
+									</>
+								)}
 								<Divider />
 								<SenderInformation
 									control={methods.control}
@@ -181,6 +201,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 									setValue={methods.setValue}
 									selectedService={service}
 									methods={methods}
+									step={showPurchaseInformation ? 5 : 4}
 								/>
 								<Divider />
 								<RecipientInformation
@@ -192,6 +213,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 											? 'Prekės pristatymo / gavėjo informacija'
 											: 'Siuntos pristatymo / gavėjo informacija'
 									}
+									step={showPurchaseInformation ? 6 : 5}
 								/>
 								{selectedService === 'productSalesService' && (
 									<>
@@ -204,27 +226,13 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 										/>
 									</>
 								)}
-								{selectedService === 'productPurchaseService' &&
-									sumOfPurchasePrice(shipments) > 249 && (
-										<>
-											<Divider />
-											<ProductPurchaseServiceInformation
-												control={methods.control}
-												formErrors={formErrors}
-												selectedService={service}
-												methods={methods}
-											/>
-										</>
-									)}
-
 								<Divider />
 								<PayerInformation
 									control={methods.control}
 									step={
 										selectedService === 'productSalesService'
 											? 7
-											: selectedService === 'productPurchaseService' &&
-											  pricesOfItems > 249
+											: showPurchaseInformation
 											? 7
 											: 6
 									}
@@ -235,6 +243,8 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 									errorMessages={errorMessages}
 									submitErrorMessage={submitErrorMessage}
 									postCodeObject={postCodeObject}
+									setPriceDescription={setPriceDescription}
+									priceDescription={priceDescription}
 								/>
 							</>
 						)}

@@ -58,7 +58,7 @@ function SearchBoxV2({
 					onLoad={(ref) => (inputRef.current = ref)}
 					onPlaceChanged={handleOnPlacesChanged}
 					options={{
-						componentRestrictions: { country },
+						componentRestrictions: { country: country },
 					}}>
 					<CustomInput
 						id='autocomplete-input'

@@ -143,7 +143,7 @@ const SingleShimpentForm = ({
 						return 'Suveskite parduodamos prekės kainą, kurią EcoTrip kurjeriui perduos siuntos gavėjas.';
 					break;
 				case 'extent':
-					if (Number(value) > 300)
+					if (Number(value) > 300 && selectedService === 'parcelForceShipment')
 						return 'Siuntos apimtis skaičiuojama automatiškai pagal formulę: ilgis + plotis*2 + aukštis*2 < 300 cm - viršijus nepatarnaujame.';
 					break;
 				case 'weight':

@@ -25,6 +25,15 @@ type Props = {
 	errorMessages: Record<string, string>;
 	submitErrorMessage: string | null;
 	postCodeObject: any;
+	priceDescription: { title: string; price: string }[];
+	setPriceDescription: React.Dispatch<
+		React.SetStateAction<
+			{
+				title: string;
+				price: string;
+			}[]
+		>
+	>;
 };
 
 const PayerInformation = ({
@@ -37,6 +46,8 @@ const PayerInformation = ({
 	errorMessages,
 	submitErrorMessage,
 	postCodeObject,
+	setPriceDescription,
+	priceDescription,
 }: Props) => {
 	const [discountCode, setDiscountCode] = useState<string>('');
 
@@ -95,9 +106,20 @@ const PayerInformation = ({
 		postCodeObject: any
 	) => {
 		let price = 0;
+		const priceDescription: { title: string; price: string }[] = [];
+
 		for (let i = 0; i < shipmentsArray.length; i++) {
 			const shipmentPrice = shipmentsArray[i].estimatedPrice;
 			price += Number(shipmentPrice);
+			if (shipmentsArray[i].category?.label) {
+				priceDescription.push({
+					title: `Siunta nr. ${i + 1}: ${
+						shipmentsArray[i].productType?.label ??
+						shipmentsArray[i].category?.label
+					}:`,
+					price: `${currency}${shipmentsArray[i].estimatedPrice}` || '0.00',
+				});
+			}
 		}
 
 		if (service === 'shipmentWithAddressService') {
@@ -107,23 +129,57 @@ const PayerInformation = ({
 		if (service === 'productPurchaseService') {
 			// is savu
 			if (payer === 'thePayerIsTheSender') {
-				const threePercentOfThePrice = (price * 3) / 100;
+				const threePercentOfThePrice = (price / 100) * 3;
 				if (threePercentOfThePrice < 5) {
 					price += 5;
+					priceDescription.push({
+						title: 'Prekes nupirkimo paslauga:',
+						price: `${currency}5.00`,
+					});
 				} else {
 					price += threePercentOfThePrice;
+					priceDescription.push({
+						title: 'Prekes nupirkimo paslauga (3%):',
+						price: `${currency}${threePercentOfThePrice.toFixed(2)}`,
+					});
 				}
 			}
 			// klientas
 			if (payer === 'thePayerIsTheRecipient') {
-				const twoPercentOfThePrice = (price * 2) / 100;
+				const twoPercentOfThePrice = (price / 100) * 2;
 				if (twoPercentOfThePrice < 15) {
 					price += 15;
+					priceDescription.push({
+						title: `Prekes nupirkimo paslauga (${currency}15):`,
+						price: `${currency}15.00`,
+					});
 				} else if (twoPercentOfThePrice > 50) {
 					price += 50;
+					priceDescription.push({
+						title: `Prekes nupirkimo paslauga (50${currency}):`,
+						price: `${currency}50.00`,
+					});
 				} else {
 					price += twoPercentOfThePrice;
+					priceDescription.push({
+						title: `Prekes nupirkimo paslauga (2%):`,
+						price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
+					});
 				}
+			}
+
+			const purchaseServiceShipmentsPrices =
+				shipmentsArray.reduce(
+					(acc, curr) => acc + Number(curr.shipmentPrice),
+					0
+				) || 0;
+
+			if (purchaseServiceShipmentsPrices > 249) {
+				price += purchaseServiceShipmentsPrices;
+				priceDescription.push({
+					title: 'Prekiu nupirkimo suma:',
+					price: `${currency}${purchaseServiceShipmentsPrices.toFixed(2)}`,
+				});
 			}
 		}
 
@@ -131,12 +187,25 @@ const PayerInformation = ({
 			const twoPercentOfThePrice = (price * 2) / 100;
 			if (twoPercentOfThePrice < 15) {
 				price += 15;
+				priceDescription.push({
+					title: 'Prekės pardavimo paslauga:',
+					price: `${currency}15.00`,
+				});
 			} else if (twoPercentOfThePrice > 50) {
 				price += 50;
+				priceDescription.push({
+					title: 'Prekiu nupirkimo suma:',
+					price: `${currency}50.00`,
+				});
 			} else {
 				price += twoPercentOfThePrice;
+				priceDescription.push({
+					title: 'Prekiu nupirkimo suma:',
+					price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
+				});
 			}
 		}
+
 		if (
 			postCodeObject?.additionalCharges === 'Parcel force pricelist' &&
 			service !== 'shipmentWithAddressService'
@@ -161,6 +230,10 @@ const PayerInformation = ({
 			zones.forEach((item) => {
 				if (item.title === zone) {
 					price += item.value;
+					priceDescription.push({
+						title: '"Parcel force" zonos kaina:',
+						price: `${currency}${item.value}`,
+					});
 				}
 			});
 		} else if (
@@ -169,20 +242,51 @@ const PayerInformation = ({
 			service !== 'shipmentWithAddressService'
 		) {
 			price += Number(postCodeObject?.additionalCharges) || 0;
+			priceDescription.push({
+				title: 'Adreso papildomas mokestis:',
+				price: `${currency}${Number(postCodeObject.additionalCharges).toFixed(
+					2
+				)}`,
+			});
 		}
 
 		const discountPercentage = getDiscountPercentage(
 			shipmentsArray.length || 0
 		);
 
+		const percentage =
+			discountPercentage === 0.8
+				? '20%'
+				: discountPercentage === 0.85
+				? '15%'
+				: discountPercentage === 0.9
+				? '10%'
+				: discountPercentage === 0.95
+				? '5%'
+				: null;
+
+		if (percentage) {
+			priceDescription.push({
+				title: `Nuolaida už siuntų kiekį:`,
+				price: `${percentage}`,
+			});
+		}
 		const secondDiscountPercentage =
 			postCodeObject?.discount === '10%' &&
 			service !== 'shipmentWithAddressService'
 				? 0.9
 				: 1;
 
+		if (secondDiscountPercentage === 0.9) {
+			priceDescription.push({
+				title: `Adreso nuolaida:`,
+				price: `10%`,
+			});
+		}
+
 		const finalPrice = price * discountPercentage * secondDiscountPercentage;
 
+		setPriceDescription(priceDescription);
 		methods.setValue('estimatedShipmentPrice', finalPrice.toFixed(2) ?? '0.00');
 	};
 
@@ -267,6 +371,7 @@ const PayerInformation = ({
 					control={control}
 					formErrors={formErrors}
 					methods={methods}
+					priceDescription={priceDescription}
 				/>
 				<div className='checkboxes-container'>
 					<ControlledCheckboxWithLabel

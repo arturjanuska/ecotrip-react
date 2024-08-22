@@ -11,6 +11,7 @@ type Props = {
 	formErrors: FieldErrors<FormType>;
 	methods: UseFormReturn<FormType, any, undefined>;
 	stepLabel: string;
+	step: number;
 };
 
 const RecipientInformation = ({
@@ -18,15 +19,18 @@ const RecipientInformation = ({
 	formErrors,
 	methods,
 	stepLabel,
+	step,
 }: Props) => {
 	const validationRules = useCustomValidation({});
 
 	const recipientValidationRules = validationRules.recipientInformation;
 
+	const service = methods.watch('service');
+
 	return (
 		<Step
 			title={stepLabel}
-			step={5}>
+			step={step}>
 			<ClientInformationForm
 				client='recipient'
 				control={control}
@@ -34,7 +38,10 @@ const RecipientInformation = ({
 				formErrors={formErrors}
 				validationRules={recipientValidationRules}
 				methods={methods}
-				step={5}
+				step={step}
+				isShipmentWithAddressServiceSelected={
+					service === 'shipmentWithAddressService'
+				}
 			/>
 		</Step>
 	);

@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
@@ -10,6 +11,7 @@ type Props = {
 	direction: 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
 	setValue: UseFormSetValue<FormType>;
 	dayFrom?: string;
+	service?: string;
 };
 
 const useDeliveryDate = ({
@@ -17,6 +19,7 @@ const useDeliveryDate = ({
 	direction,
 	setValue,
 	dayFrom,
+	service,
 }: Props) => {
 	useEffect(() => {
 		const getDeliveryDate = () => {
@@ -43,13 +46,24 @@ const useDeliveryDate = ({
 				return date;
 			};
 
+			const findNextAfterNextValidDay = (date: Dayjs, validDays: number[]) => {
+				date = findNextValidDay(date, validDays);
+				date = date.add(7, 'day');
+				date = findNextValidDay(date, validDays);
+				return date;
+			};
+
 			const pickupEndDate = dayjs(
 				`${pickupYear}-${pickupMonth}-${parseInt(pickupEnd, 10)}`
 			).add(1, 'day');
-			const deliveryStartDate = findNextValidDay(
-				pickupEndDate,
-				deliveryDays
-			).subtract(1, 'day');
+
+			const deliveryStartDate =
+				service === 'parcelForceShipment'
+					? findNextAfterNextValidDay(pickupEndDate, deliveryDays).subtract(
+							1,
+							'day'
+					  )
+					: findNextValidDay(pickupEndDate, deliveryDays).subtract(1, 'day');
 
 			const deliveryEndDate = deliveryStartDate.add(1, 'day');
 
@@ -84,7 +98,7 @@ const useDeliveryDate = ({
 			setValue('dates.to.month', null);
 			setValue('dates.to.day', null);
 		}
-	}, [pickupDate, direction, setValue, dayFrom]);
+	}, [pickupDate, direction, setValue, dayFrom, service]);
 };
 
 export default useDeliveryDate;
