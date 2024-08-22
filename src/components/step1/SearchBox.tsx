@@ -91,7 +91,6 @@ const ReadySearchBox = ({
 				}}
 				onChange={(newValue, actionMeta) => {
 					const val = newValue as unknown as OptionType;
-					console.log('val ===', val);
 					if (actionMeta.action === 'clear') {
 						onClear(name);
 					} else {

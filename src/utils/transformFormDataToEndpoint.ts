@@ -3,7 +3,6 @@
 import { FormType } from './formTypes';
 
 export const transformFormDataToEndpoint = (data: FormType) => {
-	console.log('data ===', data);
 	return {
 		route: data.direction,
 		estimatedPrice: {

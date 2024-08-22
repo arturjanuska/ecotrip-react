@@ -84,7 +84,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		return price;
 	};
 
-	const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
+	// const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
 
 	useEffect(() => {
 		methods.setValue('service', '');
@@ -92,7 +92,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 
 	const onSubmit = async (data: FormType) => {
 		const transformedData = transformFormDataToEndpoint(data);
-		console.log('transformedData ===', transformedData);
+
 		const response = await fetch('http://localhost:3000/api/orders', {
 			method: 'POST',
 			headers: {
