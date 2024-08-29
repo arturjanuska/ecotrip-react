@@ -152,7 +152,7 @@ const PayerInformation = ({
         } else {
           price += threePercentOfThePrice;
           priceDescription.push({
-            title: 'Prekės nupirkimo paslauga (3%):',
+            title: 'Prekės nupirkimo paslauga:',
             price: `${currency}${threePercentOfThePrice.toFixed(2)}`,
           });
         }
@@ -163,19 +163,19 @@ const PayerInformation = ({
         if (twoPercentOfThePrice < 15) {
           price += 15;
           priceDescription.push({
-            title: `Prekės nupirkimo paslauga (${currency}15):`,
+            title: `Prekės nupirkimo paslauga:`,
             price: `${currency}15.00`,
           });
         } else if (twoPercentOfThePrice > 50) {
           price += 50;
           priceDescription.push({
-            title: `Prekės nupirkimo paslauga (50${currency}):`,
+            title: `Prekės nupirkimo paslauga:`,
             price: `${currency}50.00`,
           });
         } else {
           price += twoPercentOfThePrice;
           priceDescription.push({
-            title: `Prekės nupirkimo paslauga (2%):`,
+            title: `Prekės nupirkimo paslauga:`,
             price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
           });
         }
@@ -238,7 +238,7 @@ const PayerInformation = ({
         if (item.title === zone) {
           price += item.value;
           priceDescription.push({
-            title: '"Parcel force" zonos kaina:',
+            title: 'Partnerių antkainis:',
             price: `${currency}${item.value}`,
           });
         }
