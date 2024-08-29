@@ -140,7 +140,7 @@ const PayerInformation = ({
 
     if (service === 'productPurchaseService') {
       // is savu
-      if (payer === 'thePayerIsTheSender') {
+      if (purchaseServiceShipmentsPrices < 250) {
         const threePercentOfThePrice =
           (purchaseServiceShipmentsPrices / 100) * 3;
         if (threePercentOfThePrice < 5) {
@@ -158,7 +158,7 @@ const PayerInformation = ({
         }
       }
       // klientas
-      if (payer === 'thePayerIsTheRecipient') {
+      if (purchaseServiceShipmentsPrices >= 250) {
         const twoPercentOfThePrice = (purchaseServiceShipmentsPrices / 100) * 2;
         if (twoPercentOfThePrice < 15) {
           price += 15;
