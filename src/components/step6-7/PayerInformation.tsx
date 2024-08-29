@@ -108,8 +108,6 @@ const PayerInformation = ({
     let price = 0;
     const priceDescription: { title: string; price: string }[] = [];
 
-    let shipmentPriceSum = 0;
-
     for (let i = 0; i < shipmentsArray.length; i++) {
       const shipmentPrice = shipmentsArray[i].estimatedPrice;
       price += Number(shipmentPrice);
