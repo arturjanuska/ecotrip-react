@@ -87,7 +87,9 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
   // const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
 
   useEffect(() => {
-    methods.setValue('service', '');
+    if (service !== 'shipmentWithAddressService') {
+      methods.setValue('service', '');
+    }
   }, [pickupAddressZipCode, deliveryAddressZipCode]);
 
   const onSubmit = async (data: FormType) => {
