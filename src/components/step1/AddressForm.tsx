@@ -197,7 +197,15 @@ const AddressForm = ({
         </FieldContainer>
       </div>
 
-      {direction && direction !== 'LT-LT' ? (
+      <ServiceSection
+        setValue={setValue}
+        selectedService={selectedService}
+        isParcelForce={isParcelForce}
+        currency={currency}
+        methods={methods}
+      />
+
+      {/* {direction && direction !== 'LT-LT' ? (
         <ServiceSection
           setValue={setValue}
           selectedService={selectedService}
@@ -205,7 +213,7 @@ const AddressForm = ({
           currency={currency}
           methods={methods}
         />
-      ) : null}
+      ) : null} */}
     </Step>
   );
 };
