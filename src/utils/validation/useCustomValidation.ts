@@ -36,19 +36,19 @@ export const useCustomValidation = ({
     pickupAddress:
       service !== 'shipmentWithAddressService'
         ? { required: 'Laukas yra privalomas' }
-        : null,
+        : { required: false },
     pickupAddressZipCode:
       service !== 'shipmentWithAddressService'
         ? { required: 'Laukas yra privalomas' }
-        : null,
+        : { required: false },
     deliveryAddress:
       service !== 'shipmentWithAddressService'
         ? { required: 'Laukas yra privalomas' }
-        : null,
+        : { required: false },
     deliveryAddressZipCode:
       service !== 'shipmentWithAddressService'
         ? { required: 'Laukas yra privalomas' }
-        : null,
+        : { required: false },
     dates: {
       from: {
         year: {
@@ -218,7 +218,7 @@ export const useCustomValidation = ({
               },
             },
           }
-        : null,
+        : { required: false },
     purchaseInformation:
       service === 'productPurchaseService'
         ? {
@@ -254,7 +254,7 @@ export const useCustomValidation = ({
             address: { required: 'Laukas yra privalomas' },
             zipCode: { required: 'Laukas yra privalomas' },
           }
-        : null,
+        : { required: false },
     customerInformation: {
       payerOfTheShipment: { required: 'Laukas yra privalomas' },
       paymentMethod: { required: 'Laukas yra privalomas' },
@@ -297,7 +297,7 @@ export const useCustomValidation = ({
             },
           },
         }
-      : null,
+      : { required: false },
     packagingAndLabelingRules: {
       required: 'Prašome pažymėti, kad sutinkate su EcoTrip taisyklėmis.',
     },

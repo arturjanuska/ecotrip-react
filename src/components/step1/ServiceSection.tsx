@@ -101,7 +101,7 @@ const ServiceSection = ({
   const services: ServiceProps[] = isParcelForce
     ? [
         {
-          title: 'Parcel Force siuntos',
+          title: 'Siuntos',
           desc: 'Įprastos kainos',
           icon: (
             <svg
@@ -248,7 +248,7 @@ const ServiceSection = ({
         },
         {
           title: 'Prekės pardavimo paslauga',
-          desc: `Papildomai nuo ${currency}10`,
+          desc: `Papildomai nuo ${currency}15`,
           icon: (
             <svg
               width='35'
@@ -454,7 +454,7 @@ const ServiceSection = ({
         },
         {
           title: 'Prekės pardavimo paslauga',
-          desc: `Papildomai nuo ${currency}10`,
+          desc: `Papildomai nuo ${currency}15`,
           icon: (
             <svg
               width='35'

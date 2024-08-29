@@ -16,415 +16,426 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
-	control: Control<FormType, any>;
-	step: number;
-	stepLabel: string;
-	formErrors: FieldErrors<FormType>;
-	methods: UseFormReturn<FormType, any, undefined>;
-	currency: '€' | '£';
-	errorMessages: Record<string, string>;
-	submitErrorMessage: string | null;
-	postCodeObject: any;
-	priceDescription: { title: string; price: string }[];
-	setPriceDescription: React.Dispatch<
-		React.SetStateAction<
-			{
-				title: string;
-				price: string;
-			}[]
-		>
-	>;
+  control: Control<FormType, any>;
+  step: number;
+  stepLabel: string;
+  formErrors: FieldErrors<FormType>;
+  methods: UseFormReturn<FormType, any, undefined>;
+  currency: '€' | '£';
+  errorMessages: Record<string, string>;
+  submitErrorMessage: string | null;
+  postCodeObject: any;
+  priceDescription: { title: string; price: string }[];
+  setPriceDescription: React.Dispatch<
+    React.SetStateAction<
+      {
+        title: string;
+        price: string;
+      }[]
+    >
+  >;
 };
 
 const PayerInformation = ({
-	control,
-	step,
-	stepLabel,
-	formErrors,
-	methods,
-	currency,
-	errorMessages,
-	submitErrorMessage,
-	postCodeObject,
-	setPriceDescription,
-	priceDescription,
+  control,
+  step,
+  stepLabel,
+  formErrors,
+  methods,
+  currency,
+  errorMessages,
+  submitErrorMessage,
+  postCodeObject,
+  setPriceDescription,
+  priceDescription,
 }: Props) => {
-	const [discountCode, setDiscountCode] = useState<string>('');
+  const [discountCode, setDiscountCode] = useState<string>('');
 
-	const payerOptions = [
-		{
-			label: 'Mokėtojas yra siuntėjas',
-			value: 'thePayerIsTheSender',
-		},
-		{
-			label: 'Mokėtojas yra gavėjas',
-			value: 'thePayerIsTheRecipient',
-		},
-	];
+  const payerOptions = [
+    {
+      label: 'Mokėtojas yra siuntėjas',
+      value: 'thePayerIsTheSender',
+    },
+    {
+      label: 'Mokėtojas yra gavėjas',
+      value: 'thePayerIsTheRecipient',
+    },
+  ];
 
-	const paymentMethodOptions = [
-		{
-			label: 'Grynais',
-			value: 'cash',
-		},
-		{
-			label: 'Kortele',
-			value: 'card',
-		},
-		{
-			label: 'Bankiniu pavedimu (juridiniams asmenims)',
-			value: 'bankTransfer',
-		},
-	];
+  const paymentMethodOptions = [
+    {
+      label: 'Grynais',
+      value: 'cash',
+    },
+    {
+      label: 'Kortele',
+      value: 'card',
+    },
+    {
+      label: 'Bankiniu pavedimu (juridiniams asmenims)',
+      value: 'bankTransfer',
+    },
+  ];
 
-	const shipments = methods.watch('shipments');
+  const shipments = methods.watch('shipments');
 
-	const service = methods.watch('service');
+  const service = methods.watch('service');
 
-	const payer = methods.watch('customerInformation.payerOfTheShipment.value');
+  const payer = methods.watch('customerInformation.payerOfTheShipment.value');
 
-	const shipmentsWithEmptyEstimatedPrice = shipments.filter((item) => {
-		if (item.estimatedPrice === '0.00' || !item.estimatedPrice) {
-			return true;
-		}
-	});
+  const shipmentsWithEmptyEstimatedPrice = shipments.filter((item) => {
+    if (item.estimatedPrice === '0.00' || !item.estimatedPrice) {
+      return true;
+    }
+  });
 
-	const validationRules = useCustomValidation({});
+  const validationRules = useCustomValidation({ service });
 
-	const getDiscountPercentage = (itemsCount: number) => {
-		if (itemsCount === 0 || itemsCount === 1) return 1;
+  const getDiscountPercentage = (itemsCount: number) => {
+    if (itemsCount === 0 || itemsCount === 1) return 1;
 
-		if (itemsCount === 2) return 0.95;
-		if (itemsCount === 3) return 0.9;
-		if (itemsCount === 4) return 0.85;
-		if (itemsCount > 4) return 0.8;
-		return 1;
-	};
+    if (itemsCount === 2) return 0.95;
+    if (itemsCount === 3) return 0.9;
+    if (itemsCount === 4) return 0.85;
+    if (itemsCount > 4) return 0.8;
+    return 1;
+  };
 
-	const getOrderPrice = (
-		shipmentsArray: ShipmentProps[],
-		postCodeObject: any
-	) => {
-		let price = 0;
-		const priceDescription: { title: string; price: string }[] = [];
+  const getOrderPrice = (
+    shipmentsArray: ShipmentProps[],
+    postCodeObject: any
+  ) => {
+    let price = 0;
+    const priceDescription: { title: string; price: string }[] = [];
 
-		for (let i = 0; i < shipmentsArray.length; i++) {
-			const shipmentPrice = shipmentsArray[i].estimatedPrice;
-			price += Number(shipmentPrice);
-			if (shipmentsArray[i].category?.label) {
-				priceDescription.push({
-					title: `Siunta nr. ${i + 1}: ${
-						shipmentsArray[i].productType?.label ??
-						shipmentsArray[i].category?.label
-					}:`,
-					price: `${currency}${shipmentsArray[i].estimatedPrice}` || '0.00',
-				});
-			}
-		}
+    let shipmentPriceSum = 0;
 
-		if (service === 'shipmentWithAddressService') {
-			price += 0;
-		}
+    for (let i = 0; i < shipmentsArray.length; i++) {
+      const shipmentPrice = shipmentsArray[i].estimatedPrice;
+      price += Number(shipmentPrice);
+      if (shipmentsArray[i].category?.label) {
+        priceDescription.push({
+          title: `Siunta nr. ${i + 1}: ${
+            shipmentsArray[i].productType?.label ??
+            shipmentsArray[i].category?.label
+          }:`,
+          price: `${currency}${shipmentsArray[i].estimatedPrice}` || '0.00',
+        });
+      }
+    }
 
-		if (service === 'productPurchaseService') {
-			// is savu
-			if (payer === 'thePayerIsTheSender') {
-				const threePercentOfThePrice = (price / 100) * 3;
-				if (threePercentOfThePrice < 5) {
-					price += 5;
-					priceDescription.push({
-						title: 'Prekes nupirkimo paslauga:',
-						price: `${currency}5.00`,
-					});
-				} else {
-					price += threePercentOfThePrice;
-					priceDescription.push({
-						title: 'Prekes nupirkimo paslauga (3%):',
-						price: `${currency}${threePercentOfThePrice.toFixed(2)}`,
-					});
-				}
-			}
-			// klientas
-			if (payer === 'thePayerIsTheRecipient') {
-				const twoPercentOfThePrice = (price / 100) * 2;
-				if (twoPercentOfThePrice < 15) {
-					price += 15;
-					priceDescription.push({
-						title: `Prekes nupirkimo paslauga (${currency}15):`,
-						price: `${currency}15.00`,
-					});
-				} else if (twoPercentOfThePrice > 50) {
-					price += 50;
-					priceDescription.push({
-						title: `Prekes nupirkimo paslauga (50${currency}):`,
-						price: `${currency}50.00`,
-					});
-				} else {
-					price += twoPercentOfThePrice;
-					priceDescription.push({
-						title: `Prekes nupirkimo paslauga (2%):`,
-						price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
-					});
-				}
-			}
+    const purchaseServiceShipmentsPrices =
+      shipmentsArray.reduce(
+        (acc, curr) => acc + Number(curr.shipmentPrice),
+        0
+      ) || 0;
 
-			const purchaseServiceShipmentsPrices =
-				shipmentsArray.reduce(
-					(acc, curr) => acc + Number(curr.shipmentPrice),
-					0
-				) || 0;
+    const salesServiceShipmentsPrices =
+      shipmentsArray.reduce(
+        (acc, curr) => acc + Number(curr.purchasePriceOfTheItem),
+        0
+      ) || 0;
 
-			if (purchaseServiceShipmentsPrices > 249) {
-				price += purchaseServiceShipmentsPrices;
-				priceDescription.push({
-					title: 'Prekiu nupirkimo suma:',
-					price: `${currency}${purchaseServiceShipmentsPrices.toFixed(2)}`,
-				});
-			}
-		}
+    if (service === 'shipmentWithAddressService') {
+      price += 0;
+    }
 
-		if (service === 'productSalesService') {
-			const twoPercentOfThePrice = (price * 2) / 100;
-			if (twoPercentOfThePrice < 15) {
-				price += 15;
-				priceDescription.push({
-					title: 'Prekės pardavimo paslauga:',
-					price: `${currency}15.00`,
-				});
-			} else if (twoPercentOfThePrice > 50) {
-				price += 50;
-				priceDescription.push({
-					title: 'Prekiu nupirkimo suma:',
-					price: `${currency}50.00`,
-				});
-			} else {
-				price += twoPercentOfThePrice;
-				priceDescription.push({
-					title: 'Prekiu nupirkimo suma:',
-					price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
-				});
-			}
-		}
+    if (service === 'productPurchaseService') {
+      // is savu
+      if (payer === 'thePayerIsTheSender') {
+        const threePercentOfThePrice =
+          (purchaseServiceShipmentsPrices / 100) * 3;
+        if (threePercentOfThePrice < 5) {
+          price += 5;
+          priceDescription.push({
+            title: 'Prekės nupirkimo paslauga:',
+            price: `${currency}5.00`,
+          });
+        } else {
+          price += threePercentOfThePrice;
+          priceDescription.push({
+            title: 'Prekės nupirkimo paslauga (3%):',
+            price: `${currency}${threePercentOfThePrice.toFixed(2)}`,
+          });
+        }
+      }
+      // klientas
+      if (payer === 'thePayerIsTheRecipient') {
+        const twoPercentOfThePrice = (purchaseServiceShipmentsPrices / 100) * 2;
+        if (twoPercentOfThePrice < 15) {
+          price += 15;
+          priceDescription.push({
+            title: `Prekės nupirkimo paslauga (${currency}15):`,
+            price: `${currency}15.00`,
+          });
+        } else if (twoPercentOfThePrice > 50) {
+          price += 50;
+          priceDescription.push({
+            title: `Prekės nupirkimo paslauga (50${currency}):`,
+            price: `${currency}50.00`,
+          });
+        } else {
+          price += twoPercentOfThePrice;
+          priceDescription.push({
+            title: `Prekės nupirkimo paslauga (2%):`,
+            price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
+          });
+        }
+      }
 
-		if (
-			postCodeObject?.additionalCharges === 'Parcel force pricelist' &&
-			service !== 'shipmentWithAddressService'
-		) {
-			const zones = [
-				{
-					title: 'Zone 1',
-					value: 9,
-				},
-				{
-					title: 'Zone 2',
-					value: 19,
-				},
-				{
-					title: 'Zone 3',
-					value: 23,
-				},
-			];
+      if (purchaseServiceShipmentsPrices < 250) {
+        price += purchaseServiceShipmentsPrices;
+        priceDescription.push({
+          title: 'Prekių nupirkimo suma:',
+          price: `${currency}${purchaseServiceShipmentsPrices.toFixed(2)}`,
+        });
+      }
+    }
 
-			const zone = postCodeObject?.parcelForceZone || '';
+    if (service === 'productSalesService') {
+      const twoPercentOfThePrice = (salesServiceShipmentsPrices * 2) / 100;
+      if (twoPercentOfThePrice < 15) {
+        price += 15;
+        priceDescription.push({
+          title: 'Prekės pardavimo paslauga:',
+          price: `${currency}15.00`,
+        });
+      } else if (twoPercentOfThePrice > 50) {
+        price += 50;
+        priceDescription.push({
+          title: 'Prekių nupirkimo suma:',
+          price: `${currency}50.00`,
+        });
+      } else {
+        price += twoPercentOfThePrice;
+        priceDescription.push({
+          title: 'Prekių nupirkimo suma:',
+          price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
+        });
+      }
+    }
 
-			zones.forEach((item) => {
-				if (item.title === zone) {
-					price += item.value;
-					priceDescription.push({
-						title: '"Parcel force" zonos kaina:',
-						price: `${currency}${item.value}`,
-					});
-				}
-			});
-		} else if (
-			postCodeObject?.additionalCharges &&
-			!isNaN(Number(postCodeObject?.additionalCharges)) &&
-			service !== 'shipmentWithAddressService'
-		) {
-			price += Number(postCodeObject?.additionalCharges) || 0;
-			priceDescription.push({
-				title: 'Adreso papildomas mokestis:',
-				price: `${currency}${Number(postCodeObject.additionalCharges).toFixed(
-					2
-				)}`,
-			});
-		}
+    if (
+      postCodeObject?.additionalCharges === 'Parcel force pricelist' &&
+      service !== 'shipmentWithAddressService'
+    ) {
+      const zones = [
+        {
+          title: 'Zone 1',
+          value: 9,
+        },
+        {
+          title: 'Zone 2',
+          value: 19,
+        },
+        {
+          title: 'Zone 3',
+          value: 23,
+        },
+      ];
 
-		const discountPercentage = getDiscountPercentage(
-			shipmentsArray.length || 0
-		);
+      const zone = postCodeObject?.parcelForceZone || '';
 
-		const percentage =
-			discountPercentage === 0.8
-				? '20%'
-				: discountPercentage === 0.85
-				? '15%'
-				: discountPercentage === 0.9
-				? '10%'
-				: discountPercentage === 0.95
-				? '5%'
-				: null;
+      zones.forEach((item) => {
+        if (item.title === zone) {
+          price += item.value;
+          priceDescription.push({
+            title: '"Parcel force" zonos kaina:',
+            price: `${currency}${item.value}`,
+          });
+        }
+      });
+    } else if (
+      postCodeObject?.additionalCharges &&
+      !isNaN(Number(postCodeObject?.additionalCharges)) &&
+      service !== 'shipmentWithAddressService'
+    ) {
+      price += Number(postCodeObject?.additionalCharges) || 0;
+      priceDescription.push({
+        title: 'Adreso papildomas mokestis:',
+        price: `${currency}${Number(postCodeObject.additionalCharges).toFixed(
+          2
+        )}`,
+      });
+    }
 
-		if (percentage) {
-			priceDescription.push({
-				title: `Nuolaida už siuntų kiekį:`,
-				price: `${percentage}`,
-			});
-		}
-		const secondDiscountPercentage =
-			postCodeObject?.discount === '10%' &&
-			service !== 'shipmentWithAddressService'
-				? 0.9
-				: 1;
+    const discountPercentage = getDiscountPercentage(
+      shipmentsArray.length || 0
+    );
 
-		if (secondDiscountPercentage === 0.9) {
-			priceDescription.push({
-				title: `Adreso nuolaida:`,
-				price: `10%`,
-			});
-		}
+    const percentage =
+      discountPercentage === 0.8
+        ? '20%'
+        : discountPercentage === 0.85
+        ? '15%'
+        : discountPercentage === 0.9
+        ? '10%'
+        : discountPercentage === 0.95
+        ? '5%'
+        : null;
 
-		const finalPrice = price * discountPercentage * secondDiscountPercentage;
+    if (percentage) {
+      priceDescription.push({
+        title: `Nuolaida už siuntų kiekį:`,
+        price: `${percentage}`,
+      });
+    }
+    const secondDiscountPercentage =
+      postCodeObject?.discount === '10%' &&
+      service !== 'shipmentWithAddressService'
+        ? 0.9
+        : 1;
 
-		setPriceDescription(priceDescription);
-		methods.setValue('estimatedShipmentPrice', finalPrice.toFixed(2) ?? '0.00');
-	};
+    if (secondDiscountPercentage === 0.9) {
+      priceDescription.push({
+        title: `Adreso nuolaida:`,
+        price: `10%`,
+      });
+    }
 
-	useEffect(() => {
-		getOrderPrice(shipments, postCodeObject);
-	}, [
-		shipments,
-		shipments.length,
-		JSON.stringify(shipments),
-		payer,
-		service,
-		JSON.stringify(postCodeObject),
-	]);
+    const finalPrice = price * discountPercentage * secondDiscountPercentage;
 
-	const orderPrice = methods.watch('estimatedShipmentPrice');
+    setPriceDescription(priceDescription);
+    methods.setValue('estimatedShipmentPrice', finalPrice.toFixed(2) ?? '0.00');
+  };
 
-	const isDisabled =
-		Object.keys(errorMessages).length > 0 ||
-		shipmentsWithEmptyEstimatedPrice.length > 0 ||
-		shipments.length === 0;
+  useEffect(() => {
+    getOrderPrice(shipments, postCodeObject);
+  }, [
+    shipments,
+    shipments.length,
+    JSON.stringify(shipments),
+    payer,
+    service,
+    JSON.stringify(postCodeObject),
+  ]);
 
-	return (
-		<Step
-			step={step}
-			title={stepLabel}>
-			<>
-				<div className='payer-info-container'>
-					<FieldContainer
-						label='Kas yra siuntos užsakovas?'
-						description='Prašome iš anksto nurodyti, kas bus atsakingas už siuntos apmokėjimą, kad vėliau nebūtų nesusipratimų ar papildomų klausimų po užsakymo.'>
-						<ControlledStyledSelect
-							placeholder='Kas yra siuntos užsakovas?'
-							isDisabled={
-								service === 'shipmentWithAddressService' ||
-								service === 'productPurchaseService'
-							}
-							name='customerInformation.payerOfTheShipment'
-							options={payerOptions}
-							control={control}
-							errorMessage={
-								formErrors.customerInformation?.payerOfTheShipment?.message
-							}
-							rules={validationRules.customerInformation.payerOfTheShipment}
-						/>
-					</FieldContainer>
-					<FieldContainer
-						label='Pasirinkite apmokėjimo būdą'
-						description='Prašome pasirinkti ir nurodyti atsiskaitymo būdą, kuris jums yra patogus ir teisingas.'>
-						<ControlledStyledSelect
-							placeholder='Pasirinkite apmokėjimo būdą'
-							name='customerInformation.paymentMethod'
-							options={paymentMethodOptions}
-							control={control}
-							errorMessage={
-								formErrors.customerInformation?.paymentMethod?.message
-							}
-							rules={validationRules.customerInformation.paymentMethod}
-						/>
-					</FieldContainer>
-				</div>
-				<div className='columns'>
-					<div className='left-column empty'></div>
-					<div className='right-column discount-section'>
-						<UncontrolledInput
-							placeholder='Įveskite nuolaidos kodą'
-							isError={false}
-							onChange={(e) => {
-								setDiscountCode(e.target.value);
-							}}
-							value={discountCode}
-						/>
-						<SecondaryButton
-							type='button'
-							disabled={!discountCode}>
-							<FontAwesomeIcon icon={faCheck} />
-						</SecondaryButton>
-					</div>
-				</div>
-				<OrderPrice
-					sum={orderPrice}
-					currency={currency}
-					control={control}
-					formErrors={formErrors}
-					methods={methods}
-					priceDescription={priceDescription}
-				/>
-				<div className='checkboxes-container'>
-					<ControlledCheckboxWithLabel
-						control={control}
-						errorMessage={formErrors.packagingAndLabelingRules?.message}
-						name='packagingAndLabelingRules'
-						rules={validationRules.packagingAndLabelingRules}>
-						<>
-							<span>
-								Aš esu susipažinęs(-usi) ir sutinku su{' '}
-								<Link
-									href='https://ecotrip.lt/siuntos-pakavimo-ir-zenklinimo-taisykles/'
-									text='EcoTrip siuntos pakavimo ir ženklinimo taisyklėmis *'
-								/>
-							</span>
-						</>
-					</ControlledCheckboxWithLabel>
-					<ControlledCheckboxWithLabel
-						control={control}
-						errorMessage={formErrors.transportRules?.message}
-						name='transportRules'
-						rules={validationRules.transportRules}>
-						<span>
-							Aš esu susipažinęs(-usi) ir sutinku su{' '}
-							<Link
-								href='https://ecotrip.lt/vezimo-taisykles/'
-								text='EcoTrip vežimo taisyklėmis *'
-							/>
-						</span>
-					</ControlledCheckboxWithLabel>
-				</div>
-				<div
-					style={{
-						width: '100%',
-						display: 'flex',
-						justifyContent: 'flex-end',
-					}}>
-					<SecondaryButton
-						type={`${isDisabled ? 'button' : 'submit'}`}
-						disabled={isDisabled}>
-						<span>Patvirtinti užsakymą</span>
-					</SecondaryButton>
-					{submitErrorMessage ? (
-						<div className='errors'>
-							<div className='error'>
-								<span>{submitErrorMessage}</span>
-							</div>
-						</div>
-					) : null}
-				</div>
-			</>
-		</Step>
-	);
+  const orderPrice = methods.watch('estimatedShipmentPrice');
+
+  const isDisabled =
+    Object.keys(errorMessages).length > 0 ||
+    shipmentsWithEmptyEstimatedPrice.length > 0 ||
+    shipments.length === 0;
+
+  return (
+    <Step step={step} title={stepLabel}>
+      <>
+        <div className='payer-info-container'>
+          <FieldContainer
+            label='Kas yra siuntos užsakovas?'
+            description='Prašome iš anksto nurodyti, kas bus atsakingas už siuntos apmokėjimą, kad vėliau nebūtų nesusipratimų ar papildomų klausimų po užsakymo.'
+          >
+            <ControlledStyledSelect
+              placeholder='Kas yra siuntos užsakovas?'
+              isDisabled={
+                service === 'shipmentWithAddressService' ||
+                service === 'productPurchaseService'
+              }
+              name='customerInformation.payerOfTheShipment'
+              options={payerOptions}
+              control={control}
+              errorMessage={
+                formErrors.customerInformation?.payerOfTheShipment?.message
+              }
+              rules={validationRules.customerInformation.payerOfTheShipment}
+            />
+          </FieldContainer>
+          <FieldContainer
+            label='Pasirinkite apmokėjimo būdą'
+            description='Prašome pasirinkti ir nurodyti atsiskaitymo būdą, kuris jums yra patogus ir teisingas.'
+          >
+            <ControlledStyledSelect
+              placeholder='Pasirinkite apmokėjimo būdą'
+              name='customerInformation.paymentMethod'
+              options={paymentMethodOptions}
+              control={control}
+              errorMessage={
+                formErrors.customerInformation?.paymentMethod?.message
+              }
+              rules={validationRules.customerInformation.paymentMethod}
+            />
+          </FieldContainer>
+        </div>
+        <div className='columns'>
+          <div className='left-column empty'></div>
+          <div className='right-column discount-section'>
+            <UncontrolledInput
+              placeholder='Įveskite nuolaidos kodą'
+              isError={false}
+              onChange={(e) => {
+                setDiscountCode(e.target.value);
+              }}
+              value={discountCode}
+            />
+            <SecondaryButton type='button' disabled={!discountCode}>
+              <FontAwesomeIcon icon={faCheck} />
+            </SecondaryButton>
+          </div>
+        </div>
+        <OrderPrice
+          sum={orderPrice}
+          currency={currency}
+          control={control}
+          formErrors={formErrors}
+          methods={methods}
+          priceDescription={priceDescription}
+        />
+        <div className='checkboxes-container'>
+          <ControlledCheckboxWithLabel
+            control={control}
+            errorMessage={formErrors.packagingAndLabelingRules?.message}
+            name='packagingAndLabelingRules'
+            rules={validationRules.packagingAndLabelingRules}
+          >
+            <>
+              <span>
+                Aš esu susipažinęs(-usi) ir sutinku su{' '}
+                <Link
+                  href='https://ecotrip.lt/siuntos-pakavimo-ir-zenklinimo-taisykles/'
+                  text='EcoTrip siuntos pakavimo ir ženklinimo taisyklėmis *'
+                />
+              </span>
+            </>
+          </ControlledCheckboxWithLabel>
+          <ControlledCheckboxWithLabel
+            control={control}
+            errorMessage={formErrors.transportRules?.message}
+            name='transportRules'
+            rules={validationRules.transportRules}
+          >
+            <span>
+              Aš esu susipažinęs(-usi) ir sutinku su{' '}
+              <Link
+                href='https://ecotrip.lt/vezimo-taisykles/'
+                text='EcoTrip vežimo taisyklėmis *'
+              />
+            </span>
+          </ControlledCheckboxWithLabel>
+        </div>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <SecondaryButton
+            type={`${isDisabled ? 'button' : 'submit'}`}
+            disabled={isDisabled}
+          >
+            <span>Patvirtinti užsakymą</span>
+          </SecondaryButton>
+          {submitErrorMessage ? (
+            <div className='errors'>
+              <div className='error'>
+                <span>{submitErrorMessage}</span>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </>
+    </Step>
+  );
 };
 
 export default PayerInformation;

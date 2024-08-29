@@ -7,44 +7,41 @@ import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 
 type Props = {
-	control: Control<FormType, any>;
-	formErrors: FieldErrors<FormType>;
-	methods: UseFormReturn<FormType, any, undefined>;
-	stepLabel: string;
-	step: number;
+  control: Control<FormType, any>;
+  formErrors: FieldErrors<FormType>;
+  methods: UseFormReturn<FormType, any, undefined>;
+  stepLabel: string;
+  step: number;
 };
 
 const RecipientInformation = ({
-	control,
-	formErrors,
-	methods,
-	stepLabel,
-	step,
+  control,
+  formErrors,
+  methods,
+  stepLabel,
+  step,
 }: Props) => {
-	const validationRules = useCustomValidation({});
+  const service = methods.watch('service');
 
-	const recipientValidationRules = validationRules.recipientInformation;
+  const validationRules = useCustomValidation({ service });
 
-	const service = methods.watch('service');
-
-	return (
-		<Step
-			title={stepLabel}
-			step={step}>
-			<ClientInformationForm
-				client='recipient'
-				control={control}
-				subName='recipientInformation'
-				formErrors={formErrors}
-				validationRules={recipientValidationRules}
-				methods={methods}
-				step={step}
-				isShipmentWithAddressServiceSelected={
-					service === 'shipmentWithAddressService'
-				}
-			/>
-		</Step>
-	);
+  const recipientValidationRules = validationRules.recipientInformation;
+  return (
+    <Step title={stepLabel} step={step}>
+      <ClientInformationForm
+        client='recipient'
+        control={control}
+        subName='recipientInformation'
+        formErrors={formErrors}
+        validationRules={recipientValidationRules}
+        methods={methods}
+        step={step}
+        isShipmentWithAddressServiceSelected={
+          service === 'shipmentWithAddressService'
+        }
+      />
+    </Step>
+  );
 };
 
 export default RecipientInformation;

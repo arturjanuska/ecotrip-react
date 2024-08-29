@@ -50,6 +50,8 @@ const AddressForm = ({
     setValue(name, value);
   };
 
+  const service = methods.watch('service');
+
   const handleOnClear = (name: keyof FormType) => {
     if (name === 'pickupAddress') {
       setValue('pickupAddressZipCode', '');
@@ -59,7 +61,7 @@ const AddressForm = ({
     }
   };
 
-  const validationRules = useCustomValidation({});
+  const validationRules = useCustomValidation({ service });
 
   const selectedPickupAddress = methods.watch('pickupAddress');
   const selectedPickupAddressPostcode = methods.watch('pickupAddressZipCode');
