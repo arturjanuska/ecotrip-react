@@ -13,6 +13,8 @@ export type ServiceCardProps = {
   onSelect: () => void;
   selected: boolean;
   isParcelForce: boolean;
+  direction: 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
+  isDisabled: boolean;
 };
 
 const CheckmarkIcon = () => {
@@ -23,14 +25,12 @@ const ServiceCard = ({
   service,
   onSelect,
   selected,
-  isParcelForce,
+  isDisabled,
 }: ServiceCardProps) => {
   return (
     <div
       className={`service-card ${selected ? 'active' : ''} ${
-        isParcelForce && service.value !== 'parcelForceShipment'
-          ? 'disabled-card'
-          : ''
+        isDisabled ? 'disabled-card' : ''
       }`}
       onClick={onSelect}
     >

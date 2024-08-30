@@ -12,6 +12,10 @@
 	flex-direction: column;
 }
 
+.service-section-container .services-mapping-container-service-card {
+	width: min(360px, 100%);
+}
+
 .service-section-container a {
 	font-family: Arial;
 	font-size: 12px;
@@ -33,7 +37,7 @@
 
 .service-card {
 	box-sizing: border-box;
-	width: 360px;
+	width: min(360px, 100%);
 	border-radius: 5px;
 	border: 1px solid #7a777680;
 	display: flex;
@@ -115,5 +119,10 @@
 @media (max-width: 768px) {
 	.address-form-section-wrapper {
 		flex-direction: column;
+	}
+
+	.service-card {
+		max-width: none;
+		width: 100%;
 	}
 }

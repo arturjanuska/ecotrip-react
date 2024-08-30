@@ -8,65 +8,62 @@ import SimpleTextError from './SimpleTextError';
 import { FormType } from '../utils/formTypes';
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
-	children: React.ReactNode | Element;
-	className?: string;
-	style?: CSSProperties;
-	name: keyof FormType;
-	control: any;
-	errorMessage?: string;
-	rules?:
-		| Omit<
-				RegisterOptions<FormType, keyof FormType>,
-				'disabled' | 'valueAsNumber' | 'valueAsDate' | 'setValueAs'
-		  >
-		| undefined;
+  children: React.ReactNode | Element;
+  className?: string;
+  style?: CSSProperties;
+  name: keyof FormType;
+  control: any;
+  errorMessage?: string;
+  rules?:
+    | Omit<
+        RegisterOptions<FormType, keyof FormType>,
+        'disabled' | 'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+      >
+    | undefined;
 };
 
 const ControlledCheckboxWithLabel = ({
-	children,
-	className,
-	style,
-	name,
-	control,
-	errorMessage,
-	rules,
-	...rest
+  children,
+  className,
+  style,
+  name,
+  control,
+  errorMessage,
+  rules,
+  ...rest
 }: Props) => {
-	return (
-		<Controller
-			name={name}
-			control={control}
-			rules={rules}
-			render={({ field }) => {
-				return (
-					<>
-						<div
-							className={`form-control ${className ? className : ''}`}
-							style={style}>
-							<label className='label cursor-pointer'>
-								<input
-									{...field}
-									{...rest}
-									type='checkbox'
-									className={`checkbox checkbox-primary ${
-										errorMessage ? 'error' : ''
-									}`}
-									// @ts-ignore
-									checked={field.value}
-									defaultChecked={false}
-								/>
-								<div className='custom-label-text'>{children}</div>
-							</label>
-						</div>
-						<SimpleTextError
-							message={errorMessage}
-							textAlign='right'
-						/>
-					</>
-				);
-			}}
-		/>
-	);
+  return (
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field }) => {
+        return (
+          <>
+            <div
+              className={`form-control ${className ? className : ''}`}
+              style={style}
+            >
+              <label className='label cursor-pointer'>
+                <input
+                  {...field}
+                  {...rest}
+                  type='checkbox'
+                  className={`checkbox checkbox-primary ${
+                    errorMessage ? 'error' : ''
+                  }`}
+                  // @ts-ignore
+                  checked={field.value ?? false}
+                />
+                <div className='custom-label-text'>{children}</div>
+              </label>
+            </div>
+            <SimpleTextError message={errorMessage} textAlign='right' />
+          </>
+        );
+      }}
+    />
+  );
 };
 
 export default ControlledCheckboxWithLabel;
