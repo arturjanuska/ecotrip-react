@@ -48,6 +48,7 @@ const TransportationDates = ({
   const options = useDateOptions({
     selectedMonth: monthFrom || null,
     direction,
+    service,
   });
 
   return (
