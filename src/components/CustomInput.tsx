@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';

@@ -42,18 +42,18 @@ export const calculateShipmentPrice = ({
 	if (nWeight > 30 && nWeight <= 35) {
 		priceCalculatedByWeight = nWeight * 1.5;
 	}
-	if (nWeight > 35 && nWeight <= 50) {
+	if (nWeight > 35) {
 		priceCalculatedByWeight = nWeight * 1.49;
 		priceCalculatedByWeight = priceCalculatedByWeight * 1.05;
 	}
-	if (nWeight > 50 && nWeight <= 100) {
-		priceCalculatedByWeight = nWeight * 1.46;
-		priceCalculatedByWeight = priceCalculatedByWeight * 1.07;
-	}
-	if (nWeight > 100) {
-		priceCalculatedByWeight = nWeight * 1.35;
-		priceCalculatedByWeight = priceCalculatedByWeight * 1.1;
-	}
+	// if (nWeight > 50 && nWeight <= 100) {
+	// 	priceCalculatedByWeight = nWeight * 1.46;
+	// 	priceCalculatedByWeight = priceCalculatedByWeight * 1.07;
+	// }
+	// if (nWeight > 100) {
+	// 	priceCalculatedByWeight = nWeight * 1.35;
+	// 	priceCalculatedByWeight = priceCalculatedByWeight * 1.1;
+	// }
 
 	priceCalculatedByWeight = priceCalculatedByWeight * amount;
 

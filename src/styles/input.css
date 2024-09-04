@@ -31,6 +31,10 @@
 	color: #7a7776;
 }
 
+.input-container:has(input:disabled) {
+	background-color: #f4f4f4;
+}
+
 .input-container:focus-within {
 	border-color: #9aa61e;
 }

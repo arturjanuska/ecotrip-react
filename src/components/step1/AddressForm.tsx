@@ -157,7 +157,7 @@ const AddressForm = ({
 				</FieldContainer>
 				<FieldContainer
 					label='Paėmimo pašto kodas:'
-					description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą. Pasitikrinkite ar teisingas pašto kodas.'>
+					description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą.'>
 					<CustomInput
 						type='text'
 						placeholder='Pašto kodas'
@@ -165,6 +165,7 @@ const AddressForm = ({
 						control={control}
 						errorMessage={formErrors.pickupAddressZipCode?.message}
 						rules={validationRules.pickupAddressZipCode}
+						disabled={true}
 					/>
 				</FieldContainer>
 			</div>
@@ -185,7 +186,7 @@ const AddressForm = ({
 				</FieldContainer>
 				<FieldContainer
 					label='Pristatymo pašto kodas:'
-					description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą. Pasitikrinkite ar teisingas pašto kodas.'>
+					description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą.'>
 					<CustomInput
 						type='text'
 						placeholder='Pašto kodas'
@@ -193,6 +194,7 @@ const AddressForm = ({
 						control={control}
 						errorMessage={formErrors.deliveryAddressZipCode?.message}
 						rules={validationRules.deliveryAddressZipCode}
+						disabled={true}
 					/>
 				</FieldContainer>
 			</div>

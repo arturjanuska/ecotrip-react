@@ -24,13 +24,6 @@ const ServiceSection = ({
 		const pickupAddressPostcode = methods.getValues('pickupAddressZipCode');
 		const deliveryAddressPostcode = methods.getValues('deliveryAddressZipCode');
 
-		if (service === 'productSalesService') {
-			setValue('ransomPayeeInformation.ransomRecipient', {
-				label: 'Siuntejas',
-				value: 'sender',
-			});
-		}
-
 		if (service === 'shipmentWithAddressService') {
 			setValue(`senderInformation.firstName`, 'EcoTrip UK');
 			setValue(`senderInformation.lastName`, '----');
@@ -57,19 +50,30 @@ const ServiceSection = ({
 	const direction = methods.watch('direction');
 
 	const handleServiceSelect = (service: string) => {
-		if (service === 'productPurchaseService') {
+		if (
+			service === 'productPurchaseService' ||
+			service === 'shipmentWithAddressService'
+		) {
 			setValue('customerInformation.payerOfTheShipment', {
 				label: 'Mokėtojas yra gavėjas',
 				value: 'thePayerIsTheRecipient',
 			});
 		}
+
+		if (service === 'productSalesService') {
+			setValue('ransomPayeeInformation.ransomRecipient', {
+				label: 'Siuntejas',
+				value: 'sender',
+			});
+		}
+
 		setValue('shipments', [
 			{
 				estimatedPrice: '0.00',
 				category:
 					service === 'parcelForceShipment'
 						? {
-								label: 'Siuntos',
+								label: '"Parcel Force" siunta',
 								value: 'shipments',
 						  }
 						: { label: 'Standartinės siuntos', value: 'shipments' },
@@ -519,6 +523,8 @@ const ServiceSection = ({
 									service={service}
 									direction={direction}
 									onSelect={() => {
+										console.log('selecting');
+
 										if (isCardDisabled(service.value, isParcelForce)) return;
 										handleServiceSelect(service.value);
 									}}
