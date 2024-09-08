@@ -325,7 +325,7 @@ const SingleShimpentForm = ({
                 selectedService === 'parcelForceShipment'
               ) {
                 return {
-                  label: '"Parcel Force" siunta',
+                  label: 'Siunta',
                   value: 'shipments',
                 };
               } else {

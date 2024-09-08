@@ -15,7 +15,6 @@ export const calculateShipmentPrice = ({
   width,
   height,
   amount,
-  service,
 }: Props) => {
   if (!weight || !length || !width || !height)
     return {
@@ -23,7 +22,6 @@ export const calculateShipmentPrice = ({
       volume: 0,
       extent: 0,
     };
-  // TODO
   let priceCalculatedByWeight = 0;
   let priceCalculatedByVolume = 0;
   const nWeight = Number(weight);

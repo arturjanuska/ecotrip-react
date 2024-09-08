@@ -70,13 +70,7 @@ const ServiceSection = ({
     setValue('shipments', [
       {
         estimatedPrice: '0.00',
-        category:
-          service === 'parcelForceShipment'
-            ? {
-                label: '"Parcel Force" siunta',
-                value: 'shipments',
-              }
-            : { label: 'Siunta', value: 'shipments' },
+        category: { label: 'Siunta', value: 'shipments' },
         amount: 1,
       },
     ]);
@@ -551,14 +545,14 @@ const ServiceSection = ({
         {selectedService === 'parcelForceShipment' ? (
           <div className='service-section-sub-text'>
             <span>
-              Dėl pasirinkto UK adreso, jūsų siuntą siųsime per partnerius
-              (Parcel Force), galimas maksimalus siuntos svoris iki 30 kg ir
-              privalomas pakavimas dėžėse. Jei sutinkate su sąlygomis tęskite
-              siuntos įvedimą.{' '}
+              Dėl pasirinkto UK adreso, jūsų siuntą persiųsime per partnerius,
+              galimas maksimalus siuntos svoris iki 30 kg ir privalomas
+              pakavimas dėžėse. Jei sutinkate su sąlygomis tęskite siuntos
+              įvedimą.{' '}
             </span>
             <Link
               href='/'
-              text='Plačiau apie Parcel Force siuntas rasite čia.'
+              text='Plačiau apie siuntų persiuntimą per partnerius rasite čia.'
             />
           </div>
         ) : null}

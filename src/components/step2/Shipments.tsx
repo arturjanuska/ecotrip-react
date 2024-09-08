@@ -45,20 +45,10 @@ const Shipments = ({
   const handleAddShipment = () => {
     append({
       estimatedPrice: '0.00',
-      category:
-        selectedService === 'parcelForceShipment'
-          ? {
-              label: 'Parcel Force siunta',
-              value: 'shipments',
-            }
-          : selectedService === 'shipmentWithAddressService' ||
-            selectedService === 'productPurchaseService' ||
-            selectedService === 'productSalesService'
-          ? {
-              label: 'Siunta',
-              value: 'shipments',
-            }
-          : null,
+      category: {
+        label: 'Siunta',
+        value: 'shipments',
+      },
       amount: 1,
     });
   };
