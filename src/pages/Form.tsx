@@ -90,13 +90,16 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
   const onSubmit = async (data: FormType) => {
     const transformedData = transformFormDataToEndpoint(data);
 
-    const response = await fetch(`/api/orders`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(transformedData),
-    });
+    const response = await fetch(
+      `https://api.uzsakymas.ecotrip.lt/api/orders`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transformedData),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
