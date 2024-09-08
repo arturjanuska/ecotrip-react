@@ -90,7 +90,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
   const onSubmit = async (data: FormType) => {
     const transformedData = transformFormDataToEndpoint(data);
 
-    const response = await fetch('http://localhost:3000/api/orders', {
+    const response = await fetch(`/api/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
