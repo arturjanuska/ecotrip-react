@@ -30,7 +30,7 @@ const OrderPrice = ({
                 className='price-description-row'
                 key={`${item.title}-${index}`}
               >
-                {item.title} <strong>{item.price}</strong>
+                <span>{item.title}</span> <strong>{item.price}</strong>
               </p>
             );
           })}

@@ -109,15 +109,83 @@ const PayerInformation = ({
     const priceDescription: { title: string; price: string }[] = [];
 
     for (let i = 0; i < shipmentsArray.length; i++) {
-      const shipmentPrice = shipmentsArray[i].estimatedPrice;
-      price += Number(shipmentPrice);
-      if (shipmentsArray[i].category?.label) {
+      const shipment = shipmentsArray[i];
+      const shipmentWeight = Number(shipment.weight) ?? 0;
+      const shipmentLenght = Number(shipment.length) ?? 0;
+      const shipmentWidth = Number(shipment.width) ?? 0;
+      const shipmentHeight = Number(shipment.height) ?? 0;
+
+      let parcelForceAdditionalCharges = 0;
+      if (service === 'parcelForceShipment') {
+        if (
+          (shipmentLenght <= 45 ||
+            shipmentWidth <= 45 ||
+            shipmentHeight <= 45) &&
+          shipmentWeight <= 2
+        ) {
+          parcelForceAdditionalCharges = 4.19;
+        } else if (
+          (shipmentLenght <= 61 ||
+            shipmentWidth <= 61 ||
+            shipmentHeight <= 61) &&
+          shipmentWeight <= 20
+        ) {
+          if (shipmentWeight <= 2) {
+            parcelForceAdditionalCharges = 5.89;
+          } else if (shipmentWeight > 2 && shipmentWeight <= 10) {
+            parcelForceAdditionalCharges = 7.59;
+          } else if (shipmentWeight > 10 && shipmentWeight <= 20) {
+            parcelForceAdditionalCharges = 11.69;
+          }
+        } else if (
+          postCodeObject?.additionalCharges === 'Parcel force pricelist'
+        ) {
+          const zones = [
+            {
+              title: 'Zone 1',
+              value: 9,
+            },
+            {
+              title: 'Zone 2',
+              value: 19,
+            },
+            {
+              title: 'Zone 3',
+              value: 23,
+            },
+          ];
+
+          const zone = postCodeObject?.parcelForceZone || '';
+
+          zones.forEach((item) => {
+            if (item.title === zone) {
+              parcelForceAdditionalCharges = item.value;
+            }
+          });
+        }
+      }
+
+      const shipmentPrice =
+        Number(shipment.estimatedPrice) + parcelForceAdditionalCharges;
+
+      price += shipmentPrice;
+
+      if (shipment.category?.label) {
         priceDescription.push({
           title: `Siunta nr. ${i + 1}: ${
-            shipmentsArray[i].productType?.label ??
-            shipmentsArray[i].category?.label
+            shipment.productType?.label
+              ? `${shipment.productType?.label} ${
+                  parcelForceAdditionalCharges !== 0
+                    ? '+ Persiuntimo paslauga'
+                    : ''
+                }`
+              : `${shipment.category?.label} ${
+                  parcelForceAdditionalCharges !== 0
+                    ? '+ Persiuntimo paslauga'
+                    : ''
+                }`
           }:`,
-          price: `${currency}${shipmentsArray[i].estimatedPrice}` || '0.00',
+          price: `${currency}${shipmentPrice.toFixed(2)}` || '0.00',
         });
       }
     }
@@ -214,36 +282,6 @@ const PayerInformation = ({
     }
 
     if (
-      postCodeObject?.additionalCharges === 'Parcel force pricelist' &&
-      service !== 'shipmentWithAddressService'
-    ) {
-      const zones = [
-        {
-          title: 'Zone 1',
-          value: 9,
-        },
-        {
-          title: 'Zone 2',
-          value: 19,
-        },
-        {
-          title: 'Zone 3',
-          value: 23,
-        },
-      ];
-
-      const zone = postCodeObject?.parcelForceZone || '';
-
-      zones.forEach((item) => {
-        if (item.title === zone) {
-          price += item.value;
-          priceDescription.push({
-            title: 'Partnerių antkainis:',
-            price: `${currency}${item.value}`,
-          });
-        }
-      });
-    } else if (
       postCodeObject?.additionalCharges &&
       !isNaN(Number(postCodeObject?.additionalCharges)) &&
       service !== 'shipmentWithAddressService'
