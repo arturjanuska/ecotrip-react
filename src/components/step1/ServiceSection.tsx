@@ -4,7 +4,11 @@ import ServiceCard, { ServiceProps } from '../ServiceCard';
 import Link from '../Link';
 import { UseFormReturn, UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
-import { getServices, isCardDisabled } from '../../utils/getServices';
+import {
+	getServices,
+	isCardDisabled,
+	servicesDefinition,
+} from '../../utils/getServices';
 
 const ServiceSection = ({
 	setValue,
@@ -25,7 +29,7 @@ const ServiceSection = ({
 		const pickupAddressPostcode = methods.getValues('pickupAddressZipCode');
 		const deliveryAddressPostcode = methods.getValues('deliveryAddressZipCode');
 
-		if (service === 'shipmentWithAddressService') {
+		if (service === servicesDefinition[3]) {
 			setValue(`senderInformation.firstName`, 'EcoTrip UK');
 			setValue(`senderInformation.lastName`, '----');
 			setValue(`senderInformation.phoneNumber`, '+447479622299');
@@ -52,16 +56,16 @@ const ServiceSection = ({
 
 	const handleServiceSelect = (service: string) => {
 		if (
-			service === 'productPurchaseService' ||
-			service === 'shipmentWithAddressService'
+			service === servicesDefinition[4] ||
+			service === servicesDefinition[3]
 		) {
 			setValue('customerInformation.payerOfTheShipment', {
-				label: 'Mokėtojas yra gavėjas',
+				label: 'Gavėjas',
 				value: 'thePayerIsTheRecipient',
 			});
 		}
 
-		if (service === 'productSalesService') {
+		if (service === servicesDefinition[5]) {
 			setValue('ransomPayeeInformation.ransomRecipient', {
 				label: 'Siuntejas',
 				value: 'sender',
@@ -124,7 +128,7 @@ const ServiceSection = ({
 					text='Sužinoti daugiau apie papildomas paslaugas ir kaip jomis naudotis'
 				/>
 
-				{selectedService === 'parcelForceShipment' ? (
+				{selectedService === servicesDefinition[2] ? (
 					<div className='service-section-sub-text'>
 						<span>
 							Dėl pasirinkto UK adreso, jūsų siuntą persiųsime per partnerius,

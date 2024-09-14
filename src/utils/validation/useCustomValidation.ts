@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { ShipmentProps } from '../formTypes';
 import { servicesDefinition } from '../getServices';
@@ -7,6 +8,80 @@ type ValidationProps = {
 	service?: string;
 	formShipment?: ShipmentProps;
 };
+
+type ValidationRule = {
+	required?: string | boolean;
+	minLength?: {
+		value: number;
+		message: string;
+	};
+	pattern?: {
+		value: RegExp;
+		message: string;
+	};
+};
+
+type DateValidation = {
+	year: ValidationRule;
+	month: ValidationRule;
+	day: ValidationRule;
+};
+
+type InformationValidation = {
+	firstName: ValidationRule;
+	lastName: ValidationRule;
+	phoneNumber: ValidationRule;
+	email: ValidationRule;
+	address: ValidationRule;
+	zipCode: ValidationRule;
+};
+
+type ShipmentValidationRule = {
+	required: string;
+};
+
+type ShipmentsValidation = {
+	category: ShipmentValidationRule;
+	productType: ShipmentValidationRule;
+	size: ShipmentValidationRule;
+	specification: ShipmentValidationRule;
+	estimatedPrice: ShipmentValidationRule;
+	amount: ShipmentValidationRule;
+	length: ShipmentValidationRule;
+	width: ShipmentValidationRule;
+	weight: ShipmentValidationRule;
+	height: ShipmentValidationRule;
+	volume: ShipmentValidationRule;
+	extent: ShipmentValidationRule;
+	shipmentPrice: ShipmentValidationRule;
+	purchasePriceOfTheItem: ShipmentValidationRule;
+	orderedShipmentNumber: ShipmentValidationRule;
+};
+
+type CustomValidationReturn = {
+	pickupAddress: ValidationRule;
+	pickupAddressZipCode: ValidationRule;
+	deliveryAddress: ValidationRule;
+	deliveryAddressZipCode: ValidationRule;
+	dates: {
+		from: DateValidation;
+		to: DateValidation;
+	};
+	shipments: ShipmentsValidation;
+	senderInformation: InformationValidation;
+	recipientInformation: InformationValidation;
+	ransomPayeeInformation: InformationValidation | { required: boolean };
+	purchaseInformation: InformationValidation | { required: boolean };
+	customerInformation: {
+		payerOfTheShipment: ValidationRule;
+		paymentMethod: ValidationRule;
+	};
+	invoiceInformation: InformationValidation | { required: boolean };
+	packagingAndLabelingRules: ValidationRule;
+	transportRules: ValidationRule;
+};
+
+export type { CustomValidationReturn };
 
 const useCustomShipmentsValidation = () => {
 	return {
@@ -31,7 +106,7 @@ const useCustomShipmentsValidation = () => {
 export const useCustomValidation = ({
 	invoiceNeeded = false,
 	service,
-}: ValidationProps) => {
+}: ValidationProps): CustomValidationReturn => {
 	const combinedLTandUKPhoneNumberRegex = /^\+(44|370)\d+$/;
 	return {
 		pickupAddress:
@@ -168,6 +243,7 @@ export const useCustomValidation = ({
 		ransomPayeeInformation:
 			service === 'productSalesService'
 				? {
+						// @ts-ignore
 						ransomRecipient: {
 							required: 'Laukas yra privalomas',
 							minLength: {
@@ -262,6 +338,7 @@ export const useCustomValidation = ({
 		},
 		invoiceInformation: invoiceNeeded
 			? {
+					// @ts-ignore
 					companyName: {
 						required: 'Laukas yra privalomas',
 						minLength: {

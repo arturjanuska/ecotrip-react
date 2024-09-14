@@ -30,6 +30,10 @@ import { getError } from '../../utils/validation/getError';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import { useEffect, useState } from 'react';
 import { servicesDefinition } from '../../utils/getServices';
+import TypeSelect from './fields/TypeSelect';
+import VolumeFields from './fields/VolumeFields';
+
+export const productTypesWithRequiredManagerCall = ['interior', 'carQuarter'];
 
 type Props = {
 	shipmentNumber: number;
@@ -295,8 +299,6 @@ const SingleShimpentForm = ({
 		name: `shipments.${index}.estimatedPrice`,
 	});
 
-	const productTypesWithRequiredManagerCall = ['interior', 'carQuarter'];
-
 	const volumeErrorMessages = [
 		errorMessages.length,
 		errorMessages.width,
@@ -360,33 +362,25 @@ const SingleShimpentForm = ({
 			</div>
 			<div className='right-column'>
 				{productTypeOptions.length > 0 && (
-					<FieldContainer
-						label={`Nr. ${shipmentNumber} siuntos tipas`}
-						description={`${
-							productTypesWithRequiredManagerCall.includes(
-								selectedProductType?.value ?? ''
-							)
-								? 'Susisiekite su vadybininku'
-								: ''
-						}`}>
-						<ControlledStyledSelect
-							name={`shipments.${index}.productType`}
+					<>
+						<TypeSelect
+							shipmentNumber={shipmentNumber}
+							selectedProductTypeValue={selectedProductType?.value}
+							index={index}
 							control={control}
-							isClearable
-							rules={validationRules.shipments.productType}
+							validationRules={validationRules.shipments.productType}
 							errorMessage={getError(
 								`shipments.${index}.productType`,
 								formErrors
 							)}
 							options={productTypeOptions}
-							placeholder='Siuntos tipas'
 							onChange={() => {
 								setValue(`shipments.${index}.size`, null);
 								setValue(`shipments.${index}.specification`, null);
 								setValue(`shipments.${index}.estimatedPrice`, '0.00');
 							}}
 						/>
-					</FieldContainer>
+					</>
 				)}
 				{selectedCategory?.value === 'flatScreenTv' ? (
 					<>
@@ -411,97 +405,49 @@ const SingleShimpentForm = ({
 				{productTypesThatNeedsPriceCalculation.includes(
 					selectedProductType?.value ?? ''
 				) ? (
-					<FieldContainer
-						label={`Nr. ${shipmentNumber} siuntos išmatavimai metrais`}
-						description={''}>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'column',
-								gap: '8px',
-							}}>
-							<div className='volume-fields-container'>
-								<CustomInput
-									name={`shipments.${index}.length`}
-									control={control}
-									placeholder='Ilgis'
-									defaultValue={0}
-									type='number'
-									onFocus={(e) => {
-										const value = e.target.value;
-										if (Number(value) === 0) {
-											setValue(`shipments.${index}.length`, '');
-										}
-									}}
-									onChange={(e) => {
-										handleValidation('length', e.target.value);
-									}}
-									rules={validationRules.shipments.length}
-									errorMessage={getError(
-										`shipments.${index}.length`,
-										formErrors
-									)}
-								/>
-								<CustomInput
-									name={`shipments.${index}.width`}
-									control={control}
-									placeholder='Plotis'
-									defaultValue={0}
-									type='number'
-									onFocus={(e) => {
-										const value = e.target.value;
-										if (Number(value) === 0) {
-											setValue(`shipments.${index}.width`, '');
-										}
-									}}
-									onChange={(e) => {
-										handleValidation('width', e.target.value);
-									}}
-									rules={validationRules.shipments.width}
-									errorMessage={getError(
-										`shipments.${index}.width`,
-										formErrors
-									)}
-								/>
-								<CustomInput
-									name={`shipments.${index}.height`}
-									control={control}
-									placeholder='Aukštis'
-									defaultValue={0}
-									type='number'
-									onFocus={(e) => {
-										const value = e.target.value;
-										if (Number(value) === 0) {
-											setValue(`shipments.${index}.height`, '');
-										}
-									}}
-									onChange={(e) => {
-										handleValidation('height', e.target.value);
-									}}
-									rules={validationRules.shipments.height}
-									errorMessage={getError(
-										`shipments.${index}.height`,
-										formErrors
-									)}
-								/>
-							</div>
-							<div className='errors'>
-								{volumeErrorMessages.length !== 0 &&
-									volumeErrorMessages
-										.filter((mes) => mes !== undefined)
-										.map((err, index) => {
-											return (
-												<div
-													className='error'
-													key={index}>
-													<span>Šių parametrų siuntos neaptarnaujame. </span>{' '}
-													{err}
-												</div>
-											);
-										})}
-							</div>
-						</div>
-					</FieldContainer>
+					<VolumeFields
+						shipmentNumber={shipmentNumber}
+						index={index}
+						control={control}
+						validationRules={validationRules}
+						errorMessages={{
+							length: getError(`shipments.${index}.length`, formErrors),
+							width: getError(`shipments.${index}.width`, formErrors),
+							height: getError(`shipments.${index}.height`, formErrors),
+						}}
+						onFocus={{
+							length: (e: React.FocusEvent<HTMLInputElement, Element>) => {
+								const value = e.target.value;
+								if (Number(value) === 0) {
+									setValue(`shipments.${index}.length`, '');
+								}
+							},
+							width: (e: React.FocusEvent<HTMLInputElement, Element>) => {
+								const value = e.target.value;
+								if (Number(value) === 0) {
+									setValue(`shipments.${index}.width`, '');
+								}
+							},
+							height: (e: React.FocusEvent<HTMLInputElement, Element>) => {
+								const value = e.target.value;
+								if (Number(value) === 0) {
+									setValue(`shipments.${index}.height`, '');
+								}
+							},
+						}}
+						onChange={{
+							length: (e: any) => {
+								handleValidation('length', e.target.value);
+							},
+							width: (e: any) => {
+								handleValidation('width', e.target.value);
+							},
+							height: (e: any) => {
+								handleValidation('height', e.target.value);
+							},
+						}}
+						volumeErrorMessages={volumeErrorMessages}
+					/>
 				) : null}
 				{selectedCategory?.value === 'shipments' ||
 				selectedCategory?.value === 'removals' ? (
@@ -541,244 +487,120 @@ const SingleShimpentForm = ({
 							</FieldContainer>
 						) : null}
 
-						<FieldContainer
-							label={`Nr. ${shipmentNumber} siuntos išmatavimai centimetrais`}
+						<VolumeFields
+							shipmentNumber={shipmentNumber}
 							description={
 								selectedService === servicesDefinition[2]
 									? 'Maksimalus "Parcel Force" siuntos ilgis 110 cm, plotis 70 cm, aukštis 110 cm. Didesnių išmatavimų neaptarnaujame.'
 									: ''
-							}>
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									gap: '8px',
-								}}>
-								<div className='volume-fields-container'>
-									<CustomInput
-										name={`shipments.${index}.length`}
-										control={control}
-										placeholder='Ilgis'
-										type='number'
-										onFocus={(e) => {
-											const value = e.target.value;
-											if (Number(value) === 0) {
-												setValue(`shipments.${index}.length`, '');
-											}
-										}}
-										defaultValue={0}
-										min={0}
-										onChange={(e) => {
-											handleValidation('length', e.target.value);
-										}}
-										rules={validationRules.shipments.length}
-										errorMessage={getError(
-											`shipments.${index}.length`,
-											formErrors
-										)}
-										isError={!!errorMessages.length}
-									/>
-									<CustomInput
-										name={`shipments.${index}.width`}
-										control={control}
-										placeholder='Plotis'
-										type='number'
-										onFocus={(e) => {
-											const value = e.target.value;
-											if (Number(value) === 0) {
-												setValue(`shipments.${index}.width`, '');
-											}
-										}}
-										defaultValue={0}
-										min={0}
-										onChange={(e) => {
-											handleValidation('width', e.target.value);
-										}}
-										rules={validationRules.shipments.width}
-										errorMessage={getError(
-											`shipments.${index}.width`,
-											formErrors
-										)}
-										isError={!!errorMessages.width}
-									/>
-									<CustomInput
-										name={`shipments.${index}.height`}
-										control={control}
-										placeholder='Aukštis'
-										type='number'
-										onFocus={(e) => {
-											const value = e.target.value;
-											if (Number(value) === 0) {
-												setValue(`shipments.${index}.height`, '');
-											}
-										}}
-										defaultValue={0}
-										min={0}
-										onChange={(e) => {
-											handleValidation('height', e.target.value);
-										}}
-										rules={validationRules.shipments.height}
-										errorMessage={getError(
-											`shipments.${index}.height`,
-											formErrors
-										)}
-										isError={!!errorMessages.height}
-									/>
-								</div>
-								<div className='errors'>
-									{volumeErrorMessages.length !== 0 &&
-										volumeErrorMessages
-											.filter((mes) => mes !== undefined)
-											.map((err, index) => {
-												return (
-													<div
-														className='error'
-														key={index}>
-														<span>Šių parametrų siuntos neaptarnaujame. </span>{' '}
-														{err}
-													</div>
-												);
-											})}
-								</div>
-							</div>
-						</FieldContainer>
-
-						{selectedService === servicesDefinition[2] ? (
-							<FieldContainer
-								label={`Nr. ${shipmentNumber} siuntos apimtis (max 300 cm)`}>
-								<CustomInput
-									name={`shipments.${index}.extent`}
-									control={control}
-									type='number'
-									onFocus={(e) => {
-										const value = e.target.value;
-										if (Number(value) === 0) {
-											setValue(`shipments.${index}.extent`, '');
-										}
-									}}
-									placeholder='Apimtis'
-									onChange={(e) => {
-										handleValidation('extent', e.target.value);
-									}}
-									rules={validationRules.shipments.extent}
-									errorMessage={
-										errorMessages.extent ||
-										getError(`shipments.${index}.extent`, formErrors)
+							}
+							index={index}
+							control={control}
+							validationRules={validationRules}
+							errorMessages={{
+								length: getError(`shipments.${index}.length`, formErrors),
+								width: getError(`shipments.${index}.width`, formErrors),
+								height: getError(`shipments.${index}.height`, formErrors),
+								extent:
+									errorMessages.extent ||
+									getError(`shipments.${index}.extent`, formErrors),
+								shipmentPrice: getError(
+									`shipments.${index}.shipmentPrice`,
+									formErrors
+								),
+								orderedShipmentNumber: getError(
+									`shipments.${index}.orderedShipmentNumber`,
+									formErrors
+								),
+								purchasePriceOfTheItem: getError(
+									`shipments.${index}.purchasePriceOfTheItem`,
+									formErrors
+								),
+								orderedShipmentNumberErrorMessage,
+								shipmentPriceErrorMessage,
+								purchasePriceOfTheItemErrorMessage,
+							}}
+							onFocus={{
+								length: (e: React.FocusEvent<HTMLInputElement, Element>) => {
+									const value = e.target.value;
+									if (Number(value) === 0) {
+										setValue(`shipments.${index}.length`, '');
 									}
-								/>
-							</FieldContainer>
-						) : null}
-
-						{selectedService === servicesDefinition[3] && (
-							<FieldContainer
-								label='Užsakytos siuntos numeris (Amazon UK, eBay ir kt.) *'
-								description=''>
-								<>
-									<CustomInput
-										name={`shipments.${index}.orderedShipmentNumber`}
-										control={control}
-										placeholder='Siuntos numeris'
-										onChange={(e) => {
-											handleValidation('orderedShipmentNumber', e.target.value);
-										}}
-										rules={validationRules.shipments.orderedShipmentNumber}
-										errorMessage={getError(
-											`shipments.${index}.orderedShipmentNumber`,
-											formErrors
-										)}
-									/>
-									{orderedShipmentNumberErrorMessage && (
-										<div className='errors'>
-											<div className='error'>
-												<span>Neįvestas siuntos numeris. </span>{' '}
-												{orderedShipmentNumberErrorMessage}
-											</div>
-										</div>
-									)}
-								</>
-							</FieldContainer>
-						)}
-						{selectedService === servicesDefinition[4] && (
-							<FieldContainer
-								label='Prekės nupirkimo suma'
-								description=''>
-								<>
-									<CustomInput
-										name={`shipments.${index}.shipmentPrice`}
-										control={control}
-										placeholder='Įveskite prekės sumą'
-										type='number'
-										onFocus={(e) => {
-											const value = e.target.value;
-											if (Number(value) === 0) {
-												setValue(`shipments.${index}.shipmentPrice`, '');
-											}
-										}}
-										onChange={(e) => {
-											if (Number(e.target.value) >= 250) {
-												setShipmentPriceError(
-													'Prekės kainai viršijus £250 GBP, reikalingas pinigų perdavimas EcoTrip kurjeriui iki prekės nupirkimo. Atvykstame nurodytu pinigus perduodačio asmens adresu.'
-												);
-											} else {
-												setShipmentPriceError('');
-											}
-										}}
-										rules={validationRules.shipments.shipmentPrice}
-										errorMessage={getError(
-											`shipments.${index}.shipmentPrice`,
-											formErrors
-										)}
-									/>
-									{shipmentPriceErrorMessage && (
-										<div className='errors'>
-											<div className='error'>{shipmentPriceErrorMessage}</div>
-										</div>
-									)}
-								</>
-							</FieldContainer>
-						)}
-						{selectedService === servicesDefinition[5] && (
-							<FieldContainer
-								label='Siuntos/prekės išpirkos kaina'
-								description=''>
-								<>
-									<CustomInput
-										name={`shipments.${index}.purchasePriceOfTheItem`}
-										control={control}
-										placeholder='Įveskite siuntos/prekės kainą'
-										type='number'
-										onFocus={(e) => {
-											const value = e.target.value;
-											if (Number(value) === 0) {
-												setValue(
-													`shipments.${index}.purchasePriceOfTheItem`,
-													''
-												);
-											}
-										}}
-										onChange={(e) => {
-											handleValidation(
-												'purchasePriceOfTheItem',
-												e.target.value
-											);
-										}}
-										rules={validationRules.shipments.purchasePriceOfTheItem}
-										errorMessage={getError(
-											`shipments.${index}.purchasePriceOfTheItem`,
-											formErrors
-										)}
-									/>
-									{purchasePriceOfTheItemErrorMessage && (
-										<div className='errors'>
-											<div className='error'>
-												<span>Neįvesta siuntos/prekės kaina. </span>{' '}
-												{purchasePriceOfTheItemErrorMessage}
-											</div>
-										</div>
-									)}
-								</>
-							</FieldContainer>
-						)}
+								},
+								width: (e: React.FocusEvent<HTMLInputElement, Element>) => {
+									const value = e.target.value;
+									if (Number(value) === 0) {
+										setValue(`shipments.${index}.width`, '');
+									}
+								},
+								height: (e: React.FocusEvent<HTMLInputElement, Element>) => {
+									const value = e.target.value;
+									if (Number(value) === 0) {
+										setValue(`shipments.${index}.height`, '');
+									}
+								},
+								extent: (e: React.FocusEvent<HTMLInputElement, Element>) => {
+									const value = e.target.value;
+									if (Number(value) === 0) {
+										setValue(`shipments.${index}.extent`, '');
+									}
+								},
+								shipmentPrice: (
+									e: React.FocusEvent<HTMLInputElement, Element>
+								) => {
+									const value = e.target.value;
+									if (Number(value) === 0) {
+										setValue(`shipments.${index}.shipmentPrice`, '');
+									}
+								},
+								purchasePriceOfTheItem: (
+									e: React.FocusEvent<HTMLInputElement, Element>
+								) => {
+									const value = e.target.value;
+									if (Number(value) === 0) {
+										setValue(`shipments.${index}.purchasePriceOfTheItem`, '');
+									}
+								},
+							}}
+							onChange={{
+								length: (e: any) => {
+									handleValidation('length', e.target.value);
+								},
+								width: (e: any) => {
+									handleValidation('width', e.target.value);
+								},
+								height: (e: any) => {
+									handleValidation('height', e.target.value);
+								},
+								extent: (e: any) => {
+									handleValidation('extent', e.target.value);
+								},
+								orderedShipmentNumber: (e: any) => {
+									handleValidation('orderedShipmentNumber', e.target.value);
+								},
+								purchasePriceOfTheItem: (e: any) => {
+									handleValidation('purchasePriceOfTheItem', e.target.value);
+								},
+								shipmentPrice: (e) => {
+									if (Number(e.target.value) >= 250) {
+										setShipmentPriceError(
+											'Prekės kainai viršijus £250 GBP, reikalingas pinigų perdavimas EcoTrip kurjeriui iki prekės nupirkimo. Atvykstame nurodytu pinigus perduodačio asmens adresu.'
+										);
+									} else {
+										setShipmentPriceError('');
+									}
+								},
+							}}
+							volumeErrorMessages={volumeErrorMessages}
+							showExtentField={selectedService === servicesDefinition[2]}
+							showOrderedShipmentNumber={
+								selectedService === servicesDefinition[3]
+							}
+							showShipmentPriceField={selectedService === servicesDefinition[4]}
+							showPurchasePriceOfItemField={
+								selectedService === servicesDefinition[5]
+							}
+						/>
 					</>
 				) : (
 					<>
