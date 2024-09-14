@@ -1,6 +1,7 @@
 import '../styles/modal.css';
 import SecondaryButton from '../components/SecondaryButton';
 import PrimaryButton from '../components/PrimaryButton';
+import useScrollToTop from '../utils/useScrollToTop';
 
 const ModalPage = ({
 	setOrderId,
@@ -9,6 +10,8 @@ const ModalPage = ({
 	setOrderId: () => void;
 	orderId: string;
 }) => {
+	useScrollToTop();
+
 	return (
 		<div className='modal-wrapper'>
 			<div className='modal-container'>

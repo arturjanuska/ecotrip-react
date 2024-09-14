@@ -87,7 +87,7 @@ const Footer = () => {
 								/>
 								<InfoEntry
 									icon={faLocationDot}
-									content='Minijos g. 152b 93263 Klaipėda'
+									content='Dubysos g. 37, Klaipėda'
 								/>
 								<div className='contacts-icons'>
 									<IconWithContainer
