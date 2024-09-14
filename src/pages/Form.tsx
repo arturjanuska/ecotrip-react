@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 import { transformFormDataToEndpoint } from '../utils/transformFormDataToEndpoint';
+import { servicesDefinition } from '../utils/getServices';
 
 const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
   const methods = useForm<FormType>({
@@ -82,7 +83,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
   // const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
 
   useEffect(() => {
-    if (service !== 'shipmentWithAddressService') {
+    if (service !== servicesDefinition[3]) {
       methods.setValue('service', '');
     }
   }, [pickupAddressZipCode, deliveryAddressZipCode]);
@@ -115,7 +116,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
   };
 
   const showPurchaseInformation =
-    selectedService === 'productPurchaseService' &&
+    selectedService === servicesDefinition[4] &&
     sumOfPurchasePrice(shipments) > 249;
 
   useEffect(() => {
@@ -133,13 +134,11 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     <form
       className='main'
       onSubmit={methods.handleSubmit(onSubmit)}
-      autoComplete='off'
-    >
+      autoComplete='off'>
       <div
         style={{
           marginBottom: '70px',
-        }}
-      >
+        }}>
         <Breadcrumds />
         <Divider />
         <AddressForm
@@ -192,12 +191,12 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
                 <SenderInformation
                   control={methods.control}
                   stepLabel={
-                    selectedService === 'productSalesService' ||
-                    selectedService === 'productPurchaseService'
+                    selectedService === servicesDefinition[5] ||
+                      selectedService === servicesDefinition[4]
                       ? 'Siuntos paėmimo / pardavėjo informacija'
-                      : selectedService === 'shipmentWithAddressService'
-                      ? 'EcoTrip sandėlio duomenys, kuriuos turite nurodyti užsakydami siuntą iš tiekėjo'
-                      : 'Siuntos paėmimo / siuntėjo informacija'
+                      : selectedService === servicesDefinition[3]
+                        ? 'EcoTrip sandėlio duomenys, kuriuos turite nurodyti užsakydami siuntą iš tiekėjo'
+                        : 'Siuntos paėmimo / siuntėjo informacija'
                   }
                   formErrors={formErrors}
                   setValue={methods.setValue}
@@ -211,13 +210,13 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
                   formErrors={formErrors}
                   methods={methods}
                   stepLabel={
-                    selectedService === 'productSalesService'
+                    selectedService === servicesDefinition[5]
                       ? 'Prekės pristatymo / gavėjo informacija'
                       : 'Siuntos pristatymo / gavėjo informacija'
                   }
                   step={showPurchaseInformation ? 6 : 5}
                 />
-                {selectedService === 'productSalesService' && (
+                {selectedService === servicesDefinition[5] && (
                   <>
                     <Divider />
                     <RansomPayeeInformation
@@ -232,11 +231,11 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
                 <PayerInformation
                   control={methods.control}
                   step={
-                    selectedService === 'productSalesService'
+                    selectedService === servicesDefinition[5]
                       ? 7
                       : showPurchaseInformation
-                      ? 7
-                      : 6
+                        ? 7
+                        : 6
                   }
                   stepLabel={'Užsakovo informacija'}
                   formErrors={formErrors}

@@ -75,16 +75,16 @@ const AddressForm = ({
 		checkParcelForcePostcodes(
 			direction
 				? {
-						postcodes: [
-							selectedPickupAddressPostcode as string,
-							selectedDeliveryAddressPostcode as string,
-						],
-						setPostCodeObject,
-				  }
+					postcodes: [
+						selectedPickupAddressPostcode as string,
+						selectedDeliveryAddressPostcode as string,
+					],
+					setPostCodeObject,
+				}
 				: {
-						postcodes: [],
-						setPostCodeObject,
-				  }
+					postcodes: [],
+					setPostCodeObject,
+				}
 		) || false;
 
 	const getDirection = (pickupPostcode: string, deliveryPostcode: string) => {
@@ -206,16 +206,6 @@ const AddressForm = ({
 				currency={currency}
 				methods={methods}
 			/>
-
-			{/* {direction && direction !== 'LT-LT' ? (
-        <ServiceSection
-          setValue={setValue}
-          selectedService={selectedService}
-          isParcelForce={isParcelForce}
-          currency={currency}
-          methods={methods}
-        />
-      ) : null} */}
 		</Step>
 	);
 };
