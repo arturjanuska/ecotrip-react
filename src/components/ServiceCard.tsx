@@ -6,6 +6,8 @@ export type ServiceProps = {
   desc: string;
   icon: React.ReactNode;
   value: string;
+  link?: string;
+  linkText?: string;
 };
 
 export type ServiceCardProps = {
