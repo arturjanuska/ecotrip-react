@@ -124,8 +124,8 @@ const ServiceSection = ({
             </svg>
           ),
           value: 'parcelForceShipment',
-
-          linkText: 'Link',
+          link: 'https://ecotrip.lt/siuntos-i-anglija-is-lietuvos-is-anglijos-i-lietuva/',
+          linkText: 'Sužinoti daugiau apie siuntų ir krovinių pervežimą.',
         },
 
         {
@@ -202,8 +202,10 @@ const ServiceSection = ({
             </svg>
           ),
           value: 'shipmentWithAddressService',
+          link: 'https://ecotrip.lt/apsipirkimo-adresas-anglijoje/',
 
-          linkText: 'Link',
+          linkText:
+            'Sužinoti daugiau apie siuntas su adreso paslauga ir kaip ja naudotis.',
         },
         {
           title: 'Prekės nupirkimo paslauga',
@@ -339,8 +341,8 @@ const ServiceSection = ({
             </svg>
           ),
           value: 'standartShipment',
-
-          linkText: 'Link',
+          link: 'https://ecotrip.lt/siuntos-i-anglija-is-lietuvos-is-anglijos-i-lietuva/',
+          linkText: 'Sužinoti daugiau apie siuntų ir krovinių pervežimą.',
         },
         {
           title: 'Siuntos su adreso paslauga',
@@ -416,8 +418,10 @@ const ServiceSection = ({
             </svg>
           ),
           value: 'shipmentWithAddressService',
+          link: 'https://ecotrip.lt/apsipirkimo-adresas-anglijoje/',
 
-          linkText: 'Link',
+          linkText:
+            'Sužinoti daugiau apie siuntas su adreso paslauga ir kaip ja naudotis.',
         },
         {
           title: 'Prekės nupirkimo paslauga',
@@ -557,8 +561,8 @@ const ServiceSection = ({
           </div>
         </div>
         <Link
-          href='/'
-          text='Sužinoti daugiau apie papildomas paslaugas ir kaip jomis naudotis'
+          href='https://ecotrip.lt/prekes-is-anglijos-uk/'
+          text='Sužinoti daugiau apie prekės nupirkimo ir pardavimo paslaugas ir kaip jomis naudotis.'
         />
 
         {selectedService === 'parcelForceShipment' ? (
@@ -567,12 +571,12 @@ const ServiceSection = ({
               Dėl pasirinkto UK adreso, jūsų siuntą persiųsime per partnerius,
               galimas maksimalus siuntos svoris iki 30 kg ir privalomas
               pakavimas dėžėse. Jei sutinkate su sąlygomis tęskite siuntos
-              įvedimą.{' '}
+              įvedimą.
             </span>
-            <Link
+            {/* <Link
               href='/'
               text='Plačiau apie siuntų persiuntimą per partnerius rasite čia.'
-            />
+            /> */}
           </div>
         ) : null}
       </div>
