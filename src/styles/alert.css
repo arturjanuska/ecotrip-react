@@ -1,0 +1,26 @@
+.alert-container {
+	width: 100%;
+	border: 1px solid #ff0000;
+	border-radius: 4px;
+	display: flex;
+	padding: 12px 16px;
+	background-color: #ff00000d;
+	align-items: flex-start;
+	gap: 12px;
+	justify-content: flex-start;
+	margin-bottom: 26px;
+}
+
+.alert-messages {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.alert-messages span {
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16.1px;
+	color: #7a7776;
+}
