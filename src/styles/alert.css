@@ -24,3 +24,8 @@
 	line-height: 16.1px;
 	color: #7a7776;
 }
+@media (max-width: 768px) {
+	.alert-container {
+		width: auto;
+	}
+}

@@ -60,6 +60,8 @@
 	line-height: 16.1px;
 	text-align: left;
 	color: #7a7776;
+	display: flex;
+	justify-content: space-between;
 }
 
 .estimated-price span {
@@ -74,5 +76,8 @@
 @media (max-width: 768px) {
 	.single-shipment-container {
 		flex-direction: column;
+	}
+	.estimated-price {
+		font-size: 13px;
 	}
 }

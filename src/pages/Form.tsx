@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 import { transformFormDataToEndpoint } from '../utils/transformFormDataToEndpoint';
+import useCurrencyConverter from '../utils/useCurrencyConverter';
 
 const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 	const methods = useForm<FormType>({
@@ -48,6 +49,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		null
 	);
 	const currency = methods.watch('currency') ?? '€';
+	const rate = useCurrencyConverter({ currency });
 
 	const service = methods.watch('service');
 
@@ -149,6 +151,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 					currency={currency}
 					formErrors={formErrors}
 					setPostCodeObject={setPostCodeObjectFn}
+					rate={rate}
 				/>
 				<Divider />
 				{direction === 'LT-LT' ? (
@@ -168,6 +171,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 									formErrors={formErrors}
 									errorMessages={errorMessages}
 									setErrorMessages={setErrorMessages}
+									rate={rate}
 								/>
 								<Divider />
 								<TransportationDates
@@ -245,6 +249,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 									postCodeObject={postCodeObject}
 									setPriceDescription={setPriceDescription}
 									priceDescription={priceDescription}
+									rate={rate}
 								/>
 							</>
 						)}

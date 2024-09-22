@@ -28,6 +28,7 @@ const AddressForm = ({
 	currency,
 	formErrors,
 	setPostCodeObject,
+	rate,
 }: {
 	setValue: UseFormSetValue<FormType>;
 	control: Control<FormType, any>;
@@ -37,6 +38,7 @@ const AddressForm = ({
 	currency: '€' | '£';
 	formErrors: FieldErrors<FormType>;
 	setPostCodeObject: (obj: any) => void;
+	rate: number;
 }) => {
 	const onChange = (name: keyof FormType, value: string) => {
 		if (name === 'pickupAddress') {
@@ -205,6 +207,7 @@ const AddressForm = ({
 				isParcelForce={isParcelForce}
 				currency={currency}
 				methods={methods}
+				rate={rate}
 			/>
 
 			{/* {direction && direction !== 'LT-LT' ? (

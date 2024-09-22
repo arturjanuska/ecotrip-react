@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
@@ -16,6 +17,7 @@ import UncontrolledInput from '../UncontrolledInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CustomAlert from '../CustomAlert';
+import { convertValue } from '../../utils/convertCurrency';
 
 type Props = {
 	control: Control<FormType, any>;
@@ -36,6 +38,7 @@ type Props = {
 			}[]
 		>
 	>;
+	rate: number;
 };
 
 const PayerInformation = ({
@@ -50,6 +53,7 @@ const PayerInformation = ({
 	postCodeObject,
 	setPriceDescription,
 	priceDescription,
+	rate,
 }: Props) => {
 	const [discountCode, setDiscountCode] = useState<string>('');
 
@@ -187,22 +191,28 @@ const PayerInformation = ({
 										: ''
 							  }`
 					}:`,
-					price: `${currency}${shipmentPrice.toFixed(2)}` || '0.00',
+					price:
+						`${currency}${shipmentPrice.toFixed(2)} - ${convertValue(
+							currency,
+							shipmentPrice,
+							rate
+						)}` || '0.00',
 				});
 			}
 		}
 
 		const purchaseServiceShipmentsPrices =
-			shipmentsArray.reduce(
-				(acc, curr) => acc + Number(curr.shipmentPrice),
-				0
-			) || 0;
+			shipmentsArray
+				.filter((item) => item.shipmentPrice)
+				.reduce((acc, curr) => {
+					return acc + Number(curr.shipmentPrice);
+				}, 0) || 0;
 
 		const salesServiceShipmentsPrices =
-			shipmentsArray.reduce(
-				(acc, curr) => acc + Number(curr.purchasePriceOfTheItem),
-				0
-			) || 0;
+			shipmentsArray
+				.filter((item) => item.purchasePriceOfTheItem)
+				.reduce((acc, curr) => acc + Number(curr.purchasePriceOfTheItem), 0) ||
+			0;
 
 		if (service === 'shipmentWithAddressService') {
 			price += 0;
@@ -217,13 +227,15 @@ const PayerInformation = ({
 					price += 5;
 					priceDescription.push({
 						title: 'Prekės nupirkimo paslauga:',
-						price: `${currency}5.00`,
+						price: `${currency}5.00 - ${convertValue(currency, 5, rate)}`,
 					});
 				} else {
 					price += threePercentOfThePrice;
 					priceDescription.push({
 						title: 'Prekės nupirkimo paslauga:',
-						price: `${currency}${threePercentOfThePrice.toFixed(2)}`,
+						price: `${currency}${threePercentOfThePrice.toFixed(
+							2
+						)} - ${convertValue(currency, threePercentOfThePrice, rate)}`,
 					});
 				}
 			}
@@ -234,19 +246,21 @@ const PayerInformation = ({
 					price += 15;
 					priceDescription.push({
 						title: `Prekės nupirkimo paslauga:`,
-						price: `${currency}15.00`,
+						price: `${currency}15.00 - ${convertValue(currency, 15, rate)}`,
 					});
 				} else if (twoPercentOfThePrice > 50) {
 					price += 50;
 					priceDescription.push({
 						title: `Prekės nupirkimo paslauga:`,
-						price: `${currency}50.00`,
+						price: `${currency}50.00 - ${convertValue(currency, 50, rate)}`,
 					});
 				} else {
 					price += twoPercentOfThePrice;
 					priceDescription.push({
 						title: `Prekės nupirkimo paslauga:`,
-						price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
+						price: `${currency}${twoPercentOfThePrice.toFixed(
+							2
+						)} - ${convertValue(currency, twoPercentOfThePrice, rate)}`,
 					});
 				}
 			}
@@ -255,7 +269,13 @@ const PayerInformation = ({
 				price += purchaseServiceShipmentsPrices;
 				priceDescription.push({
 					title: 'Prekių nupirkimo suma:',
-					price: `${currency}${purchaseServiceShipmentsPrices.toFixed(2)}`,
+					price: `${currency}${purchaseServiceShipmentsPrices.toFixed(
+						2
+					)}  - ${convertValue(
+						currency,
+						purchaseServiceShipmentsPrices,
+						rate
+					)}`,
 				});
 			}
 		}
@@ -266,19 +286,21 @@ const PayerInformation = ({
 				price += 15;
 				priceDescription.push({
 					title: 'Prekės pardavimo paslauga:',
-					price: `${currency}15.00`,
+					price: `${currency}15.00  - ${convertValue(currency, 15, rate)}`,
 				});
 			} else if (twoPercentOfThePrice > 50) {
 				price += 50;
 				priceDescription.push({
-					title: 'Prekių nupirkimo suma:',
-					price: `${currency}50.00`,
+					title: 'Prekių pardavimo suma:',
+					price: `${currency}50.00  - ${convertValue(currency, 50, rate)}`,
 				});
 			} else {
 				price += twoPercentOfThePrice;
 				priceDescription.push({
-					title: 'Prekių nupirkimo suma:',
-					price: `${currency}${twoPercentOfThePrice.toFixed(2)}`,
+					title: 'Prekių pardavimo suma:',
+					price: `${currency}${twoPercentOfThePrice.toFixed(
+						2
+					)}  - ${convertValue(currency, twoPercentOfThePrice, rate)}`,
 				});
 			}
 		}
@@ -293,6 +315,10 @@ const PayerInformation = ({
 				title: 'Adreso papildomas mokestis:',
 				price: `${currency}${Number(postCodeObject.additionalCharges).toFixed(
 					2
+				)} - ${convertValue(
+					currency,
+					Number(postCodeObject.additionalCharges),
+					rate
 				)}`,
 			});
 		}
@@ -368,8 +394,6 @@ const PayerInformation = ({
 		? 'Nesuvesti siuntos duomenys'
 		: null;
 
-	console.log('shipmentErrorMessage ===', shipmentErrorMessage);
-
 	const isDisabled =
 		Object.keys(errorMessages).length > 0 || shipments.length === 0;
 
@@ -432,14 +456,20 @@ const PayerInformation = ({
 						</SecondaryButton>
 					</div>
 				</div>
-				<OrderPrice
-					sum={orderPrice}
-					currency={currency}
-					control={control}
-					formErrors={formErrors}
-					methods={methods}
-					priceDescription={priceDescription}
-				/>
+				<div className='columns'>
+					<div className='left-column empty'></div>
+					<div className='right-column'>
+						<OrderPrice
+							sum={orderPrice}
+							currency={currency}
+							control={control}
+							formErrors={formErrors}
+							methods={methods}
+							priceDescription={priceDescription}
+							rate={rate}
+						/>
+					</div>
+				</div>
 				<div className='checkboxes-container'>
 					<ControlledCheckboxWithLabel
 						control={control}
@@ -479,6 +509,7 @@ const PayerInformation = ({
 					}}>
 					<CustomAlert
 						messages={[
+							...(submitErrorMessage ? [submitErrorMessage] : []),
 							...(shipmentErrorMessage ? [shipmentErrorMessage] : []),
 							...errorMessagesArray,
 						]}
@@ -488,13 +519,6 @@ const PayerInformation = ({
 						disabled={isDisabled}>
 						<span>Patvirtinti užsakymą</span>
 					</SecondaryButton>
-					{submitErrorMessage ? (
-						<div className='errors'>
-							<div className='error'>
-								<span>{submitErrorMessage}</span>
-							</div>
-						</div>
-					) : null}
 				</div>
 			</>
 		</Step>
