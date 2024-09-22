@@ -132,4 +132,8 @@
 		max-width: none;
 		width: 100%;
 	}
+
+	.service-section-container .services-mapping-container-service-card {
+		width: 100%;
+	}
 }
