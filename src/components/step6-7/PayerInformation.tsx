@@ -368,8 +368,6 @@ const PayerInformation = ({
 		? 'Nesuvesti siuntos duomenys'
 		: null;
 
-	console.log('shipmentErrorMessage ===', shipmentErrorMessage);
-
 	const isDisabled =
 		Object.keys(errorMessages).length > 0 || shipments.length === 0;
 
