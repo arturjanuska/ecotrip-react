@@ -23,7 +23,9 @@ export const getPickupDay = (
 		return {
 			label: `${
 				monthNamesForDaySelect[selectedMonthIndex - 1]
-			} ${pickupStartDay} - ${monthNamesForDaySelect[0]} ${dayDifference}`,
+			} ${pickupStartDay} - ${
+				monthNamesForDaySelect[selectedMonthIndex]
+			} ${dayDifference}`,
 			value: `${pickupStartDay} - ${dayDifference}`,
 		};
 	}
