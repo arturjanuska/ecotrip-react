@@ -53,6 +53,12 @@ const ServiceSection = ({
 	const direction = methods.watch('direction');
 
 	const handleServiceSelect = (service: string) => {
+		if (service === 'shipmentWithAddressService') {
+			setValue('dates.from.day', null);
+			setValue('dates.from.month', null);
+			setValue('dates.from.year', null);
+		}
+
 		if (
 			service === 'productPurchaseService' ||
 			service === 'shipmentWithAddressService'

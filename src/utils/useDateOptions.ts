@@ -17,14 +17,15 @@ export const getPickupDay = (
 	const selectedMonthDate = dayjs(`${currentYear}-${selectedMonthIndex}-01`);
 
 	const daysInMonth = selectedMonthDate.daysInMonth();
-
 	if (pickupStartDay + diff > daysInMonth) {
 		const dayDifference = pickupStartDay + diff - daysInMonth;
 		return {
 			label: `${
 				monthNamesForDaySelect[selectedMonthIndex - 1]
 			} ${pickupStartDay} - ${
-				monthNamesForDaySelect[selectedMonthIndex]
+				monthNamesForDaySelect[
+					selectedMonthIndex === 12 ? 0 : selectedMonthIndex
+				]
 			} ${dayDifference}`,
 			value: `${pickupStartDay} - ${dayDifference}`,
 		};
