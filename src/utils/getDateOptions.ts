@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { monthNames } from '../components/step3/monthNames';
+import { monthNamesForDaySelect } from '../components/step3/monthNames';
 
 const getDateOptions = ({
 	selectedMonth,
@@ -23,7 +23,7 @@ const getDateOptions = ({
 		{ length: 12 - currentMonthIndex + 1 },
 		(_, i) => currentMonthIndex + i
 	).map((month) => ({
-		label: monthNames[month - 1],
+		label: monthNamesForDaySelect[month - 1],
 		value: month.toString(),
 	}));
 

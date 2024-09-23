@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { monthNames } from '../components/step3/monthNames';
+import {
+	monthNamesForDaySelect,
+	monthNamesForMonthSelect,
+} from '../components/step3/monthNames';
 import { OptionType } from './types';
 
-export const getPickupDayLabel = (
+export const getPickupDay = (
 	pickupStartDay: number,
 	pickupEndDay: number,
 	selectedMonthIndex: number,
@@ -17,9 +20,21 @@ export const getPickupDayLabel = (
 
 	if (pickupStartDay + diff > daysInMonth) {
 		const dayDifference = pickupStartDay + diff - daysInMonth;
-		return `${pickupStartDay} - ${dayDifference}`;
+		return {
+			label: `${
+				monthNamesForDaySelect[selectedMonthIndex - 1]
+			} ${pickupStartDay} - ${monthNamesForDaySelect[0]} ${dayDifference}`,
+			value: `${pickupStartDay} - ${dayDifference}`,
+		};
 	}
-	return `${pickupStartDay} - ${pickupEndDay}`;
+	return {
+		label: `${
+			monthNamesForDaySelect[selectedMonthIndex - 1]
+		} ${pickupStartDay} - ${
+			monthNamesForDaySelect[selectedMonthIndex - 1]
+		} ${pickupEndDay}`,
+		value: `${pickupStartDay} - ${pickupEndDay}`,
+	};
 };
 
 const useDateOptions = ({
@@ -63,7 +78,7 @@ const useDateOptions = ({
 				{ length: 12 - currentMonthIndex + 1 },
 				(_, i) => currentMonthIndex + i
 			).map((month) => ({
-				label: monthNames[month - 1],
+				label: monthNamesForMonthSelect[month - 1],
 				value: month.toString(),
 			}));
 
@@ -111,20 +126,14 @@ const useDateOptions = ({
 						const startDay = startDateRange.date();
 						const endDay = endDateRange.date();
 
-						const label = getPickupDayLabel(
+						const day = getPickupDay(
 							startDay,
 							endDay,
 							selectedMonthIndex,
 							is_UK_LT ? 2 : 1
 						);
 
-						if (selectedMonthIndex === 11 && label === '31 - 1') {
-							return;
-						}
-						days.push({
-							label,
-							value: label,
-						});
+						days.push(day);
 
 						// Move the date pointer to the day after the end of this range
 						date = endDateRange.add(1, 'day');

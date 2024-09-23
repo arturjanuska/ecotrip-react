@@ -4,7 +4,10 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { FormType } from './formTypes';
-import { monthNames } from '../components/step3/monthNames';
+import {
+	monthNamesForDaySelect,
+	monthNamesForMonthSelect,
+} from '../components/step3/monthNames';
 
 type Props = {
 	pickupDate: string;
@@ -88,12 +91,26 @@ const useDeliveryDate = ({
 
 			const deliveryEndDate = deliveryStartDate.add(is_UK_LT ? 1 : 2, 'day');
 
+			const deliveryStartDateDay = deliveryStartDate.format('D');
+			const deliveryEndDateDay = deliveryEndDate.format('D');
+
+			const month = deliveryStartDate.format('MM');
+
+			const deliveryStartDateDayLabel = `${
+				monthNamesForDaySelect[parseInt(month, 10) - 1]
+			} ${deliveryStartDateDay}`;
+
+			const deliveryEndDateDayLabel =
+				parseInt(month, 10) === 12
+					? `${monthNamesForDaySelect[0]} ${deliveryEndDateDay}`
+					: `${
+							monthNamesForDaySelect[parseInt(month, 10) - 1]
+					  } ${deliveryEndDateDay}`;
+
 			const deliveryDate = {
 				year: deliveryStartDate.format('YYYY'),
 				month: deliveryStartDate.format('MM'),
-				day: `${deliveryStartDate.format('D')} - ${deliveryEndDate.format(
-					'D'
-				)}`,
+				day: `${deliveryStartDateDay} - ${deliveryEndDateDay}`,
 			};
 
 			setValue('dates.to.year', {
@@ -102,12 +119,12 @@ const useDeliveryDate = ({
 			});
 
 			setValue('dates.to.month', {
-				label: monthNames[deliveryStartDate.month()],
+				label: monthNamesForMonthSelect[deliveryStartDate.month()],
 				value: deliveryDate.month,
 			});
 
 			setValue('dates.to.day', {
-				label: deliveryDate.day,
+				label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
 				value: deliveryDate.day,
 			});
 		};
