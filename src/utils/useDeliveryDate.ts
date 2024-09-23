@@ -4,104 +4,139 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { FormType } from './formTypes';
-import { monthNames } from '../components/step3/monthNames';
+import {
+	monthNamesForDaySelect,
+	monthNamesForMonthSelect,
+} from '../components/step3/monthNames';
 
 type Props = {
-  pickupDate: string;
-  direction: 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
-  setValue: UseFormSetValue<FormType>;
-  dayFrom?: string;
-  service?: string;
+	pickupDate: string;
+	direction: 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
+	setValue: UseFormSetValue<FormType>;
+	dayRangeFrom?: string;
+	service?: string;
 };
 
 const useDeliveryDate = ({
-  pickupDate,
-  direction,
-  setValue,
-  dayFrom,
-  service,
+	pickupDate,
+	direction,
+	setValue,
+	dayRangeFrom,
+	service,
 }: Props) => {
-  useEffect(() => {
-    const getDeliveryDate = () => {
-      if (!pickupDate || direction === 'LT-LT') {
-        setValue('dates.to.year', null);
-        setValue('dates.to.month', null);
-        setValue('dates.to.day', null);
-        return;
-      }
+	useEffect(() => {
+		const getDeliveryDate = () => {
+			if (!pickupDate || direction === 'LT-LT') {
+				setValue('dates.to.year', null);
+				setValue('dates.to.month', null);
+				setValue('dates.to.day', null);
+				return;
+			}
 
-      const [pickupStart, pickupEnd] = pickupDate
-        .split(' - ')
-        .map((day) => day.trim());
-      const [pickupYear, pickupMonth] = pickupStart
-        .split('/')
-        .map((part) => parseInt(part, 10));
+			const pickupStart = pickupDate;
 
-      const deliveryDays =
-        direction === 'UK-LT' || service === 'shipmentWithAddressService'
-          ? [2, 3]
-          : [5, 6];
+			const pickupEndDay = dayRangeFrom?.split(' - ')[1];
 
-      const findNextValidDay = (date: Dayjs, validDays: number[]) => {
-        while (!validDays.includes(date.day())) {
-          date = date.add(1, 'day');
-        }
-        return date;
-      };
+			const pickupMonth = parseInt(pickupStart.split('/')[1], 10);
 
-      const findNextAfterNextValidDay = (date: Dayjs, validDays: number[]) => {
-        date = findNextValidDay(date, validDays);
-        date = date.add(7, 'day');
-        date = findNextValidDay(date, validDays);
-        return date;
-      };
+			const is_UK_LT =
+				direction === 'UK-LT' || service === 'shipmentWithAddressService';
 
-      const pickupEndDate = dayjs(
-        `${pickupYear}-${pickupMonth}-${parseInt(pickupEnd, 10)}`
-      ).add(1, 'day');
+			const deliveryDays = is_UK_LT ? [2, 3] : [0, 5, 6];
 
-      const deliveryStartDate =
-        service === 'parcelForceShipment'
-          ? findNextAfterNextValidDay(pickupEndDate, deliveryDays).subtract(
-              1,
-              'day'
-            )
-          : findNextValidDay(pickupEndDate, deliveryDays).subtract(1, 'day');
+			const findNextValidDay = (date: Dayjs, validDays: number[]) => {
+				while (!validDays.includes(date.day())) {
+					date = date.add(1, 'day');
+				}
+				return date;
+			};
 
-      const deliveryEndDate = deliveryStartDate.add(1, 'day');
+			const findNextAfterNextValidDay = (date: Dayjs, validDays: number[]) => {
+				date = findNextValidDay(date, validDays);
+				date = date.add(7, 'day');
+				date = findNextValidDay(date, validDays);
+				return date;
+			};
 
-      const deliveryDate = {
-        year: deliveryStartDate.format('YYYY'),
-        month: deliveryStartDate.format('MM'),
-        day: `${deliveryStartDate.format('D')} - ${deliveryEndDate.format(
-          'D'
-        )}`,
-      };
+			const getDeliveryYear = () => {
+				const currentYear = dayjs().year();
 
-      setValue('dates.to.year', {
-        label: deliveryDate.year,
-        value: deliveryDate.year,
-      });
+				const nextYear = dayjs().add(1, 'year').year();
 
-      setValue('dates.to.month', {
-        label: monthNames[deliveryStartDate.month()],
-        value: deliveryDate.month,
-      });
+				if (pickupMonth == 12) {
+					if (pickupEndDay === '1' || pickupEndDay === '2') {
+						return nextYear;
+					}
+					return currentYear;
+				}
+				return currentYear;
+			};
 
-      setValue('dates.to.day', {
-        label: deliveryDate.day,
-        value: deliveryDate.day,
-      });
-    };
+			const getDeliveryMonth = () => {
+				return pickupEndDay === '1' || pickupEndDay === '2'
+					? pickupMonth + 1 < 13
+						? pickupMonth + 1
+						: 1
+					: pickupMonth;
+			};
 
-    if (dayFrom) {
-      getDeliveryDate();
-    } else {
-      setValue('dates.to.year', null);
-      setValue('dates.to.month', null);
-      setValue('dates.to.day', null);
-    }
-  }, [pickupDate, direction, setValue, dayFrom, service]);
+			const pickupEndDate = dayjs(
+				`${getDeliveryYear()}-${getDeliveryMonth()}-${pickupEndDay}`
+			).add(1, 'day');
+
+			const deliveryStartDate =
+				service === 'parcelForceShipment'
+					? findNextAfterNextValidDay(pickupEndDate, deliveryDays)
+					: findNextValidDay(pickupEndDate, deliveryDays);
+
+			const deliveryEndDate = deliveryStartDate.add(is_UK_LT ? 1 : 2, 'day');
+
+			const deliveryStartDateDay = deliveryStartDate.format('D');
+			const deliveryEndDateDay = deliveryEndDate.format('D');
+
+			const month = deliveryStartDate.format('MM');
+
+			const deliveryStartDateDayLabel = `${
+				monthNamesForDaySelect[parseInt(month, 10) - 1]
+			} ${deliveryStartDateDay}`;
+
+			const deliveryEndDateDayLabel =
+				parseInt(month, 10) === 12
+					? `${monthNamesForDaySelect[0]} ${deliveryEndDateDay}`
+					: `${
+							monthNamesForDaySelect[parseInt(month, 10) - 1]
+					  } ${deliveryEndDateDay}`;
+
+			const deliveryDate = {
+				year: deliveryStartDate.format('YYYY'),
+				month: deliveryStartDate.format('MM'),
+				day: `${deliveryStartDateDay} - ${deliveryEndDateDay}`,
+			};
+
+			setValue('dates.to.year', {
+				label: deliveryDate.year,
+				value: deliveryDate.year,
+			});
+
+			setValue('dates.to.month', {
+				label: monthNamesForMonthSelect[deliveryStartDate.month()],
+				value: deliveryDate.month,
+			});
+
+			setValue('dates.to.day', {
+				label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
+				value: deliveryDate.day,
+			});
+		};
+
+		if (dayRangeFrom) {
+			getDeliveryDate();
+		} else {
+			setValue('dates.to.year', null);
+			setValue('dates.to.month', null);
+			setValue('dates.to.day', null);
+		}
+	}, [pickupDate, direction, setValue, dayRangeFrom, service]);
 };
 
 export default useDeliveryDate;
