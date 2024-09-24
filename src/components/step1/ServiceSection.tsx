@@ -5,6 +5,7 @@ import Link from '../Link';
 import { UseFormReturn, UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { convertValue } from '../../utils/convertCurrency';
+import scrollToSection from '../../utils/scrollToSection';
 
 const ServiceSection = ({
 	setValue,
@@ -85,6 +86,12 @@ const ServiceSection = ({
 		]);
 		setValue('service', service);
 		prefillAddressFormFields(service);
+		setTimeout(() => {
+			scrollToSection({
+				scrollToSection: 'shipments-section',
+				block: 'center',
+			});
+		}, 200);
 	};
 
 	const getIconColor = (service: string): '#9AA61E' | '#7A777680' => {

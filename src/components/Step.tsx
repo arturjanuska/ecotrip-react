@@ -2,17 +2,20 @@ import React from 'react';
 import '../styles/step.css';
 
 type Props = {
+	id?: string;
 	title: string;
 	step: number;
 	children: React.ReactNode;
 	className?: string;
 };
 
-const Step = ({ title, step, children, className }: Props) => {
+const Step = ({ title, step, children, className, id }: Props) => {
 	const stepTitle = `${step}. ${title}`;
 
 	return (
-		<div className={`step-columns ${className ? className : ''}`}>
+		<div
+			className={`step-columns ${className ? className : ''}`}
+			id={id}>
 			<div className='title-column'>
 				<span>{stepTitle}</span>
 			</div>

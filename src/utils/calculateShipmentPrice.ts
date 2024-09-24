@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-mixed-spaces-and-tabs */
 type Props = {
 	weight?: string;
@@ -24,7 +26,7 @@ export const calculateShipmentPrice = ({
 			extent: 0,
 		};
 	let priceCalculatedByWeight = 0;
-	let priceCalculatedByVolume = 0;
+	// let priceCalculatedByVolume = 0;
 	const nWeight = Number(weight);
 	const nLengthInMeters = Number(length) / 100;
 	const nWidthInMeters = Number(width) / 100;
@@ -63,6 +65,7 @@ export const calculateShipmentPrice = ({
 
 	const extent = nLengthInMeters + nWidthInMeters * 2 + nHeightInMeters * 2;
 
+	// @ts-ignore
 	let pricePerUnit = 286;
 
 	if (volumeInMeters <= 0.16) {
@@ -82,7 +85,7 @@ export const calculateShipmentPrice = ({
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	priceCalculatedByVolume = pricePerUnit * volumeInMeters * amount;
+	// priceCalculatedByVolume = pricePerUnit * volumeInMeters * amount;
 
 	return {
 		price: priceCalculatedByWeight.toFixed(2) ?? '0.00',

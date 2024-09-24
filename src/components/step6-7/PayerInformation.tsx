@@ -89,11 +89,11 @@ const PayerInformation = ({
 
 	const payer = methods.watch('customerInformation.payerOfTheShipment.value');
 
-	const shipmentsWithEmptyEstimatedPrice = shipments.filter((item) => {
-		if (item.estimatedPrice === '0.00' || !item.estimatedPrice) {
-			return true;
-		}
-	});
+	// const shipmentsWithEmptyEstimatedPrice = shipments.filter((item) => {
+	// 	if (item.estimatedPrice === '0.00' || !item.estimatedPrice) {
+	// 		return true;
+	// 	}
+	// });
 
 	const validationRules = useCustomValidation({ service });
 

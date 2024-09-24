@@ -57,6 +57,7 @@ const Shipments = ({
 
 	return (
 		<Step
+			id='shipments-section'
 			step={2}
 			title={`Siuntos suvedimas ${
 				selectedService === 'shipmentWithAddressService'
