@@ -121,7 +121,6 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		sumOfPurchasePrice(shipments) > 249;
 
 	useEffect(() => {
-
 		if (direction && direction !== 'LT-LT') {
 			methods.setValue('dates.from.day', null);
 			methods.setValue('dates.from.month', null);

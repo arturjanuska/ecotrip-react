@@ -11,7 +11,7 @@ import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType, ShipmentProps } from '../../utils/formTypes';
 import ControlledStyledSelect from '../ControlledStyledSelect';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 // import UncontrolledInput from '../UncontrolledInput';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
