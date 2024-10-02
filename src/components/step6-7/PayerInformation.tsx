@@ -13,9 +13,9 @@ import ControlledStyledSelect from '../ControlledStyledSelect';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { useEffect, useState } from 'react';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
-import UncontrolledInput from '../UncontrolledInput';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+// import UncontrolledInput from '../UncontrolledInput';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CustomAlert from '../CustomAlert';
 import { convertValue } from '../../utils/convertCurrency';
 
@@ -55,7 +55,7 @@ const PayerInformation = ({
 	priceDescription,
 	rate,
 }: Props) => {
-	const [discountCode, setDiscountCode] = useState<string>('');
+	// const [discountCode, setDiscountCode] = useState<string>('');
 
 	const payerOptions = [
 		{
