@@ -438,7 +438,7 @@ const PayerInformation = ({
 						/>
 					</FieldContainer>
 				</div>
-				<div className='columns'>
+				{/* <div className='columns'>
 					<div className='left-column empty'></div>
 					<div className='right-column discount-section'>
 						<UncontrolledInput
@@ -455,7 +455,7 @@ const PayerInformation = ({
 							<FontAwesomeIcon icon={faCheck} />
 						</SecondaryButton>
 					</div>
-				</div>
+				</div> */}
 				<div className='columns'>
 					<div className='left-column empty'></div>
 					<div className='right-column'>

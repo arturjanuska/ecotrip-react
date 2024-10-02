@@ -102,6 +102,7 @@
 .news-container {
 	width: 100%;
 	max-width: 300px;
+	width: 300px;
 	display: flex;
 	flex-direction: column;
 	gap: 4rem;
