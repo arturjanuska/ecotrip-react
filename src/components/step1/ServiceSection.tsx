@@ -31,13 +31,13 @@ const ServiceSection = ({
 		if (service === 'shipmentWithAddressService') {
 			setValue(`senderInformation.firstName`, 'EcoTrip UK');
 			setValue(`senderInformation.lastName`, '----');
-			setValue(`senderInformation.phoneNumber`, '+447479622299');
+			setValue(`senderInformation.phoneNumber`, '+447588847760');
 			setValue(`senderInformation.email`, 'info@ecotrip.lt');
 			setValue(
 				`senderInformation.address`,
-				'Chaney Court Cottage, Maidstone Rd, Boughton Monchelseam, Tonbridge'
+				'216 Halbutt St, Dagenham RM9 5AA, UK'
 			);
-			setValue(`senderInformation.zipCode`, 'TN12 0RW');
+			setValue(`senderInformation.zipCode`, 'RM9 5AA');
 		} else {
 			setValue(`senderInformation.firstName`, '');
 			setValue(`senderInformation.lastName`, '');

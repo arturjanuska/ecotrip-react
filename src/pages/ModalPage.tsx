@@ -28,7 +28,7 @@ const ModalPage = ({
 					<p>
 						Jeigu negausite laiško, prašome susisiekti su 'EcoTrip' telefonu{' '}
 						<span className='contact-number'>+37060122060</span> arba{' '}
-						<span className='contact-number'>+447479622299</span>{' '}
+						<span className='contact-number'>+447588847760</span>{' '}
 					</p>
 				</div>
 				<div className='modal-footer'>
