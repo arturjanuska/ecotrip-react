@@ -31,7 +31,7 @@ const ServiceSection = ({
 		if (service === 'shipmentWithAddressService') {
 			setValue(`senderInformation.firstName`, 'EcoTrip UK');
 			setValue(`senderInformation.lastName`, '----');
-			setValue(`senderInformation.phoneNumber`, '+447588847760');
+			setValue(`senderInformation.phoneNumber`, '+447479622299');
 			setValue(`senderInformation.email`, 'info@ecotrip.lt');
 			setValue(
 				`senderInformation.address`,
