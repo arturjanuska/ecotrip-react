@@ -15,8 +15,13 @@ import { FormType, ShipmentProps } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
-import { transformFormDataToEndpoint } from '../utils/transformFormDataToEndpoint';
+import {
+	TransformedFormData,
+	transformFormDataToEndpoint,
+} from '../utils/transformFormDataToEndpoint';
 import useCurrencyConverter from '../utils/useCurrencyConverter';
+import { fetchWrapper } from '../components/api/fetchWrapper';
+import { useMutation } from '@tanstack/react-query';
 
 const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 	const methods = useForm<FormType>({
@@ -89,32 +94,50 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		}
 	}, [pickupAddressZipCode, deliveryAddressZipCode]);
 
-	const onSubmit = async (data: FormType) => {
-		const transformedData = transformFormDataToEndpoint(data);
+	const postData = async (transformedData: TransformedFormData) => {
+		const options = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(transformedData),
+		};
 
-		const response = await fetch(
-			`https://api.uzsakymas.ecotrip.lt/api/orders`,
+		const response = await fetchWrapper(
+			'https://api.uzsakymas.ecotrip.lt/api/orders',
 			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(transformedData),
+				httpOptions: options,
 			}
 		);
 
-		if (response.ok) {
-			const data = await response.json();
+		return response.json();
+	};
+
+	const createTaskMutation = useMutation({
+		mutationKey: ['new-task'],
+		mutationFn: (data: TransformedFormData) => {
+			return postData(data);
+		},
+		onSuccess: (data) => {
 			const orderId = data.orderId;
 			setShowSubmitError(null);
 			setOrderId(orderId);
 			methods.reset();
-		} else {
+		},
+		onError: (error) => {
+			console.log(error);
 			setShowSubmitError(
 				'Serverio klaida. Susisiekite su vadybininku +370 601 22060'
 			);
-		}
+		},
+	});
+
+	const onSubmit = async (data: FormType) => {
+		const transformedData = transformFormDataToEndpoint(data);
+		await createTaskMutation.mutateAsync(transformedData);
 	};
+
+	const isLoading = createTaskMutation.isPending ?? false;
 
 	const showPurchaseInformation =
 		selectedService === 'productPurchaseService' &&
@@ -254,6 +277,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 									setPriceDescription={setPriceDescription}
 									priceDescription={priceDescription}
 									rate={rate}
+									isLoading={isLoading}
 								/>
 							</>
 						)}

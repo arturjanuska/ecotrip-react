@@ -39,6 +39,7 @@ type Props = {
 		>
 	>;
 	rate: number;
+	isLoading: boolean;
 };
 
 const PayerInformation = ({
@@ -54,6 +55,7 @@ const PayerInformation = ({
 	setPriceDescription,
 	priceDescription,
 	rate,
+	isLoading,
 }: Props) => {
 	// const [discountCode, setDiscountCode] = useState<string>('');
 
@@ -516,7 +518,7 @@ const PayerInformation = ({
 					/>
 					<SecondaryButton
 						type={`${isDisabled ? 'button' : 'submit'}`}
-						disabled={isDisabled}>
+						disabled={isDisabled || isLoading}>
 						<span>Patvirtinti užsakymą</span>
 					</SecondaryButton>
 				</div>

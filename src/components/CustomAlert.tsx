@@ -14,7 +14,13 @@ const CustomAlert = ({ messages }: { messages: string[] }) => {
 			</div>
 			<div className='alert-messages'>
 				{messages &&
-					messages.map((mess) => <span className='error'>{mess}</span>)}
+					messages.map((mess) => (
+						<span
+							className='error'
+							key={mess}>
+							{mess}
+						</span>
+					))}
 			</div>
 		</div>
 	);

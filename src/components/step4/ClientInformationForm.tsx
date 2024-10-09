@@ -120,7 +120,9 @@ const ClientInformationForm = ({
 							rules={validationRules?.phoneNumber}
 						/>
 					</FieldContainer>
-					<FieldContainer label={`${value} el. paštas`}>
+					<FieldContainer
+						label={`${value} el. paštas`}
+						description='Prašome nurodyti teisingą el. pašto adresą, kad galėtume išsiųsti užsakymo patvirtinimą ir kurjerio sekimo nuorodą.'>
 						<CustomInput
 							placeholder={`Įveskite ${value.toLowerCase()} el. paštą *`}
 							control={control}

@@ -5,12 +5,15 @@ import { useEffect, useState } from 'react';
 import './globals.css';
 import Form from './pages/Form';
 import ModalPage from './pages/ModalPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 declare global {
 	interface Window {
 		fbq: any;
 	}
 }
+
+const queryClient = new QueryClient();
 
 function App() {
 	const [orderId, setOrderId] = useState<string | null>(null);
@@ -64,25 +67,27 @@ function App() {
 	}, []);
 
 	return (
-		<>
-			{!orderId ? (
-				<Form setOrderId={(id: string) => setOrderId(id)} />
-			) : (
-				<ModalPage
-					setOrderId={() => setOrderId(null)}
-					orderId={orderId}
-				/>
-			)}
-			<noscript>
-				<img
-					height='1'
-					width='1'
-					style={{ display: 'none' }}
-					src='https://www.facebook.com/tr?id=123755041741966&ev=PageView&noscript=1'
-					alt='fb pixel'
-				/>
-			</noscript>
-		</>
+		<QueryClientProvider client={queryClient}>
+			<>
+				{!orderId ? (
+					<Form setOrderId={(id: string) => setOrderId(id)} />
+				) : (
+					<ModalPage
+						setOrderId={() => setOrderId(null)}
+						orderId={orderId}
+					/>
+				)}
+				<noscript>
+					<img
+						height='1'
+						width='1'
+						style={{ display: 'none' }}
+						src='https://www.facebook.com/tr?id=123755041741966&ev=PageView&noscript=1'
+						alt='fb pixel'
+					/>
+				</noscript>
+			</>
+		</QueryClientProvider>
 	);
 }
 

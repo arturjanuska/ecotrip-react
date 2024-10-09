@@ -2,7 +2,66 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { FormType } from './formTypes';
 
-export const transformFormDataToEndpoint = (data: FormType) => {
+type ClientInfoType = {
+	name: string;
+	surname: string;
+	phone: string;
+	email: string;
+	address: string;
+	postCode: string;
+	description: string;
+};
+
+export type TransformedFormData = {
+	route: string | null;
+	estimatedPrice: {
+		value: string;
+		currency: '€' | '£';
+	};
+	invoice: {
+		companyName: string;
+		companyCode: string;
+		pvmCode: string;
+		companyEmail: string;
+		companyAddress: string;
+	} | null;
+	year: number;
+	month: number;
+	day: string | null;
+	dates: {
+		pickupDate: string;
+		deliveryDate: string;
+	};
+	parcels: {
+		category: string | null;
+		productType: string | null;
+		orderedShipmentNumber: string | null;
+		specification: string | null;
+		estimatedPrice: number | null;
+		// @ts-ignore
+		size: string | null;
+		amount: number | null;
+		length: number | null;
+		width: number | null;
+		height: number | null;
+		volume: number | null;
+		extent: number | null;
+		shipmentPrice: number | null;
+		purchasePriceOfTheItem: number | null;
+		weight: number | null;
+	};
+	service: string;
+	payer: string;
+	paymentType: string;
+	receiver: ClientInfoType;
+	sender: ClientInfoType;
+	ransomPayee: (ClientInfoType & { ransomRecipient: string }) | null;
+	purchaseInformation: ClientInfoType | null;
+};
+
+export const transformFormDataToEndpoint = (
+	data: FormType
+): TransformedFormData => {
 	return {
 		route:
 			data.service === 'shipmentWithAddressService' ? 'UK-LT' : data.direction,
@@ -13,7 +72,7 @@ export const transformFormDataToEndpoint = (data: FormType) => {
 		invoice: data.invoiceInformation || null,
 		year: Number(data.dates.from.year?.value),
 		month: Number(data.dates.from.month?.value),
-		day: data.dates.from.day?.value,
+		day: data.dates.from.day?.value || null,
 		dates: {
 			pickupDate: `${Number(data.dates.from.year?.value)}/${Number(
 				data.dates.from.month?.value
@@ -23,11 +82,11 @@ export const transformFormDataToEndpoint = (data: FormType) => {
 			)}/${data.dates.to.day?.value}`,
 		},
 		parcels: data.shipments.map((item) => ({
-			category: item.category?.label,
+			category: item.category?.label || null,
 			productType: item.productType?.label || null,
 			orderedShipmentNumber: item.orderedShipmentNumber || null,
 			specification: item.specification?.label || null,
-			estimatedPrice: Number(item.estimatedPrice),
+			estimatedPrice: Number(item.estimatedPrice) || null,
 			// @ts-ignore
 			size: (item.size?.label as string) ?? null,
 			amount: Number(item.amount) || 1,

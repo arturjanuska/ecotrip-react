@@ -144,7 +144,7 @@ const ServiceSection = ({
 				},
 
 				{
-					title: 'Siuntos su adreso paslauga',
+					title: 'Apsipirkimo adreso suteikimas',
 					desc: `Papildomai nuo ${currency}0`,
 					icon: (
 						<svg
@@ -219,7 +219,7 @@ const ServiceSection = ({
 					link: 'https://ecotrip.lt/apsipirkimo-adresas-anglijoje/',
 
 					linkText:
-						'Sužinoti daugiau apie siuntas su adreso paslauga ir kaip ja naudotis.',
+						'Sužinoti daugiau apie Apsipirkimo adreso suteikimo paslaugą ir kaip ja naudotis.',
 				},
 				{
 					title: 'Prekės nupirkimo paslauga',
@@ -364,7 +364,7 @@ const ServiceSection = ({
 					linkText: 'Sužinoti daugiau apie siuntų ir krovinių pervežimą.',
 				},
 				{
-					title: 'Siuntos su adreso paslauga',
+					title: 'Apsipirkimo adreso suteikimas',
 					desc: `Papildomai nuo ${currency}0`,
 					icon: (
 						<svg
@@ -439,7 +439,7 @@ const ServiceSection = ({
 					link: 'https://ecotrip.lt/apsipirkimo-adresas-anglijoje/',
 
 					linkText:
-						'Sužinoti daugiau apie siuntas su adreso paslauga ir kaip ja naudotis.',
+						'Sužinoti daugiau apie Apsipirkimo adreso suteikimo paslaugą ir kaip ja naudotis.',
 				},
 				{
 					title: 'Prekės nupirkimo paslauga',
