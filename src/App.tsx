@@ -6,89 +6,104 @@ import './globals.css';
 import Form from './pages/Form';
 import ModalPage from './pages/ModalPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
 
 declare global {
-	interface Window {
-		fbq: any;
-	}
+  interface Window {
+    fbq: any;
+  }
 }
 
 const queryClient = new QueryClient();
 
 function App() {
-	const [orderId, setOrderId] = useState<string | null>(null);
+  const [orderId, setOrderId] = useState<string | null>(null);
 
-	useEffect(() => {
-		const loadFacebookPixel = () => {
-			try {
-				// Check if fbq is already defined to avoid redefining
-				if (!window.fbq) {
-					(function (
-						f: any,
-						b: any,
-						e: any,
-						v: any,
-						n?: any,
-						t?: any,
-						s?: any
-					) {
-						if (f.fbq) return;
-						n = f.fbq = function () {
-							(n.callMethod ? n.callMethod : n.queue.push).apply(n, arguments);
-						};
-						if (!f._fbq) f._fbq = n;
-						n.push = n;
-						n.loaded = true;
-						n.version = '2.0';
-						n.queue = [];
-						t = b.createElement(e);
-						t.async = true;
-						t.src = v;
-						s = b.getElementsByTagName(e)[0];
-						s.parentNode.insertBefore(t, s);
-					})(
-						window,
-						document,
-						'script',
-						'https://connect.facebook.net/en_US/fbevents.js'
-					);
+  useEffect(() => {
+    const loadFacebookPixel = () => {
+      try {
+        // Check if fbq is already defined to avoid redefining
+        if (!window.fbq) {
+          (function (
+            f: any,
+            b: any,
+            e: any,
+            v: any,
+            n?: any,
+            t?: any,
+            s?: any
+          ) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+              (n.callMethod ? n.callMethod : n.queue.push).apply(n, arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = true;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = true;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+          })(
+            window,
+            document,
+            'script',
+            'https://connect.facebook.net/en_US/fbevents.js'
+          );
 
-					// Initialize and track PageView
-					window.fbq('init', '123755041741966');
-					window.fbq('track', 'PageView');
-				}
-			} catch (error) {
-				console.error('Error loading Facebook Pixel:', error);
-			}
-		};
+          // Initialize and track PageView
+          window.fbq('init', '123755041741966');
+          window.fbq('track', 'PageView');
+        }
+      } catch (error) {
+        console.error('Error loading Facebook Pixel:', error);
+      }
+    };
 
-		// Run the function to load Facebook Pixel
-		loadFacebookPixel();
-	}, []);
+    // Run the function to load Facebook Pixel
+    loadFacebookPixel();
+  }, []);
 
-	return (
-		<QueryClientProvider client={queryClient}>
-			<>
-				{!orderId ? (
-					<Form setOrderId={(id: string) => setOrderId(id)} />
-				) : (
-					<ModalPage
-						setOrderId={() => setOrderId(null)}
-						orderId={orderId}
-					/>
-				)}
-				<noscript>
-					<img
-						height='1'
-						width='1'
-						style={{ display: 'none' }}
-						src='https://www.facebook.com/tr?id=123755041741966&ev=PageView&noscript=1'
-						alt='fb pixel'
-					/>
-				</noscript>
-			</>
-		</QueryClientProvider>
-	);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <>
+        <Helmet>
+          <script
+            async
+            src='https://www.googletagmanager.com/gtag/js?id=AW-792301087'
+          ></script>
+          <script>
+            {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-792301087');
+          `}
+          </script>
+        </Helmet>
+
+        <>
+          {!orderId ? (
+            <Form setOrderId={(id: string) => setOrderId(id)} />
+          ) : (
+            <ModalPage setOrderId={() => setOrderId(null)} orderId={orderId} />
+          )}
+          <noscript>
+            <img
+              height='1'
+              width='1'
+              style={{ display: 'none' }}
+              src='https://www.facebook.com/tr?id=123755041741966&ev=PageView&noscript=1'
+              alt='fb pixel'
+            />
+          </noscript>
+        </>
+      </>
+    </QueryClientProvider>
+  );
 }
 
 export default App;

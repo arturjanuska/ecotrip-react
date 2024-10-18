@@ -141,11 +141,16 @@ const AddressForm = ({
   ]);
 
   return (
-    <Step title='Paėmimo ir pristatymo adresai' step={1}>
+    <Step
+      title='Paėmimo ir pristatymo adresai'
+      step={1}
+      instructions='Įveskite siuntėjo ir gavėjo adresus, tuomet pasirinkite norimą paslaugą iš langelių apačioje'
+    >
       <div className='address-form-section-wrapper'>
         <FieldContainer
           label='Paėmimo adresas:'
           description='Adresas iš kur paimama siunta arba perduodama EcoTrip kurjeriui.'
+          instructions='Įrašykite ir pasirinkite tikslų siuntėjo adresą'
         >
           <SearchBoxV2
             control={control}
@@ -177,6 +182,7 @@ const AddressForm = ({
         <FieldContainer
           label='Pristatymo adresas:'
           description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'
+          instructions='Įrašykite ir pasirinkite tikslų gavėjo adresą'
         >
           <SearchBoxV2
             name={'deliveryAddress'}
@@ -191,6 +197,8 @@ const AddressForm = ({
         <FieldContainer
           label='Pristatymo pašto kodas:'
           description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą.'
+          instructions=''
+          className='align-self-baseline mt-26px'
         >
           <CustomInput
             type='text'
