@@ -149,8 +149,9 @@ const AddressForm = ({
       <div className='address-form-section-wrapper'>
         <FieldContainer
           label='Paėmimo adresas:'
-          description='Adresas iš kur paimama siunta arba perduodama EcoTrip kurjeriui.'
-          instructions='Įrašykite ir pasirinkite tikslų siuntėjo adresą'
+          description='Įrašykite ir pasirinkite tikslų siuntėjo adresą.'
+          // description='Adresas iš kur paimama siunta arba perduodama EcoTrip kurjeriui.'
+          // instructions='Įrašykite ir pasirinkite tikslų siuntėjo adresą'
         >
           <SearchBoxV2
             control={control}
@@ -181,8 +182,9 @@ const AddressForm = ({
       <div className='address-form-section-wrapper'>
         <FieldContainer
           label='Pristatymo adresas:'
-          description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'
-          instructions='Įrašykite ir pasirinkite tikslų gavėjo adresą'
+          description='Įrašykite ir pasirinkite tikslų gavėjo adresą.'
+          // description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'
+          // instructions='Įrašykite ir pasirinkite tikslų gavėjo adresą'
         >
           <SearchBoxV2
             name={'deliveryAddress'}

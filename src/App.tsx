@@ -16,55 +16,43 @@ declare global {
 
 const queryClient = new QueryClient();
 
+const initFacebookPixel = (pixelId: string) => {
+  if (typeof window.fbq === 'undefined') {
+    (function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod
+          ? n.callMethod.apply(n, arguments)
+          : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(
+      window,
+      document,
+      'script',
+      'https://connect.facebook.net/en_US/fbevents.js'
+    );
+    window.fbq('init', pixelId);
+    window.fbq('track', 'PageView');
+  } else {
+    console.warn('Facebook Pixel is blocked or already loaded.');
+  }
+};
+
 function App() {
   const [orderId, setOrderId] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadFacebookPixel = () => {
-      try {
-        // Check if fbq is already defined to avoid redefining
-        if (!window.fbq) {
-          (function (
-            f: any,
-            b: any,
-            e: any,
-            v: any,
-            n?: any,
-            t?: any,
-            s?: any
-          ) {
-            if (f.fbq) return;
-            n = f.fbq = function () {
-              (n.callMethod ? n.callMethod : n.queue.push).apply(n, arguments);
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = true;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = true;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s);
-          })(
-            window,
-            document,
-            'script',
-            'https://connect.facebook.net/en_US/fbevents.js'
-          );
-
-          // Initialize and track PageView
-          window.fbq('init', '123755041741966');
-          window.fbq('track', 'PageView');
-        }
-      } catch (error) {
-        console.error('Error loading Facebook Pixel:', error);
-      }
-    };
-
-    // Run the function to load Facebook Pixel
-    loadFacebookPixel();
+    initFacebookPixel('123755041741966');
   }, []);
 
   return (
@@ -84,7 +72,32 @@ function App() {
           `}
           </script>
         </Helmet>
-
+        {/* <Helmet>
+          <script>
+            {`
+            !function(f,b,e,v,n,t,s) {
+              if (f.fbq) return;
+              const n = (f.fbq = function () {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+              });
+              if (!f._fbq) f._fbq = n;
+              n.push = n;
+              n.loaded = !0;
+              n.version = '2.0';
+              n.queue = [];
+              const t = b.createElement(e);
+              t.async = !0;
+              t.src = v;
+              const s = b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t, s);
+              (window, document, 'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', 'YOUR_PIXEL_ID');
+              fbq('track', 'PageView');
+            }
+          `}
+          </script>
+        </Helmet> */}
         <>
           {!orderId ? (
             <Form setOrderId={(id: string) => setOrderId(id)} />
