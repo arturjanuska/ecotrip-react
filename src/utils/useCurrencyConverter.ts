@@ -1,34 +1,30 @@
 import { useEffect, useState } from 'react';
 
 const useCurrencyConverter = ({ currency }: { currency: '€' | '£' }) => {
-  const [rate, setRate] = useState(1);
+	const [rate, setRate] = useState(1);
 
-  useEffect(() => {
-    const getRate = async (currency: '€' | '£') => {
-      const currencyCode = currency === '€' ? 'EUR' : 'GBP';
+	useEffect(() => {
+		const getRate = async (currency: '€' | '£') => {
+			const baseCurrencyCode = currency === '€' ? 'EUR' : 'GBP';
+			const currencyCodeToGetRate = baseCurrencyCode === 'EUR' ? 'GBP' : 'EUR';
 
-      const response = await fetch(
-        `https://v6.exchangerate-api.com/v6/f4425234a41d92bbe4bfd444/latest/${currencyCode}`
-      );
-      const data = await response.json();
+			const res = await fetch(
+				`https://openexchangerates.org/api/latest.json?app_id=3a45579860fa4b5a9cb32b7078d5c23c&base=${baseCurrencyCode}`
+			);
 
-      const conversionRate = Object.entries(data.conversion_rates).find(
-        ([key]) => {
-          const rateCurrencyCodeKey = currencyCode === 'EUR' ? 'GBP' : 'EUR';
-          if (rateCurrencyCodeKey === key) {
-            return true;
-          }
-          return false;
-        }
-      );
-      if (conversionRate && conversionRate.length > 0) {
-        setRate(conversionRate[1] as number);
-      }
-    };
-    getRate(currency);
-  }, [currency]);
+			const data = await res.json();
 
-  return rate;
+			const conversionRate = Object.entries(data.rates).find(
+				([key]) => currencyCodeToGetRate === key
+			);
+
+			if (conversionRate && conversionRate.length > 0) {
+				setRate(conversionRate[1] as number);
+			}
+		};
+		getRate(currency);
+	}, [currency]);
+	return rate;
 };
 
 export default useCurrencyConverter;
