@@ -9,7 +9,7 @@ const useCurrencyConverter = ({ currency }: { currency: '€' | '£' }) => {
 			const currencyCodeToGetRate = baseCurrencyCode === 'EUR' ? 'GBP' : 'EUR';
 
 			const res = await fetch(
-				`https://openexchangerates.org/api/latest.json?app_id=3a45579860fa4b5a9cb32b7078d5c23c&base=${baseCurrencyCode}`
+				`https://openexchangerates.org/api/latest.json?app_id=559dcf0827d44c219f0a22fdc6264e3c&base=${baseCurrencyCode}`
 			);
 
 			const data = await res.json();
