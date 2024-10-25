@@ -22,6 +22,7 @@ import {
 import useCurrencyConverter from '../utils/useCurrencyConverter';
 import { fetchWrapper } from '../components/api/fetchWrapper';
 import { useMutation } from '@tanstack/react-query';
+import ReactPixel from 'react-facebook-pixel';
 
 declare global {
   interface Window {
@@ -29,7 +30,11 @@ declare global {
   }
 }
 
-const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
+const Form = ({
+  setOrderId,
+}: {
+  setOrderId: (id: string) => void;
+}) => {
   const methods = useForm<FormType>({
     defaultValues: {
       invoiceRequired: false,
@@ -46,9 +51,9 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     shouldUnregister: true,
   });
 
-  const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
-    {}
-  );
+  const [errorMessages, setErrorMessages] = useState<
+    Record<string, string>
+  >({});
 
   const [priceDescription, setPriceDescription] = useState<
     { title: string; price: string }[]
@@ -56,9 +61,9 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 
   const [postCodeObject, setPostCodeObject] = useState<any>(null);
 
-  const [submitErrorMessage, setShowSubmitError] = useState<string | null>(
-    null
-  );
+  const [submitErrorMessage, setShowSubmitError] = useState<
+    string | null
+  >(null);
   const currency = methods.watch('currency') ?? '€';
   const rate = useCurrencyConverter({ currency });
 
@@ -70,7 +75,9 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 
   const selectedService = methods.watch('service');
   const pickupAddressZipCode = methods.watch('pickupAddressZipCode');
-  const deliveryAddressZipCode = methods.watch('deliveryAddressZipCode');
+  const deliveryAddressZipCode = methods.watch(
+    'deliveryAddressZipCode'
+  );
 
   // @ts-ignore
   const formData = methods.watch();
@@ -168,6 +175,10 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     }
   }, [direction]);
 
+  useEffect(() => {
+    ReactPixel.pageView();
+  }, []);
+
   const setPostCodeObjectFn = (obj: any) => {
     setPostCodeObject(obj);
   };
@@ -241,7 +252,8 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
                     selectedService === 'productSalesService' ||
                     selectedService === 'productPurchaseService'
                       ? 'Siuntos paėmimo / pardavėjo informacija'
-                      : selectedService === 'shipmentWithAddressService'
+                      : selectedService ===
+                        'shipmentWithAddressService'
                       ? 'EcoTrip sandėlio duomenys, kuriuos turite nurodyti užsakydami siuntą iš tiekėjo'
                       : 'Siuntos paėmimo / siuntėjo informacija'
                   }

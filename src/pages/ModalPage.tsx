@@ -2,7 +2,7 @@ import '../styles/modal.css';
 import SecondaryButton from '../components/SecondaryButton';
 import PrimaryButton from '../components/PrimaryButton';
 import useScrollToTop from '../utils/useScrollToTop';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const ModalPage = ({
   setOrderId,
@@ -13,17 +13,17 @@ const ModalPage = ({
 }) => {
   useScrollToTop();
 
-  // useEffect(() => {
-  //   const triggerGoogleConversion = () => {
-  //     window.gtag('event', 'conversion', {
-  //       send_to: 'AW-792301087',
-  //       value: 'Success order',
-  //     });
-  //   };
-  //   if (orderId) {
-  //     triggerGoogleConversion();
-  //   }
-  // }, [orderId]);
+  useEffect(() => {
+    const triggerGoogleConversion = () => {
+      window.gtag('event', 'conversion', {
+        send_to: 'AW-792301087',
+        value: 'Success order',
+      });
+    };
+    if (orderId) {
+      triggerGoogleConversion();
+    }
+  }, [orderId]);
 
   return (
     <div className='modal-wrapper'>
