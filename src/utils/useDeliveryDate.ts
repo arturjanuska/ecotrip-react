@@ -8,6 +8,7 @@ import {
   monthNamesForDaySelect,
   monthNamesForMonthSelect,
 } from '../components/step3/monthNames';
+import { getDecemberDeliveryDays } from './hardcodedDays/december';
 
 type Props = {
   pickupDate: string;
@@ -37,20 +38,29 @@ const useDeliveryDate = ({
 
       const pickupEndDay = dayRangeFrom?.split(' - ')[1];
 
-      const pickupMonth = parseInt(pickupStart.split('/')[1], 10);
+      const pickupMonth = parseInt(
+        pickupStart.split('/')[1],
+        10
+      );
 
       const is_UK_LT = direction === 'UK-LT';
 
       const deliveryDays = is_UK_LT ? [2, 3] : [0, 5, 6];
 
-      const findNextValidDay = (date: Dayjs, validDays: number[]) => {
+      const findNextValidDay = (
+        date: Dayjs,
+        validDays: number[]
+      ) => {
         while (!validDays.includes(date.day())) {
           date = date.add(1, 'day');
         }
         return date;
       };
 
-      const findNextAfterNextValidDay = (date: Dayjs, validDays: number[]) => {
+      const findNextAfterNextValidDay = (
+        date: Dayjs,
+        validDays: number[]
+      ) => {
         date = findNextValidDay(date, validDays);
         date = date.add(7, 'day');
         date = findNextValidDay(date, validDays);
@@ -63,7 +73,10 @@ const useDeliveryDate = ({
         const nextYear = dayjs().add(1, 'year').year();
 
         if (pickupMonth == 12) {
-          if (pickupEndDay === '1' || pickupEndDay === '2') {
+          if (
+            pickupEndDay === '1' ||
+            pickupEndDay === '2'
+          ) {
             return nextYear;
           }
           return currentYear;
@@ -85,14 +98,25 @@ const useDeliveryDate = ({
 
       const deliveryStartDate =
         service === 'parcelForceShipment'
-          ? findNextAfterNextValidDay(pickupEndDate, deliveryDays)
+          ? findNextAfterNextValidDay(
+              pickupEndDate,
+              deliveryDays
+            )
           : findNextValidDay(pickupEndDate, deliveryDays);
 
-      const deliveryEndDate = deliveryStartDate.add(is_UK_LT ? 1 : 2, 'day');
+      const deliveryEndDate = deliveryStartDate.add(
+        is_UK_LT ? 1 : 2,
+        'day'
+      );
 
-      const deliveryStartDateDay = deliveryStartDate.format('D');
-      const deliveryEndDateDay = deliveryEndDate.format('D');
-
+      const deliveryStartDateDay =
+        deliveryStartDate.format('D');
+      const deliveryEndDateDay =
+        deliveryEndDate.format('D');
+      console.log(
+        'deliveryEndDateDay ===> ',
+        deliveryEndDateDay
+      );
       const month = deliveryStartDate.format('MM');
 
       const deliveryStartDateDayLabel = `${
@@ -103,7 +127,12 @@ const useDeliveryDate = ({
         parseInt(month, 10) === 12
           ? `${monthNamesForDaySelect[0]} ${deliveryEndDateDay}`
           : `${
-              monthNamesForDaySelect[parseInt(month, 10) - 1]
+              monthNamesForDaySelect[
+                parseInt(deliveryEndDateDay, 10) === 1 ||
+                parseInt(deliveryEndDateDay, 10) === 2
+                  ? parseInt(month, 10)
+                  : parseInt(month, 10) - 1
+              ]
             } ${deliveryEndDateDay}`;
 
       const deliveryDate = {
@@ -118,14 +147,28 @@ const useDeliveryDate = ({
       });
 
       setValue('dates.to.month', {
-        label: monthNamesForMonthSelect[deliveryStartDate.month()],
+        label:
+          monthNamesForMonthSelect[
+            deliveryStartDate.month()
+          ],
         value: deliveryDate.month,
       });
 
-      setValue('dates.to.day', {
-        label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
-        value: deliveryDate.day,
-      });
+      if (getDeliveryMonth() === 12) {
+        // December hardcoded days
+        setValue(
+          'dates.to.day',
+          getDecemberDeliveryDays(
+            direction,
+            dayRangeFrom as string
+          ) || null
+        );
+      } else {
+        setValue('dates.to.day', {
+          label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
+          value: deliveryDate.day,
+        });
+      }
     };
 
     if (dayRangeFrom) {
@@ -135,7 +178,13 @@ const useDeliveryDate = ({
       setValue('dates.to.month', null);
       setValue('dates.to.day', null);
     }
-  }, [pickupDate, direction, setValue, dayRangeFrom, service]);
+  }, [
+    pickupDate,
+    direction,
+    setValue,
+    dayRangeFrom,
+    service,
+  ]);
 };
 
 export default useDeliveryDate;

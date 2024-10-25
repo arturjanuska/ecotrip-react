@@ -5,6 +5,7 @@ import {
   monthNamesForMonthSelect,
 } from '../components/step3/monthNames';
 import { OptionType } from './types';
+import { getDecemberPickupDays } from './hardcodedDays/december';
 
 export const getPickupDay = (
   pickupStartDay: number,
@@ -15,8 +16,8 @@ export const getPickupDay = (
   const currentYear = dayjs().year();
 
   const selectedMonthDate = dayjs(`${currentYear}-${selectedMonthIndex}-01`);
-
   const daysInMonth = selectedMonthDate.daysInMonth();
+
   if (pickupStartDay + diff > daysInMonth) {
     const dayDifference = pickupStartDay + diff - daysInMonth;
     return {
@@ -84,17 +85,14 @@ const useDateOptions = ({
         value: month.toString(),
       }));
 
-      const days: OptionType[] = [];
+      let days: OptionType[] = [];
 
       if (selectedMonth) {
         const selectedMonthIndex = parseInt(selectedMonth, 10);
-
         // Start from the first day of the selected month
         let date = dayjs(`${currentYear}-${selectedMonth}-01`);
-
         // Set endDate to the end of the selected month
         const endDate = date.endOf('month');
-
         while (date.isBefore(endDate) || date.isSame(endDate, 'day')) {
           // Skip past dates
           if (
@@ -134,8 +132,10 @@ const useDateOptions = ({
               selectedMonthIndex,
               is_UK_LT ? 2 : 1
             );
-
-            days.push(day);
+            // TODO: HARDCODED FOR DECEMBER MONTH, PROBABLY NEED TO REMOVE AFTER NY
+            if (day.value !== '1 - 1') {
+              days.push(day);
+            }
 
             // Move the date pointer to the day after the end of this range
             date = endDateRange.add(1, 'day');
@@ -144,8 +144,12 @@ const useDateOptions = ({
           }
         }
       }
-
-      setDateOptions({ years, months, days });
+      if (selectedMonth === '12') {
+        days = getDecemberPickupDays(direction);
+        setDateOptions({ years, months, days });
+      } else {
+        setDateOptions({ years, months, days });
+      }
     };
 
     calculateDateOptions();
