@@ -7,6 +7,12 @@ type ValidationProps = {
   formShipment?: ShipmentProps;
 };
 
+const notZero = (value: string) => {
+  return parseFloat(value) === 0
+    ? 'Laukas negali būti nulis'
+    : true;
+};
+
 const useCustomShipmentsValidation = () => {
   return {
     category: { required: 'Laukas yra privalomas' },
@@ -14,16 +20,48 @@ const useCustomShipmentsValidation = () => {
     size: { required: 'Laukas yra privalomas' },
     specification: { required: 'Laukas yra privalomas' },
     estimatedPrice: { required: 'Laukas yra privalomas' },
-    amount: { required: 'Laukas yra privalomas' },
-    length: { required: 'Laukas yra privalomas' },
-    width: { required: 'Laukas yra privalomas' },
-    weight: { required: 'Laukas yra privalomas' },
-    height: { required: 'Laukas yra privalomas' },
+    amount: {
+      required: 'Laukas yra privalomas',
+      validate: {
+        notZero,
+      },
+    },
+    length: {
+      required: 'Laukas yra privalomas',
+      validate: {
+        notZero,
+      },
+    },
+    width: {
+      required: 'Laukas yra privalomas',
+      validate: {
+        notZero,
+      },
+    },
+    weight: {
+      required: 'Laukas yra privalomas',
+      validate: {
+        notZero,
+      },
+    },
+    height: {
+      required: 'Laukas yra privalomas',
+      validate: {
+        notZero,
+      },
+    },
     volume: { required: 'Laukas yra privalomas' },
     extent: { required: 'Laukas yra privalomas' },
     shipmentPrice: { required: 'Laukas yra privalomas' },
-    purchasePriceOfTheItem: { required: 'Laukas yra privalomas' },
-    orderedShipmentNumber: { required: 'Laukas yra privalomas' },
+    purchasePriceOfTheItem: {
+      required: 'Laukas yra privalomas',
+      validate: {
+        notZero,
+      },
+    },
+    orderedShipmentNumber: {
+      required: 'Laukas yra privalomas',
+    },
   };
 };
 
@@ -79,14 +117,16 @@ export const useCustomValidation = ({
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
       lastName: {
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
       phoneNumber: {
@@ -100,7 +140,8 @@ export const useCustomValidation = ({
       email: {
         required: 'Laukas yra privalomas',
         pattern: {
-          value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+          value:
+            /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
           message: 'Neteisingas el. pašto formatas',
         },
       },
@@ -108,14 +149,16 @@ export const useCustomValidation = ({
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
       zipCode: {
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
     },
@@ -124,14 +167,16 @@ export const useCustomValidation = ({
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
       lastName: {
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
       phoneNumber: {
@@ -145,7 +190,8 @@ export const useCustomValidation = ({
       email: {
         required: 'Laukas yra privalomas',
         pattern: {
-          value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+          value:
+            /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
           message: 'Neteisingas el. pašto formatas',
         },
       },
@@ -153,14 +199,16 @@ export const useCustomValidation = ({
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
       zipCode: {
         required: 'Laukas yra privalomas',
         minLength: {
           value: 3,
-          message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message:
+            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
         },
       },
     },
@@ -171,21 +219,24 @@ export const useCustomValidation = ({
               required: 'Laukas yra privalomas',
               minLength: {
                 value: 3,
-                message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message:
+                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
               },
             },
             firstName: {
               required: 'Laukas yra privalomas',
               minLength: {
                 value: 3,
-                message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message:
+                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
               },
             },
             lastName: {
               required: 'Laukas yra privalomas',
               minLength: {
                 value: 3,
-                message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message:
+                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
               },
             },
             phoneNumber: {
@@ -199,7 +250,8 @@ export const useCustomValidation = ({
             email: {
               required: 'Laukas yra privalomas',
               pattern: {
-                value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+                value:
+                  /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
                 message: 'Neteisingas el. pašto formatas',
               },
             },
@@ -207,14 +259,16 @@ export const useCustomValidation = ({
               required: 'Laukas yra privalomas',
               minLength: {
                 value: 3,
-                message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message:
+                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
               },
             },
             zipCode: {
               required: 'Laukas yra privalomas',
               minLength: {
                 value: 3,
-                message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message:
+                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
               },
             },
           }
@@ -226,14 +280,16 @@ export const useCustomValidation = ({
               required: 'Laukas yra privalomas',
               minLength: {
                 value: 3,
-                message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message:
+                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
               },
             },
             lastName: {
               required: 'Laukas yra privalomas',
               minLength: {
                 value: 3,
-                message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message:
+                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
               },
             },
             phoneNumber: {
@@ -247,7 +303,8 @@ export const useCustomValidation = ({
             email: {
               required: 'Laukas yra privalomas',
               pattern: {
-                value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+                value:
+                  /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
                 message: 'Neteisingas el. pašto formatas',
               },
             },
@@ -256,7 +313,9 @@ export const useCustomValidation = ({
           }
         : { required: false },
     customerInformation: {
-      payerOfTheShipment: { required: 'Laukas yra privalomas' },
+      payerOfTheShipment: {
+        required: 'Laukas yra privalomas',
+      },
       paymentMethod: { required: 'Laukas yra privalomas' },
     },
     invoiceInformation: invoiceNeeded
@@ -265,27 +324,31 @@ export const useCustomValidation = ({
             required: 'Laukas yra privalomas',
             minLength: {
               value: 3,
-              message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message:
+                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
             },
           },
           companyCode: {
             required: 'Laukas yra privalomas',
             minLength: {
               value: 3,
-              message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message:
+                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
             },
           },
           pvmCode: {
             required: 'Laukas yra privalomas',
             minLength: {
               value: 3,
-              message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message:
+                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
             },
           },
           companyEmail: {
             required: 'Laukas yra privalomas',
             pattern: {
-              value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+              value:
+                /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
               message: 'Neteisingas el. pašto formatas',
             },
           },
@@ -293,16 +356,19 @@ export const useCustomValidation = ({
             required: 'Laukas yra privalomas',
             minLength: {
               value: 3,
-              message: 'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message:
+                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
             },
           },
         }
       : { required: false },
     packagingAndLabelingRules: {
-      required: 'Prašome pažymėti, kad sutinkate su EcoTrip taisyklėmis.',
+      required:
+        'Prašome pažymėti, kad sutinkate su EcoTrip taisyklėmis.',
     },
     transportRules: {
-      required: 'Prašome pažymėti, kad sutinkate su EcoTrip taisyklėmis.',
+      required:
+        'Prašome pažymėti, kad sutinkate su EcoTrip taisyklėmis.',
     },
   };
 };
