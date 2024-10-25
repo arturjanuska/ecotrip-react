@@ -113,10 +113,6 @@ const useDeliveryDate = ({
         deliveryStartDate.format('D');
       const deliveryEndDateDay =
         deliveryEndDate.format('D');
-      console.log(
-        'deliveryEndDateDay ===> ',
-        deliveryEndDateDay
-      );
       const month = deliveryStartDate.format('MM');
 
       const deliveryStartDateDayLabel = `${
