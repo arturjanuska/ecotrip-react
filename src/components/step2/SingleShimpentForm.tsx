@@ -71,7 +71,8 @@ const SingleShimpentForm = ({
     'gardenEquipment',
   ];
 
-  const [shipmentPriceErrorMessage, setShipmentPriceError] = useState('');
+  const [shipmentPriceErrorMessage, setShipmentPriceError] =
+    useState('');
 
   const productTypesThatNeedsPriceCalculation = ['fridge', 'freezer'];
 
@@ -118,7 +119,10 @@ const SingleShimpentForm = ({
           }
           break;
         case 'width':
-          if (selectedService === 'parcelForceShipment' && Number(value) > 70) {
+          if (
+            selectedService === 'parcelForceShipment' &&
+            Number(value) > 70
+          ) {
             return 'Apgailestaujame, tačiau į mūsų automobilius telpa ne platesni kaip 70 cm kroviniai.';
           } else {
             if (Number(value) > 200)
@@ -146,11 +150,17 @@ const SingleShimpentForm = ({
             return 'Suveskite parduodamos prekės kainą, kurią EcoTrip kurjeriui perduos siuntos gavėjas.';
           break;
         case 'extent':
-          if (Number(value) > 300 && selectedService === 'parcelForceShipment')
+          if (
+            Number(value) > 300 &&
+            selectedService === 'parcelForceShipment'
+          )
             return 'Siuntos apimtis skaičiuojama automatiškai pagal formulę: ilgis + plotis*2 + aukštis*2 < 300 cm - viršijus nepatarnaujame.';
           break;
         case 'weight':
-          if (Number(value) > 30 && selectedService === 'parcelForceShipment')
+          if (
+            Number(value) > 30 &&
+            selectedService === 'parcelForceShipment'
+          )
             return 'Apgailestaujame, tačiau sunkesnius uz 30 kg krovinius neaptarnaujame.';
           break;
         default:
@@ -183,7 +193,8 @@ const SingleShimpentForm = ({
     name: `shipments.${index}.category`,
   });
 
-  const productTypeOptions = getOptionsBySelectedCategory(selectedCategory);
+  const productTypeOptions =
+    getOptionsBySelectedCategory(selectedCategory);
 
   const selectedProductType = useWatch({
     control,
@@ -297,14 +308,18 @@ const SingleShimpentForm = ({
     name: `shipments.${index}.estimatedPrice`,
   });
 
-  const productTypesWithRequiredManagerCall = ['interior', 'carQuarter'];
+  const productTypesWithRequiredManagerCall = [
+    'interior',
+    'carQuarter',
+  ];
 
   const volumeErrorMessages = [
     errorMessages.length,
     errorMessages.width,
     errorMessages.height,
   ];
-  const orderedShipmentNumberErrorMessage = errorMessages.orderedShipmentNumber;
+  const orderedShipmentNumberErrorMessage =
+    errorMessages.orderedShipmentNumber;
 
   const purchasePriceOfTheItemErrorMessage =
     errorMessages.purchasePriceOfTheItem;
@@ -320,6 +335,7 @@ const SingleShimpentForm = ({
           <ControlledStyledSelect
             name={`shipments.${index}.category`}
             control={control}
+            // @ts-ignore
             rules={validationRules.shipments.category}
             options={categoriesOptions.map((option) => {
               if (
@@ -358,7 +374,12 @@ const SingleShimpentForm = ({
             {isNaN(Number(estimatedPrice)) || !estimatedPrice
               ? '0.00'
               : estimatedPrice}{' '}
-            - {convertValue(currency, Number(estimatedPrice ?? 0), rate)}
+            -{' '}
+            {convertValue(
+              currency,
+              Number(estimatedPrice ?? 0),
+              rate
+            )}
           </span>
         </p>
       </div>
@@ -378,6 +399,7 @@ const SingleShimpentForm = ({
               name={`shipments.${index}.productType`}
               control={control}
               isClearable
+              // @ts-ignore
               rules={validationRules.shipments.productType}
               errorMessage={getError(
                 `shipments.${index}.productType`,
@@ -408,8 +430,12 @@ const SingleShimpentForm = ({
                 onChange={() => {
                   setValue(`shipments.${index}.specification`, null);
                 }}
+                // @ts-ignore
                 rules={validationRules.shipments.size}
-                errorMessage={getError(`shipments.${index}.size`, formErrors)}
+                errorMessage={getError(
+                  `shipments.${index}.size`,
+                  formErrors
+                )}
               />
             </FieldContainer>
           </>
@@ -444,6 +470,7 @@ const SingleShimpentForm = ({
                   onChange={(e) => {
                     handleValidation('length', e.target.value);
                   }}
+                  // @ts-ignore
                   rules={validationRules.shipments.length}
                   errorMessage={getError(
                     `shipments.${index}.length`,
@@ -465,6 +492,7 @@ const SingleShimpentForm = ({
                   onChange={(e) => {
                     handleValidation('width', e.target.value);
                   }}
+                  // @ts-ignore
                   rules={validationRules.shipments.width}
                   errorMessage={getError(
                     `shipments.${index}.width`,
@@ -486,6 +514,7 @@ const SingleShimpentForm = ({
                   onChange={(e) => {
                     handleValidation('height', e.target.value);
                   }}
+                  // @ts-ignore
                   rules={validationRules.shipments.height}
                   errorMessage={getError(
                     `shipments.${index}.height`,
@@ -500,7 +529,9 @@ const SingleShimpentForm = ({
                     .map((err, index) => {
                       return (
                         <div className='error' key={index}>
-                          <span>Šių parametrų siuntos neaptarnaujame. </span>{' '}
+                          <span>
+                            Šių parametrų siuntos neaptarnaujame.{' '}
+                          </span>{' '}
                           {err}
                         </div>
                       );
@@ -536,6 +567,7 @@ const SingleShimpentForm = ({
                       setValue(`shipments.${index}.weight`, '');
                     }
                   }}
+                  // @ts-ignore
                   rules={validationRules.shipments.weight}
                   errorMessage={
                     errorMessages.weight ||
@@ -580,6 +612,7 @@ const SingleShimpentForm = ({
                     onChange={(e) => {
                       handleValidation('length', e.target.value);
                     }}
+                    // @ts-ignore
                     rules={validationRules.shipments.length}
                     errorMessage={getError(
                       `shipments.${index}.length`,
@@ -603,6 +636,7 @@ const SingleShimpentForm = ({
                     onChange={(e) => {
                       handleValidation('width', e.target.value);
                     }}
+                    // @ts-ignore
                     rules={validationRules.shipments.width}
                     errorMessage={getError(
                       `shipments.${index}.width`,
@@ -626,6 +660,7 @@ const SingleShimpentForm = ({
                     onChange={(e) => {
                       handleValidation('height', e.target.value);
                     }}
+                    // @ts-ignore
                     rules={validationRules.shipments.height}
                     errorMessage={getError(
                       `shipments.${index}.height`,
@@ -641,7 +676,9 @@ const SingleShimpentForm = ({
                       .map((err, index) => {
                         return (
                           <div className='error' key={index}>
-                            <span>Šių parametrų siuntos neaptarnaujame. </span>{' '}
+                            <span>
+                              Šių parametrų siuntos neaptarnaujame.{' '}
+                            </span>{' '}
                             {err}
                           </div>
                         );
@@ -668,6 +705,7 @@ const SingleShimpentForm = ({
                   onChange={(e) => {
                     handleValidation('extent', e.target.value);
                   }}
+                  // @ts-ignore
                   rules={validationRules.shipments.extent}
                   errorMessage={
                     errorMessages.extent ||
@@ -688,9 +726,15 @@ const SingleShimpentForm = ({
                     control={control}
                     placeholder='Siuntos numeris'
                     onChange={(e) => {
-                      handleValidation('orderedShipmentNumber', e.target.value);
+                      handleValidation(
+                        'orderedShipmentNumber',
+                        e.target.value
+                      );
                     }}
-                    rules={validationRules.shipments.orderedShipmentNumber}
+                    // @ts-ignore
+                    rules={
+                      validationRules.shipments.orderedShipmentNumber
+                    }
                     errorMessage={getError(
                       `shipments.${index}.orderedShipmentNumber`,
                       formErrors
@@ -708,7 +752,10 @@ const SingleShimpentForm = ({
               </FieldContainer>
             )}
             {selectedService === 'productPurchaseService' && (
-              <FieldContainer label='Prekės nupirkimo suma' description=''>
+              <FieldContainer
+                label='Prekės nupirkimo suma'
+                description=''
+              >
                 <>
                   <CustomInput
                     name={`shipments.${index}.shipmentPrice`}
@@ -718,7 +765,10 @@ const SingleShimpentForm = ({
                     onFocus={(e) => {
                       const value = e.target.value;
                       if (Number(value) === 0) {
-                        setValue(`shipments.${index}.shipmentPrice`, '');
+                        setValue(
+                          `shipments.${index}.shipmentPrice`,
+                          ''
+                        );
                       }
                     }}
                     onChange={(e) => {
@@ -730,6 +780,7 @@ const SingleShimpentForm = ({
                         setShipmentPriceError('');
                       }
                     }}
+                    // @ts-ignore
                     rules={validationRules.shipments.shipmentPrice}
                     errorMessage={getError(
                       `shipments.${index}.shipmentPrice`,
@@ -738,7 +789,9 @@ const SingleShimpentForm = ({
                   />
                   {shipmentPriceErrorMessage && (
                     <div className='errors'>
-                      <div className='error'>{shipmentPriceErrorMessage}</div>
+                      <div className='error'>
+                        {shipmentPriceErrorMessage}
+                      </div>
                     </div>
                   )}
                 </>
@@ -770,7 +823,10 @@ const SingleShimpentForm = ({
                         e.target.value
                       );
                     }}
-                    rules={validationRules.shipments.purchasePriceOfTheItem}
+                    // @ts-ignore
+                    rules={
+                      validationRules.shipments.purchasePriceOfTheItem
+                    }
                     errorMessage={getError(
                       `shipments.${index}.purchasePriceOfTheItem`,
                       formErrors
@@ -810,8 +866,12 @@ const SingleShimpentForm = ({
                       options={sizeOptions}
                       placeholder='Siuntos dydis'
                       onChange={() => {
-                        setValue(`shipments.${index}.specification`, null);
+                        setValue(
+                          `shipments.${index}.specification`,
+                          null
+                        );
                       }}
+                      // @ts-ignore
                       rules={validationRules.shipments.size}
                       errorMessage={getError(
                         `shipments.${index}.size`,
@@ -832,6 +892,7 @@ const SingleShimpentForm = ({
                       control={control}
                       options={specificationOptions}
                       placeholder='Siuntos specifikacija'
+                      // @ts-ignore
                       rules={validationRules.shipments.specification}
                       errorMessage={getError(
                         `shipments.${index}.specification`,
@@ -841,7 +902,10 @@ const SingleShimpentForm = ({
                   </FieldContainer>
                 ) : null}
                 {selectedService === 'productPurchaseService' && (
-                  <FieldContainer label='Prekės nupirkimo suma' description=''>
+                  <FieldContainer
+                    label='Prekės nupirkimo suma'
+                    description=''
+                  >
                     <>
                       <CustomInput
                         name={`shipments.${index}.shipmentPrice`}
@@ -851,7 +915,10 @@ const SingleShimpentForm = ({
                         onFocus={(e) => {
                           const value = e.target.value;
                           if (Number(value) === 0) {
-                            setValue(`shipments.${index}.shipmentPrice`, '');
+                            setValue(
+                              `shipments.${index}.shipmentPrice`,
+                              ''
+                            );
                           }
                         }}
                         onChange={(e) => {
@@ -863,7 +930,10 @@ const SingleShimpentForm = ({
                             setShipmentPriceError('');
                           }
                         }}
-                        rules={validationRules.shipments.shipmentPrice}
+                        // @ts-ignore
+                        rules={
+                          validationRules.shipments.shipmentPrice
+                        }
                         errorMessage={getError(
                           `shipments.${index}.shipmentPrice`,
                           formErrors
@@ -896,11 +966,13 @@ const SingleShimpentForm = ({
                       defaultValue={1}
                       onBlur={(e) => {
                         // @ts-ignore
-                        const value = e.target?.value as unknown as string;
+                        const value = // @ts-ignore
+                        e.target?.value as unknown as string;
                         if (!value) {
                           setValue(`shipments.${index}.amount`, 1);
                         }
                       }}
+                      // @ts-ignore
                       rules={validationRules.shipments.amount}
                       errorMessage={getError(
                         `shipments.${index}.amount`,
