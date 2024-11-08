@@ -175,10 +175,6 @@ const Form = ({
     }
   }, [direction]);
 
-  useEffect(() => {
-    ReactPixel.pageView();
-  }, []);
-
   const setPostCodeObjectFn = (obj: any) => {
     setPostCodeObject(obj);
   };

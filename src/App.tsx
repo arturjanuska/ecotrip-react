@@ -12,19 +12,14 @@ import {
 import { Helmet } from 'react-helmet';
 import ReactPixel from 'react-facebook-pixel';
 
-declare global {
-  interface Window {
-    fbq: any;
-  }
-}
-
 const queryClient = new QueryClient();
 
 function App() {
   const [orderId, setOrderId] = useState<string | null>(null);
 
   useEffect(() => {
-    ReactPixel.init('123755041741966');
+    ReactPixel.init('1060218774766985');
+    ReactPixel.pageView();
   }, []);
 
   return (
@@ -59,7 +54,7 @@ function App() {
               height='1'
               width='1'
               style={{ display: 'none' }}
-              src='https://www.facebook.com/tr?id=123755041741966&ev=PageView&noscript=1'
+              src='https://www.facebook.com/tr?id=1060218774766985&ev=PageView&noscript=1'
               alt='fb pixel'
             />
           </noscript>
