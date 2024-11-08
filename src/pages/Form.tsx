@@ -22,7 +22,6 @@ import {
 import useCurrencyConverter from '../utils/useCurrencyConverter';
 import { fetchWrapper } from '../components/api/fetchWrapper';
 import { useMutation } from '@tanstack/react-query';
-import ReactPixel from 'react-facebook-pixel';
 
 declare global {
   interface Window {
