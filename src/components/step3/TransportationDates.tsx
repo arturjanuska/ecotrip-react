@@ -78,7 +78,7 @@ const TransportationDates = ({
             resetToDates={resetToDates}
             service={service}
           />
-          {direction === 'LT-UK' && dayRangeFrom === '17 - 18' ? (
+          {/* {direction === 'LT-UK' && dayRangeFrom === '17 - 18' ? (
             <div className='warning-text'>
               <p>
                 Informuojame, kad gruodžio 18 d. išvykstame į
@@ -90,7 +90,7 @@ const TransportationDates = ({
               <p>+44 7479 622299</p>
               <p>info@ecotrip.lt</p>
             </div>
-          ) : null}
+          ) : null} */}
         </div>
       </>
     </Step>
