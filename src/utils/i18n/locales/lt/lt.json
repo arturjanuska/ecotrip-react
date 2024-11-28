@@ -1,0 +1,14 @@
+{
+  "pageBreadcrumbs": "Siuntos skaičiuoklė / užsakymas",
+  "addressFormStepTitle": "Paėmimo ir pristatymo adresai",
+  "addressFormStepInstructions": "Įveskite siuntėjo ir gavėjo adresus, tuomet pasirinkite norimą paslaugą iš langelių apačioje",
+  "pickupAddressLabel": "Paėmimo adresas:",
+  "deliveryAddressLabel": "Pristatymo adresas:",
+  "zipCodeLabel": "Pašto kodas",
+  "zipCodeDescripion": "Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą.",
+  "senderPickupFieldDescription": "Įrašykite ir pasirinkite tikslų siuntėjo adresą.",
+  "recipientPickupFieldDescription": "Įrašykite ir pasirinkite tikslų gavėjo adresą.",
+  "enterStreetNumberCity": "Įveskite gatvę, namo numerį, miestą",
+  "deliveryZipCode": "Pristatymo pašto kodas:",
+  "pickupZipCode": "Paėmimo pašto kodas:"
+}
