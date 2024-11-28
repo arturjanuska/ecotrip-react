@@ -3,12 +3,14 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
-import { FormType } from './formTypes';
+
 import {
   monthNamesForDaySelect,
   monthNamesForMonthSelect,
 } from '../components/step3/monthNames';
-import { getDecemberDeliveryDays } from './hardcodedDays/december';
+import { FormType } from '../utils/formTypes';
+import { getDecemberDeliveryDays } from '../utils/hardcodedDays/december';
+
 
 type Props = {
   pickupDate: string;

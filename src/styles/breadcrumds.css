@@ -8,6 +8,12 @@
 	color: #7a7776;
 }
 
+.language-select-container {
+	width: 100%;
+	margin: 12px 0;
+	display: flex;
+	justify-content: flex-end;
+}
 @media (max-width: 768px) {
 	.breadcrumds {
 		margin: 40px 0;

@@ -1,0 +1,127 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:react-hooks/recommended",
+    "airbnb",
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "@typescript-eslint", "test-selectors"],
+  "rules": {
+    "prettier/prettier": "off",
+    "react/prop-types": "off",
+    "react/button-has-type": "off",
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.test.js",
+          "**/*.test.jsx",
+          "**/*.spec.ts",
+          "**/*.spec.tsx",
+          "**/*.spec.js",
+          "**/*.spec.jsx",
+          "**/*.stories.ts",
+          "**/*.stories.tsx",
+          "**/*.stories.js",
+          "**/*.stories.jsx"
+        ]
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".tsx", ".ts"]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-no-bind": "off",
+    "react/jsx-boolean-value": "off",
+    "react/destructuring-assignment": "off",
+    "object-shorthand": "off",
+    "no-unused-vars": "off",
+    "no-undef": "off",
+    "no-underscore-dangle": "off",
+    "react/require-default-props": "off",
+    "no-use-before-define": "off",
+    "arrow-body-style": "off",
+    "camelcase": "off",
+    "radix": "off",
+    "no-plusplus": "off",
+    "import/order": "off",
+    "no-shadow": "off",
+    "prefer-destructuring": "off",
+    "no-else-return": "off",
+    "no-continue": "off",
+    "no-restricted-syntax": [
+      "error",
+      // "ForInStatement",
+      // "ForOfStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "controlComponents": ["DebounceInput"],
+        "depth": 3
+      }
+    ],
+    "react-hooks/exhaustive-deps": "off",
+    // Mandatory test ids on interactive elements --- eslint-plugin-test-selectors
+    "test-selectors/anchor": ["error", "always", { "testAttribute": ["data-cy"] }],
+    "test-selectors/button": ["error", "always", { "testAttribute": ["data-cy"], "htmlOnly": true }],
+    "test-selectors/input": ["error", "always", { "testAttribute": ["data-cy"] }],
+    "test-selectors/onKeyDown": ["error", "always", { "testAttribute": ["data-cy"] }],
+    "test-selectors/onKeyUp": ["error", "always", { "testAttribute": ["data-cy"] }]
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*Slice.ts"],
+      "rules": { "no-param-reassign": ["error", { "props": false }] }
+    },
+    {
+      "files": ["src/**/*.stories.tsx"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "prefer-arrow-callback": "off"
+      }
+    }
+  ]
+}

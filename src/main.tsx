@@ -4,6 +4,8 @@ import GlobalLayout from './components/GlobalLayout.tsx';
 import Footer from './components/footer/Footer.tsx';
 import App from './App.tsx';
 
+import './utils/i18n/index.ts';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<GlobalLayout>

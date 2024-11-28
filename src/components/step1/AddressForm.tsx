@@ -18,6 +18,7 @@ import { checkParcelForcePostcodes } from '../../utils/checkPostCodes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import SearchBoxV2 from './newSearchBox/SearchBoxV2';
 import { findPostcode } from '../../utils/findPostcode';
+import { useTranslation } from 'react-i18next';
 
 const AddressForm = ({
 	setValue,
@@ -40,6 +41,8 @@ const AddressForm = ({
 	setPostCodeObject: (obj: any) => void;
 	rate: number;
 }) => {
+	const { t } = useTranslation();
+
 	const onChange = (name: keyof FormType, value: string) => {
 		if (name === 'pickupAddress') {
 			const postCode = findPostcode(value);
@@ -82,11 +85,11 @@ const AddressForm = ({
 							selectedDeliveryAddressPostcode as string,
 						],
 						setPostCodeObject,
-				  }
+					}
 				: {
 						postcodes: [],
 						setPostCodeObject,
-				  }
+					}
 		) || false;
 
 	const getDirection = (pickupPostcode: string, deliveryPostcode: string) => {
@@ -142,12 +145,12 @@ const AddressForm = ({
 
 	return (
 		<Step
-			title='Paėmimo ir pristatymo adresai'
+			title={t('addressFormStepTitle')}
 			step={1}
-			instructions='Įveskite siuntėjo ir gavėjo adresus, tuomet pasirinkite norimą paslaugą iš langelių apačioje'>
+			instructions={t('addressFormStepInstructions')}>
 			<div className='address-form-section-wrapper'>
 				<FieldContainer
-					label='Paėmimo adresas:'
+					label={t('pickupAddressLabel')}
 					description='Įrašykite ir pasirinkite tikslų siuntėjo adresą.'
 					// description='Adresas iš kur paimama siunta arba perduodama EcoTrip kurjeriui.'
 					// instructions='Įrašykite ir pasirinkite tikslų siuntėjo adresą'
@@ -164,10 +167,10 @@ const AddressForm = ({
 				</FieldContainer>
 				<FieldContainer
 					label='Paėmimo pašto kodas:'
-					description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą.'>
+					description={t('zipCodeDescripion')}>
 					<CustomInput
 						type='text'
-						placeholder='Pašto kodas'
+						placeholder={t('zipCodeLabel')}
 						name='pickupAddressZipCode'
 						control={control}
 						errorMessage={formErrors.pickupAddressZipCode?.message}
@@ -179,7 +182,7 @@ const AddressForm = ({
 
 			<div className='address-form-section-wrapper'>
 				<FieldContainer
-					label='Pristatymo adresas:'
+					label={t('deliveryAddressLabel')}
 					description='Įrašykite ir pasirinkite tikslų gavėjo adresą.'
 					// description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'
 					// instructions='Įrašykite ir pasirinkite tikslų gavėjo adresą'
@@ -196,11 +199,11 @@ const AddressForm = ({
 				</FieldContainer>
 				<FieldContainer
 					label='Pristatymo pašto kodas:'
-					description='Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą.'
+					description={t('zipCodeDescripion')}
 					instructions=''>
 					<CustomInput
 						type='text'
-						placeholder='Pašto kodas'
+						placeholder={t('zipCodeLabel')}
 						name='deliveryAddressZipCode'
 						control={control}
 						errorMessage={formErrors.deliveryAddressZipCode?.message}
