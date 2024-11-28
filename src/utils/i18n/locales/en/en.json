@@ -1,9 +1,14 @@
 {
-	"pageBreadcrumbs": "Shipment calculator / order",
-	"addressFormStepTitle": "Pickup and delivery addresses",
-	"addressFormStepInstructions": "Enter the sender's and recipient's addresses, then select the desired service from the options below.",
-	"pickupAddressLabel": "Pickup address:",
-	"deliveryAddressLabel": "Delivery address:",
-	"zipCodeLabel": "Zip code",
-	"zipCodeDescripion": "The zip code is generated automatically when the exact address is entered."
+  "pageBreadcrumbs": "Shipment calculator / order",
+  "addressFormStepTitle": "Pickup and delivery addresses",
+  "addressFormStepInstructions": "Enter the sender's and recipient's addresses, then select the desired service from the options below.",
+  "pickupAddressLabel": "Pickup address:",
+  "deliveryAddressLabel": "Delivery address:",
+  "zipCodeLabel": "Zip code",
+  "zipCodeDescripion": "The zip code is generated automatically when the exact address is entered.",
+  "senderPickupFieldDescription": "Enter and select the exact sender's address.",
+  "recipientPickupFieldDescription": "Enter and select the exact recipient's address.",
+  "enterStreetNumberCity": "Enter street, house number, city",
+  "deliveryZipCode": "Delivery zip code:",
+  "pickupZipCode": "Pickup zip code:"
 }

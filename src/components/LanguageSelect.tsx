@@ -26,21 +26,20 @@ const LanguageSelect = () => {
 	const localStorageLang = localStorage.getItem('lang') as Languages;
 
 	return (
-		<div className='language-select-container'>
-			<StyledSelect
-				className='language-select'
-				options={options}
-				defaultValue={options.find(
-					(option) => option.value === localStorageLang
-				)}
-				// @ts-ignore
-				onChange={(select: { value: string; label: string }) => {
-					const value = select.value as Languages;
-					onLanguageChange(value);
-				}}
-			/>
-		</div>
-	);
+    <div className="language-select-container">
+      <StyledSelect
+        options={options}
+        defaultValue={options.find(
+          (option) => option.value === localStorageLang || "lt",
+        )}
+        // @ts-ignore
+        onChange={(select: { value: string; label: string }) => {
+          const value = select.value as Languages;
+          onLanguageChange(value);
+        }}
+      />
+    </div>
+  );
 };
 
 export default LanguageSelect;

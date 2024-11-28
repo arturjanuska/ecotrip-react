@@ -144,87 +144,90 @@ const AddressForm = ({
 	]);
 
 	return (
-		<Step
-			title={t('addressFormStepTitle')}
-			step={1}
-			instructions={t('addressFormStepInstructions')}>
-			<div className='address-form-section-wrapper'>
-				<FieldContainer
-					label={t('pickupAddressLabel')}
-					description='Įrašykite ir pasirinkite tikslų siuntėjo adresą.'
-					// description='Adresas iš kur paimama siunta arba perduodama EcoTrip kurjeriui.'
-					// instructions='Įrašykite ir pasirinkite tikslų siuntėjo adresą'
-				>
-					<SearchBoxV2
-						control={control}
-						name={'pickupAddress'}
-						placeholder='Įveskite gatvę, namo numerį, miestą'
-						errorMessage={formErrors.pickupAddress?.message}
-						methods={methods}
-						onChange={onChange}
-						onClear={handleOnClear}
-					/>
-				</FieldContainer>
-				<FieldContainer
-					label='Paėmimo pašto kodas:'
-					description={t('zipCodeDescripion')}>
-					<CustomInput
-						type='text'
-						placeholder={t('zipCodeLabel')}
-						name='pickupAddressZipCode'
-						control={control}
-						errorMessage={formErrors.pickupAddressZipCode?.message}
-						rules={validationRules.pickupAddressZipCode}
-						disabled={true}
-					/>
-				</FieldContainer>
-			</div>
+    <Step
+      title={t("addressFormStepTitle")}
+      step={1}
+      instructions={t("addressFormStepInstructions")}
+    >
+      <div className="address-form-section-wrapper">
+        <FieldContainer
+          label={t("pickupAddressLabel")}
+          description={t("senderPickupFieldDescription")}
+          // description='Adresas iš kur paimama siunta arba perduodama EcoTrip kurjeriui.'
+          // instructions='Įrašykite ir pasirinkite tikslų siuntėjo adresą'
+        >
+          <SearchBoxV2
+            control={control}
+            name={"pickupAddress"}
+            placeholder={t("enterStreetNumberCity")}
+            errorMessage={formErrors.pickupAddress?.message}
+            methods={methods}
+            onChange={onChange}
+            onClear={handleOnClear}
+          />
+        </FieldContainer>
+        <FieldContainer
+          label={t("pickupZipCode")}
+          description={t("zipCodeDescripion")}
+        >
+          <CustomInput
+            type="text"
+            placeholder={t("zipCodeLabel")}
+            name="pickupAddressZipCode"
+            control={control}
+            errorMessage={formErrors.pickupAddressZipCode?.message}
+            rules={validationRules.pickupAddressZipCode}
+            disabled={true}
+          />
+        </FieldContainer>
+      </div>
 
-			<div className='address-form-section-wrapper'>
-				<FieldContainer
-					label={t('deliveryAddressLabel')}
-					description='Įrašykite ir pasirinkite tikslų gavėjo adresą.'
-					// description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'
-					// instructions='Įrašykite ir pasirinkite tikslų gavėjo adresą'
-				>
-					<SearchBoxV2
-						name={'deliveryAddress'}
-						placeholder='Įveskite gatvę, namo numerį, miestą'
-						errorMessage={formErrors.deliveryAddress?.message}
-						control={control}
-						methods={methods}
-						onChange={onChange}
-						onClear={handleOnClear}
-					/>
-				</FieldContainer>
-				<FieldContainer
-					label='Pristatymo pašto kodas:'
-					description={t('zipCodeDescripion')}
-					instructions=''>
-					<CustomInput
-						type='text'
-						placeholder={t('zipCodeLabel')}
-						name='deliveryAddressZipCode'
-						control={control}
-						errorMessage={formErrors.deliveryAddressZipCode?.message}
-						rules={validationRules.deliveryAddressZipCode}
-						disabled={true}
-					/>
-				</FieldContainer>
-			</div>
+      <div className="address-form-section-wrapper">
+        <FieldContainer
+          label={t("deliveryAddressLabel")}
+          description={t("recipientPickupFieldDescription")}
+          // description='Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.'
+          // instructions='Įrašykite ir pasirinkite tikslų gavėjo adresą'
+        >
+          <SearchBoxV2
+            name={"deliveryAddress"}
+            placeholder={t("enterStreetNumberCity")}
+            errorMessage={formErrors.deliveryAddress?.message}
+            control={control}
+            methods={methods}
+            onChange={onChange}
+            onClear={handleOnClear}
+          />
+        </FieldContainer>
+        <FieldContainer
+          label={t("deliveryZipCode")}
+          description={t("zipCodeDescripion")}
+          instructions=""
+        >
+          <CustomInput
+            type="text"
+            placeholder={t("zipCodeLabel")}
+            name="deliveryAddressZipCode"
+            control={control}
+            errorMessage={formErrors.deliveryAddressZipCode?.message}
+            rules={validationRules.deliveryAddressZipCode}
+            disabled={true}
+          />
+        </FieldContainer>
+      </div>
 
-			{direction && direction !== 'LT-LT' ? (
-				<ServiceSection
-					setValue={setValue}
-					selectedService={selectedService}
-					isParcelForce={isParcelForce}
-					currency={currency}
-					methods={methods}
-					rate={rate}
-				/>
-			) : null}
+      {direction && direction !== "LT-LT" ? (
+        <ServiceSection
+          setValue={setValue}
+          selectedService={selectedService}
+          isParcelForce={isParcelForce}
+          currency={currency}
+          methods={methods}
+          rate={rate}
+        />
+      ) : null}
 
-			{/* {direction && direction !== 'LT-LT' ? (
+      {/* {direction && direction !== 'LT-LT' ? (
         <ServiceSection
           setValue={setValue}
           selectedService={selectedService}
@@ -233,8 +236,8 @@ const AddressForm = ({
           methods={methods}
         />
       ) : null} */}
-		</Step>
-	);
+    </Step>
+  );
 };
 
 export default AddressForm;
