@@ -30,6 +30,7 @@ import { getError } from '../../utils/validation/getError';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import { useEffect, useState } from 'react';
 import { convertValue } from '../../utils/convertCurrency';
+import { t } from 'i18next';
 
 type Props = {
   shipmentNumber: number;
@@ -328,8 +329,8 @@ const SingleShimpentForm = ({
     <div className='single-shipment-container'>
       <div className='left-column'>
         <FieldContainer
-          label={`Pasirinkite Nr. ${shipmentNumber} siuntos kategoriją`}
-          description='Įveskite siuntos kategoriją. Pasirinkus siuntą pagal katalogą, automatiškai paskaičiuosime siuntimo kainą.'
+          label={t("shipmentLeftColumnLabel", {count: shipmentNumber})}
+          description={t("shipmentLeftColumnDescription")}
           className='left-column-item'
         >
           <ControlledStyledSelect
@@ -352,7 +353,7 @@ const SingleShimpentForm = ({
               }
             })}
             isClearable
-            placeholder='Siuntos kategorija'
+            placeholder={t("shipmentCategoryPlaceholder")}
             isDisabled={
               selectedService === 'parcelForceShipment' ||
               selectedService === 'shipmentWithAddressService' ||
@@ -368,7 +369,7 @@ const SingleShimpentForm = ({
           />
         </FieldContainer>
         <p className='estimated-price'>
-          Numatoma Nr. {shipmentNumber} siuntos kaina:{' '}
+          {t("estimatedShipmentPriceLabel", {count: shipmentNumber})}{' '}
           <span>
             {currency}
             {isNaN(Number(estimatedPrice)) || !estimatedPrice
@@ -386,12 +387,12 @@ const SingleShimpentForm = ({
       <div className='right-column'>
         {productTypeOptions.length > 0 && (
           <FieldContainer
-            label={`Nr. ${shipmentNumber} siuntos tipas`}
+            label={t("productTypeLabel", {count: shipmentNumber})}
             description={`${
               productTypesWithRequiredManagerCall.includes(
                 selectedProductType?.value ?? ''
               )
-                ? 'Susisiekite su vadybininku'
+                ? t("wrongDirectionMessage1")
                 : ''
             }`}
           >
@@ -406,7 +407,7 @@ const SingleShimpentForm = ({
                 formErrors
               )}
               options={productTypeOptions}
-              placeholder='Siuntos tipas'
+              placeholder={t("productTypeSelectPlaceholder")}
               onChange={() => {
                 setValue(`shipments.${index}.size`, null);
                 setValue(`shipments.${index}.specification`, null);

@@ -24,6 +24,7 @@ import { fetchWrapper } from '../components/api/fetchWrapper';
 import { useMutation } from '@tanstack/react-query';
 import LanguageSelect from '../components/LanguageSelect';
 import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
+import { useTranslation } from "react-i18next";
 
 declare global {
 	interface Window {
@@ -47,6 +48,8 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		},
 		shouldUnregister: true,
 	});
+
+const {t} = useTranslation();
 
 	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
 		{}
@@ -202,7 +205,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 				<Divider />
 				{direction === 'LT-LT' ? (
 					<div className='direction-message'>
-						<p>Susisiekite su vadybininku +370 601 22060</p>
+						<p>{t("wrongDirectionMessage1")}</p>
 						<p>Info@ecotrip.lt</p>
 					</div>
 				) : (

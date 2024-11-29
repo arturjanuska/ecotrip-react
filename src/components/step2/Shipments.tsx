@@ -5,12 +5,13 @@ import {
 	FieldErrors,
 	useFieldArray,
 	UseFormReturn,
-} from 'react-hook-form';
-import Step from '../Step';
-import SingleShimpentForm from './SingleShimpentForm';
-import { FormType } from '../../utils/formTypes';
-import PrimaryButton from '../PrimaryButton';
-import './step2.css';
+} from "react-hook-form";
+import Step from "../Step";
+import SingleShimpentForm from "./SingleShimpentForm";
+import { FormType } from "../../utils/formTypes";
+import PrimaryButton from "../PrimaryButton";
+import "./step2.css";
+import { useTranslation } from "react-i18next";
 
 const Shipments = ({
 	control,
@@ -25,7 +26,7 @@ const Shipments = ({
 	control: Control<FormType>;
 	selectedService: string;
 	methods: UseFormReturn<FormType, any, undefined>;
-	currency: '€' | '£';
+	currency: "€" | "£";
 	formErrors: FieldErrors<FormType>;
 	errorMessages: Record<string, string>;
 	setErrorMessages: React.Dispatch<
@@ -35,7 +36,7 @@ const Shipments = ({
 }) => {
 	const { fields, append, remove } = useFieldArray<FormType>({
 		control,
-		name: 'shipments',
+		name: "shipments",
 	});
 
 	const removeShipment = (index: number) => {
@@ -46,32 +47,32 @@ const Shipments = ({
 
 	const handleAddShipment = () => {
 		append({
-			estimatedPrice: '0.00',
+			estimatedPrice: "0.00",
 			category: {
-				label: 'Siunta',
-				value: 'shipments',
+				label: "Siunta",
+				value: "shipments",
 			},
 			amount: 1,
 		});
 	};
 
+	const { t } = useTranslation();
+
 	return (
 		<Step
-			id='shipments-section'
+			id="shipments-section"
 			step={2}
-			title={`Siuntos suvedimas ${
-				selectedService === 'shipmentWithAddressService'
-					? '(EcoTrip adreso pasl.)'
-					: ''
-			}`}>
-			<div className='shipments-column-wrapper'>
-				<div className='shipments-column-container'>
+			title={`${t("step2Title")} ${selectedService === "shipmentWithAddressService"
+					? t("step2SubTitle")
+					: ""
+				}`}
+		>
+			<div className="shipments-column-wrapper">
+				<div className="shipments-column-container">
 					{fields.length > 0 &&
 						fields.map((field, index) => {
 							return (
-								<div
-									className='form-control'
-									key={field.id}>
+								<div className="form-control" key={field.id}>
 									<SingleShimpentForm
 										key={field.id}
 										shipmentNumber={index + 1}
@@ -92,25 +93,28 @@ const Shipments = ({
 						})}
 				</div>
 				<div
-					className='single-shipment-container'
+					className="single-shipment-container"
 					style={{
 						margin: 0,
-					}}>
-					<div className='left-column'>
+					}}
+				>
+					<div className="left-column">
 						<div
 							style={{
-								width: '100%',
+								width: "100%",
 							}}
-							className='buttons-container'>
+							className="buttons-container"
+						>
 							<PrimaryButton
-								className='add-shipment-button'
-								type='button'
-								onClick={handleAddShipment}>
-								Pridėti papildomą siuntą
+								className="add-shipment-button"
+								type="button"
+								onClick={handleAddShipment}
+							>
+							{	t("addAdditionalShipments")}
 							</PrimaryButton>
 						</div>
 					</div>
-					<div className='right-column'></div>
+					<div className="right-column"></div>
 				</div>
 			</div>
 		</Step>
