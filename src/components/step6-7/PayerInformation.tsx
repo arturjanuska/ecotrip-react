@@ -61,11 +61,11 @@ const PayerInformation = ({
 
 	const payerOptions = [
 		{
-			label: 'Mokėtojas yra siuntėjas',
+			label: 'Užsakovas yra siuntėjas',
 			value: 'thePayerIsTheSender',
 		},
 		{
-			label: 'Mokėtojas yra gavėjas',
+			label: 'Užsakovas yra gavėjas',
 			value: 'thePayerIsTheRecipient',
 		},
 	];

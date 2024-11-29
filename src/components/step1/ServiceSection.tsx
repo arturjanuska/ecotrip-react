@@ -69,7 +69,7 @@ const ServiceSection = ({
 			service === 'shipmentWithAddressService'
 		) {
 			setValue('customerInformation.payerOfTheShipment', {
-				label: 'Mokėtojas yra gavėjas',
+				label: 'Užsakovas yra gavėjas',
 				value: 'thePayerIsTheRecipient',
 			});
 		}
