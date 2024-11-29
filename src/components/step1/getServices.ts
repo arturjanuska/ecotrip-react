@@ -84,7 +84,7 @@ const getServices = (
           linkText: "standartShipmentServiceLinkText",
         },
         {
-          title: "Apsipirkimo adreso suteikimas",
+          title: "addressServiceTitle",
           desc: {
             text: "addressServiceDesc",
             variables: {
@@ -112,7 +112,7 @@ const getServices = (
           linkText: "Link",
         },
         {
-          title: "Prekės pardavimo paslauga",
+          title: "salesServiceTitle",
           desc: {
             text: "salesServiceDesc",
             variables: {
