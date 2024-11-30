@@ -2,19 +2,19 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import AddressForm from '../components/step1/AddressForm';
-import Breadcrumds from '../components/Breadcrumds';
-import Divider from '../components/Divider';
-import SenderInformation from '../components/step4/SenderInformation';
-import TransportationDates from '../components/step3/TransportationDates';
-import Shipments from '../components/step2/Shipments';
-import RecipientInformation from '../components/step5/RecipientInformation';
-import RansomPayeeInformation from '../components/step6-7/RansomPayeeInformation';
-import PayerInformation from '../components/step6-7/PayerInformation';
-import { FormType, ShipmentProps } from '../utils/formTypes';
-import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
-import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
+import AddressForm from "../components/step1/AddressForm";
+import Breadcrumds from "../components/Breadcrumds";
+import Divider from "../components/Divider";
+import SenderInformation from "../components/step4/SenderInformation";
+import TransportationDates from "../components/step3/TransportationDates";
+import Shipments from "../components/step2/Shipments";
+import RecipientInformation from "../components/step5/RecipientInformation";
+import RansomPayeeInformation from "../components/step6-7/RansomPayeeInformation";
+import PayerInformation from "../components/step6-7/PayerInformation";
+import { FormType, ShipmentProps } from "../utils/formTypes";
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import ProductPurchaseServiceInformation from "../components/step6-7/ProductPurchaseServiceInformation";
 import {
   TransformedFormData,
   transformFormDataToEndpoint,
@@ -24,6 +24,7 @@ import { fetchWrapper } from '../components/api/fetchWrapper';
 import { useMutation } from '@tanstack/react-query';
 import LanguageSelect from '../components/LanguageSelect';
 import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
+import { useTranslation } from "react-i18next";
 
 declare global {
 	interface Window {
@@ -47,6 +48,8 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		},
 		shouldUnregister: true,
 	});
+
+const {t} = useTranslation();
 
 	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
 		{}
@@ -202,7 +205,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 				<Divider />
 				{direction === 'LT-LT' ? (
 					<div className='direction-message'>
-						<p>Susisiekite su vadybininku +370 601 22060</p>
+						<p>{t("wrongDirectionMessage1")}</p>
 						<p>Info@ecotrip.lt</p>
 					</div>
 				) : (

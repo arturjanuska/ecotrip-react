@@ -1,13 +1,17 @@
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 
 export type ServiceProps = {
   title: string;
-  desc: string;
+  desc: {
+    text: string;
+    variables: { [key: string]: string }
+  };
   icon: React.ReactNode;
   value: string;
   link?: string;
-  linkText?: string;
+  linkText: string;
 };
 
 export type ServiceCardProps = {
@@ -29,6 +33,9 @@ const ServiceCard = ({
   selected,
   isDisabled,
 }: ServiceCardProps) => {
+
+  const { t } = useTranslation();
+
   return (
     <div
       className={`service-card ${selected ? 'active' : ''} ${
@@ -39,8 +46,8 @@ const ServiceCard = ({
       <div className='service-info'>
         {service.icon}
         <div className='service-description'>
-          <span className='card-title'>{service.title}</span>
-          <span className='card-description'>{service.desc}</span>
+          <span className='card-title'>{t(service.title)}</span>
+          <span className='card-description'>{t(service.desc.text, service.desc.variables)}</span>
         </div>
       </div>
       {selected ? <CheckmarkIcon /> : null}
