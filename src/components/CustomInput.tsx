@@ -43,24 +43,25 @@ const CustomInput = ({
 					name={name as keyof FormType}
 					control={control}
 					rules={props.rules}
-					render={({ field }) => {
-						const handleChange = (e: any) => {
-							if (props.onChange) {
-								props.onChange(e);
-							}
-							field.onChange(e);
-						};
-
+					render={({ field: { value, onChange, ref, name, onBlur } }) => {
 						return (
 							<div
 								className={`input-container ${
 									errorMessage || isError ? 'error-input' : ''
 								}`}>
-								{/* @ts-expect-error */}
 								<input
-									{...field}
 									{...props}
-									onChange={handleChange}
+									ref={ref}
+									value={value as any}
+									name={name}
+									onChange={(e) => {
+										onChange(e);
+										props.onChange?.(e);
+									}}
+									onBlur={(e) => {
+										onBlur();
+										props.onBlur?.(e);
+									}}
 								/>
 							</div>
 						);

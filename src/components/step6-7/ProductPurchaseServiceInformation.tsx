@@ -4,6 +4,7 @@ import ClientInformationForm from '../step4/ClientInformationForm';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
 	control: Control<FormType, any>;
@@ -17,7 +18,11 @@ const ProductPurchaseServiceInformation = ({
 	selectedService,
 	methods,
 }: Props) => {
-	const validationRules = useCustomValidation({ service: selectedService }) as {
+
+	const {t} = useTranslation();
+
+
+	const validationRules = useCustomValidation({ service: selectedService, t }) as {
 		[key: string]: any;
 	};
 	const purchaseValidationRules = validationRules.purchaseInformation;

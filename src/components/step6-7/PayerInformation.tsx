@@ -18,6 +18,7 @@ import { useCustomValidation } from '../../utils/validation/useCustomValidation'
 // import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CustomAlert from '../CustomAlert';
 import { convertValue } from '../../utils/convertCurrency';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
 	control: Control<FormType, any>;
@@ -28,7 +29,7 @@ type Props = {
 	currency: '€' | '£';
 	errorMessages: Record<string, string>;
 	submitErrorMessage: string | null;
-	postCodeObject: any;
+	postcodeDetails: any;
 	priceDescription: { title: string; price: string }[];
 	setPriceDescription: React.Dispatch<
 		React.SetStateAction<
@@ -51,7 +52,7 @@ const PayerInformation = ({
 	currency,
 	errorMessages,
 	submitErrorMessage,
-	postCodeObject,
+	postcodeDetails,
 	setPriceDescription,
 	priceDescription,
 	rate,
@@ -91,7 +92,10 @@ const PayerInformation = ({
 
 	const payer = methods.watch('customerInformation.payerOfTheShipment.value');
 
-	const validationRules = useCustomValidation({ service });
+	const {t} = useTranslation();
+
+
+	const validationRules = useCustomValidation({ service, t });
 
 	const getDiscountPercentage = (itemsCount: number) => {
 		if (itemsCount === 0 || itemsCount === 1) return 1;
@@ -105,7 +109,7 @@ const PayerInformation = ({
 
 	const getOrderPrice = (
 		shipmentsArray: ShipmentProps[],
-		postCodeObject: any
+		postcodeDetails: any
 	) => {
 		let price = 0;
 		const priceDescription: { title: string; price: string }[] = [];
@@ -140,7 +144,7 @@ const PayerInformation = ({
 						parcelForceAdditionalCharges = 11.69;
 					}
 				} else if (
-					postCodeObject?.additionalCharges === 'Parcel force pricelist'
+					postcodeDetails?.additionalCharges === 'Parcel force pricelist'
 				) {
 					const zones = [
 						{
@@ -157,7 +161,7 @@ const PayerInformation = ({
 						},
 					];
 
-					const zone = postCodeObject?.parcelForceZone || '';
+					const zone = postcodeDetails?.parcelForceZone || '';
 
 					zones.forEach((item) => {
 						if (item.title === zone) {
@@ -180,12 +184,12 @@ const PayerInformation = ({
 									parcelForceAdditionalCharges !== 0
 										? '+ Persiuntimo paslauga'
 										: ''
-							  }`
+								}`
 							: `${shipment.category?.label} ${
 									parcelForceAdditionalCharges !== 0
 										? '+ Persiuntimo paslauga'
 										: ''
-							  }`
+								}`
 					}:`,
 					price:
 						`${currency}${shipmentPrice.toFixed(2)} - ${convertValue(
@@ -302,18 +306,18 @@ const PayerInformation = ({
 		}
 
 		if (
-			postCodeObject?.additionalCharges &&
-			!isNaN(Number(postCodeObject?.additionalCharges)) &&
+			postcodeDetails?.additionalCharges &&
+			!isNaN(Number(postcodeDetails?.additionalCharges)) &&
 			service !== 'shipmentWithAddressService'
 		) {
-			price += Number(postCodeObject?.additionalCharges) || 0;
+			price += Number(postcodeDetails?.additionalCharges) || 0;
 			priceDescription.push({
 				title: 'Adreso papildomas mokestis:',
-				price: `${currency}${Number(postCodeObject.additionalCharges).toFixed(
+				price: `${currency}${Number(postcodeDetails.additionalCharges).toFixed(
 					2
 				)} - ${convertValue(
 					currency,
-					Number(postCodeObject.additionalCharges),
+					Number(postcodeDetails.additionalCharges),
 					rate
 				)}`,
 			});
@@ -327,12 +331,12 @@ const PayerInformation = ({
 			discountPercentage === 0.8
 				? '20%'
 				: discountPercentage === 0.85
-				? '15%'
-				: discountPercentage === 0.9
-				? '10%'
-				: discountPercentage === 0.95
-				? '5%'
-				: null;
+					? '15%'
+					: discountPercentage === 0.9
+						? '10%'
+						: discountPercentage === 0.95
+							? '5%'
+							: null;
 
 		if (percentage) {
 			priceDescription.push({
@@ -341,7 +345,7 @@ const PayerInformation = ({
 			});
 		}
 		const secondDiscountPercentage =
-			postCodeObject?.discount === '10%' &&
+			postcodeDetails?.discount === '10%' &&
 			service !== 'shipmentWithAddressService'
 				? 0.9
 				: 1;
@@ -360,14 +364,14 @@ const PayerInformation = ({
 	};
 
 	useEffect(() => {
-		getOrderPrice(shipments, postCodeObject);
+		getOrderPrice(shipments, postcodeDetails);
 	}, [
 		shipments,
 		shipments.length,
 		JSON.stringify(shipments),
 		payer,
 		service,
-		JSON.stringify(postCodeObject),
+		JSON.stringify(postcodeDetails),
 	]);
 
 	const orderPrice = methods.watch('estimatedShipmentPrice');

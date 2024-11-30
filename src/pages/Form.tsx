@@ -25,6 +25,8 @@ import { useMutation } from '@tanstack/react-query';
 import LanguageSelect from '../components/LanguageSelect';
 import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
 import { useTranslation } from "react-i18next";
+import PrimaryButton from '../components/PrimaryButton';
+import { checkParcelForcePostcodes } from '../utils/checkPostCodes';
 
 declare global {
 	interface Window {
@@ -49,7 +51,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 		shouldUnregister: true,
 	});
 
-const {t} = useTranslation();
+	const { t } = useTranslation();
 
 	const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
 		{}
@@ -58,8 +60,6 @@ const {t} = useTranslation();
 	const [priceDescription, setPriceDescription] = useState<
 		{ title: string; price: string }[]
 	>([]);
-
-	const [postCodeObject, setPostCodeObject] = useState<any>(null);
 
 	const [submitErrorMessage, setShowSubmitError] = useState<string | null>(
 		null
@@ -162,6 +162,12 @@ const {t} = useTranslation();
 		selectedService === 'productPurchaseService' &&
 		sumOfPurchasePrice(shipments) > 249;
 
+	const selectedPickupAddressPostcode = methods.watch('pickupAddressZipCode');
+
+	const selectedDeliveryAddressPostcode = methods.watch(
+		'deliveryAddressZipCode'
+	);
+
 	useEffect(() => {
 		if (direction && direction !== 'LT-LT') {
 			methods.setValue('dates.from.day', null);
@@ -173,11 +179,23 @@ const {t} = useTranslation();
 		}
 	}, [direction]);
 
-	const setPostCodeObjectFn = (obj: any) => {
-		setPostCodeObject(obj);
+	useLocaleStorageLanguage();
+
+	const fillTestForm = () => {
+		methods.setValue('pickupAddress', 'Blackpool FY1 6BF, UK');
+		methods.setValue('pickupAddressZipCode', 'FY1 6BF');
+		methods.setValue('deliveryAddress', '07123 Vilnius, Lithuania');
+		methods.setValue('deliveryAddressZipCode', '07123');
 	};
 
-	useLocaleStorageLanguage();
+	const { isParcelForce, postcodeDetails } = checkParcelForcePostcodes({
+		postcodes: direction
+			? [
+					selectedPickupAddressPostcode as string,
+					selectedDeliveryAddressPostcode as string,
+				]
+			: [],
+	});
 
 	return (
 		<form
@@ -189,23 +207,34 @@ const {t} = useTranslation();
 					marginBottom: '70px',
 				}}>
 				<Breadcrumds />
-				<LanguageSelect />
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'flex-end',
+						marginBottom: '20px',
+					}}>
+					<PrimaryButton
+						type='button'
+						onClick={fillTestForm}>
+						Fill form
+					</PrimaryButton>
+					<LanguageSelect methods={methods} />
+				</div>
 				<Divider />
 				<AddressForm
-					setValue={methods.setValue}
-					control={methods.control}
 					selectedService={selectedService}
 					methods={methods}
 					direction={direction}
 					currency={currency}
 					formErrors={formErrors}
-					setPostCodeObject={setPostCodeObjectFn}
 					rate={rate}
+					isParcelForce={isParcelForce}
 				/>
 				<Divider />
 				{direction === 'LT-LT' ? (
 					<div className='direction-message'>
-						<p>{t("wrongDirectionMessage1")}</p>
+						<p>{t('wrongDirectionMessage1')}</p>
 						<p>Info@ecotrip.lt</p>
 					</div>
 				) : (
@@ -295,7 +324,7 @@ const {t} = useTranslation();
 									currency={currency}
 									errorMessages={errorMessages}
 									submitErrorMessage={submitErrorMessage}
-									postCodeObject={postCodeObject}
+									postcodeDetails={postcodeDetails}
 									setPriceDescription={setPriceDescription}
 									priceDescription={priceDescription}
 									rate={rate}

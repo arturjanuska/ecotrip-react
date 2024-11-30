@@ -33,7 +33,10 @@ const Shipments = ({
     React.SetStateAction<Record<string, string>>
   >;
   rate: number;
-}) => {
+  }) => {
+  
+  const { t } = useTranslation();
+  
   const { fields, append, remove } = useFieldArray<FormType>({
     control,
     name: "shipments",
@@ -49,14 +52,13 @@ const Shipments = ({
     append({
       estimatedPrice: "0.00",
       category: {
-        label: "Siunta",
+        label: t("shipments"),
         value: "shipments",
       },
       amount: 1,
     });
   };
 
-  const { t } = useTranslation();
 
   return (
     <Step

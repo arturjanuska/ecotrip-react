@@ -7,6 +7,7 @@ import { FormType } from '../../utils/formTypes';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import SearchBoxV2 from '../step1/newSearchBox/SearchBoxV2';
+import { useTranslation } from 'react-i18next';
 
 type InvoiceProps = {
   control: Control<FormType, any>;
@@ -18,9 +19,13 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
   const needInvoice = methods.watch('invoiceRequired');
   const service = methods.watch('service');
 
+	const {t} = useTranslation();
+
+
   const validationRules = useCustomValidation({
     invoiceNeeded: needInvoice,
     service,
+    t
   });
 
   const onChange = (name: keyof FormType, value: string) => {

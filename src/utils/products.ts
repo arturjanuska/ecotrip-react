@@ -5,1329 +5,1329 @@ import {  getOptions } from './getOptions';
 import { convertRangeSizeToOptionType } from './convertSizeOptions';
 
 export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
-  // setOfWheels
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 0,
-      to: 15,
-    },
-    volume: 0.08,
-    weight: 28,
-    specification: {
-      label: 'withoutTires',
-      value: 'withoutTires',
-    },
-    price: 60,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 0,
-      to: 15,
-    },
-    volume: 0.24,
-    weight: 40,
-    specification: {
-      label: 'withTires',
-      value: 'withTires',
-    },
-    price: 70,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 16,
-      to: 17,
-    },
-    volume: 0.1,
-    weight: 32,
-    specification: {
-      label: 'withoutTires',
-      value: 'withoutTires',
-    },
-    price: 80,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 16,
-      to: 17,
-    },
-    volume: 0.3,
-    weight: 48,
-    specification: {
-      label: 'withTires',
-      value: 'withTires',
-    },
-    price: 90,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 18,
-      to: 21,
-    },
-    volume: 0.12,
-    weight: 40,
-    specification: {
-      label: 'withoutTires',
-      value: 'withoutTires',
-    },
-    price: 100,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 18,
-      to: 21,
-    },
-    volume: 0.36,
-    weight: 60,
-    specification: {
-      label: 'withTires',
-      value: 'withTires',
-    },
-    price: 110,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 22,
-      to: Infinity,
-    },
-    volume: 0.14,
-    weight: 48,
-    specification: {
-      label: 'withoutTires',
-      value: 'withoutTires',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'setOfWheels',
-      value: 'setOfWheels',
-    },
-    size: {
-      from: 22,
-      to: Infinity,
-    },
-    volume: 0.44,
-    weight: 72,
-    specification: {
-      label: 'withTires',
-      value: 'withTires',
-    },
-    price: 130,
-  },
-  // Kita sub kategorija
+	// setOfWheels
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 0,
+			to: 15,
+		},
+		volume: 0.08,
+		weight: 28,
+		specification: {
+			label: 'withoutTires',
+			value: 'withoutTires',
+		},
+		price: 60,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 0,
+			to: 15,
+		},
+		volume: 0.24,
+		weight: 40,
+		specification: {
+			label: 'withTires',
+			value: 'withTires',
+		},
+		price: 70,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 16,
+			to: 17,
+		},
+		volume: 0.1,
+		weight: 32,
+		specification: {
+			label: 'withoutTires',
+			value: 'withoutTires',
+		},
+		price: 80,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 16,
+			to: 17,
+		},
+		volume: 0.3,
+		weight: 48,
+		specification: {
+			label: 'withTires',
+			value: 'withTires',
+		},
+		price: 90,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 18,
+			to: 21,
+		},
+		volume: 0.12,
+		weight: 40,
+		specification: {
+			label: 'withoutTires',
+			value: 'withoutTires',
+		},
+		price: 100,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 18,
+			to: 21,
+		},
+		volume: 0.36,
+		weight: 60,
+		specification: {
+			label: 'withTires',
+			value: 'withTires',
+		},
+		price: 110,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 22,
+			to: Infinity,
+		},
+		volume: 0.14,
+		weight: 48,
+		specification: {
+			label: 'withoutTires',
+			value: 'withoutTires',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'setOfWheels',
+			value: 'setOfWheels',
+		},
+		size: {
+			from: 22,
+			to: Infinity,
+		},
+		volume: 0.44,
+		weight: 72,
+		specification: {
+			label: 'withTires',
+			value: 'withTires',
+		},
+		price: 130,
+	},
+	// Kita sub kategorija
 
-  // doors
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'microCars',
-      value: 'microCars',
-    },
-    volume: 0.15,
-    weight: 15,
-    specification: null,
-    price: 45,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'subcompactCars',
-      value: 'subcompactCars',
-    },
-    volume: 0.18,
-    weight: 18,
-    specification: null,
-    price: 45,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'compactCars',
-      value: 'compactCars',
-    },
-    volume: 0.2,
-    weight: 20,
-    specification: null,
-    price: 50,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'midSizeCars',
-      value: 'midSizeCars',
-    },
-    volume: 0.25,
-    weight: 22,
-    specification: null,
-    price: 50,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'bigCars',
-      value: 'bigCars',
-    },
-    volume: 0.3,
-    weight: 25,
-    specification: null,
-    price: 55,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'suvs',
-      value: 'suvs',
-    },
-    volume: 0.35,
-    weight: 30,
-    specification: null,
-    price: 55,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'pickupTrucks',
-      value: 'pickupTrucks',
-    },
-    volume: 0.4,
-    weight: 35,
-    specification: null,
-    price: 60,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'doors',
-      value: 'doors',
-    },
-    size: {
-      label: 'minibuses',
-      value: 'minibuses',
-    },
-    volume: 0.45,
-    weight: 40,
-    specification: null,
-    price: 85,
-  },
-  // interior
-  // allways need to call manager
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'interior',
-      value: 'interior',
-    },
-    size: null,
-    callManager: true,
-    volume: 0,
-    weight: 0,
-    specification: null,
-    price: 0,
-  },
+	// doors
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'microCars',
+			value: 'microCars',
+		},
+		volume: 0.15,
+		weight: 15,
+		specification: null,
+		price: 45,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'subcompactCars',
+			value: 'subcompactCars',
+		},
+		volume: 0.18,
+		weight: 18,
+		specification: null,
+		price: 45,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'compactCars',
+			value: 'compactCars',
+		},
+		volume: 0.2,
+		weight: 20,
+		specification: null,
+		price: 50,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'midSizeCars',
+			value: 'midSizeCars',
+		},
+		volume: 0.25,
+		weight: 22,
+		specification: null,
+		price: 50,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'bigCars',
+			value: 'bigCars',
+		},
+		volume: 0.3,
+		weight: 25,
+		specification: null,
+		price: 55,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'suvs',
+			value: 'suvs',
+		},
+		volume: 0.35,
+		weight: 30,
+		specification: null,
+		price: 55,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'pickupTrucks',
+			value: 'pickupTrucks',
+		},
+		volume: 0.4,
+		weight: 35,
+		specification: null,
+		price: 60,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'doors',
+			value: 'doors',
+		},
+		size: {
+			label: 'minibuses',
+			value: 'minibuses',
+		},
+		volume: 0.45,
+		weight: 40,
+		specification: null,
+		price: 85,
+	},
+	// interior
+	// allways need to call manager
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'interior',
+			value: 'interior',
+		},
+		size: null,
+		callManager: true,
+		volume: 0,
+		weight: 0,
+		specification: null,
+		price: 0,
+	},
 
-  // carQuarter
-  // allways need to call manager
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'carQuarter',
-      value: 'carQuarter',
-    },
-    size: null,
-    callManager: true,
-    volume: 0,
-    weight: 0,
-    specification: null,
-    price: 0,
-  },
+	// carQuarter
+	// allways need to call manager
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'carQuarter',
+			value: 'carQuarter',
+		},
+		size: null,
+		callManager: true,
+		volume: 0,
+		weight: 0,
+		specification: null,
+		price: 0,
+	},
 
-  // bumper
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'microCars',
-      value: 'microCars',
-    },
-    volume: 0.12,
-    weight: 8,
-    specification: null,
-    price: 60,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'subcompactCars',
-      value: 'subcompactCars',
-    },
-    volume: 0.15,
-    weight: 10,
-    specification: null,
-    price: 60,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'compactCars',
-      value: 'compactCars',
-    },
-    volume: 0.18,
-    weight: 12,
-    specification: null,
-    price: 70,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'midSizeCars',
-      value: 'midSizeCars',
-    },
-    volume: 0.22,
-    weight: 15,
-    specification: null,
-    price: 75,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'bigCars',
-      value: 'bigCars',
-    },
-    volume: 0.25,
-    weight: 18,
-    specification: null,
-    price: 80,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'suvs',
-      value: 'suvs',
-    },
-    volume: 0.28,
-    weight: 20,
-    specification: null,
-    price: 85,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'pickupTrucks',
-      value: 'pickupTrucks',
-    },
-    volume: 0.3,
-    weight: 22,
-    specification: null,
-    price: 85,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'bumper',
-      value: 'bumper',
-    },
-    size: {
-      label: 'minibuses',
-      value: 'minibuses',
-    },
-    volume: 0.35,
-    weight: 25,
-    specification: null,
-    price: 85,
-  },
-  // cover
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'microCars',
-      value: 'microCars',
-    },
-    volume: 0.12,
-    weight: 10,
-    specification: null,
-    price: 55,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'subcompactCars',
-      value: 'subcompactCars',
-    },
-    volume: 0.15,
-    weight: 12,
-    specification: null,
-    price: 55,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'compactCars',
-      value: 'compactCars',
-    },
-    volume: 0.18,
-    weight: 15,
-    specification: null,
-    price: 60,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'midSizeCars',
-      value: 'midSizeCars',
-    },
-    volume: 0.22,
-    weight: 18,
-    specification: null,
-    price: 65,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'bigCars',
-      value: 'bigCars',
-    },
-    volume: 0.25,
-    weight: 20,
-    specification: null,
-    price: 80,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'suvs',
-      value: 'suvs',
-    },
-    volume: 0.28,
-    weight: 22,
-    specification: null,
-    price: 80,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'pickupTrucks',
-      value: 'pickupTrucks',
-    },
-    volume: 0.3,
-    weight: 25,
-    specification: null,
-    price: 80,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'cover',
-      value: 'cover',
-    },
-    size: {
-      label: 'minibuses',
-      value: 'minibuses',
-    },
-    volume: 0.35,
-    weight: 28,
-    specification: null,
-    price: 85,
-  },
-  // engine
-  // engine full = true
-  // engine empty = false
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 0,
-      to: 999,
-    },
-    volume: 0.14,
-    weight: 75,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 80,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 0,
-      to: 999,
-    },
-    volume: 0.14,
-    weight: 85,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 1000,
-      to: 1499,
-    },
-    volume: 0.18,
-    weight: 100,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 100,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 1000,
-      to: 1499,
-    },
-    volume: 0.18,
-    weight: 115,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 170,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 1500,
-      to: 1999,
-    },
-    volume: 0.23,
-    weight: 125,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 1500,
-      to: 1999,
-    },
-    volume: 0.23,
-    weight: 145,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 200,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 2000,
-      to: 2499,
-    },
-    volume: 0.29,
-    weight: 155,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 150,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 2000,
-      to: 2499,
-    },
-    volume: 0.29,
-    weight: 180,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 250,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 2500,
-      to: 2999,
-    },
-    volume: 0.36,
-    weight: 190,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 180,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 2500,
-      to: 2999,
-    },
-    volume: 0.36,
-    weight: 220,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 300,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 3000,
-      to: 3499,
-    },
-    volume: 0.45,
-    weight: 215,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 200,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 3000,
-      to: 3499,
-    },
-    volume: 0.45,
-    weight: 250,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 350,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 3500,
-      to: 3999,
-    },
-    volume: 0.54,
-    weight: 250,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 230,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 3500,
-      to: 3999,
-    },
-    volume: 0.54,
-    weight: 290,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 370,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 4000,
-      to: Infinity,
-    },
-    volume: 0.63,
-    weight: 300,
-    specification: {
-      label: 'empty',
-      value: 'empty',
-    },
-    price: 250,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'engine',
-      value: 'engine',
-    },
-    size: {
-      from: 4000,
-      to: Infinity,
-    },
-    volume: 0.63,
-    weight: 340,
-    specification: {
-      label: 'full',
-      value: 'full',
-    },
-    price: 400,
-  },
+	// bumper
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'microCars',
+			value: 'microCars',
+		},
+		volume: 0.12,
+		weight: 8,
+		specification: null,
+		price: 60,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'subcompactCars',
+			value: 'subcompactCars',
+		},
+		volume: 0.15,
+		weight: 10,
+		specification: null,
+		price: 60,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'compactCars',
+			value: 'compactCars',
+		},
+		volume: 0.18,
+		weight: 12,
+		specification: null,
+		price: 70,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'midSizeCars',
+			value: 'midSizeCars',
+		},
+		volume: 0.22,
+		weight: 15,
+		specification: null,
+		price: 75,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'bigCars',
+			value: 'bigCars',
+		},
+		volume: 0.25,
+		weight: 18,
+		specification: null,
+		price: 80,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'suvs',
+			value: 'suvs',
+		},
+		volume: 0.28,
+		weight: 20,
+		specification: null,
+		price: 85,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'pickupTrucks',
+			value: 'pickupTrucks',
+		},
+		volume: 0.3,
+		weight: 22,
+		specification: null,
+		price: 85,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'bumper',
+			value: 'bumper',
+		},
+		size: {
+			label: 'minibuses',
+			value: 'minibuses',
+		},
+		volume: 0.35,
+		weight: 25,
+		specification: null,
+		price: 85,
+	},
+	// cover
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'microCars',
+			value: 'microCars',
+		},
+		volume: 0.12,
+		weight: 10,
+		specification: null,
+		price: 55,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'subcompactCars',
+			value: 'subcompactCars',
+		},
+		volume: 0.15,
+		weight: 12,
+		specification: null,
+		price: 55,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'compactCars',
+			value: 'compactCars',
+		},
+		volume: 0.18,
+		weight: 15,
+		specification: null,
+		price: 60,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'midSizeCars',
+			value: 'midSizeCars',
+		},
+		volume: 0.22,
+		weight: 18,
+		specification: null,
+		price: 65,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'bigCars',
+			value: 'bigCars',
+		},
+		volume: 0.25,
+		weight: 20,
+		specification: null,
+		price: 80,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'suvs',
+			value: 'suvs',
+		},
+		volume: 0.28,
+		weight: 22,
+		specification: null,
+		price: 80,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'pickupTrucks',
+			value: 'pickupTrucks',
+		},
+		volume: 0.3,
+		weight: 25,
+		specification: null,
+		price: 80,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'cover',
+			value: 'cover',
+		},
+		size: {
+			label: 'minibuses',
+			value: 'minibuses',
+		},
+		volume: 0.35,
+		weight: 28,
+		specification: null,
+		price: 85,
+	},
+	// engine
+	// engine full = true
+	// engine empty = false
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 0,
+			to: 999,
+		},
+		volume: 0.14,
+		weight: 75,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 80,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 0,
+			to: 999,
+		},
+		volume: 0.14,
+		weight: 85,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 1000,
+			to: 1499,
+		},
+		volume: 0.18,
+		weight: 100,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 100,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 1000,
+			to: 1499,
+		},
+		volume: 0.18,
+		weight: 115,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 170,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 1500,
+			to: 1999,
+		},
+		volume: 0.23,
+		weight: 125,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 1500,
+			to: 1999,
+		},
+		volume: 0.23,
+		weight: 145,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 200,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 2000,
+			to: 2499,
+		},
+		volume: 0.29,
+		weight: 155,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 150,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 2000,
+			to: 2499,
+		},
+		volume: 0.29,
+		weight: 180,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 250,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 2500,
+			to: 2999,
+		},
+		volume: 0.36,
+		weight: 190,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 180,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 2500,
+			to: 2999,
+		},
+		volume: 0.36,
+		weight: 220,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 300,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 3000,
+			to: 3499,
+		},
+		volume: 0.45,
+		weight: 215,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 200,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 3000,
+			to: 3499,
+		},
+		volume: 0.45,
+		weight: 250,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 350,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 3500,
+			to: 3999,
+		},
+		volume: 0.54,
+		weight: 250,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 230,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 3500,
+			to: 3999,
+		},
+		volume: 0.54,
+		weight: 290,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 370,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 4000,
+			to: Infinity,
+		},
+		volume: 0.63,
+		weight: 300,
+		specification: {
+			label: 'empty',
+			value: 'empty',
+		},
+		price: 250,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'engine',
+			value: 'engine',
+		},
+		size: {
+			from: 4000,
+			to: Infinity,
+		},
+		volume: 0.63,
+		weight: 340,
+		specification: {
+			label: 'full',
+			value: 'full',
+		},
+		price: 400,
+	},
 
-  // transmision
-  // specification: true => manual
-  // specification: false => Automatine
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 0,
-      to: 999,
-    },
-    volume: 0.3,
-    weight: 30,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 50,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 0,
-      to: 999,
-    },
-    volume: 0.025,
-    weight: 25,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 45,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 1000,
-      to: 1499,
-    },
-    volume: 0.035,
-    weight: 40,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 65,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 1000,
-      to: 1499,
-    },
-    volume: 0.03,
-    weight: 35,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 50,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 1500,
-      to: 1999,
-    },
-    volume: 0.4,
-    weight: 50,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 75,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 1500,
-      to: 1999,
-    },
-    volume: 0.035,
-    weight: 45,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 60,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 2000,
-      to: 2499,
-    },
-    volume: 0.045,
-    weight: 60,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 85,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 2000,
-      to: 2499,
-    },
-    volume: 0.4,
-    weight: 55,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 75,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 2500,
-      to: 2999,
-    },
-    volume: 0.05,
-    weight: 70,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 2500,
-      to: 2999,
-    },
-    volume: 0.045,
-    weight: 65,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 85,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 3000,
-      to: 3499,
-    },
-    volume: 0.055,
-    weight: 80,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 3000,
-      to: 3499,
-    },
-    volume: 0.05,
-    weight: 75,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 3500,
-      to: 3999,
-    },
-    volume: 0.06,
-    weight: 90,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 3500,
-      to: 3999,
-    },
-    volume: 0.055,
-    weight: 85,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 4000,
-      to: Infinity,
-    },
-    volume: 0.07,
-    weight: 100,
-    specification: {
-      label: 'automatic',
-      value: 'automatic',
-    },
-    price: 120,
-  },
-  {
-    category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
-      value: 'automotiveGoods',
-    },
-    productType: {
-      label: 'gearbox',
-      value: 'gearbox',
-    },
-    size: {
-      from: 4000,
-      to: Infinity,
-    },
-    volume: 0.06,
-    weight: 95,
-    specification: {
-      label: 'manual',
-      value: 'manual',
-    },
-    price: 120,
-  },
+	// transmision
+	// specification: true => manual
+	// specification: false => Automatine
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 0,
+			to: 999,
+		},
+		volume: 0.3,
+		weight: 30,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 50,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 0,
+			to: 999,
+		},
+		volume: 0.025,
+		weight: 25,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 45,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 1000,
+			to: 1499,
+		},
+		volume: 0.035,
+		weight: 40,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 65,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 1000,
+			to: 1499,
+		},
+		volume: 0.03,
+		weight: 35,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 50,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 1500,
+			to: 1999,
+		},
+		volume: 0.4,
+		weight: 50,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 75,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 1500,
+			to: 1999,
+		},
+		volume: 0.035,
+		weight: 45,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 60,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 2000,
+			to: 2499,
+		},
+		volume: 0.045,
+		weight: 60,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 85,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 2000,
+			to: 2499,
+		},
+		volume: 0.4,
+		weight: 55,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 75,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 2500,
+			to: 2999,
+		},
+		volume: 0.05,
+		weight: 70,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 2500,
+			to: 2999,
+		},
+		volume: 0.045,
+		weight: 65,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 85,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 3000,
+			to: 3499,
+		},
+		volume: 0.055,
+		weight: 80,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 3000,
+			to: 3499,
+		},
+		volume: 0.05,
+		weight: 75,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 3500,
+			to: 3999,
+		},
+		volume: 0.06,
+		weight: 90,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 3500,
+			to: 3999,
+		},
+		volume: 0.055,
+		weight: 85,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 4000,
+			to: Infinity,
+		},
+		volume: 0.07,
+		weight: 100,
+		specification: {
+			label: 'automatic',
+			value: 'automatic',
+		},
+		price: 120,
+	},
+	{
+		category: {
+			label: 'automotiveGoods',
+			value: 'automotiveGoods',
+		},
+		productType: {
+			label: 'gearbox',
+			value: 'gearbox',
+		},
+		size: {
+			from: 4000,
+			to: Infinity,
+		},
+		volume: 0.06,
+		weight: 95,
+		specification: {
+			label: 'manual',
+			value: 'manual',
+		},
+		price: 120,
+	},
 ];
 
 export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [

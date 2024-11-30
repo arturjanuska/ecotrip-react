@@ -39,43 +39,71 @@ export const checkPostCodes = ({ address }: CheckPostCodesProps) => {
   };
 };
 
-export const test = (
-  postcode: string,
-  setPostCodeObject: (obj: any) => void
-) => {
-  if (!postcode) return false;
-  const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
-  const match = postcode.match(outcodePattern);
+export const validatePostcode = (postcode: string) => {
+	if (!postcode) return false;
+	const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
+	const match = postcode.match(outcodePattern);
 
-  if (match) {
-    const outcode = match[0];
+	if (match) {
+		const outcode = match[0];
 
-    const isMatch = UK_POST_CODES.some(
-      (item) =>
-        item.postcode === outcode &&
-        item.additionalCharges === 'Parcel force pricelist'
-    );
-    const obj = UK_POST_CODES.find((item) => item.postcode === outcode);
+		const isMatch = UK_POST_CODES.some(
+			(item) =>
+				item.postcode === outcode &&
+				item.additionalCharges === 'Parcel force pricelist'
+		);
 
-    setPostCodeObject(obj || null);
+		return isMatch;
+	} else {
+		return false;
+	}
+};
 
-    if (isMatch) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
+type PostCodeObject = {
+	postcode: string;
+	eastings: string;
+	northings: string;
+	latitude: string;
+	longitude: string;
+	town: string;
+	region: string;
+	country: string;
+	countryString: string;
+	basicPrice: string;
+	additionalCharges: string;
+	parcelForceZone: string;
+	discount: string;
+	calendar: string;
+} | null;
+
+const getPostcodeDetails = (postcode: string) => {
+	let output: PostCodeObject = null;
+	if (!postcode) return output;
+	const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
+	const match = postcode.match(outcodePattern);
+
+	if (match) {
+		output = UK_POST_CODES.find((item) => item.postcode === match[0]) || null;
+		return output;
+	}
+	return output;
 };
 
 export const checkParcelForcePostcodes = ({
-  postcodes,
-  setPostCodeObject,
+	postcodes,
 }: {
-  postcodes: string[];
-  setPostCodeObject: (obj: any) => void;
-}): boolean => {
-  const result = postcodes.map((code) => test(code, setPostCodeObject));
-  return result.some((res) => res);
+	postcodes: string[];
+}) => {
+	const postcodeDetailsArray = postcodes
+		.map((code) => getPostcodeDetails(code))
+		.filter((item) => item !== null);
+
+	const postcodeDetails = postcodeDetailsArray[0];
+
+	return {
+		isParcelForce: postcodes
+			.map((code) => validatePostcode(code))
+			.some((item) => item),
+		postcodeDetails,
+	};
 };

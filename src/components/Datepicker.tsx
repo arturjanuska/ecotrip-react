@@ -5,6 +5,7 @@ import ControlledStyledSelect from './ControlledStyledSelect';
 import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../utils/formTypes';
 import { useCustomValidation } from '../utils/validation/useCustomValidation';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
 	fiedsDisabled: boolean;
@@ -35,7 +36,10 @@ const Datepicker = ({
 	setValue,
 	service,
 }: Props) => {
-	const validationRules = useCustomValidation({ service });
+
+	const {t} = useTranslation();
+
+	const validationRules = useCustomValidation({ service, t });
 
 	return (
 		<FieldContainer

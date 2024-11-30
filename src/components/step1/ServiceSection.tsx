@@ -89,7 +89,7 @@ const ServiceSection = ({
 		setValue('shipments', [
 			{
 				estimatedPrice: '0.00',
-				category: { label: 'Siunta', value: 'shipments' },
+				category: { label: t("shipments"), value: 'shipments' },
 				amount: 1,
 			},
 		]);

@@ -61,7 +61,7 @@ function SearchBoxV2({
 						componentRestrictions: { country: country },
 					}}>
 					<CustomInput
-						id='autocomplete-input'
+						id={`autocomplete-input-${name}`}
 						control={control}
 						name={name}
 						placeholder={placeholder}

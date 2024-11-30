@@ -6,6 +6,7 @@ import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import ControlledStyledSelect from '../ControlledStyledSelect';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   control: Control<FormType, any>;
@@ -20,7 +21,10 @@ const RansomPayeeInformation = ({
   selectedService,
   methods,
 }: Props) => {
-  const validationRules = useCustomValidation({ service: selectedService });
+
+	const {t} = useTranslation();
+
+  const validationRules = useCustomValidation({ service: selectedService , t});
 
   const ransomPayeeValidationRules =
     validationRules.ransomPayeeInformation as any;
