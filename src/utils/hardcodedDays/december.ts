@@ -83,7 +83,7 @@ export const getDecemberDeliveryDays = (
 		}
 	} else if (direction === 'UK-LT') {
 		switch (pickupDayValue) {
-			case '29 - 1': {
+			case '30 - 2': {
 				return {
 					label: 'Gruodžio 3 - Gruodžio 4',
 					value: '3 - 4',
