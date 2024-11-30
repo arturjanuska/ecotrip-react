@@ -4,8 +4,8 @@ import Datepicker from '../Datepicker';
 import './step3.css';
 import { FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
-import useDeliveryDate from '../../utils/useDeliveryDate';
-import useDateOptions from '../../utils/useDateOptions';
+import useDeliveryDate from '../../hooks/useDeliveryDate';
+import useDateOptions from '../../hooks/useDateOptions';
 
 type TransportationDatesProps = {
   methods: UseFormReturn<FormType, any, undefined>;

@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import '../styles/breadcrumds.css';
 
 const Breadcrumds = () => {
-	return <h1 className='breadcrumds'>Siuntos skaičiuoklė / užsakymas</h1>;
+	const { t } = useTranslation();
+
+	return <h1 className='breadcrumds'>{t('pageBreadcrumbs')}</h1>;
 };
 
 export default Breadcrumds;
