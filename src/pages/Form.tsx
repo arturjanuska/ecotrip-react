@@ -35,6 +35,8 @@ declare global {
 }
 
 const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
+  const { t } = useTranslation();
+
   const methods = useForm<FormType>({
     defaultValues: {
       invoiceRequired: false,
@@ -43,7 +45,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
       currency: '€',
       customerInformation: {
         paymentMethod: {
-          label: 'Grynais',
+          label: t('cash'),
           value: 'cash',
         },
       },
@@ -51,7 +53,6 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     shouldUnregister: true,
   });
 
-  const { t } = useTranslation();
 
   const [errorMessages, setErrorMessages] = useState<Record<string, string>>(
     {}
@@ -275,10 +276,10 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
                   stepLabel={
                     selectedService === 'productSalesService' ||
                     selectedService === 'productPurchaseService'
-                      ? 'Siuntos paėmimo / pardavėjo informacija'
+                      ? t('pickupInfoMsg')
                       : selectedService === 'shipmentWithAddressService'
-                        ? 'EcoTrip sandėlio duomenys, kuriuos turite nurodyti užsakydami siuntą iš tiekėjo'
-                        : 'Siuntos paėmimo / siuntėjo informacija'
+                        ? t('warehouseDetailsMsg')
+                        : t('senderInfoMsg')
                   }
                   formErrors={formErrors}
                   setValue={methods.setValue}
@@ -293,8 +294,8 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
                   methods={methods}
                   stepLabel={
                     selectedService === 'productSalesService'
-                      ? 'Prekės pristatymo / gavėjo informacija'
-                      : 'Siuntos pristatymo / gavėjo informacija'
+                      ? t('recipientInfoMsg')
+                      : t('deliveryInfoMsg')
                   }
                   step={showPurchaseInformation ? 6 : 5}
                 />
@@ -319,7 +320,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
                         ? 7
                         : 6
                   }
-                  stepLabel={'Užsakovo informacija'}
+                  stepLabel={t('customerInfoMsg')}
                   formErrors={formErrors}
                   methods={methods}
                   currency={currency}

@@ -7,7 +7,7 @@ import FieldContainer from '../FieldContainer';
 import CustomInput from '../CustomInput';
 import './step1.css';
 import ServiceSection from './ServiceSection';
-import { FormType } from '../../utils/formTypes';
+import { DirectionType, FormType } from '../../utils/formTypes';
 import { useEffect } from 'react';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import SearchBoxV2 from './newSearchBox/SearchBoxV2';
@@ -103,7 +103,7 @@ const AddressForm = ({
       selectedPickupAddressPostcode &&
       selectedDeliveryAddressPostcode
     ) {
-      const dir: 'LT-UK' | 'UK-LT' | 'LT-LT' | null = getDirection(
+      const dir: DirectionType = getDirection(
         selectedPickupAddressPostcode,
         selectedDeliveryAddressPostcode
       );

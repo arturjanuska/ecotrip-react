@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Invoice from './Invoice';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
-import { FormType } from '../../utils/formTypes';
+import { CurrencyType, FormType } from '../../utils/formTypes';
 import { convertValue } from '../../utils/convertCurrency';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   sum: string;
   control: Control<FormType, any>;
   formErrors: FieldErrors<FormType>;
-  currency: '€' | '£';
+  currency: CurrencyType;
   methods: UseFormReturn<FormType, any, undefined>;
   priceDescription: { title: string; price: string }[];
   rate: number;
@@ -23,6 +24,8 @@ const OrderPrice = ({
   priceDescription,
   rate,
 }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <div className="order-price-container">
       {priceDescription.length !== 0 ? (
@@ -40,7 +43,7 @@ const OrderPrice = ({
         </div>
       ) : null}
       <p className="order-price">
-        Numatoma viso užsakymo kaina:{' '}
+        {t('orderPrice')}{' '}
         <strong>
           {currency}
           {sum

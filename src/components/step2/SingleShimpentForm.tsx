@@ -560,6 +560,8 @@ const SingleShimpentForm = ({
                   control={control}
                   placeholder={t('shipmentWeight')}
                   type="number"
+                  max={1000}
+                  min={0}
                   onFocus={(e) => {
                     const value = e.target.value;
                     if (Number(value) === 0) {
@@ -574,6 +576,13 @@ const SingleShimpentForm = ({
                   }
                   onChange={(e) => {
                     handleValidation('weight', e.target.value);
+                  }}
+                  onBlur={(e) => {
+                    // @ts-ignore
+                    const value: number = e?.target?.value || 0;
+                    if (value > 1000) {
+                      setValue(`shipments.${index}.weight`, '1000');
+                    }
                   }}
                 />
               </FieldContainer>

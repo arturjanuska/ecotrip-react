@@ -7,6 +7,9 @@ import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import ControlledStyledSelect from '../ControlledStyledSelect';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import i18n from 'i18next';
+import { OptionType } from '../../utils/types';
 
 type Props = {
   control: Control<FormType, any>;
@@ -23,6 +26,7 @@ const RansomPayeeInformation = ({
 }: Props) => {
   const { t } = useTranslation();
 
+  const currentlLanguage = i18n.language;
   const validationRules = useCustomValidation({ service: selectedService, t });
 
   const ransomPayeeValidationRules =
@@ -30,21 +34,37 @@ const RansomPayeeInformation = ({
 
   const options = [
     {
-      label: 'Siuntėjas',
+      label: 'sender',
       value: 'sender',
     },
     {
-      label: 'Kitas asmuo',
+      label: 'otherPerson',
       value: 'otherPerson',
     },
   ];
 
-  const ransomRecipientSelect = methods.watch(
+  const ransomRecipientSelectValue = methods.watch(
     'ransomPayeeInformation.ransomRecipient.value'
   );
 
+  useEffect(() => {
+    const selectedOption = options.find(
+      (option) => option.value === ransomRecipientSelectValue
+    ) as OptionType;
+
+    const translatedOption = {
+      label: t(selectedOption.value),
+      value: selectedOption.value,
+    };
+
+    methods.setValue(
+      'ransomPayeeInformation.ransomRecipient',
+      translatedOption
+    );
+  }, [currentlLanguage]);
+
   return (
-    <Step step={6} title="Siuntos/prekės išpirkos gavėjo informacija">
+    <Step step={6} title={t('step6Title')}>
       <>
         <div
           style={{
@@ -52,8 +72,8 @@ const RansomPayeeInformation = ({
           }}
         >
           <FieldContainer
-            label="Kas yra siuntos/prekės išpirkos gavėjas?"
-            description="Nurodykite, kam ir kokiu adresu grąžinti iš siuntos gavėjos surinktą pinigų sumą. Įprastai tai yra siuntos siuntėjas."
+            label={t('ransomRecipientStepLabel')}
+            description={t('ransomRecipientStepDescription')}
           >
             <ControlledStyledSelect
               name="ransomPayeeInformation.ransomRecipient"
@@ -67,7 +87,7 @@ const RansomPayeeInformation = ({
             />
           </FieldContainer>
         </div>
-        {ransomRecipientSelect === 'otherPerson' ? (
+        {ransomRecipientSelectValue === 'otherPerson' ? (
           <div>
             <ClientInformationForm
               client="ransomPayee"

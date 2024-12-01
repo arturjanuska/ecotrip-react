@@ -29,7 +29,7 @@ const ProductPurchaseServiceInformation = ({
   const purchaseValidationRules = validationRules.purchaseInformation;
 
   return (
-    <Step step={4} title="Pinigų perdavimo prekės nupirkimui informacija">
+    <Step step={4} title={t('step4Title')}>
       <>
         <div>
           <ClientInformationForm

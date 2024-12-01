@@ -73,14 +73,14 @@ const ServiceSection = ({
       service === 'shipmentWithAddressService'
     ) {
       setValue('customerInformation.payerOfTheShipment', {
-        label: 'Užsakovas yra gavėjas',
+        label: t('thePayerIsTheRecipient'),
         value: 'thePayerIsTheRecipient',
       });
     }
 
     if (service === 'productSalesService') {
       setValue('ransomPayeeInformation.ransomRecipient', {
-        label: 'Siuntejas',
+        label: t('sender'),
         value: 'sender',
       });
     }

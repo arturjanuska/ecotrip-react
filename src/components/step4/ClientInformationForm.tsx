@@ -9,6 +9,7 @@ import { FormType } from '../../utils/formTypes';
 import { getError } from '../../utils/validation/getError';
 import { findPostcode } from '../../utils/findPostcode';
 import SearchBoxV2 from '../step1/newSearchBox/SearchBoxV2';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   client: 'sender' | 'recipient' | 'ransomPayee' | 'purchaseInformation';
@@ -22,6 +23,8 @@ type Props = {
   step?: number;
 };
 
+type FieldType = 'name' | 'surname' | 'phone' | 'email' | 'address' | 'zipcode';
+
 const ClientInformationForm = ({
   client,
   control,
@@ -32,65 +35,62 @@ const ClientInformationForm = ({
   methods,
   step,
 }: Props) => {
-  const getSubject = (client: Props['client']) => {
-    switch (client) {
-      case 'sender':
-        return 'Siuntėjo';
-
-      case 'recipient':
-        return 'Gavėjo';
-
-      case 'ransomPayee':
-        return 'Išpirkos gavėjo';
-
-      case 'purchaseInformation':
-        return 'Pinigus perduodančio';
-
-      default:
-        return 'Siuntėjo';
-    }
-  };
+  const { t } = useTranslation();
 
   const getAddressDescription = (client: Props['client']) => {
     switch (client) {
       case 'sender':
-        return 'Adresas iš kur paįmama siunta arba perduodama EcoTrip komandai.';
+        return t('senderAddressDescription');
 
       case 'recipient':
-        return 'Adresas, kuriame gavėjas galės atsiimti siuntą arba kuriame siunta bus palikta po pristatymo.';
+        return t('recipientAddressDescription');
 
       case 'ransomPayee':
-        return 'Adresas, kur perduodami pinigai EcoTrip kurjeriui.';
+        return t('ransomPayeeAndPurchaseAddressDescription');
 
       case 'purchaseInformation':
-        return 'Adresas, kur perduodami pinigai EcoTrip kurjeriui.';
+        return t('ransomPayeeAndPurchaseAddressDescription');
 
       default:
-        return 'Adresas iš kur paįmama siunta arba perduodama EcoTrip komandai.';
+        return t('senderAddressDescription');
     }
   };
 
-  const value = getSubject(client);
-
   const onChange = (_name: keyof FormType, value: string) => {
     const correctedName = `${subName}.address`;
-    const postCode = findPostcode(value);
+    const postCode: keyof FormType = findPostcode(value) as keyof FormType;
     // @ts-ignore
     methods.setValue(`${subName}.zipCode`, postCode);
-    // @ts-ignore
-    methods.setValue(correctedName, value);
+    methods.setValue(correctedName as keyof FormType, value);
   };
 
   const isFieldsDisabled =
     isShipmentWithAddressServiceSelected && client === 'sender';
 
+  const generateTranslationKey = (
+    client: Props['client'],
+    field: FieldType,
+    fieldType: 'label' | 'placeholder'
+  ) => {
+    return `${client}${field.charAt(0).toUpperCase()}${field.slice(1)}${fieldType === 'label' ? 'Label' : 'Placeholder'}`;
+  };
+
+  const getTranslatedValue = (
+    client: Props['client'],
+    field: FieldType,
+    fieldType: 'label' | 'placeholder'
+  ) => {
+    const translationKey = generateTranslationKey(client, field, fieldType);
+    return t(translationKey);
+  };
+
   return (
     <>
       <div className="client-form-container">
         <div className="client-form-row">
-          <FieldContainer label={`${value} vardas`}>
+          <FieldContainer label={getTranslatedValue(client, 'name', 'label')}>
             <CustomInput
-              placeholder={`Įveskite ${value.toLowerCase()} vardą *`}
+              placeholder={getTranslatedValue(client, 'name', 'placeholder')}
               control={control}
               name={`${subName}.firstName`}
               errorMessage={getError(`${subName}.firstName`, formErrors)}
@@ -98,9 +98,11 @@ const ClientInformationForm = ({
               rules={validationRules?.firstName}
             />
           </FieldContainer>
-          <FieldContainer label={`${value} pavardė`}>
+          <FieldContainer
+            label={getTranslatedValue(client, 'surname', 'label')}
+          >
             <CustomInput
-              placeholder={`Įveskite ${value.toLowerCase()} pavardę *`}
+              placeholder={getTranslatedValue(client, 'surname', 'placeholder')}
               control={control}
               name={`${subName}.lastName`}
               errorMessage={getError(`${subName}.lastName`, formErrors)}
@@ -110,9 +112,9 @@ const ClientInformationForm = ({
           </FieldContainer>
         </div>
         <div className="client-form-row">
-          <FieldContainer label={`${value} telefonas`}>
+          <FieldContainer label={getTranslatedValue(client, 'phone', 'label')}>
             <CustomInput
-              placeholder={`Įveskite ${value.toLowerCase()} telefoną *`}
+              placeholder={getTranslatedValue(client, 'phone', 'placeholder')}
               control={control}
               name={`${subName}.phoneNumber`}
               errorMessage={getError(`${subName}.phoneNumber`, formErrors)}
@@ -121,11 +123,11 @@ const ClientInformationForm = ({
             />
           </FieldContainer>
           <FieldContainer
-            label={`${value} el. paštas`}
-            description="Prašome nurodyti teisingą el. pašto adresą, kad galėtume išsiųsti užsakymo patvirtinimą ir kurjerio sekimo nuorodą."
+            label={getTranslatedValue(client, 'email', 'label')}
+            description={t('emailFieldDescription')}
           >
             <CustomInput
-              placeholder={`Įveskite ${value.toLowerCase()} el. paštą *`}
+              placeholder={getTranslatedValue(client, 'email', 'placeholder')}
               control={control}
               name={`${subName}.email`}
               errorMessage={getError(`${subName}.email`, formErrors)}
@@ -136,14 +138,13 @@ const ClientInformationForm = ({
         </div>
         <div className="client-form-row">
           <FieldContainer
-            label={`${value} adresas`}
+            label={getTranslatedValue(client, 'address', 'label')}
             description={getAddressDescription(client)}
           >
             <SearchBoxV2
               control={control}
-              // @ts-ignore
-              name={`${subName}.address`}
-              placeholder="Įveskite gatvę, namo numerį, miestą"
+              name={`${subName}.address` as keyof FormType}
+              placeholder={t('enterStreetNumberCity')}
               errorMessage={getError(`${subName}.address`, formErrors)}
               methods={methods}
               onChange={onChange}
@@ -154,11 +155,11 @@ const ClientInformationForm = ({
             />
           </FieldContainer>
           <FieldContainer
-            label={`${value} pašto kodas`}
-            description="Pašto kodas sugeneruojamas automatiškai, suvedus tikslų adresą. Pasitikrinkite ar teisingas pašto kodas."
+            label={getTranslatedValue(client, 'zipcode', 'label')}
+            description={t('zipcodeFieldDescription')}
           >
             <CustomInput
-              placeholder={`Pašto kodas *`}
+              placeholder={t('zipcodeInputPlaceholder')}
               control={control}
               name={`${subName}.zipCode`}
               errorMessage={getError(`${subName}.zipCode`, formErrors)}
@@ -170,14 +171,10 @@ const ClientInformationForm = ({
       </div>
 
       <CustomTextarea
-        label={
-          step === 5
-            ? 'Papildoma informacija apie pristatomą siuntą'
-            : 'Papildoma informacija apie paimamą siuntą'
-        }
+        label={step === 5 ? t('textAreaStep5Label') : t('textAreaLabel')}
         name={`${subName}.additionInformation`}
         control={control}
-        placeholder="Pvz.: Nebusiu namie, siuntą paduos mano kaimynas. Arba siuntą rasite paėmimui galiniame kieme ir panašiai."
+        placeholder={t('textAreaPlaceholder')}
       />
     </>
   );

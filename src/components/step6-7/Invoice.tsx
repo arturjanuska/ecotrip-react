@@ -28,48 +28,47 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
   });
 
   const onChange = (name: keyof FormType, value: string) => {
-    // @ts-ignore
     methods.setValue(name, value);
   };
 
   return (
     <>
       <ControlledCheckboxWithLabel control={control} name="invoiceRequired">
-        <span>Reikalinga sąskaita faktūra</span>
+        <span>{t('needInvoiceMsg')}</span>
       </ControlledCheckboxWithLabel>
 
       {needInvoice ? (
         <div className="invoice-form-container">
-          <FieldContainer label="Įmonės pavadinimas">
+          <FieldContainer label={t('companyName')}>
             <CustomInput
-              placeholder="Įveskite įmonės pavadinimą *"
+              placeholder={t('enterCompanyName')}
               control={control}
               name="invoiceInformation.companyName"
               errorMessage={formErrors.invoiceInformation?.companyName?.message}
               rules={validationRules.invoiceInformation?.companyName}
             />
           </FieldContainer>
-          <FieldContainer label="Įmonės kodas">
+          <FieldContainer label={t('companyCode')}>
             <CustomInput
-              placeholder="Įveskite įmonės kodą *"
+              placeholder={t('enterCompanyCode')}
               name="invoiceInformation.companyCode"
               control={control}
               errorMessage={formErrors.invoiceInformation?.companyCode?.message}
               rules={validationRules.invoiceInformation?.companyCode}
             />
           </FieldContainer>
-          <FieldContainer label="PVM mokėtojo kodas">
+          <FieldContainer label={t('pvmComapnyCode')}>
             <CustomInput
-              placeholder="Įveskite PVM mokėtojo kodą *"
+              placeholder={t('enterPvmComapnyCode')}
               name="invoiceInformation.pvmCode"
               control={control}
               errorMessage={formErrors.invoiceInformation?.pvmCode?.message}
               rules={validationRules.invoiceInformation?.pvmCode}
             />
           </FieldContainer>
-          <FieldContainer label="Įmonės el. paštas">
+          <FieldContainer label={t('companyEmail')}>
             <CustomInput
-              placeholder="Įveskite įmonės el paštą *"
+              placeholder={t('enterCompanyEmail')}
               control={control}
               name="invoiceInformation.companyEmail"
               errorMessage={
@@ -78,12 +77,12 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
               rules={validationRules.invoiceInformation?.companyEmail}
             />
           </FieldContainer>
-          <FieldContainer label="Įmonės adresas">
+          <FieldContainer label={t('companyAddress')}>
             <SearchBoxV2
               control={control}
               // @ts-ignore
               name="invoiceInformation.companyAddress"
-              placeholder="Įveskite įmonės adresą *"
+              placeholder={t('enterComapnyAddress')}
               errorMessage={
                 formErrors.invoiceInformation?.companyAddress?.message
               }

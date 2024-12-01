@@ -27,6 +27,7 @@
 	padding: 12px;
 	border: 1px solid #0000001a;
 	border-radius: 5px;
+	resize: vertical;
 }
 
 .custom-textarea textarea:hover {
