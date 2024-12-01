@@ -44,21 +44,21 @@ const ControlledCheckboxWithLabel = ({
               className={`form-control ${className ? className : ''}`}
               style={style}
             >
-              <label className='label cursor-pointer'>
+              <label className="label cursor-pointer">
                 <input
                   {...field}
                   {...rest}
-                  type='checkbox'
+                  type="checkbox"
                   className={`checkbox checkbox-primary ${
                     errorMessage ? 'error' : ''
                   }`}
                   // @ts-ignore
                   checked={field.value ?? false}
                 />
-                <div className='custom-label-text'>{children}</div>
+                <div className="custom-label-text">{children}</div>
               </label>
             </div>
-            <SimpleTextError message={errorMessage} textAlign='right' />
+            <SimpleTextError message={errorMessage} textAlign="right" />
           </>
         );
       }}

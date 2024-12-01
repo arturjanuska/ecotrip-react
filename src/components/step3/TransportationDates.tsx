@@ -54,15 +54,15 @@ const TransportationDates = ({
   // TODO
 
   return (
-    <Step step={3} title='Siuntos pervežimo datos'>
+    <Step step={3} title="Siuntos pervežimo datos">
       <>
-        <div className='date-fields-container'>
+        <div className="date-fields-container">
           <Datepicker
             fiedsDisabled={false}
-            label='Siuntos paėmimo data'
+            label="Siuntos paėmimo data"
             options={options}
             control={methods.control}
-            name='from'
+            name="from"
             formErrors={formErrors}
             resetToDates={resetToDates}
             setValue={setValue}
@@ -71,9 +71,9 @@ const TransportationDates = ({
 
           <Datepicker
             fiedsDisabled={true}
-            label='Siuntos pristatymo data (numatoma)'
+            label="Siuntos pristatymo data (numatoma)"
             control={methods.control}
-            name='to'
+            name="to"
             formErrors={formErrors}
             resetToDates={resetToDates}
             service={service}

@@ -21,10 +21,9 @@ const RansomPayeeInformation = ({
   selectedService,
   methods,
 }: Props) => {
+  const { t } = useTranslation();
 
-	const {t} = useTranslation();
-
-  const validationRules = useCustomValidation({ service: selectedService , t});
+  const validationRules = useCustomValidation({ service: selectedService, t });
 
   const ransomPayeeValidationRules =
     validationRules.ransomPayeeInformation as any;
@@ -45,7 +44,7 @@ const RansomPayeeInformation = ({
   );
 
   return (
-    <Step step={6} title='Siuntos/prekės išpirkos gavėjo informacija'>
+    <Step step={6} title="Siuntos/prekės išpirkos gavėjo informacija">
       <>
         <div
           style={{
@@ -53,11 +52,11 @@ const RansomPayeeInformation = ({
           }}
         >
           <FieldContainer
-            label='Kas yra siuntos/prekės išpirkos gavėjas?'
-            description='Nurodykite, kam ir kokiu adresu grąžinti iš siuntos gavėjos surinktą pinigų sumą. Įprastai tai yra siuntos siuntėjas.'
+            label="Kas yra siuntos/prekės išpirkos gavėjas?"
+            description="Nurodykite, kam ir kokiu adresu grąžinti iš siuntos gavėjos surinktą pinigų sumą. Įprastai tai yra siuntos siuntėjas."
           >
             <ControlledStyledSelect
-              name='ransomPayeeInformation.ransomRecipient'
+              name="ransomPayeeInformation.ransomRecipient"
               options={options}
               control={control}
               rules={
@@ -71,9 +70,9 @@ const RansomPayeeInformation = ({
         {ransomRecipientSelect === 'otherPerson' ? (
           <div>
             <ClientInformationForm
-              client='ransomPayee'
+              client="ransomPayee"
               control={control}
-              subName='ransomPayeeInformation'
+              subName="ransomPayeeInformation"
               formErrors={formErrors}
               validationRules={
                 ransomPayeeValidationRules

@@ -7,46 +7,45 @@ import { useCustomValidation } from '../../utils/validation/useCustomValidation'
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-	control: Control<FormType, any>;
-	formErrors: FieldErrors<FormType>;
-	selectedService: string;
-	methods: UseFormReturn<FormType, any, undefined>;
+  control: Control<FormType, any>;
+  formErrors: FieldErrors<FormType>;
+  selectedService: string;
+  methods: UseFormReturn<FormType, any, undefined>;
 };
 const ProductPurchaseServiceInformation = ({
-	control,
-	formErrors,
-	selectedService,
-	methods,
+  control,
+  formErrors,
+  selectedService,
+  methods,
 }: Props) => {
+  const { t } = useTranslation();
 
-	const {t} = useTranslation();
+  const validationRules = useCustomValidation({
+    service: selectedService,
+    t,
+  }) as {
+    [key: string]: any;
+  };
+  const purchaseValidationRules = validationRules.purchaseInformation;
 
-
-	const validationRules = useCustomValidation({ service: selectedService, t }) as {
-		[key: string]: any;
-	};
-	const purchaseValidationRules = validationRules.purchaseInformation;
-
-	return (
-		<Step
-			step={4}
-			title='Pinigų perdavimo prekės nupirkimui informacija'>
-			<>
-				<div>
-					<ClientInformationForm
-						client='purchaseInformation'
-						control={control}
-						subName='purchaseInformation'
-						formErrors={formErrors}
-						validationRules={
-							purchaseValidationRules ? purchaseValidationRules : undefined
-						}
-						methods={methods}
-					/>
-				</div>
-			</>
-		</Step>
-	);
+  return (
+    <Step step={4} title="Pinigų perdavimo prekės nupirkimui informacija">
+      <>
+        <div>
+          <ClientInformationForm
+            client="purchaseInformation"
+            control={control}
+            subName="purchaseInformation"
+            formErrors={formErrors}
+            validationRules={
+              purchaseValidationRules ? purchaseValidationRules : undefined
+            }
+            methods={methods}
+          />
+        </div>
+      </>
+    </Step>
+  );
 };
 
 export default ProductPurchaseServiceInformation;

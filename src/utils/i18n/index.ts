@@ -7,19 +7,19 @@ import enLang from './locales/en/en.json';
 const initialLanguage = localStorage.getItem('lang') || 'en';
 
 i18n.use(initReactI18next).init({
-	lng: initialLanguage,
-	resources: {
-		lt: {
-			translation: ltLang,
-		},
-		en: {
-			translation: enLang,
-		},
-	},
-	fallbackLng: 'en',
-	supportedLngs: ['en', 'lt'],
+  lng: initialLanguage,
+  resources: {
+    lt: {
+      translation: ltLang,
+    },
+    en: {
+      translation: enLang,
+    },
+  },
+  fallbackLng: 'en',
+  supportedLngs: ['en', 'lt'],
 
-	interpolation: {
-		escapeValue: false,
-	},
+  interpolation: {
+    escapeValue: false,
+  },
 });

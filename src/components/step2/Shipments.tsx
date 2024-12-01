@@ -1,17 +1,17 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-	Control,
-	FieldErrors,
-	useFieldArray,
-	UseFormReturn,
-} from "react-hook-form";
-import Step from "../Step";
-import SingleShimpentForm from "./SingleShimpentForm";
-import { CurrencyType, FormType } from "../../utils/formTypes";
-import PrimaryButton from "../PrimaryButton";
-import "./step2.css";
-import { useTranslation } from "react-i18next";
+  Control,
+  FieldErrors,
+  useFieldArray,
+  UseFormReturn,
+} from 'react-hook-form';
+import Step from '../Step';
+import SingleShimpentForm from './SingleShimpentForm';
+import { CurrencyType, FormType } from '../../utils/formTypes';
+import PrimaryButton from '../PrimaryButton';
+import './step2.css';
+import { useTranslation } from 'react-i18next';
 
 const Shipments = ({
   control,
@@ -33,13 +33,12 @@ const Shipments = ({
     React.SetStateAction<Record<string, string>>
   >;
   rate: number;
-  }) => {
-  
+}) => {
   const { t } = useTranslation();
-  
+
   const { fields, append, remove } = useFieldArray<FormType>({
     control,
-    name: "shipments",
+    name: 'shipments',
   });
 
   const removeShipment = (index: number) => {
@@ -50,24 +49,23 @@ const Shipments = ({
 
   const handleAddShipment = () => {
     append({
-      estimatedPrice: "0.00",
+      estimatedPrice: '0.00',
       category: {
-        label: t("shipments"),
-        value: "shipments",
+        label: t('shipments'),
+        value: 'shipments',
       },
       amount: 1,
     });
   };
 
-
   return (
     <Step
       id="shipments-section"
       step={2}
-      title={`${t("step2Title")} ${
-        selectedService === "shipmentWithAddressService"
-          ? t("step2SubTitle")
-          : ""
+      title={`${t('step2Title')} ${
+        selectedService === 'shipmentWithAddressService'
+          ? t('step2SubTitle')
+          : ''
       }`}
     >
       <div className="shipments-column-wrapper">
@@ -104,7 +102,7 @@ const Shipments = ({
           <div className="left-column">
             <div
               style={{
-                width: "100%",
+                width: '100%',
               }}
               className="buttons-container"
             >
@@ -113,7 +111,7 @@ const Shipments = ({
                 type="button"
                 onClick={handleAddShipment}
               >
-                {t("addAdditionalShipments")}
+                {t('addAdditionalShipments')}
               </PrimaryButton>
             </div>
           </div>

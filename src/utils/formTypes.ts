@@ -1,9 +1,9 @@
-import { OptionType, RangeSizeType } from "./types";
+import { OptionType, RangeSizeType } from './types';
 
 export enum FormTypes {
-  Shipment = "shipment",
-  OtherProducts = "other-products",
-  ParcelForceShimpent = "parcel-force-shipment",
+  Shipment = 'shipment',
+  OtherProducts = 'other-products',
+  ParcelForceShimpent = 'parcel-force-shipment',
 }
 
 export type ShipmentProps = {
@@ -24,8 +24,8 @@ export type ShipmentProps = {
   purchasePriceOfTheItem?: string;
 };
 
-export type DirectionType = "UK-LT" | "LT-UK" | "LT-LT" | null;
-export type CurrencyType = "€" | "£";
+export type DirectionType = 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
+export type CurrencyType = '€' | '£';
 
 export type FormType = {
   direction: DirectionType;

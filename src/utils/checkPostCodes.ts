@@ -40,70 +40,70 @@ export const checkPostCodes = ({ address }: CheckPostCodesProps) => {
 };
 
 export const validatePostcode = (postcode: string) => {
-	if (!postcode) return false;
-	const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
-	const match = postcode.match(outcodePattern);
+  if (!postcode) return false;
+  const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
+  const match = postcode.match(outcodePattern);
 
-	if (match) {
-		const outcode = match[0];
+  if (match) {
+    const outcode = match[0];
 
-		const isMatch = UK_POST_CODES.some(
-			(item) =>
-				item.postcode === outcode &&
-				item.additionalCharges === 'Parcel force pricelist'
-		);
+    const isMatch = UK_POST_CODES.some(
+      (item) =>
+        item.postcode === outcode &&
+        item.additionalCharges === 'Parcel force pricelist'
+    );
 
-		return isMatch;
-	} else {
-		return false;
-	}
+    return isMatch;
+  } else {
+    return false;
+  }
 };
 
 type PostCodeObject = {
-	postcode: string;
-	eastings: string;
-	northings: string;
-	latitude: string;
-	longitude: string;
-	town: string;
-	region: string;
-	country: string;
-	countryString: string;
-	basicPrice: string;
-	additionalCharges: string;
-	parcelForceZone: string;
-	discount: string;
-	calendar: string;
+  postcode: string;
+  eastings: string;
+  northings: string;
+  latitude: string;
+  longitude: string;
+  town: string;
+  region: string;
+  country: string;
+  countryString: string;
+  basicPrice: string;
+  additionalCharges: string;
+  parcelForceZone: string;
+  discount: string;
+  calendar: string;
 } | null;
 
 const getPostcodeDetails = (postcode: string) => {
-	let output: PostCodeObject = null;
-	if (!postcode) return output;
-	const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
-	const match = postcode.match(outcodePattern);
+  let output: PostCodeObject = null;
+  if (!postcode) return output;
+  const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
+  const match = postcode.match(outcodePattern);
 
-	if (match) {
-		output = UK_POST_CODES.find((item) => item.postcode === match[0]) || null;
-		return output;
-	}
-	return output;
+  if (match) {
+    output = UK_POST_CODES.find((item) => item.postcode === match[0]) || null;
+    return output;
+  }
+  return output;
 };
 
 export const checkParcelForcePostcodes = ({
-	postcodes,
+  postcodes,
 }: {
-	postcodes: string[];
+  postcodes: string[];
 }) => {
-	const postcodeDetailsArray = postcodes
-		.map((code) => getPostcodeDetails(code))
-		.filter((item) => item !== null);
+  const postcodeDetailsArray = postcodes
+    .map((code) => getPostcodeDetails(code))
+    .filter((item) => item !== null);
 
-	const postcodeDetails = postcodeDetailsArray[0];
+  const postcodeDetails = postcodeDetailsArray[0];
 
-	return {
-		isParcelForce: postcodes
-			.map((code) => validatePostcode(code))
-			.some((item) => item),
-		postcodeDetails,
-	};
+  return {
+    isParcelForce: postcodes
+      .map((code) => validatePostcode(code))
+      .some((item) => item),
+    postcodeDetails,
+  };
 };

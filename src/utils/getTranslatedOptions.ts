@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { OptionType } from "./types";
+import { OptionType } from './types';
 
 const getTranslatedOptions = (options: OptionType[], t: any) => {
   return options.map((option) => {

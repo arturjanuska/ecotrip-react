@@ -24,8 +24,7 @@ const RecipientInformation = ({
 }: Props) => {
   const service = methods.watch('service');
 
-	const {t} = useTranslation();
-
+  const { t } = useTranslation();
 
   const validationRules = useCustomValidation({ service, t });
 
@@ -33,9 +32,9 @@ const RecipientInformation = ({
   return (
     <Step title={stepLabel} step={step}>
       <ClientInformationForm
-        client='recipient'
+        client="recipient"
         control={control}
-        subName='recipientInformation'
+        subName="recipientInformation"
         formErrors={formErrors}
         validationRules={recipientValidationRules}
         methods={methods}

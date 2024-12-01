@@ -7,10 +7,7 @@ import { useEffect, useState } from 'react';
 import './globals.css';
 import Form from './pages/Form';
 import ModalPage from './pages/ModalPage';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet';
 import ReactPixel from 'react-facebook-pixel';
 
@@ -30,7 +27,7 @@ function App() {
         <Helmet>
           <script
             async
-            src='https://www.googletagmanager.com/gtag/js?id=AW-792301087'
+            src="https://www.googletagmanager.com/gtag/js?id=AW-792301087"
           ></script>
           <script>
             {`
@@ -46,18 +43,15 @@ function App() {
           {!orderId ? (
             <Form setOrderId={(id: string) => setOrderId(id)} />
           ) : (
-            <ModalPage
-              setOrderId={() => setOrderId(null)}
-              orderId={orderId}
-            />
+            <ModalPage setOrderId={() => setOrderId(null)} orderId={orderId} />
           )}
           <noscript>
             <img
-              height='1'
-              width='1'
+              height="1"
+              width="1"
               style={{ display: 'none' }}
-              src='https://www.facebook.com/tr?id=1060218774766985&ev=PageView&noscript=1'
-              alt='fb pixel'
+              src="https://www.facebook.com/tr?id=1060218774766985&ev=PageView&noscript=1"
+              alt="fb pixel"
             />
           </noscript>
         </>

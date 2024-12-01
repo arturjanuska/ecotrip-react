@@ -31,7 +31,7 @@ const SenderInformation = ({
 }: SenderInformationProps) => {
   const service = methods.watch('service');
 
-	const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const validationRules = useCustomValidation({ service, t });
 
@@ -40,9 +40,9 @@ const SenderInformation = ({
   return (
     <Step title={stepLabel} step={step}>
       <ClientInformationForm
-        client='sender'
+        client="sender"
         control={control}
-        subName='senderInformation'
+        subName="senderInformation"
         formErrors={formErrors}
         isShipmentWithAddressServiceSelected={
           selectedService === 'shipmentWithAddressService'

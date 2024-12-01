@@ -22,7 +22,7 @@ const CustomTextarea = ({
         name={name}
         control={control}
         render={({ field }) => (
-          <div className='custom-textarea'>
+          <div className="custom-textarea">
             {label && <label htmlFor={name}>{label}</label>}
             <textarea
               {...field}

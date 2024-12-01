@@ -6,7 +6,7 @@ export type ServiceProps = {
   title: string;
   desc: {
     text: string;
-    variables: { [key: string]: string }
+    variables: { [key: string]: string };
   };
   icon: React.ReactNode;
   value: string;
@@ -24,7 +24,7 @@ export type ServiceCardProps = {
 };
 
 const CheckmarkIcon = () => {
-  return <FontAwesomeIcon icon={faCircleCheck} color='#9AA61E' size='lg' />;
+  return <FontAwesomeIcon icon={faCircleCheck} color="#9AA61E" size="lg" />;
 };
 
 const ServiceCard = ({
@@ -33,7 +33,6 @@ const ServiceCard = ({
   selected,
   isDisabled,
 }: ServiceCardProps) => {
-
   const { t } = useTranslation();
 
   return (
@@ -43,11 +42,13 @@ const ServiceCard = ({
       }`}
       onClick={onSelect}
     >
-      <div className='service-info'>
+      <div className="service-info">
         {service.icon}
-        <div className='service-description'>
-          <span className='card-title'>{t(service.title)}</span>
-          <span className='card-description'>{t(service.desc.text, service.desc.variables)}</span>
+        <div className="service-description">
+          <span className="card-title">{t(service.title)}</span>
+          <span className="card-description">
+            {t(service.desc.text, service.desc.variables)}
+          </span>
         </div>
       </div>
       {selected ? <CheckmarkIcon /> : null}

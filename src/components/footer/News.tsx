@@ -1,9 +1,9 @@
 // import SecondaryButton from '../SecondaryButton';
 
 const News = () => {
-	return (
-		<div className='news-container'>
-			{/* <div className='news-headings'>
+  return (
+    <div className="news-container">
+      {/* <div className='news-headings'>
 				<h3>Naujienlaiškis</h3>
 				<h4>Mūsų naujienos ir specialūs pasiūlymas prenumeratoriams</h4>
 			</div>
@@ -14,8 +14,8 @@ const News = () => {
 				/>
 				<SecondaryButton>Prenumeruoti</SecondaryButton>
 			</div> */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default News;

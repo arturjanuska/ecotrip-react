@@ -9,46 +9,46 @@ import { FormType } from '../utils/formTypes';
 type Languages = 'lt' | 'en';
 
 const LanguageSelect = ({
-	methods,
+  methods,
 }: {
-	methods: UseFormReturn<FormType, any, undefined>;
+  methods: UseFormReturn<FormType, any, undefined>;
 }) => {
-	const { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
-	const options = [
-		{
-			value: 'en',
-			label: 'English',
-		},
-		{
-			value: 'lt',
-			label: 'Lietuvių',
-		},
-	];
+  const options = [
+    {
+      value: 'en',
+      label: 'English',
+    },
+    {
+      value: 'lt',
+      label: 'Lietuvių',
+    },
+  ];
 
-	const onLanguageChange = (value: Languages) => {
-		localStorage.setItem('lang', value);
-		i18n.changeLanguage(value);
-	};
+  const onLanguageChange = (value: Languages) => {
+    localStorage.setItem('lang', value);
+    i18n.changeLanguage(value);
+  };
 
-	useTranslateParcelData({
-		currentLanguage: i18n.language,
-		methods,
-	});
+  useTranslateParcelData({
+    currentLanguage: i18n.language,
+    methods,
+  });
 
-	return (
-		<div className='language-select-container'>
-			<StyledSelect
-				options={options}
-				defaultValue={options.find((option) => option.value === i18n.language)}
-				// @ts-ignore
-				onChange={(select: { value: string; label: string }) => {
-					const value = select.value as Languages;
-					onLanguageChange(value);
-				}}
-			/>
-		</div>
-	);
+  return (
+    <div className="language-select-container">
+      <StyledSelect
+        options={options}
+        defaultValue={options.find((option) => option.value === i18n.language)}
+        // @ts-ignore
+        onChange={(select: { value: string; label: string }) => {
+          const value = select.value as Languages;
+          onLanguageChange(value);
+        }}
+      />
+    </div>
+  );
 };
 
 export default LanguageSelect;
