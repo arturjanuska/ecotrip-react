@@ -303,5 +303,15 @@
   "salesAmountMsg": "Sales amount:",
   "addressFeeMsg": "Address fee:",
   "quantityDiscountMsg": "Quantity discount:",
-  "addressDiscountMsg": "Address discount:"
+  "addressDiscountMsg": "Address discount:",
+  "cargoTransportLink": "Cargo transport",
+  "shipmentTransportLink": "Shipment delivery",
+  "deliveryFromStores": "Delivery from stores",
+  "transportationRules": "Transportation rules",
+  "movingServices": "Moving services",
+  "packingAndLabelingRules": "Packing and labeling rules",
+  "contacts": "Contacts",
+  "domesticTransport": "Domestic transport",
+  "internationalTransport": "International transport",
+  "copyright": "@ 2024 ecotrip.lt | All rights reserved"
 }

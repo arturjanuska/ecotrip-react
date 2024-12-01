@@ -303,5 +303,15 @@
   "salesAmountMsg": "Prekių pardavimo suma:",
   "addressFeeMsg": "Adreso papildomas mokestis:",
   "quantityDiscountMsg": "Nuolaida už siuntų kiekį:",
-  "addressDiscountMsg": "Adreso nuolaida:"
+  "addressDiscountMsg": "Adreso nuolaida:",
+  "cargoTransportLink": "Krovinių pervežimas",
+  "shipmentTransportLink": "Siuntų pristatymas",
+  "deliveryFromStores": "Pristatymas iš parduotuvių",
+  "transportationRules": "Vežimo taisyklės",
+  "movingServices": "Perkraustymo paslaugos",
+  "packingAndLabelingRules": "Siuntos pakavimo ir ženklinimo taisyklės",
+  "contacts": "Kontaktai",
+  "domesticTransport": "Pervežimai Lietuvoje",
+  "internationalTransport": "Pervežimai užsienyje",
+  "copyright": "@ 2024 ecotrip.lt | Visos teisės saugomos"
 }

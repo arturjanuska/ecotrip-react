@@ -13,46 +13,49 @@ import {
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
 import IconWithContainer from '../IconWithContainer';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   const firstColumnList = [
     {
-      label: 'Krovinių pervežimas',
+      label: t('cargoTransportLink'),
       href: 'https://ecotrip.lt/kroviniu-pervezimas/',
     },
     {
-      label: 'Siuntų gabenimas',
+      label: t('shipmentTransportLink'),
       href: 'https://ecotrip.lt/siuntu-pristatymas/',
     },
     {
-      label: 'Pristatymas iš parduotuvių',
+      label: t('deliveryFromStores'),
       href: 'https://ecotrip.lt/pristatymas-is-parduotuviu/',
     },
     {
-      label: 'Vežimo taisyklės',
+      label: t('transportationRules'),
       href: 'https://ecotrip.lt/vezimo-taisykles/',
     },
   ];
 
   const secondColumnList = [
     {
-      label: 'Krovinių pervežimas',
+      label: t('cargoTransportLink'),
       href: 'https://ecotrip.lt/kroviniu-pervezimas/',
     },
     {
-      label: 'Siuntų gabenimas',
+      label: t('shipmentTransportLink'),
       href: 'https://ecotrip.lt/siuntu-pristatymas/',
     },
     {
-      label: 'Perkraustymo paslaugos',
+      label: t('movingServices'),
       href: 'https://ecotrip.lt/perkraustymo-paslaugos/',
     },
     {
-      label: 'Siuntos pakavimo ir ženklinimo taisyklės',
+      label: t('packingAndLabelingRules'),
       href: 'https://ecotrip.lt/siuntos-pakavimo-ir-zenklinimo-taisykles/',
     },
     {
-      label: 'Vežimo taisyklės',
+      label: t('transportationRules'),
       href: 'https://ecotrip.lt/vezimo-taisykles/',
     },
   ];
@@ -62,10 +65,13 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-sections">
-            <LinkList list={firstColumnList} title="Pervežimai Lietuvoje" />
-            <LinkList list={secondColumnList} title="Pervežimai užsienyje" />
+            <LinkList list={firstColumnList} title={t('domesticTransport')} />
+            <LinkList
+              list={secondColumnList}
+              title={t('internationalTransport')}
+            />
             <div className="link-list-container">
-              <h2 className="link-list-title">Kontaktai</h2>
+              <h2 className="link-list-title">{t('contacts')}</h2>
               <div className="footer-contacts">
                 <InfoEntry icon={faPhone} content="+370 601 22060" />
                 <InfoEntry icon={faPhone} content="+370 647 57542" />
@@ -109,7 +115,7 @@ const Footer = () => {
               <News />
             </div>
           </div>
-          <p className="copyright">@ 2024 ecotrip.lt | Visos teisės saugomos</p>
+          <p className="copyright">{t('copyright')}</p>
         </div>
       </div>
     </div>
