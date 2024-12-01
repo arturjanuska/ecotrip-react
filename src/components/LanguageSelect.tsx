@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { FormType } from '../utils/formTypes';
 import useTranslateTransportationDate from '../hooks/useTranslateTransportationDate';
 
-type Languages = 'lt' | 'en';
+type Languages = 'lt' | 'en' | 'ru';
 
 const LanguageSelect = ({
   methods,
@@ -24,6 +24,10 @@ const LanguageSelect = ({
     {
       value: 'lt',
       label: 'Lietuvių',
+    },
+    {
+      value: 'ru',
+      label: 'Русский',
     },
   ];
 
