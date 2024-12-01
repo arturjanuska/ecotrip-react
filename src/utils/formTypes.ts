@@ -27,6 +27,15 @@ export type ShipmentProps = {
 export type DirectionType = 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
 export type CurrencyType = '€' | '£';
 
+export type DateDayType =
+  | (OptionType & {
+      key?: {
+        one: string;
+        two: string;
+      };
+    })
+  | null;
+
 export type FormType = {
   direction: DirectionType;
   currency: CurrencyType;
@@ -40,12 +49,12 @@ export type FormType = {
     from: {
       year: OptionType | null;
       month: OptionType | null;
-      day: OptionType | null;
+      day: DateDayType;
     };
     to: {
       year: OptionType | null;
       month: OptionType | null;
-      day: OptionType | null;
+      day: DateDayType;
     };
   };
   senderInformation: {

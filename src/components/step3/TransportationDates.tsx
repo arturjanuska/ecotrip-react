@@ -3,14 +3,15 @@ import Step from '../Step';
 import Datepicker from '../Datepicker';
 import './step3.css';
 import { FieldErrors, UseFormReturn } from 'react-hook-form';
-import { FormType } from '../../utils/formTypes';
+import { DirectionType, FormType } from '../../utils/formTypes';
 import useDeliveryDate from '../../hooks/useDeliveryDate';
 import useDateOptions from '../../hooks/useDateOptions';
+import { useTranslation } from 'react-i18next';
 
 type TransportationDatesProps = {
   methods: UseFormReturn<FormType, any, undefined>;
   formErrors: FieldErrors<FormType>;
-  direction: 'LT-UK' | 'UK-LT' | 'LT-LT' | null;
+  direction: DirectionType;
 };
 
 const TransportationDates = ({
@@ -19,6 +20,8 @@ const TransportationDates = ({
   direction,
 }: TransportationDatesProps) => {
   const { watch, setValue } = methods;
+
+  const { t } = useTranslation();
 
   const yearFrom = watch('dates.from.year.value');
   const monthFrom = watch('dates.from.month.value');
@@ -51,15 +54,13 @@ const TransportationDates = ({
     service,
   });
 
-  // TODO
-
   return (
-    <Step step={3} title="Siuntos pervežimo datos">
+    <Step step={3} title={t('step3Title')}>
       <>
         <div className="date-fields-container">
           <Datepicker
             fiedsDisabled={false}
-            label="Siuntos paėmimo data"
+            label={t('datepickerFromFieldLabel')}
             options={options}
             control={methods.control}
             name="from"
@@ -71,7 +72,7 @@ const TransportationDates = ({
 
           <Datepicker
             fiedsDisabled={true}
-            label="Siuntos pristatymo data (numatoma)"
+            label={t('datepickerToFieldLabel')}
             control={methods.control}
             name="to"
             formErrors={formErrors}

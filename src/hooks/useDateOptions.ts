@@ -5,7 +5,8 @@ import {
   monthNamesForMonthSelect,
 } from '../components/step3/monthNames';
 import { OptionType } from '../utils/types';
-import { getDecemberPickupDays } from '../utils/hardcodedDays/december';
+import { DateDayType, DirectionType } from '../utils/formTypes';
+import i18next from 'i18next';
 
 export const getPickupDay = (
   pickupStartDay: number,
@@ -21,23 +22,33 @@ export const getPickupDay = (
   if (pickupStartDay + diff > daysInMonth) {
     const dayDifference = pickupStartDay + diff - daysInMonth;
     return {
-      label: `${
+      label: `${i18next.t(
         monthNamesForDaySelect[selectedMonthIndex - 1]
-      } ${pickupStartDay} - ${
+      )} ${pickupStartDay} - ${i18next.t(
         monthNamesForDaySelect[
           selectedMonthIndex === 12 ? 0 : selectedMonthIndex
         ]
-      } ${dayDifference}`,
+      )} ${dayDifference}`,
       value: `${pickupStartDay} - ${dayDifference}`,
+      key: {
+        one: monthNamesForDaySelect[selectedMonthIndex - 1],
+        two: monthNamesForDaySelect[
+          selectedMonthIndex === 12 ? 0 : selectedMonthIndex
+        ],
+      },
     };
   }
   return {
-    label: `${
+    label: `${i18next.t(
       monthNamesForDaySelect[selectedMonthIndex - 1]
-    } ${pickupStartDay} - ${
+    )} ${pickupStartDay} - ${i18next.t(
       monthNamesForDaySelect[selectedMonthIndex - 1]
-    } ${pickupEndDay}`,
+    )} ${pickupEndDay}`,
     value: `${pickupStartDay} - ${pickupEndDay}`,
+    key: {
+      one: monthNamesForDaySelect[selectedMonthIndex - 1],
+      two: monthNamesForDaySelect[selectedMonthIndex - 1],
+    },
   };
 };
 
@@ -47,13 +58,15 @@ const useDateOptions = ({
   service,
 }: {
   selectedMonth: string | null;
-  direction: 'LT-UK' | 'UK-LT' | 'LT-LT' | null;
+  direction: DirectionType;
   service: string;
 }) => {
+  const currentLanguage = i18next.language;
+
   const [dateOptions, setDateOptions] = useState<{
     years: OptionType[]; // OptionType is { label: string, value: string }
     months: OptionType[];
-    days: OptionType[];
+    days: DateDayType[];
   }>({
     years: [],
     months: [],
@@ -85,7 +98,7 @@ const useDateOptions = ({
         value: month.toString(),
       }));
 
-      let days: OptionType[] = [];
+      const days: DateDayType[] = [];
 
       if (selectedMonth) {
         const selectedMonthIndex = parseInt(selectedMonth, 10);
@@ -144,16 +157,18 @@ const useDateOptions = ({
           }
         }
       }
-      if (selectedMonth === '12') {
-        days = getDecemberPickupDays(direction);
-        setDateOptions({ years, months, days });
-      } else {
-        setDateOptions({ years, months, days });
-      }
+      setDateOptions({ years, months, days });
+
+      // if (selectedMonth === '12') {
+      //   // days = getDecemberPickupDays(direction);
+      //   setDateOptions({ years, months, days });
+      // } else {
+      //   setDateOptions({ years, months, days });
+      // }
     };
 
     calculateDateOptions();
-  }, [selectedMonth, direction, service]);
+  }, [selectedMonth, direction, service, currentLanguage]);
 
   return dateOptions;
 };

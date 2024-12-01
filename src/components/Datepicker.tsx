@@ -3,7 +3,7 @@
 import FieldContainer from './FieldContainer';
 import ControlledStyledSelect from './ControlledStyledSelect';
 import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
-import { FormType } from '../utils/formTypes';
+import { DateDayType, FormType } from '../utils/formTypes';
 import { useCustomValidation } from '../utils/validation/useCustomValidation';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +13,7 @@ type Props = {
   options?: {
     years: { label: string; value: string }[];
     months: { label: string; value: string }[];
-    days: { label: string; value: string }[];
+    days: DateDayType[];
   };
   className?: string;
   control: Control<FormType, any>;
@@ -45,7 +45,7 @@ const Datepicker = ({
       <div className="date-picker-wrapper">
         <div>
           <ControlledStyledSelect
-            placeholder="Metai"
+            placeholder={t('year')}
             options={options?.years || []}
             isDisabled={fiedsDisabled}
             control={control}
@@ -71,7 +71,7 @@ const Datepicker = ({
         </div>
         <div>
           <ControlledStyledSelect
-            placeholder="Mėnuo"
+            placeholder={t('month')}
             options={options?.months || []}
             isDisabled={fiedsDisabled}
             control={control}
@@ -95,7 +95,7 @@ const Datepicker = ({
         </div>
         <div>
           <ControlledStyledSelect
-            placeholder="Diena"
+            placeholder={t('day')}
             options={options?.days || []}
             isDisabled={fiedsDisabled}
             control={control}

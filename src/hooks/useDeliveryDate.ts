@@ -10,6 +10,8 @@ import {
 } from '../components/step3/monthNames';
 import { FormType } from '../utils/formTypes';
 import { getDecemberDeliveryDays } from '../utils/hardcodedDays/december';
+import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 type Props = {
   pickupDate: string;
@@ -26,6 +28,10 @@ const useDeliveryDate = ({
   dayRangeFrom,
   service,
 }: Props) => {
+  const { t } = useTranslation();
+
+  const language = i18n.language;
+
   useEffect(() => {
     const getDeliveryDate = () => {
       if (!pickupDate || direction === 'LT-LT') {
@@ -96,21 +102,21 @@ const useDeliveryDate = ({
       const deliveryEndDateDay = deliveryEndDate.format('D');
       const month = deliveryStartDate.format('MM');
 
-      const deliveryStartDateDayLabel = `${
+      const deliveryStartDateDayLabel = `${t(
         monthNamesForDaySelect[parseInt(month, 10) - 1]
-      } ${deliveryStartDateDay}`;
+      )} ${deliveryStartDateDay}`;
 
       const deliveryEndDateDayLabel =
-        parseInt(month, 10) === 12
-          ? `${monthNamesForDaySelect[0]} ${deliveryEndDateDay}`
-          : `${
+        parseInt(month, 10) === 12 && parseInt(deliveryStartDateDay, 10) > 29
+          ? `${t(monthNamesForDaySelect[0])} ${deliveryEndDateDay}`
+          : `${t(
               monthNamesForDaySelect[
                 parseInt(deliveryEndDateDay, 10) === 1 ||
                 parseInt(deliveryEndDateDay, 10) === 2
                   ? parseInt(month, 10)
                   : parseInt(month, 10) - 1
               ]
-            } ${deliveryEndDateDay}`;
+            )} ${deliveryEndDateDay}`;
 
       const deliveryDate = {
         year: deliveryStartDate.format('YYYY'),
@@ -124,22 +130,52 @@ const useDeliveryDate = ({
       });
 
       setValue('dates.to.month', {
-        label: monthNamesForMonthSelect[deliveryStartDate.month()],
+        label: t(monthNamesForMonthSelect[deliveryStartDate.month()]),
         value: deliveryDate.month,
       });
 
-      if (getDeliveryMonth() === 12) {
-        // December hardcoded days
-        setValue(
-          'dates.to.day',
-          getDecemberDeliveryDays(direction, dayRangeFrom as string) || null
-        );
-      } else {
-        setValue('dates.to.day', {
-          label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
-          value: deliveryDate.day,
-        });
-      }
+      // FOR DECEMBER
+      // if (getDeliveryMonth() === 12) {
+      //   // December hardcoded days
+      //   setValue(
+      //     'dates.to.day',
+      //     getDecemberDeliveryDays(direction, dayRangeFrom as string) || null
+      //   );
+      // } else {
+      //   setValue('dates.to.day', {
+      //     label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
+      //     value: deliveryDate.day,
+      //     key: {
+      //       one: monthNamesForDaySelect[parseInt(month, 10) - 1],
+      //       two:
+      //         parseInt(month, 10) === 12
+      //           ? monthNamesForDaySelect[0]
+      //           : monthNamesForDaySelect[
+      //               parseInt(deliveryEndDateDay, 10) === 1 ||
+      //               parseInt(deliveryEndDateDay, 10) === 2
+      //                 ? parseInt(month, 10)
+      //                 : parseInt(month, 10) - 1
+      //             ],
+      //     },
+      //   });
+      // }
+
+      setValue('dates.to.day', {
+        label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
+        value: deliveryDate.day,
+        key: {
+          one: monthNamesForDaySelect[parseInt(month, 10) - 1],
+          two:
+            parseInt(month, 10) === 12
+              ? monthNamesForDaySelect[0]
+              : monthNamesForDaySelect[
+                  parseInt(deliveryEndDateDay, 10) === 1 ||
+                  parseInt(deliveryEndDateDay, 10) === 2
+                    ? parseInt(month, 10)
+                    : parseInt(month, 10) - 1
+                ],
+        },
+      });
     };
 
     if (dayRangeFrom) {
@@ -149,7 +185,7 @@ const useDeliveryDate = ({
       setValue('dates.to.month', null);
       setValue('dates.to.day', null);
     }
-  }, [pickupDate, direction, setValue, dayRangeFrom, service]);
+  }, [pickupDate, direction, setValue, dayRangeFrom, service, language]);
 };
 
 export default useDeliveryDate;
