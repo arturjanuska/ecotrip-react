@@ -94,7 +94,7 @@ const useDateOptions = ({
         { length: 12 - currentMonthIndex + 1 },
         (_, i) => currentMonthIndex + i
       ).map((month) => ({
-        label: monthNamesForMonthSelect[month - 1],
+        label: i18next.t(monthNamesForMonthSelect[month - 1]),
         value: month.toString(),
       }));
 
