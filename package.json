@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "format": "npx prettier --write 'src/**/*.{ts,tsx,js,jsx,json,md,mdx}'"
+    "format": "npx prettier --write 'src/**/*.{ts,tsx,js,jsx,json,md,mdx}'",
+    "type-check": "npx tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",

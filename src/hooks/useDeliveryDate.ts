@@ -9,7 +9,7 @@ import {
   monthNamesForMonthSelect,
 } from '../components/step3/monthNames';
 import { FormType } from '../utils/formTypes';
-import { getDecemberDeliveryDays } from '../utils/hardcodedDays/december';
+// import { getDecemberDeliveryDays } from '../utils/hardcodedDays/december';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
