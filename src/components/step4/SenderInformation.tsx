@@ -9,6 +9,7 @@ import Step from '../Step';
 import ClientInformationForm from './ClientInformationForm';
 import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import { useTranslation } from 'react-i18next';
 
 type SenderInformationProps = {
   control: Control<FormType, any>;
@@ -30,16 +31,18 @@ const SenderInformation = ({
 }: SenderInformationProps) => {
   const service = methods.watch('service');
 
-  const validationRules = useCustomValidation({ service });
+  const { t } = useTranslation();
+
+  const validationRules = useCustomValidation({ service, t });
 
   const senderValidationRules = validationRules.senderInformation;
 
   return (
     <Step title={stepLabel} step={step}>
       <ClientInformationForm
-        client='sender'
+        client="sender"
         control={control}
-        subName='senderInformation'
+        subName="senderInformation"
         formErrors={formErrors}
         isShipmentWithAddressServiceSelected={
           selectedService === 'shipmentWithAddressService'

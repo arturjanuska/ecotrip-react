@@ -1,129 +1,129 @@
-import { convertValue } from "../../utils/convertCurrency";
-import { CurrencyType, DirectionType } from "../../utils/formTypes";
-import { ServiceProps } from "../ServiceCard";
+import { convertValue } from '../../utils/convertCurrency';
+import { CurrencyType, DirectionType } from '../../utils/formTypes';
+import { ServiceProps } from '../ServiceCard';
 import {
   AddressServiceIcon,
   ParcelForceServiceIcon,
   PurchaseServiceIcon,
   SalesServiceIcon,
   StandartShipmentIcon,
-} from "../ServiceIcons";
+} from '../ServiceIcons';
 
 const getServices = (
   currency: CurrencyType,
   direction: DirectionType,
   isParcelForce: boolean,
-  rate: number,
+  rate: number
 ) => {
   const services: ServiceProps[] = isParcelForce
     ? [
         {
-          title: "standartShipmentServiceTitle",
+          title: 'standartShipmentServiceTitle',
           desc: {
-            text: "standartShipmentServiceDesc",
+            text: 'standartShipmentServiceDesc',
             variables: {},
           },
           icon: ParcelForceServiceIcon(isParcelForce, direction),
-          value: "parcelForceShipment",
-          link: "https://ecotrip.lt/siuntos-i-anglija-is-lietuvos-is-anglijos-i-lietuva/",
-          linkText: "standartShipmentServiceLinkText",
+          value: 'parcelForceShipment',
+          link: 'https://ecotrip.lt/siuntos-i-anglija-is-lietuvos-is-anglijos-i-lietuva/',
+          linkText: 'standartShipmentServiceLinkText',
         },
 
         {
-          title: "addressServiceTitle",
+          title: 'addressServiceTitle',
           desc: {
-            text: "addressServiceDesc",
+            text: 'addressServiceDesc',
             variables: {
               currency,
             },
           },
           icon: AddressServiceIcon(isParcelForce, direction),
-          value: "shipmentWithAddressService",
-          link: "https://ecotrip.lt/apsipirkimo-adresas-anglijoje/",
-          linkText: "addressServiceLinkText",
+          value: 'shipmentWithAddressService',
+          link: 'https://ecotrip.lt/apsipirkimo-adresas-anglijoje/',
+          linkText: 'addressServiceLinkText',
         },
         {
-          title: "purchaseServiceTitle",
+          title: 'purchaseServiceTitle',
           desc: {
-            text: "purchaseServiceDesc",
+            text: 'purchaseServiceDesc',
             variables: {
               currency,
               convertedValue: convertValue(currency, 5, rate),
             },
           },
           icon: PurchaseServiceIcon(isParcelForce, direction),
-          value: "productPurchaseService",
+          value: 'productPurchaseService',
 
-          linkText: "Link",
+          linkText: 'Link',
         },
         {
-          title: "salesServiceTitle",
+          title: 'salesServiceTitle',
           desc: {
-            text: "salesServiceDesc",
+            text: 'salesServiceDesc',
             variables: {
               currency,
               convertedValue: convertValue(currency, 15, rate),
             },
           },
           icon: SalesServiceIcon(isParcelForce, direction),
-          value: "productSalesService",
+          value: 'productSalesService',
 
-          linkText: "Link",
+          linkText: 'Link',
         },
       ]
     : [
         {
-          title: "standartShipmentServiceTitle",
+          title: 'standartShipmentServiceTitle',
           desc: {
-            text: "standartPrices",
+            text: 'standartPrices',
             variables: {},
           },
           icon: StandartShipmentIcon(isParcelForce, direction),
-          value: "standartShipment",
-          link: "https://ecotrip.lt/siuntos-i-anglija-is-lietuvos-is-anglijos-i-lietuva/",
-          linkText: "standartShipmentServiceLinkText",
+          value: 'standartShipment',
+          link: 'https://ecotrip.lt/siuntos-i-anglija-is-lietuvos-is-anglijos-i-lietuva/',
+          linkText: 'standartShipmentServiceLinkText',
         },
         {
-          title: "addressServiceTitle",
+          title: 'addressServiceTitle',
           desc: {
-            text: "addressServiceDesc",
+            text: 'addressServiceDesc',
             variables: {
               currency,
             },
           },
           icon: AddressServiceIcon(isParcelForce, direction),
-          value: "shipmentWithAddressService",
-          link: "https://ecotrip.lt/apsipirkimo-adresas-anglijoje/",
+          value: 'shipmentWithAddressService',
+          link: 'https://ecotrip.lt/apsipirkimo-adresas-anglijoje/',
 
-          linkText: "addressServiceLinkText",
+          linkText: 'addressServiceLinkText',
         },
         {
-          title: "purchaseServiceTitle",
+          title: 'purchaseServiceTitle',
           desc: {
-            text: "purchaseServiceDesc",
+            text: 'purchaseServiceDesc',
             variables: {
               currency,
               convertedValue: convertValue(currency, 5, rate),
             },
           },
           icon: PurchaseServiceIcon(isParcelForce, direction),
-          value: "productPurchaseService",
+          value: 'productPurchaseService',
 
-          linkText: "Link",
+          linkText: 'Link',
         },
         {
-          title: "salesServiceTitle",
+          title: 'salesServiceTitle',
           desc: {
-            text: "salesServiceDesc",
+            text: 'salesServiceDesc',
             variables: {
               currency,
               convertedValue: convertValue(currency, 15, rate),
             },
           },
           icon: SalesServiceIcon(isParcelForce, direction),
-          value: "productSalesService",
+          value: 'productSalesService',
 
-          linkText: "Link",
+          linkText: 'Link',
         },
       ];
 

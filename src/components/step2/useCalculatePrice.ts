@@ -103,10 +103,10 @@ const useCalculatePrice = ({
     }
 
     if (size !== null) {
-      if (size.value === size.label) {
-        filteredProducts = filteredProducts.filter(
-          (item) =>
-            // @ts-ignore
+      filteredProducts = filteredProducts.filter((item) => {
+        if (!item.size) return false;
+        if ('from' in item.size && 'to' in item.size) {
+          return (
             item.size.from ===
               convertOptionTypeToRangeSize(
                 productType?.value ?? '',
@@ -120,14 +120,11 @@ const useCalculatePrice = ({
                 size.value,
                 category?.value ?? ''
               )?.to
-        );
-      } else {
-        filteredProducts = filteredProducts.filter(
-          (item) =>
-            // @ts-ignore
-            item.size.label === size.label && item.size.value === size.value
-        );
-      }
+          );
+        } else {
+          return item.size.value === size.value;
+        }
+      });
     }
 
     if (specification && specification.value) {

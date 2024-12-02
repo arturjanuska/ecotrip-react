@@ -61,7 +61,7 @@ export default forwardRef(
     ref: any
   ) => {
     return (
-      <div className='w-100'>
+      <div className="w-100">
         <Select
           styles={customStyles}
           ref={ref}

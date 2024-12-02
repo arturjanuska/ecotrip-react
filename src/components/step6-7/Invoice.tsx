@@ -7,6 +7,7 @@ import { FormType } from '../../utils/formTypes';
 import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import SearchBoxV2 from '../step1/newSearchBox/SearchBoxV2';
+import { useTranslation } from 'react-i18next';
 
 type InvoiceProps = {
   control: Control<FormType, any>;
@@ -18,68 +19,70 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
   const needInvoice = methods.watch('invoiceRequired');
   const service = methods.watch('service');
 
+  const { t } = useTranslation();
+
   const validationRules = useCustomValidation({
     invoiceNeeded: needInvoice,
     service,
+    t,
   });
 
   const onChange = (name: keyof FormType, value: string) => {
-    // @ts-ignore
     methods.setValue(name, value);
   };
 
   return (
     <>
-      <ControlledCheckboxWithLabel control={control} name='invoiceRequired'>
-        <span>Reikalinga sąskaita faktūra</span>
+      <ControlledCheckboxWithLabel control={control} name="invoiceRequired">
+        <span>{t('needInvoiceMsg')}</span>
       </ControlledCheckboxWithLabel>
 
       {needInvoice ? (
-        <div className='invoice-form-container'>
-          <FieldContainer label='Įmonės pavadinimas'>
+        <div className="invoice-form-container">
+          <FieldContainer label={t('companyName')}>
             <CustomInput
-              placeholder='Įveskite įmonės pavadinimą *'
+              placeholder={t('enterCompanyName')}
               control={control}
-              name='invoiceInformation.companyName'
+              name="invoiceInformation.companyName"
               errorMessage={formErrors.invoiceInformation?.companyName?.message}
               rules={validationRules.invoiceInformation?.companyName}
             />
           </FieldContainer>
-          <FieldContainer label='Įmonės kodas'>
+          <FieldContainer label={t('companyCode')}>
             <CustomInput
-              placeholder='Įveskite įmonės kodą *'
-              name='invoiceInformation.companyCode'
+              placeholder={t('enterCompanyCode')}
+              name="invoiceInformation.companyCode"
               control={control}
               errorMessage={formErrors.invoiceInformation?.companyCode?.message}
               rules={validationRules.invoiceInformation?.companyCode}
             />
           </FieldContainer>
-          <FieldContainer label='PVM mokėtojo kodas'>
+          <FieldContainer label={t('pvmComapnyCode')}>
             <CustomInput
-              placeholder='Įveskite PVM mokėtojo kodą *'
-              name='invoiceInformation.pvmCode'
+              placeholder={t('enterPvmComapnyCode')}
+              name="invoiceInformation.pvmCode"
               control={control}
               errorMessage={formErrors.invoiceInformation?.pvmCode?.message}
               rules={validationRules.invoiceInformation?.pvmCode}
             />
           </FieldContainer>
-          <FieldContainer label='Įmonės el. paštas'>
+          <FieldContainer label={t('companyEmail')}>
             <CustomInput
-              placeholder='Įveskite įmonės el paštą *'
+              placeholder={t('enterCompanyEmail')}
               control={control}
-              name='invoiceInformation.companyEmail'
+              name="invoiceInformation.companyEmail"
               errorMessage={
                 formErrors.invoiceInformation?.companyEmail?.message
               }
               rules={validationRules.invoiceInformation?.companyEmail}
             />
           </FieldContainer>
-          <FieldContainer label='Įmonės adresas'>
+          <FieldContainer label={t('companyAddress')}>
             <SearchBoxV2
               control={control}
               // @ts-ignore
-              name='invoiceInformation.companyAddress'
-              placeholder='Įveskite įmonės adresą *'
+              name="invoiceInformation.companyAddress"
+              placeholder={t('enterComapnyAddress')}
               errorMessage={
                 formErrors.invoiceInformation?.companyAddress?.message
               }

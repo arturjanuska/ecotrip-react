@@ -7,10 +7,10 @@ import App from './App.tsx';
 import './utils/i18n/index.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
-		<GlobalLayout>
-			<App />
-		</GlobalLayout>
-		<Footer />
-	</React.StrictMode>
+  <React.StrictMode>
+    <GlobalLayout>
+      <App />
+    </GlobalLayout>
+    <Footer />
+  </React.StrictMode>
 );

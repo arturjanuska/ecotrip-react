@@ -1,66 +1,70 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import { TFunction } from 'i18next';
 import { ShipmentProps } from '../formTypes';
 
 type ValidationProps = {
   invoiceNeeded?: boolean;
   service?: string;
   formShipment?: ShipmentProps;
+  t: TFunction<'translation', undefined>;
 };
 
-const notZero = (value: string) => {
-  return parseFloat(value) === 0
-    ? 'Laukas negali būti nulis'
-    : true;
+const notZero = (value: string, t: TFunction<'translation', undefined>) => {
+  return parseFloat(value) === 0 ? t('nonZeroField') : true;
 };
 
-const useCustomShipmentsValidation = () => {
+const useCustomShipmentsValidation = ({
+  t,
+}: {
+  t: TFunction<'translation', undefined>;
+}) => {
   return {
-    category: { required: 'Laukas yra privalomas' },
-    productType: { required: 'Laukas yra privalomas' },
-    size: { required: 'Laukas yra privalomas' },
-    specification: { required: 'Laukas yra privalomas' },
-    estimatedPrice: { required: 'Laukas yra privalomas' },
+    category: { required: t('fieldRequired') },
+    productType: { required: t('fieldRequired') },
+    size: { required: t('fieldRequired') },
+    specification: { required: t('fieldRequired') },
+    estimatedPrice: { required: t('fieldRequired') },
     amount: {
-      required: 'Laukas yra privalomas',
+      required: t('fieldRequired'),
       validate: {
-        notZero,
+        notZero: (value: string) => notZero(value, t),
       },
     },
     length: {
-      required: 'Laukas yra privalomas',
+      required: t('fieldRequired'),
       validate: {
-        notZero,
+        notZero: (value: string) => notZero(value, t),
       },
     },
     width: {
-      required: 'Laukas yra privalomas',
+      required: t('fieldRequired'),
       validate: {
-        notZero,
+        notZero: (value: string) => notZero(value, t),
       },
     },
     weight: {
-      required: 'Laukas yra privalomas',
+      required: t('fieldRequired'),
       validate: {
-        notZero,
+        notZero: (value: string) => notZero(value, t),
       },
     },
     height: {
-      required: 'Laukas yra privalomas',
+      required: t('fieldRequired'),
       validate: {
-        notZero,
+        notZero: (value: string) => notZero(value, t),
       },
     },
-    volume: { required: 'Laukas yra privalomas' },
-    extent: { required: 'Laukas yra privalomas' },
-    shipmentPrice: { required: 'Laukas yra privalomas' },
+    volume: { required: t('fieldRequired') },
+    extent: { required: t('fieldRequired') },
+    shipmentPrice: { required: t('fieldRequired') },
     purchasePriceOfTheItem: {
-      required: 'Laukas yra privalomas',
+      required: t('fieldRequired'),
       validate: {
-        notZero,
+        notZero: (value: string) => notZero(value, t),
       },
     },
     orderedShipmentNumber: {
-      required: 'Laukas yra privalomas',
+      required: t('fieldRequired'),
     },
   };
 };
@@ -68,147 +72,136 @@ const useCustomShipmentsValidation = () => {
 export const useCustomValidation = ({
   invoiceNeeded = false,
   service,
+  t,
 }: ValidationProps) => {
   const combinedLTandUKPhoneNumberRegex = /^\+(44|370)\d+$/;
   return {
     pickupAddress:
       service !== 'shipmentWithAddressService'
-        ? { required: 'Laukas yra privalomas' }
+        ? { required: t('fieldRequired') }
         : { required: false },
     pickupAddressZipCode:
       service !== 'shipmentWithAddressService'
-        ? { required: 'Laukas yra privalomas' }
+        ? { required: t('fieldRequired') }
         : { required: false },
     deliveryAddress:
       service !== 'shipmentWithAddressService'
-        ? { required: 'Laukas yra privalomas' }
+        ? { required: t('fieldRequired') }
         : { required: false },
     deliveryAddressZipCode:
       service !== 'shipmentWithAddressService'
-        ? { required: 'Laukas yra privalomas' }
+        ? { required: t('fieldRequired') }
         : { required: false },
     dates: {
       from: {
         year: {
-          required: 'Laukas yra privalomas',
+          required: t('fieldRequired'),
         },
         month: {
-          required: 'Laukas yra privalomas',
+          required: t('fieldRequired'),
         },
         day: {
-          required: 'Laukas yra privalomas',
+          required: t('fieldRequired'),
         },
       },
       to: {
         year: {
-          required: 'Laukas yra privalomas',
+          required: t('fieldRequired'),
         },
         month: {
-          required: 'Laukas yra privalomas',
+          required: t('fieldRequired'),
         },
         day: {
-          required: 'Laukas yra privalomas',
+          required: t('fieldRequired'),
         },
       },
     },
-    shipments: useCustomShipmentsValidation(),
+    shipments: useCustomShipmentsValidation({ t }),
     senderInformation: {
       firstName: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
       lastName: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
       phoneNumber: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         pattern: {
           value: combinedLTandUKPhoneNumberRegex,
-          message:
-            'Neteisingas telefono numerio formatas. Turi prasidėti nuo "+" ir sekti skaičiai, pvz., +370 arba +44',
+          message: t('invalidPhoneNumberFormat'),
         },
       },
       email: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         pattern: {
-          value:
-            /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-          message: 'Neteisingas el. pašto formatas',
+          value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+          message: t('invalidEmailFormat'),
         },
       },
       address: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
       zipCode: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
     },
     recipientInformation: {
       firstName: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
       lastName: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
       phoneNumber: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         pattern: {
           value: combinedLTandUKPhoneNumberRegex,
-          message:
-            'Neteisingas telefono numerio formatas. Turi prasidėti nuo "+" ir sekti skaičiai, pvz., +370 arba +44',
+          message: t('invalidPhoneNumberFormat'),
         },
       },
       email: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         pattern: {
-          value:
-            /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-          message: 'Neteisingas el. pašto formatas',
+          value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+          message: t('invalidEmailFormat'),
         },
       },
       address: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
       zipCode: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
         minLength: {
           value: 3,
-          message:
-            'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+          message: t('minLengthMsg'),
         },
       },
     },
@@ -216,59 +209,52 @@ export const useCustomValidation = ({
       service === 'productSalesService'
         ? {
             ransomRecipient: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               minLength: {
                 value: 3,
-                message:
-                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message: t('minLengthMsg'),
               },
             },
             firstName: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               minLength: {
                 value: 3,
-                message:
-                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message: t('minLengthMsg'),
               },
             },
             lastName: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               minLength: {
                 value: 3,
-                message:
-                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message: t('minLengthMsg'),
               },
             },
             phoneNumber: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               pattern: {
                 value: combinedLTandUKPhoneNumberRegex,
-                message:
-                  'Neteisingas telefono numerio formatas. Turi prasidėti nuo "+" ir sekti skaičiai, pvz., +370 arba +44',
+                message: t('invalidPhoneNumberFormat'),
               },
             },
             email: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               pattern: {
-                value:
-                  /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-                message: 'Neteisingas el. pašto formatas',
+                value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+                message: t('invalidEmailFormat'),
               },
             },
             address: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               minLength: {
                 value: 3,
-                message:
-                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message: t('minLengthMsg'),
               },
             },
             zipCode: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               minLength: {
                 value: 3,
-                message:
-                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message: t('minLengthMsg'),
               },
             },
           }
@@ -277,98 +263,87 @@ export const useCustomValidation = ({
       service === 'productPurchaseService'
         ? {
             firstName: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               minLength: {
                 value: 3,
-                message:
-                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message: t('minLengthMsg'),
               },
             },
             lastName: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               minLength: {
                 value: 3,
-                message:
-                  'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+                message: t('minLengthMsg'),
               },
             },
             phoneNumber: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               pattern: {
                 value: combinedLTandUKPhoneNumberRegex,
-                message:
-                  'Neteisingas telefono numerio formatas. Turi prasidėti nuo "+" ir sekti skaičiai, pvz., +370 arba +44',
+                message: t('invalidPhoneNumberFormat'),
               },
             },
             email: {
-              required: 'Laukas yra privalomas',
+              required: t('fieldRequired'),
               pattern: {
-                value:
-                  /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-                message: 'Neteisingas el. pašto formatas',
+                value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+                message: t('invalidEmailFormat'),
               },
             },
-            address: { required: 'Laukas yra privalomas' },
-            zipCode: { required: 'Laukas yra privalomas' },
+            address: { required: t('fieldRequired') },
+            zipCode: { required: t('fieldRequired') },
           }
         : { required: false },
     customerInformation: {
       payerOfTheShipment: {
-        required: 'Laukas yra privalomas',
+        required: t('fieldRequired'),
       },
-      paymentMethod: { required: 'Laukas yra privalomas' },
+      paymentMethod: { required: t('fieldRequired') },
     },
     invoiceInformation: invoiceNeeded
       ? {
           companyName: {
-            required: 'Laukas yra privalomas',
+            required: t('fieldRequired'),
             minLength: {
               value: 3,
-              message:
-                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message: t('minLengthMsg'),
             },
           },
           companyCode: {
-            required: 'Laukas yra privalomas',
+            required: t('fieldRequired'),
             minLength: {
               value: 3,
-              message:
-                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message: t('minLengthMsg'),
             },
           },
           pvmCode: {
-            required: 'Laukas yra privalomas',
+            required: t('fieldRequired'),
             minLength: {
               value: 3,
-              message:
-                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message: t('minLengthMsg'),
             },
           },
           companyEmail: {
-            required: 'Laukas yra privalomas',
+            required: t('fieldRequired'),
             pattern: {
-              value:
-                /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-              message: 'Neteisingas el. pašto formatas',
+              value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+              message: t('invalidEmailFormat'),
             },
           },
           companyAddress: {
-            required: 'Laukas yra privalomas',
+            required: t('fieldRequired'),
             minLength: {
               value: 3,
-              message:
-                'Laukas privalo turėti ne mažiau kaip 3 simbolius',
+              message: t('minLengthMsg'),
             },
           },
         }
       : { required: false },
     packagingAndLabelingRules: {
-      required:
-        'Prašome pažymėti, kad sutinkate su EcoTrip taisyklėmis.',
+      required: t('agreeToTerms'),
     },
     transportRules: {
-      required:
-        'Prašome pažymėti, kad sutinkate su EcoTrip taisyklėmis.',
+      required: t('agreeToTerms'),
     },
   };
 };

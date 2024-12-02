@@ -22,9 +22,9 @@ const Step = ({
 
   return (
     <div className={`step-columns ${className ? className : ''}`} id={id}>
-      <div className='title-column'>
+      <div className="title-column">
         <span>{stepTitle}</span>
-        {instructions && <span className='instructions'>{instructions}</span>}
+        {instructions && <span className="instructions">{instructions}</span>}
       </div>
       <div
         style={{
@@ -33,7 +33,7 @@ const Step = ({
           justifyContent: 'flex-end',
         }}
       >
-        <div className='content-column'>{children}</div>
+        <div className="content-column">{children}</div>
       </div>
     </div>
   );

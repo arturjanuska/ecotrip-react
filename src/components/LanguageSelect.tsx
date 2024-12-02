@@ -1,37 +1,56 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { UseFormReturn } from 'react-hook-form';
+import useTranslateParcelData from '../hooks/useTranslateParcelData';
 import StyledSelect from './StyledSelect';
 import { useTranslation } from 'react-i18next';
+import { FormType } from '../utils/formTypes';
+import useTranslateTransportationDate from '../hooks/useTranslateTransportationDate';
 
-type Languages = 'lt' | 'en';
+type Languages = 'lt' | 'en' | 'ru';
 
-const LanguageSelect = () => {
-	const { i18n } = useTranslation();
+const LanguageSelect = ({
+  methods,
+}: {
+  methods: UseFormReturn<FormType, any, undefined>;
+}) => {
+  const { i18n } = useTranslation();
 
-	const options = [
-		{
-			value: 'en',
-			label: 'English',
-		},
-		{
-			value: 'lt',
-			label: 'Lietuvių',
-		},
-	];
+  const options = [
+    {
+      value: 'en',
+      label: 'English',
+    },
+    {
+      value: 'lt',
+      label: 'Lietuvių',
+    },
+    {
+      value: 'ru',
+      label: 'Русский',
+    },
+  ];
 
-	const onLanguageChange = (value: Languages) => {
-		localStorage.setItem('lang', value);
-		i18n.changeLanguage(value);
-	};
+  const onLanguageChange = (value: Languages) => {
+    localStorage.setItem('lang', value);
+    i18n.changeLanguage(value);
+  };
 
-	const localStorageLang = localStorage.getItem('lang') as Languages;
+  useTranslateParcelData({
+    currentLanguage: i18n.language,
+    methods,
+  });
 
-	return (
+  useTranslateTransportationDate({
+    currentLanguage: i18n.language,
+    methods,
+  });
+
+  return (
     <div className="language-select-container">
       <StyledSelect
         options={options}
-        defaultValue={options.find(
-          (option) => option.value === localStorageLang || "lt",
-        )}
+        defaultValue={options.find((option) => option.value === i18n.language)}
         // @ts-ignore
         onChange={(select: { value: string; label: string }) => {
           const value = select.value as Languages;

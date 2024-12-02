@@ -20,9 +20,9 @@ const FieldContainer = ({
   return (
     <div className={`field-container ${className ? className : ''}`}>
       {instructions ? (
-        <span className='instructions'>{instructions}</span>
+        <span className="instructions">{instructions}</span>
       ) : null}
-      {label ? <label htmlFor=''>{label}</label> : null}
+      {label ? <label htmlFor="">{label}</label> : null}
       {children}
       {description ? <p>{description}</p> : null}
     </div>

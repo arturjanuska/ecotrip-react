@@ -1,14 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { CommonProductTypeExample, OptionType } from './types';
-import {  getOptions } from './getOptions';
+import { getOptions } from './getOptions';
 import { convertRangeSizeToOptionType } from './convertSizeOptions';
 
 export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // setOfWheels
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -29,7 +29,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -50,7 +50,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -71,7 +71,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -92,7 +92,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -113,7 +113,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -134,7 +134,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -155,7 +155,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -179,7 +179,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // doors
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -197,7 +197,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -215,7 +215,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -233,7 +233,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -251,7 +251,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -269,7 +269,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -287,7 +287,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -305,7 +305,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -325,7 +325,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // allways need to call manager
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -344,7 +344,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // allways need to call manager
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -362,7 +362,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // bumper
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -380,7 +380,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -398,7 +398,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -416,7 +416,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -434,7 +434,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -452,7 +452,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -470,7 +470,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -488,7 +488,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -507,7 +507,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // cover
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -525,7 +525,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -543,7 +543,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -561,7 +561,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -579,7 +579,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -597,7 +597,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -615,7 +615,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -633,7 +633,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -654,7 +654,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // engine empty = false
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -675,7 +675,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -696,7 +696,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -717,7 +717,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -738,7 +738,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -759,7 +759,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -780,7 +780,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -801,7 +801,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -822,7 +822,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -843,7 +843,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -864,7 +864,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -885,7 +885,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -906,7 +906,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -927,7 +927,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -948,7 +948,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -969,7 +969,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -994,7 +994,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // specification: false => Automatine
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1015,7 +1015,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1036,7 +1036,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1057,7 +1057,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1078,7 +1078,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1099,7 +1099,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1120,7 +1120,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1141,7 +1141,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1162,7 +1162,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1183,7 +1183,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1204,7 +1204,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1225,7 +1225,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1246,7 +1246,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1267,7 +1267,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1288,7 +1288,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {
@@ -1309,7 +1309,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'automotiveGoodsCategoryOptionLabel',
+      label: 'automotiveGoods',
       value: 'automotiveGoods',
     },
     productType: {

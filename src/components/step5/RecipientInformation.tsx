@@ -5,6 +5,7 @@ import '../step4/step4.css';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   control: Control<FormType, any>;
@@ -23,15 +24,17 @@ const RecipientInformation = ({
 }: Props) => {
   const service = methods.watch('service');
 
-  const validationRules = useCustomValidation({ service });
+  const { t } = useTranslation();
+
+  const validationRules = useCustomValidation({ service, t });
 
   const recipientValidationRules = validationRules.recipientInformation;
   return (
     <Step title={stepLabel} step={step}>
       <ClientInformationForm
-        client='recipient'
+        client="recipient"
         control={control}
-        subName='recipientInformation'
+        subName="recipientInformation"
         formErrors={formErrors}
         validationRules={recipientValidationRules}
         methods={methods}
