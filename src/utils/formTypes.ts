@@ -98,3 +98,9 @@ export type FormType = {
 	transportRules: boolean;
 	estimatedShipmentPrice: string;
 };
+
+export type DatePicketOptions = {
+	years: OptionType[];
+	months: OptionType[];
+	days: OptionType[];
+};

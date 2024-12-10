@@ -1,13 +1,9 @@
 export const getDecemberPickupDays = (direction: 'LT-UK' | 'UK-LT' | null) => {
 	if (direction === 'LT-UK') {
 		return [
-			{
-				label: 'Gruodžio 3 - Gruodžio 4',
-				value: '3 - 4',
-			},
 			// {
-			//   label: 'Gruodžio 6 - Gruodžio 8',
-			//   value: '6 - 8',
+			// 	label: 'Gruodžio 3 - Gruodžio 4',
+			// 	value: '3 - 4',
 			// },
 			{
 				label: 'Gruodžio 10 - Gruodžio 11',
@@ -24,10 +20,10 @@ export const getDecemberPickupDays = (direction: 'LT-UK' | 'UK-LT' | null) => {
 		];
 	} else if (direction === 'UK-LT') {
 		return [
-			{
-				label: 'Gruodžio 6 - Gruodžio 8',
-				value: '6 - 8',
-			},
+			// {
+			// 	label: 'Gruodžio 6 - Gruodžio 8',
+			// 	value: '6 - 8',
+			// },
 			{
 				label: 'Gruodžio 13 - Gruodžio 15',
 				value: '13 - 15',
@@ -50,17 +46,11 @@ export const getDecemberDeliveryDays = (
 ) => {
 	if (direction === 'LT-UK') {
 		switch (pickupDayValue) {
-			case '3 - 4': {
-				return {
-					label: 'Gruodžio 6 - Gruodžio 8',
-					value: '6 - 8',
-				};
-			}
-			// case '6 - 8': {
-			//   return {
-			//     label: 'Gruodžio 10 - Gruodžio 13',
-			//     value: '10 - 13',
-			//   };
+			// case '3 - 4': {
+			// 	return {
+			// 		label: 'Gruodžio 6 - Gruodžio 8',
+			// 		value: '6 - 8',
+			// 	};
 			// }
 			case '10 - 11': {
 				return {
@@ -83,30 +73,24 @@ export const getDecemberDeliveryDays = (
 		}
 	} else if (direction === 'UK-LT') {
 		switch (pickupDayValue) {
-			case '30 - 2': {
-				return {
-					label: 'Gruodžio 3 - Gruodžio 4',
-					value: '3 - 4',
-				};
-			}
-			case '6 - 8': {
-				return {
-					label: 'Gruodžio 10 - Gruodžio 11',
-					value: '10 - 11',
-				};
-			}
+			// case '30 - 2': {
+			// 	return {
+			// 		label: 'Gruodžio 3 - Gruodžio 4',
+			// 		value: '3 - 4',
+			// 	};
+			// }
+			// case '6 - 8': {
+			// 	return {
+			// 		label: 'Gruodžio 10 - Gruodžio 11',
+			// 		value: '10 - 11',
+			// 	};
+			// }
 			case '13 - 15': {
 				return {
 					label: 'Gruodžio 17 - Gruodžio 18',
 					value: '17 - 18',
 				};
 			}
-			// case '14 - 16': {
-			//   return {
-			//     label: 'Gruodžio 15 - Gruodžio 16',
-			//     value: '15 - 16',
-			//   };
-			// }
 			case '18 - 20': {
 				return {
 					label: 'Gruodžio 23',
