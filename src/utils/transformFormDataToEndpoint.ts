@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { FormType } from './formTypes';
+import { FormType } from "./formTypes";
 
 type ClientInfoType = {
   name: string;
@@ -16,7 +16,7 @@ export type TransformedFormData = {
   route: string | null;
   estimatedPrice: {
     value: string;
-    currency: '€' | '£';
+    currency: "€" | "£";
   };
   invoice: {
     companyName: string;
@@ -59,11 +59,11 @@ export type TransformedFormData = {
 };
 
 export const transformFormDataToEndpoint = (
-  data: FormType
+  data: FormType,
 ): TransformedFormData => {
   return {
     route:
-      data.service === 'shipmentWithAddressService' ? 'UK-LT' : data.direction,
+      data.service === "shipmentWithAddressService" ? "UK-LT" : data.direction,
     estimatedPrice: {
       value: data.estimatedShipmentPrice,
       currency: data.currency,
@@ -74,10 +74,10 @@ export const transformFormDataToEndpoint = (
     day: data.dates.from.day?.value || null,
     dates: {
       pickupDate: `${Number(data.dates.from.year?.value)}/${Number(
-        data.dates.from.month?.value
+        data.dates.from.month?.value,
       )}/${data.dates.from.day?.value}`,
       deliveryDate: `${Number(data.dates.to.year?.value)}/${Number(
-        data.dates.to.month?.value
+        data.dates.to.month?.value,
       )}/${data.dates.to.day?.value}`,
     },
     parcels: data.shipments.map((item) => ({
@@ -108,7 +108,7 @@ export const transformFormDataToEndpoint = (
       email: data.recipientInformation.email,
       address: data.recipientInformation.address,
       postCode: data.recipientInformation.zipCode,
-      description: data.recipientInformation.additionInformation ?? '',
+      description: data.recipientInformation.additionInformation ?? "",
     },
     sender: {
       name: data.senderInformation.firstName,
@@ -117,7 +117,7 @@ export const transformFormDataToEndpoint = (
       email: data.senderInformation.email,
       address: data.senderInformation.address,
       postCode: data.senderInformation.zipCode,
-      description: data.senderInformation.additionInformation ?? '',
+      description: data.senderInformation.additionInformation ?? "",
     },
     ransomPayee: data.ransomPayeeInformation
       ? {

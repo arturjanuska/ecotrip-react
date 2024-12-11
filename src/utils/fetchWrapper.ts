@@ -14,7 +14,7 @@ export const fetchWrapper = async (
     routingGenerateOptions?: {
       [key: string]: any;
     };
-  }
+  },
 ) => {
   // if (!window.Routing)
   //   throw new Error(
@@ -29,7 +29,7 @@ export const fetchWrapper = async (
   // }
   const response = await fetch(
     `http://localhost:3000/api/${route}`,
-    options.httpOptions
+    options.httpOptions,
   );
   // check if valid json
   if (!response.ok) {

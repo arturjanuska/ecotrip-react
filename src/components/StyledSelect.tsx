@@ -1,37 +1,37 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import Select, { Props } from 'react-select';
-import { forwardRef } from 'react';
-import SimpleTextError from './SimpleTextError';
+import Select, { Props } from "react-select";
+import { forwardRef } from "react";
+import SimpleTextError from "./SimpleTextError";
 
 const customStyles = {
   // @ts-ignore
   placeholder: (provided, state) => ({
     ...provided,
-    color: '#7a777680',
-    fontFamily: 'Arial',
-    fontSize: '14px',
-    fontWeight: '400',
-    lineHeight: '16.1px',
-    textAlign: 'left',
+    color: "#7a777680",
+    fontFamily: "Arial",
+    fontSize: "14px",
+    fontWeight: "400",
+    lineHeight: "16.1px",
+    textAlign: "left",
   }),
   // @ts-ignore
   option: (provided, state) => ({
     ...provided,
-    color: '#7a7776',
-    fontSize: '14px',
-    fontWeight: '400',
-    lineHeight: '16.1px',
-    textAlign: 'left',
+    color: "#7a7776",
+    fontSize: "14px",
+    fontWeight: "400",
+    lineHeight: "16.1px",
+    textAlign: "left",
   }),
   // @ts-ignore
   singleValue: (provided, state) => ({
     ...provided,
-    color: '#7a7776',
-    fontSize: '14px',
-    fontWeight: '400',
-    lineHeight: '16.1px',
-    textAlign: 'left',
+    color: "#7a7776",
+    fontSize: "14px",
+    fontWeight: "400",
+    lineHeight: "16.1px",
+    textAlign: "left",
   }),
   // @ts-ignore
   valueContainer: (provided, state) => ({
@@ -40,13 +40,13 @@ const customStyles = {
   // @ts-ignore
   control: (provided, state) => ({
     ...provided,
-    border: '1px solid #0000001A',
-    '&:hover': {
-      border: state.isFocused ? '1px solid #9aa61e' : '1px solid #0000001A',
+    border: "1px solid #0000001A",
+    "&:hover": {
+      border: state.isFocused ? "1px solid #9aa61e" : "1px solid #0000001A",
     },
-    '&:focus-within': {
-      border: '1px solid #9aa61e',
-      boxShadow: 'none',
+    "&:focus-within": {
+      border: "1px solid #9aa61e",
+      boxShadow: "none",
     },
   }),
 };
@@ -58,10 +58,10 @@ export default forwardRef(
       testId?: string;
       errorMessage?: string;
     },
-    ref: any
+    ref: any,
   ) => {
     return (
-      <div className='w-100'>
+      <div className="w-100">
         <Select
           styles={customStyles}
           ref={ref}
@@ -72,5 +72,5 @@ export default forwardRef(
         <SimpleTextError message={props.errorMessage} />
       </div>
     );
-  }
+  },
 );

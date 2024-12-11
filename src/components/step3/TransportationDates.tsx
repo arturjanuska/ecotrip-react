@@ -1,96 +1,94 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Step from '../Step';
-import Datepicker from '../Datepicker';
-import './step3.css';
-import { FieldErrors, UseFormReturn } from 'react-hook-form';
-import { DatePicketOptions, FormType } from '../../utils/formTypes';
-import useDeliveryDate from '../../utils/useDeliveryDate';
-import useDateOptions from '../../utils/useDateOptions';
-import { transformDateOptionsWithExclusions } from './transformDateOptionsWithExclusions';
+import Step from "../Step";
+import Datepicker from "../Datepicker";
+import "./step3.css";
+import { FieldErrors, UseFormReturn } from "react-hook-form";
+import { DatePicketOptions, FormType } from "../../utils/formTypes";
+import useDeliveryDate from "../../utils/useDeliveryDate";
+import useDateOptions from "../../utils/useDateOptions";
+import { transformDateOptionsWithExclusions } from "./transformDateOptionsWithExclusions";
 
 type TransportationDatesProps = {
-	methods: UseFormReturn<FormType, any, undefined>;
-	formErrors: FieldErrors<FormType>;
-	direction: 'LT-UK' | 'UK-LT' | 'LT-LT' | null;
+  methods: UseFormReturn<FormType, any, undefined>;
+  formErrors: FieldErrors<FormType>;
+  direction: "LT-UK" | "UK-LT" | "LT-LT" | null;
 };
 
 const TransportationDates = ({
-	methods,
-	formErrors,
-	direction,
+  methods,
+  formErrors,
+  direction,
 }: TransportationDatesProps) => {
-	const { watch, setValue } = methods;
+  const { watch, setValue } = methods;
 
-	const yearFrom = watch('dates.from.year.value');
-	const monthFrom = watch('dates.from.month.value');
-	const dayRangeFrom = watch('dates.from.day.value');
+  const yearFrom = watch("dates.from.year.value");
+  const monthFrom = watch("dates.from.month.value");
+  const dayRangeFrom = watch("dates.from.day.value");
 
-	const service = methods.watch('service');
+  const service = methods.watch("service");
 
-	const resetToDates = () => {
-		setValue('dates.to.year', null);
-		setValue('dates.to.month', null);
-		setValue('dates.to.day', null);
-	};
+  const resetToDates = () => {
+    setValue("dates.to.year", null);
+    setValue("dates.to.month", null);
+    setValue("dates.to.day", null);
+  };
 
-	const pickupDate =
-		yearFrom && monthFrom && dayRangeFrom
-			? `${yearFrom}/${monthFrom}/${dayRangeFrom.split(' - ')[0]}`
-			: '';
+  const pickupDate =
+    yearFrom && monthFrom && dayRangeFrom
+      ? `${yearFrom}/${monthFrom}/${dayRangeFrom.split(" - ")[0]}`
+      : "";
 
-	// Move this to DatePicker component to avoid unnecessary re-renders
-	useDeliveryDate({
-		pickupDate,
-		direction,
-		setValue,
-		dayRangeFrom,
-		service,
-		selectedYear: yearFrom || null,
-	});
+  // Move this to DatePicker component to avoid unnecessary re-renders
+  useDeliveryDate({
+    pickupDate,
+    direction,
+    setValue,
+    dayRangeFrom,
+    service,
+    selectedYear: yearFrom || null,
+  });
 
-	const options: DatePicketOptions = useDateOptions({
-		selectedMonth: monthFrom || null,
-		direction,
-		service,
-		selectedYear: yearFrom || null,
-	});
+  const options: DatePicketOptions = useDateOptions({
+    selectedMonth: monthFrom || null,
+    direction,
+    service,
+    selectedYear: yearFrom || null,
+  });
 
-	const transformDateOptionsWithExclusionsResult =
-		transformDateOptionsWithExclusions({
-			calculatedOptions: options,
-			selectedYear: parseInt(yearFrom, 10) || null,
-			selectedMonth: parseInt(monthFrom, 10) || null,
-			direction,
-		});
+  const transformDateOptionsWithExclusionsResult =
+    transformDateOptionsWithExclusions({
+      calculatedOptions: options,
+      selectedYear: parseInt(yearFrom, 10) || null,
+      selectedMonth: parseInt(monthFrom, 10) || null,
+      direction,
+    });
 
-	return (
-		<Step
-			step={3}
-			title='Siuntos pervežimo datos'>
-			<>
-				<div className='date-fields-container'>
-					<Datepicker
-						fiedsDisabled={false}
-						label='Siuntos paėmimo data'
-						options={transformDateOptionsWithExclusionsResult}
-						control={methods.control}
-						name='from'
-						formErrors={formErrors}
-						resetToDates={resetToDates}
-						setValue={setValue}
-						service={service}
-					/>
+  return (
+    <Step step={3} title="Siuntos pervežimo datos">
+      <>
+        <div className="date-fields-container">
+          <Datepicker
+            fiedsDisabled={false}
+            label="Siuntos paėmimo data"
+            options={transformDateOptionsWithExclusionsResult}
+            control={methods.control}
+            name="from"
+            formErrors={formErrors}
+            resetToDates={resetToDates}
+            setValue={setValue}
+            service={service}
+          />
 
-					<Datepicker
-						fiedsDisabled={true}
-						label='Siuntos pristatymo data (numatoma)'
-						control={methods.control}
-						name='to'
-						formErrors={formErrors}
-						resetToDates={resetToDates}
-						service={service}
-					/>
-					{/* {direction === 'LT-UK' && dayRangeFrom === '17 - 18' ? (
+          <Datepicker
+            fiedsDisabled={true}
+            label="Siuntos pristatymo data (numatoma)"
+            control={methods.control}
+            name="to"
+            formErrors={formErrors}
+            resetToDates={resetToDates}
+            service={service}
+          />
+          {/* {direction === 'LT-UK' && dayRangeFrom === '17 - 18' ? (
             <div className='warning-text'>
               <p>
                 Informuojame, kad gruodžio 18 d. išvykstame į
@@ -103,10 +101,10 @@ const TransportationDates = ({
               <p>info@ecotrip.lt</p>
             </div>
           ) : null} */}
-				</div>
-			</>
-		</Step>
-	);
+        </div>
+      </>
+    </Step>
+  );
 };
 
 export default TransportationDates;

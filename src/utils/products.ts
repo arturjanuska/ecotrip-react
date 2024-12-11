@@ -1,19 +1,19 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { CommonProductTypeExample, OptionType } from './types';
-import { AnyOptionType, getOptions } from './getOptions';
-import { convertRangeSizeToOptionType } from './convertSizeOptions';
+import { CommonProductTypeExample, OptionType } from "./types";
+import { AnyOptionType, getOptions } from "./getOptions";
+import { convertRangeSizeToOptionType } from "./convertSizeOptions";
 
 export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // setOfWheels
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 0,
@@ -22,19 +22,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.08,
     weight: 28,
     specification: {
-      label: 'Be padangu',
-      value: 'withoutTires',
+      label: "Be padangu",
+      value: "withoutTires",
     },
     price: 60,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 0,
@@ -43,19 +43,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.24,
     weight: 40,
     specification: {
-      label: 'Su padangom',
-      value: 'withTires',
+      label: "Su padangom",
+      value: "withTires",
     },
     price: 70,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 16,
@@ -64,19 +64,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.1,
     weight: 32,
     specification: {
-      label: 'Be padangu',
-      value: 'withoutTires',
+      label: "Be padangu",
+      value: "withoutTires",
     },
     price: 80,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 16,
@@ -85,19 +85,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 48,
     specification: {
-      label: 'Su padangom',
-      value: 'withTires',
+      label: "Su padangom",
+      value: "withTires",
     },
     price: 90,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 18,
@@ -106,19 +106,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.12,
     weight: 40,
     specification: {
-      label: 'Be padangu',
-      value: 'withoutTires',
+      label: "Be padangu",
+      value: "withoutTires",
     },
     price: 100,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 18,
@@ -127,19 +127,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.36,
     weight: 60,
     specification: {
-      label: 'Su padangom',
-      value: 'withTires',
+      label: "Su padangom",
+      value: "withTires",
     },
     price: 110,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 22,
@@ -148,19 +148,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.14,
     weight: 48,
     specification: {
-      label: 'Be padangu',
-      value: 'withoutTires',
+      label: "Be padangu",
+      value: "withoutTires",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Ratų komplektas',
-      value: 'setOfWheels',
+      label: "Ratų komplektas",
+      value: "setOfWheels",
     },
     size: {
       from: 22,
@@ -169,8 +169,8 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.44,
     weight: 72,
     specification: {
-      label: 'Su padangom',
-      value: 'withTires',
+      label: "Su padangom",
+      value: "withTires",
     },
     price: 130,
   },
@@ -179,16 +179,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // doors
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Mikro automobiliai, pvz: Fiat 500',
-      value: 'microCars',
+      label: "Mikro automobiliai, pvz: Fiat 500",
+      value: "microCars",
     },
     volume: 0.15,
     weight: 15,
@@ -197,16 +197,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Subkompaktiniai automobiliai, pvz: VW Polo',
-      value: 'subcompactCars',
+      label: "Subkompaktiniai automobiliai, pvz: VW Polo",
+      value: "subcompactCars",
     },
     volume: 0.18,
     weight: 18,
@@ -215,16 +215,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Kompaktiniai automobiliai, pvz: VW Golf',
-      value: 'compactCars',
+      label: "Kompaktiniai automobiliai, pvz: VW Golf",
+      value: "compactCars",
     },
     volume: 0.2,
     weight: 20,
@@ -233,16 +233,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Vidutinio dydžio automobiliai, pvz: VW Passat',
-      value: 'midSizeCars',
+      label: "Vidutinio dydžio automobiliai, pvz: VW Passat",
+      value: "midSizeCars",
     },
     volume: 0.25,
     weight: 22,
@@ -251,16 +251,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Dideli automobiliai, pvz: MB S Class',
-      value: 'bigCars',
+      label: "Dideli automobiliai, pvz: MB S Class",
+      value: "bigCars",
     },
     volume: 0.3,
     weight: 25,
@@ -269,16 +269,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Visureigiai, pvz: BMW X5',
-      value: 'suvs',
+      label: "Visureigiai, pvz: BMW X5",
+      value: "suvs",
     },
     volume: 0.35,
     weight: 30,
@@ -287,16 +287,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Pikapai, pvz: Ford Ranger',
-      value: 'pickupTrucks',
+      label: "Pikapai, pvz: Ford Ranger",
+      value: "pickupTrucks",
     },
     volume: 0.4,
     weight: 35,
@@ -305,16 +305,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės,',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės,",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio durys',
-      value: 'doors',
+      label: "Automobilio durys",
+      value: "doors",
     },
     size: {
-      label: 'Mikroautobusai, pvz: VW Caravelle',
-      value: 'minibuses',
+      label: "Mikroautobusai, pvz: VW Caravelle",
+      value: "minibuses",
     },
     volume: 0.45,
     weight: 40,
@@ -325,12 +325,12 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // allways need to call manager
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio salonas',
-      value: 'interior',
+      label: "Automobilio salonas",
+      value: "interior",
     },
     size: null,
     callManager: true,
@@ -344,12 +344,12 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // allways need to call manager
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio ketvirtis',
-      value: 'carQuarter',
+      label: "Automobilio ketvirtis",
+      value: "carQuarter",
     },
     size: null,
     callManager: true,
@@ -362,16 +362,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // bumper
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Mikro automobiliai, pvz: Fiat 500',
-      value: 'microCars',
+      label: "Mikro automobiliai, pvz: Fiat 500",
+      value: "microCars",
     },
     volume: 0.12,
     weight: 8,
@@ -380,16 +380,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Subkompaktiniai automobiliai, pvz: VW Polo',
-      value: 'subcompactCars',
+      label: "Subkompaktiniai automobiliai, pvz: VW Polo",
+      value: "subcompactCars",
     },
     volume: 0.15,
     weight: 10,
@@ -398,16 +398,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Kompaktiniai automobiliai, pvz: VW Golf',
-      value: 'compactCars',
+      label: "Kompaktiniai automobiliai, pvz: VW Golf",
+      value: "compactCars",
     },
     volume: 0.18,
     weight: 12,
@@ -416,16 +416,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Vidutinio dydžio automobiliai, pvz: VW Passat',
-      value: 'midSizeCars',
+      label: "Vidutinio dydžio automobiliai, pvz: VW Passat",
+      value: "midSizeCars",
     },
     volume: 0.22,
     weight: 15,
@@ -434,16 +434,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Dideli automobiliai, pvz: MB S Class',
-      value: 'bigCars',
+      label: "Dideli automobiliai, pvz: MB S Class",
+      value: "bigCars",
     },
     volume: 0.25,
     weight: 18,
@@ -452,16 +452,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Visureigiai, pvz: BMW X5',
-      value: 'suvs',
+      label: "Visureigiai, pvz: BMW X5",
+      value: "suvs",
     },
     volume: 0.28,
     weight: 20,
@@ -470,16 +470,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Pikapai, pvz: Ford Ranger',
-      value: 'pickupTrucks',
+      label: "Pikapai, pvz: Ford Ranger",
+      value: "pickupTrucks",
     },
     volume: 0.3,
     weight: 22,
@@ -488,16 +488,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio buferis',
-      value: 'bumper',
+      label: "Automobilio buferis",
+      value: "bumper",
     },
     size: {
-      label: 'Mikroautobusai, pvz: VW Caravelle',
-      value: 'minibuses',
+      label: "Mikroautobusai, pvz: VW Caravelle",
+      value: "minibuses",
     },
     volume: 0.35,
     weight: 25,
@@ -507,16 +507,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // cover
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Mikro automobiliai, pvz: Fiat 500',
-      value: 'microCars',
+      label: "Mikro automobiliai, pvz: Fiat 500",
+      value: "microCars",
     },
     volume: 0.12,
     weight: 10,
@@ -525,16 +525,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Subkompaktiniai automobiliai, pvz: VW Polo',
-      value: 'subcompactCars',
+      label: "Subkompaktiniai automobiliai, pvz: VW Polo",
+      value: "subcompactCars",
     },
     volume: 0.15,
     weight: 12,
@@ -543,16 +543,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Kompaktiniai automobiliai, pvz: VW Golf',
-      value: 'compactCars',
+      label: "Kompaktiniai automobiliai, pvz: VW Golf",
+      value: "compactCars",
     },
     volume: 0.18,
     weight: 15,
@@ -561,16 +561,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Vidutinio dydžio automobiliai, pvz: VW Passat',
-      value: 'midSizeCars',
+      label: "Vidutinio dydžio automobiliai, pvz: VW Passat",
+      value: "midSizeCars",
     },
     volume: 0.22,
     weight: 18,
@@ -579,16 +579,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Dideli automobiliai, pvz: MB S Class',
-      value: 'bigCars',
+      label: "Dideli automobiliai, pvz: MB S Class",
+      value: "bigCars",
     },
     volume: 0.25,
     weight: 20,
@@ -597,16 +597,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Visureigiai, pvz: BMW X5',
-      value: 'suvs',
+      label: "Visureigiai, pvz: BMW X5",
+      value: "suvs",
     },
     volume: 0.28,
     weight: 22,
@@ -615,16 +615,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Pikapai, pvz: Ford Ranger',
-      value: 'pickupTrucks',
+      label: "Pikapai, pvz: Ford Ranger",
+      value: "pickupTrucks",
     },
     volume: 0.3,
     weight: 25,
@@ -633,16 +633,16 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio priekinis/galinis dangtis',
-      value: 'cover',
+      label: "Automobilio priekinis/galinis dangtis",
+      value: "cover",
     },
     size: {
-      label: 'Mikroautobusai, pvz: VW Caravelle',
-      value: 'minibuses',
+      label: "Mikroautobusai, pvz: VW Caravelle",
+      value: "minibuses",
     },
     volume: 0.35,
     weight: 28,
@@ -654,12 +654,12 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // engine empty = false
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 0,
@@ -668,19 +668,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.14,
     weight: 75,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 80,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 0,
@@ -689,19 +689,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.14,
     weight: 85,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 1000,
@@ -710,19 +710,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.18,
     weight: 100,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 100,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 1000,
@@ -731,19 +731,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.18,
     weight: 115,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 170,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 1500,
@@ -752,19 +752,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.23,
     weight: 125,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 1500,
@@ -773,19 +773,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.23,
     weight: 145,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 200,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 2000,
@@ -794,19 +794,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.29,
     weight: 155,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 150,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 2000,
@@ -815,19 +815,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.29,
     weight: 180,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 250,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 2500,
@@ -836,19 +836,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.36,
     weight: 190,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 180,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 2500,
@@ -857,19 +857,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.36,
     weight: 220,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 300,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 3000,
@@ -878,19 +878,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.45,
     weight: 215,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 200,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 3000,
@@ -899,19 +899,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.45,
     weight: 250,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 350,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 3500,
@@ -920,19 +920,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.54,
     weight: 250,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 230,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 3500,
@@ -941,19 +941,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.54,
     weight: 290,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 370,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 4000,
@@ -962,19 +962,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.63,
     weight: 300,
     specification: {
-      label: 'Tuščias',
-      value: 'empty',
+      label: "Tuščias",
+      value: "empty",
     },
     price: 250,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio variklis',
-      value: 'engine',
+      label: "Automobilio variklis",
+      value: "engine",
     },
     size: {
       from: 4000,
@@ -983,8 +983,8 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.63,
     weight: 340,
     specification: {
-      label: 'Pilnas',
-      value: 'full',
+      label: "Pilnas",
+      value: "full",
     },
     price: 400,
   },
@@ -994,12 +994,12 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
   // specification: false => Automatine
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 0,
@@ -1008,19 +1008,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 30,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 50,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 0,
@@ -1029,19 +1029,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.025,
     weight: 25,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 45,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 1000,
@@ -1050,19 +1050,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.035,
     weight: 40,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 65,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 1000,
@@ -1071,19 +1071,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.03,
     weight: 35,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 50,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 1500,
@@ -1092,19 +1092,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 50,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 75,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 1500,
@@ -1113,19 +1113,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.035,
     weight: 45,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 60,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 2000,
@@ -1134,19 +1134,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.045,
     weight: 60,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 85,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 2000,
@@ -1155,19 +1155,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 55,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 75,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 2500,
@@ -1176,19 +1176,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.05,
     weight: 70,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 2500,
@@ -1197,19 +1197,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.045,
     weight: 65,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 85,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 3000,
@@ -1218,19 +1218,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.055,
     weight: 80,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 3000,
@@ -1239,19 +1239,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.05,
     weight: 75,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 3500,
@@ -1260,19 +1260,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.06,
     weight: 90,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 3500,
@@ -1281,19 +1281,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.055,
     weight: 85,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 4000,
@@ -1302,19 +1302,19 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.07,
     weight: 100,
     specification: {
-      label: 'Automatine pavarų dėžė',
-      value: 'automatic',
+      label: "Automatine pavarų dėžė",
+      value: "automatic",
     },
     price: 120,
   },
   {
     category: {
-      label: 'Automobilinės prekės',
-      value: 'automotiveGoods',
+      label: "Automobilinės prekės",
+      value: "automotiveGoods",
     },
     productType: {
-      label: 'Automobilio pavarų dėžė',
-      value: 'gearbox',
+      label: "Automobilio pavarų dėžė",
+      value: "gearbox",
     },
     size: {
       from: 4000,
@@ -1323,8 +1323,8 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.06,
     weight: 95,
     specification: {
-      label: 'Mechanine pavarų dėžė',
-      value: 'manual',
+      label: "Mechanine pavarų dėžė",
+      value: "manual",
     },
     price: 120,
   },
@@ -1334,16 +1334,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   // childBicycleAndTricycle
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Vaikiškas dviratis, triratis (<12 metų)',
-      value: 'childBicycleAndTricycle',
+      label: "Vaikiškas dviratis, triratis (<12 metų)",
+      value: "childBicycleAndTricycle",
     },
     size: {
-      label: 'Pilnai surinktas',
-      value: 'fullyAssembled',
+      label: "Pilnai surinktas",
+      value: "fullyAssembled",
     },
     volume: 0.35,
     weight: 7,
@@ -1352,16 +1352,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Vaikiškas dviratis, triratis (<12 metų)',
-      value: 'childBicycleAndTricycle',
+      label: "Vaikiškas dviratis, triratis (<12 metų)",
+      value: "childBicycleAndTricycle",
     },
     size: {
-      label: 'Išardytas (nuimti ratai ir pedalai)',
-      value: 'dismantled',
+      label: "Išardytas (nuimti ratai ir pedalai)",
+      value: "dismantled",
     },
     volume: 0.25,
     weight: 7,
@@ -1371,16 +1371,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   // teenagersBike
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Paauglio dviratis (>12 metų)',
-      value: 'teenagersBike',
+      label: "Paauglio dviratis (>12 metų)",
+      value: "teenagersBike",
     },
     size: {
-      label: 'Pilnai surinktas',
-      value: 'fullyAssembled',
+      label: "Pilnai surinktas",
+      value: "fullyAssembled",
     },
     volume: 0.45,
     weight: 12,
@@ -1389,16 +1389,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Paauglio dviratis (>12 metų)',
-      value: 'teenagersBike',
+      label: "Paauglio dviratis (>12 metų)",
+      value: "teenagersBike",
     },
     size: {
-      label: 'Išardytas (nuimti ratai ir pedalai)',
-      value: 'dismantled',
+      label: "Išardytas (nuimti ratai ir pedalai)",
+      value: "dismantled",
     },
     volume: 0.3,
     weight: 12,
@@ -1408,16 +1408,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   // adultBike
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Suaugusiojo dviratis',
-      value: 'adultBike',
+      label: "Suaugusiojo dviratis",
+      value: "adultBike",
     },
     size: {
-      label: 'Pilnai surinktas',
-      value: 'fullyAssembled',
+      label: "Pilnai surinktas",
+      value: "fullyAssembled",
     },
     volume: 0.55,
     weight: 14,
@@ -1426,16 +1426,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Suaugusiojo dviratis',
-      value: 'adultBike',
+      label: "Suaugusiojo dviratis",
+      value: "adultBike",
     },
     size: {
-      label: 'Išardytas (nuimti ratai ir pedalai)',
-      value: 'dismantled',
+      label: "Išardytas (nuimti ratai ir pedalai)",
+      value: "dismantled",
     },
     volume: 0.4,
     weight: 14,
@@ -1445,16 +1445,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   // electricBike
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Elektrinis dviratis',
-      value: 'electricBike',
+      label: "Elektrinis dviratis",
+      value: "electricBike",
     },
     size: {
-      label: 'Pilnai surinktas',
-      value: 'fullyAssembled',
+      label: "Pilnai surinktas",
+      value: "fullyAssembled",
     },
     volume: 0.65,
     weight: 25,
@@ -1463,16 +1463,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Elektrinis dviratis',
-      value: 'electricBike',
+      label: "Elektrinis dviratis",
+      value: "electricBike",
     },
     size: {
-      label: 'Išardytas (nuimti ratai ir pedalai)',
-      value: 'dismantled',
+      label: "Išardytas (nuimti ratai ir pedalai)",
+      value: "dismantled",
     },
     volume: 0.55,
     weight: 25,
@@ -1482,16 +1482,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   // childBicycleTrailer
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Vaikiška dviračio priekaba',
-      value: 'childBicycleTrailer',
+      label: "Vaikiška dviračio priekaba",
+      value: "childBicycleTrailer",
     },
     size: {
-      label: 'Pilnai surinktas',
-      value: 'fullyAssembled',
+      label: "Pilnai surinktas",
+      value: "fullyAssembled",
     },
     volume: 0.4,
     weight: 10,
@@ -1500,16 +1500,16 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Vaikiška dviračio priekaba',
-      value: 'childBicycleTrailer',
+      label: "Vaikiška dviračio priekaba",
+      value: "childBicycleTrailer",
     },
     size: {
-      label: 'Išardytas',
-      value: 'dismantled',
+      label: "Išardytas",
+      value: "dismantled",
     },
     volume: 0.25,
     weight: 8,
@@ -1519,12 +1519,12 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   // electricScooter
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Elektrinis paspirtukas',
-      value: 'electricScooter',
+      label: "Elektrinis paspirtukas",
+      value: "electricScooter",
     },
     size: {
       from: 0,
@@ -1537,12 +1537,12 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Dviračiai, paspirtukai',
-      value: 'bicyclesAndScooters',
+      label: "Dviračiai, paspirtukai",
+      value: "bicyclesAndScooters",
     },
     productType: {
-      label: 'Elektrinis paspirtukas',
-      value: 'electricScooter',
+      label: "Elektrinis paspirtukas",
+      value: "electricScooter",
     },
     size: {
       from: 25,
@@ -1560,16 +1560,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
 
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Automobilinė kėdutė',
-      value: 'childSeat',
+      label: "Automobilinė kėdutė",
+      value: "childSeat",
     },
     size: {
-      label: 'Be pado, nepasukama',
-      value: 'withoutSole',
+      label: "Be pado, nepasukama",
+      value: "withoutSole",
     },
     volume: 0.1,
     weight: 7,
@@ -1578,16 +1578,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Automobilinė kėdutė',
-      value: 'childSeat',
+      label: "Automobilinė kėdutė",
+      value: "childSeat",
     },
     size: {
-      label: 'Pasukama ir/arba su padu',
-      value: 'withSole',
+      label: "Pasukama ir/arba su padu",
+      value: "withSole",
     },
     volume: 0.15,
     weight: 10,
@@ -1599,16 +1599,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
 
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Vežimėliai',
-      value: 'strollers',
+      label: "Vežimėliai",
+      value: "strollers",
     },
     size: {
-      label: 'Skėtukas (kelioninis)',
-      value: 'umbrella',
+      label: "Skėtukas (kelioninis)",
+      value: "umbrella",
     },
     volume: 0.8,
     weight: 5,
@@ -1617,16 +1617,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Vežimėliai',
-      value: 'strollers',
+      label: "Vežimėliai",
+      value: "strollers",
     },
     size: {
-      label: 'Sportinis',
-      value: 'sport',
+      label: "Sportinis",
+      value: "sport",
     },
     volume: 0.2,
     weight: 12,
@@ -1635,16 +1635,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Vežimėliai',
-      value: 'strollers',
+      label: "Vežimėliai",
+      value: "strollers",
     },
     size: {
-      label: 'Lopšio vežimėlis',
-      value: 'cradleStroller',
+      label: "Lopšio vežimėlis",
+      value: "cradleStroller",
     },
     volume: 0.25,
     weight: 14,
@@ -1653,16 +1653,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Vežimėliai',
-      value: 'strollers',
+      label: "Vežimėliai",
+      value: "strollers",
     },
     size: {
-      label: 'Dvyniams',
-      value: 'forTwins',
+      label: "Dvyniams",
+      value: "forTwins",
     },
     volume: 0.35,
     weight: 20,
@@ -1671,16 +1671,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Vežimėliai',
-      value: 'strollers',
+      label: "Vežimėliai",
+      value: "strollers",
     },
     size: {
-      label: '2 in 1',
-      value: '2in1',
+      label: "2 in 1",
+      value: "2in1",
     },
     volume: 0.3,
     weight: 15,
@@ -1689,16 +1689,16 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Prekės vaikams',
-      value: 'goodsForChildren',
+      label: "Prekės vaikams",
+      value: "goodsForChildren",
     },
     productType: {
-      label: 'Vežimėliai',
-      value: 'strollers',
+      label: "Vežimėliai",
+      value: "strollers",
     },
     size: {
-      label: '3 in 1',
-      value: '3in1',
+      label: "3 in 1",
+      value: "3in1",
     },
     volume: 0.4,
     weight: 18,
@@ -1712,12 +1712,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // scooterMoped
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motoroleris, mopedas',
-        value: 'scooterMoped',
+        label: "Motoroleris, mopedas",
+        value: "scooterMoped",
       },
       size: {
         from: 0,
@@ -1730,12 +1730,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motoroleris, mopedas',
-        value: 'scooterMoped',
+        label: "Motoroleris, mopedas",
+        value: "scooterMoped",
       },
       size: {
         from: 50,
@@ -1748,12 +1748,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motoroleris, mopedas',
-        value: 'scooterMoped',
+        label: "Motoroleris, mopedas",
+        value: "scooterMoped",
       },
       size: {
         from: 125,
@@ -1766,12 +1766,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motoroleris, mopedas',
-        value: 'scooterMoped',
+        label: "Motoroleris, mopedas",
+        value: "scooterMoped",
       },
       size: {
         from: 250,
@@ -1785,12 +1785,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // Standartinis motociklas standardMotorcycle
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Standartinis motociklas',
-        value: 'standardMotorcycle',
+        label: "Standartinis motociklas",
+        value: "standardMotorcycle",
       },
       size: {
         from: 0,
@@ -1803,12 +1803,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Standartinis motociklas',
-        value: 'standardMotorcycle',
+        label: "Standartinis motociklas",
+        value: "standardMotorcycle",
       },
       size: {
         from: 500,
@@ -1821,12 +1821,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Standartinis motociklas',
-        value: 'standardMotorcycle',
+        label: "Standartinis motociklas",
+        value: "standardMotorcycle",
       },
       size: {
         from: 750,
@@ -1839,12 +1839,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Standartinis motociklas',
-        value: 'standardMotorcycle',
+        label: "Standartinis motociklas",
+        value: "standardMotorcycle",
       },
       size: {
         from: 1000,
@@ -1858,12 +1858,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // Krosinis motociklas motocrossMotorcycle
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Krosinis motociklas',
-        value: 'motocrossMotorcycle',
+        label: "Krosinis motociklas",
+        value: "motocrossMotorcycle",
       },
       size: {
         from: 0,
@@ -1876,12 +1876,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Krosinis motociklas',
-        value: 'motocrossMotorcycle',
+        label: "Krosinis motociklas",
+        value: "motocrossMotorcycle",
       },
       size: {
         from: 125,
@@ -1894,12 +1894,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Krosinis motociklas',
-        value: 'motocrossMotorcycle',
+        label: "Krosinis motociklas",
+        value: "motocrossMotorcycle",
       },
       size: {
         from: 250,
@@ -1912,12 +1912,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Krosinis motociklas',
-        value: 'motocrossMotorcycle',
+        label: "Krosinis motociklas",
+        value: "motocrossMotorcycle",
       },
       size: {
         from: 450,
@@ -1931,12 +1931,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // Kelioninis motociklas touringMotorcycle
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Kelioninis motociklas',
-        value: 'touringMotorcycle',
+        label: "Kelioninis motociklas",
+        value: "touringMotorcycle",
       },
       size: {
         from: 0,
@@ -1949,12 +1949,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Kelioninis motociklas',
-        value: 'touringMotorcycle',
+        label: "Kelioninis motociklas",
+        value: "touringMotorcycle",
       },
       size: {
         from: 800,
@@ -1967,12 +1967,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Kelioninis motociklas',
-        value: 'touringMotorcycle',
+        label: "Kelioninis motociklas",
+        value: "touringMotorcycle",
       },
       size: {
         from: 1200,
@@ -1985,12 +1985,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Kelioninis motociklas',
-        value: 'touringMotorcycle',
+        label: "Kelioninis motociklas",
+        value: "touringMotorcycle",
       },
       size: {
         from: 1600,
@@ -2004,12 +2004,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // Sportinis motociklas sportsMotorcycle
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Sportinis motociklas',
-        value: 'sportsMotorcycle',
+        label: "Sportinis motociklas",
+        value: "sportsMotorcycle",
       },
       size: {
         from: 0,
@@ -2022,12 +2022,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Sportinis motociklas',
-        value: 'sportsMotorcycle',
+        label: "Sportinis motociklas",
+        value: "sportsMotorcycle",
       },
       size: {
         from: 600,
@@ -2040,12 +2040,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Sportinis motociklas',
-        value: 'sportsMotorcycle',
+        label: "Sportinis motociklas",
+        value: "sportsMotorcycle",
       },
       size: {
         from: 1000,
@@ -2059,12 +2059,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // Čioperis chopper
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Čioperis',
-        value: 'chopper',
+        label: "Čioperis",
+        value: "chopper",
       },
       size: {
         from: 0,
@@ -2077,12 +2077,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Čioperis',
-        value: 'chopper',
+        label: "Čioperis",
+        value: "chopper",
       },
       size: {
         from: 800,
@@ -2095,12 +2095,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Čioperis',
-        value: 'chopper',
+        label: "Čioperis",
+        value: "chopper",
       },
       size: {
         from: 1200,
@@ -2114,12 +2114,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // Enduro enduro
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Enduro',
-        value: 'enduro',
+        label: "Enduro",
+        value: "enduro",
       },
       size: {
         from: 0,
@@ -2132,12 +2132,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Enduro',
-        value: 'enduro',
+        label: "Enduro",
+        value: "enduro",
       },
       size: {
         from: 250,
@@ -2150,12 +2150,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Enduro',
-        value: 'enduro',
+        label: "Enduro",
+        value: "enduro",
       },
       size: {
         from: 650,
@@ -2168,12 +2168,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Enduro',
-        value: 'enduro',
+        label: "Enduro",
+        value: "enduro",
       },
       size: {
         from: 1200,
@@ -2187,12 +2187,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // quadBike Keturratis
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Keturratis',
-        value: 'quadBike',
+        label: "Keturratis",
+        value: "quadBike",
       },
       size: {
         from: 0,
@@ -2205,12 +2205,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Keturratis',
-        value: 'quadBike',
+        label: "Keturratis",
+        value: "quadBike",
       },
       size: {
         from: 400,
@@ -2223,12 +2223,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Keturratis',
-        value: 'quadBike',
+        label: "Keturratis",
+        value: "quadBike",
       },
       size: {
         from: 800,
@@ -2241,12 +2241,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Keturratis',
-        value: 'quadBike',
+        label: "Keturratis",
+        value: "quadBike",
       },
       size: {
         from: 1200,
@@ -2260,12 +2260,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // Motociklo variklis motorcycleEngine
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 0,
@@ -2278,12 +2278,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 45,
@@ -2296,12 +2296,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 250,
@@ -2314,12 +2314,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 450,
@@ -2332,12 +2332,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 600,
@@ -2350,12 +2350,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 1000,
@@ -2368,12 +2368,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 1200,
@@ -2386,12 +2386,12 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Motociklo variklis',
-        value: 'motorcycleEngine',
+        label: "Motociklo variklis",
+        value: "motorcycleEngine",
       },
       size: {
         from: 1600,
@@ -2406,16 +2406,16 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     // goodsForMotorcycles Prekės motociklams
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Prekės motociklams',
-        value: 'goodsForMotorcycles',
+        label: "Prekės motociklams",
+        value: "goodsForMotorcycles",
       },
       size: {
-        label: 'Motociklo krepšys (Dėžė)',
-        value: 'motorcycleBag',
+        label: "Motociklo krepšys (Dėžė)",
+        value: "motorcycleBag",
       },
       volume: 0.01,
       weight: 5,
@@ -2424,16 +2424,16 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
     },
     {
       category: {
-        label: 'Motociklai ir priedai',
-        value: 'motorcyclesAndAccessories',
+        label: "Motociklai ir priedai",
+        value: "motorcyclesAndAccessories",
       },
       productType: {
-        label: 'Prekės motociklams',
-        value: 'goodsForMotorcycles',
+        label: "Prekės motociklams",
+        value: "goodsForMotorcycles",
       },
       size: {
-        label: 'Duslintuvas',
-        value: 'muffler',
+        label: "Duslintuvas",
+        value: "muffler",
       },
       volume: 0.01,
       weight: 5,
@@ -2445,8 +2445,8 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
 export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2460,8 +2460,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2475,8 +2475,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2490,8 +2490,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2505,8 +2505,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2520,8 +2520,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2535,8 +2535,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2550,8 +2550,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2565,8 +2565,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2580,8 +2580,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2595,8 +2595,8 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Plokščiaekraniai TV',
-      value: 'flatScreenTv',
+      label: "Plokščiaekraniai TV",
+      value: "flatScreenTv",
     },
     productType: null,
     size: {
@@ -2614,12 +2614,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   // TODO Think how we will calculate price for these
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Šaldytuvas',
-      value: 'fridge',
+      label: "Šaldytuvas",
+      value: "fridge",
     },
     volume: 1,
     weight: 0,
@@ -2630,12 +2630,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Šaldiklis',
-      value: 'freezer',
+      label: "Šaldiklis",
+      value: "freezer",
     },
     volume: 1,
     weight: 0,
@@ -2646,12 +2646,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Pramoninė džiovyklė',
-      value: 'industrialDryer',
+      label: "Pramoninė džiovyklė",
+      value: "industrialDryer",
     },
     volume: 0.4,
     weight: 40,
@@ -2662,12 +2662,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Pramoninė indaplovė',
-      value: 'industrialDishwasher',
+      label: "Pramoninė indaplovė",
+      value: "industrialDishwasher",
     },
     volume: 0.35,
     weight: 40,
@@ -2679,16 +2679,16 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   // Skalbimo mašina washingMachine
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Skalbimo mašina',
-      value: 'washingMachine',
+      label: "Skalbimo mašina",
+      value: "washingMachine",
     },
     size: {
-      label: 'Maža skalbimo mašina',
-      value: 'Talpa 3-5 kg',
+      label: "Maža skalbimo mašina",
+      value: "Talpa 3-5 kg",
     },
     volume: 0.15,
     weight: 40,
@@ -2697,16 +2697,16 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Skalbimo mašina',
-      value: 'washingMachine',
+      label: "Skalbimo mašina",
+      value: "washingMachine",
     },
     size: {
-      label: 'Vidutinė skalbimo mašina',
-      value: 'Talpa 6-7 kg',
+      label: "Vidutinė skalbimo mašina",
+      value: "Talpa 6-7 kg",
     },
     volume: 0.2,
     weight: 60,
@@ -2715,16 +2715,16 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Skalbimo mašina',
-      value: 'washingMachine',
+      label: "Skalbimo mašina",
+      value: "washingMachine",
     },
     size: {
-      label: 'Didelė skalbimo mašina',
-      value: 'Talpa 8-9 kg',
+      label: "Didelė skalbimo mašina",
+      value: "Talpa 8-9 kg",
     },
     volume: 0.25,
     weight: 70,
@@ -2733,16 +2733,16 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Skalbimo mašina',
-      value: 'washingMachine',
+      label: "Skalbimo mašina",
+      value: "washingMachine",
     },
     size: {
-      label: 'Pramoninė skalbimo mašina',
-      value: 'Talpa 10+ kg',
+      label: "Pramoninė skalbimo mašina",
+      value: "Talpa 10+ kg",
     },
     volume: 0.3,
     weight: 80,
@@ -2751,12 +2751,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Butinė indaplovė',
-      value: 'dishwasher',
+      label: "Butinė indaplovė",
+      value: "dishwasher",
     },
     volume: 0.35,
     weight: 40,
@@ -2766,12 +2766,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Buitinė džiovyklė',
-      value: 'dryer',
+      label: "Buitinė džiovyklė",
+      value: "dryer",
     },
     volume: 0.35,
     weight: 40,
@@ -2781,12 +2781,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Kaitlentė',
-      value: 'hob',
+      label: "Kaitlentė",
+      value: "hob",
     },
     volume: 0.1,
     weight: 15,
@@ -2797,16 +2797,16 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   // Viryklė stove
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Viryklė',
-      value: 'stove',
+      label: "Viryklė",
+      value: "stove",
     },
     size: {
-      label: 'Imontuojama',
-      value: 'built-in',
+      label: "Imontuojama",
+      value: "built-in",
     },
     volume: 0.2,
     weight: 50,
@@ -2815,16 +2815,16 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Viryklė',
-      value: 'stove',
+      label: "Viryklė",
+      value: "stove",
     },
     size: {
-      label: 'Pastatoma', // TODO translate it
-      value: 'built-in',
+      label: "Pastatoma", // TODO translate it
+      value: "built-in",
     },
     volume: 0.6,
     weight: 60,
@@ -2833,16 +2833,16 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Buitinė technika',
-      value: 'householdAppliances',
+      label: "Buitinė technika",
+      value: "householdAppliances",
     },
     productType: {
-      label: 'Viryklė',
-      value: 'stove',
+      label: "Viryklė",
+      value: "stove",
     },
     size: {
-      label: '5-6 Degiklių',
-      value: 'withBurners',
+      label: "5-6 Degiklių",
+      value: "withBurners",
     },
     volume: 0.7,
     weight: 80,
@@ -2856,12 +2856,12 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
 export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Mažas sodo traktorius',
-      value: 'smallGardenTractor',
+      label: "Mažas sodo traktorius",
+      value: "smallGardenTractor",
     },
     size: {
       from: 0,
@@ -2870,19 +2870,19 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.7,
     weight: 150,
     specification: {
-      label: 'Be surinkimo krepšio',
-      value: 'withoutAssemblyBag',
+      label: "Be surinkimo krepšio",
+      value: "withoutAssemblyBag",
     },
     price: 200,
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Vidutinis sodo traktorius',
-      value: 'averageGardenTractor',
+      label: "Vidutinis sodo traktorius",
+      value: "averageGardenTractor",
     },
     size: {
       from: 80,
@@ -2891,19 +2891,19 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     volume: 1.2,
     weight: 200,
     specification: {
-      label: 'Be surinkimo krepšio',
-      value: 'withoutAssemblyBag',
+      label: "Be surinkimo krepšio",
+      value: "withoutAssemblyBag",
     },
     price: 230,
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Didelis sodo traktorius',
-      value: 'bigGardenTractor',
+      label: "Didelis sodo traktorius",
+      value: "bigGardenTractor",
     },
     size: {
       from: 120,
@@ -2912,19 +2912,19 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     volume: 1.6,
     weight: 250,
     specification: {
-      label: 'Be surinkimo krepšio',
-      value: 'withoutAssemblyBag',
+      label: "Be surinkimo krepšio",
+      value: "withoutAssemblyBag",
     },
     price: 280,
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Mažas sodo traktorius',
-      value: 'smallGardenTractor',
+      label: "Mažas sodo traktorius",
+      value: "smallGardenTractor",
     },
     size: {
       from: 0,
@@ -2933,19 +2933,19 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.85,
     weight: 160,
     specification: {
-      label: 'Su surinkimo krepšiu',
-      value: 'withAssemblyBag',
+      label: "Su surinkimo krepšiu",
+      value: "withAssemblyBag",
     },
     price: 240,
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Vidutinis sodo traktorius',
-      value: 'averageGardenTractor',
+      label: "Vidutinis sodo traktorius",
+      value: "averageGardenTractor",
     },
     size: {
       from: 80,
@@ -2954,19 +2954,19 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     volume: 1.25,
     weight: 210,
     specification: {
-      label: 'Su surinkimo krepšiu',
-      value: 'withAssemblyBag',
+      label: "Su surinkimo krepšiu",
+      value: "withAssemblyBag",
     },
     price: 270,
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Didelis sodo traktorius',
-      value: 'bigGardenTractor',
+      label: "Didelis sodo traktorius",
+      value: "bigGardenTractor",
     },
     size: {
       from: 120,
@@ -2975,19 +2975,19 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     volume: 1.7,
     weight: 260,
     specification: {
-      label: 'Su surinkimo krepšiu',
-      value: 'withAssemblyBag',
+      label: "Su surinkimo krepšiu",
+      value: "withAssemblyBag",
     },
     price: 320,
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Stumdoma žoliapjovė (maža)',
-      value: 'smallPushMower',
+      label: "Stumdoma žoliapjovė (maža)",
+      value: "smallPushMower",
     },
     volume: 0.25,
     weight: 15,
@@ -2997,12 +2997,12 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Stumdoma žoliapjovė (didelė)',
-      value: 'bigPushMower',
+      label: "Stumdoma žoliapjovė (didelė)",
+      value: "bigPushMower",
     },
     volume: 0.3,
     weight: 25,
@@ -3012,12 +3012,12 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Savaeigė žoliapjovė (maža)',
-      value: 'smallSelfPropelledMower',
+      label: "Savaeigė žoliapjovė (maža)",
+      value: "smallSelfPropelledMower",
     },
     volume: 0.3,
     weight: 30,
@@ -3027,12 +3027,12 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Sodo technika',
-      value: 'gardenEquipment',
+      label: "Sodo technika",
+      value: "gardenEquipment",
     },
     productType: {
-      label: 'Savaeigė žoliapjovė (didelė)',
-      value: 'bigSelfPropelledMower',
+      label: "Savaeigė žoliapjovė (didelė)",
+      value: "bigSelfPropelledMower",
     },
     volume: 0.35,
     weight: 40,
@@ -3046,8 +3046,8 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
   // Siuntos shipments
   {
     category: {
-      label: 'Siunta',
-      value: 'shipments',
+      label: "Siunta",
+      value: "shipments",
     },
     productType: null,
     size: {
@@ -3059,8 +3059,8 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Siunta',
-      value: 'shipments',
+      label: "Siunta",
+      value: "shipments",
     },
     productType: null,
     size: {
@@ -3072,8 +3072,8 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Siunta',
-      value: 'shipments',
+      label: "Siunta",
+      value: "shipments",
     },
     productType: null,
     size: {
@@ -3085,8 +3085,8 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Siunta',
-      value: 'shipments',
+      label: "Siunta",
+      value: "shipments",
     },
     productType: null,
     size: {
@@ -3099,8 +3099,8 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Siunta',
-      value: 'shipments',
+      label: "Siunta",
+      value: "shipments",
     },
     productType: null,
     size: {
@@ -3113,8 +3113,8 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Siunta',
-      value: 'shipments',
+      label: "Siunta",
+      value: "shipments",
     },
     productType: null,
     size: {
@@ -3127,8 +3127,8 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Siunta',
-      value: 'shipments',
+      label: "Siunta",
+      value: "shipments",
     },
     productType: null,
     size: {
@@ -3146,8 +3146,8 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
   // Size in m3
   {
     category: {
-      label: 'Perkraustymai, baldai',
-      value: 'removals',
+      label: "Perkraustymai, baldai",
+      value: "removals",
     },
     productType: null,
     size: {
@@ -3159,8 +3159,8 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Perkraustymai, baldai',
-      value: 'removals',
+      label: "Perkraustymai, baldai",
+      value: "removals",
     },
     productType: null,
     size: {
@@ -3172,8 +3172,8 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Perkraustymai, baldai',
-      value: 'removals',
+      label: "Perkraustymai, baldai",
+      value: "removals",
     },
     productType: null,
     size: {
@@ -3185,8 +3185,8 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Perkraustymai, baldai',
-      value: 'removals',
+      label: "Perkraustymai, baldai",
+      value: "removals",
     },
     productType: null,
     size: {
@@ -3198,8 +3198,8 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
   },
   {
     category: {
-      label: 'Perkraustymai, baldai',
-      value: 'removals',
+      label: "Perkraustymai, baldai",
+      value: "removals",
     },
     productType: null,
     size: {
@@ -3214,8 +3214,8 @@ export const removalsCategoryProducts: CommonProductTypeExample[] = [
 export const palettesCategoryProducts: CommonProductTypeExample[] = [
   {
     category: {
-      label: 'Paletes',
-      value: 'palettes',
+      label: "Paletes",
+      value: "palettes",
     },
     productType: null,
     size: null,
@@ -3241,10 +3241,10 @@ export const allProducts: CommonProductTypeExample[] = [
 ];
 
 export const categoriesOptions: AnyOptionType[] = getOptions(
-  allProducts.map((product) => product.category)
+  allProducts.map((product) => product.category),
 ).sort((a, b) => {
   // @ts-ignore
-  if (a.value === 'shipments' || b.value === 'shipments') return -1;
+  if (a.value === "shipments" || b.value === "shipments") return -1;
   // @ts-ignore
   return a.label.localeCompare(b.label);
 });
@@ -3253,42 +3253,42 @@ export const automotiveGoodsCategoryProductTypesOptions: AnyOptionType[] =
   getOptions(
     automotiveGoodsCategoryProducts
       .map((product) => product.productType)
-      .filter((obj) => obj !== null) as OptionType[]
+      .filter((obj) => obj !== null) as OptionType[],
   );
 
 export const bicyclesAndScootersCategoryProductTypesOptions: AnyOptionType[] =
   getOptions(
     bicyclesAndScootersCategoryProducts
       .map((product) => product.productType)
-      .filter((obj) => obj !== null) as OptionType[]
+      .filter((obj) => obj !== null) as OptionType[],
   );
 
 export const goodsForChildrenCategoryProductTypesOptions: AnyOptionType[] =
   getOptions(
     goodsForChildrenCategoryProducts
       .map((product) => product.productType)
-      .filter((obj) => obj !== null) as OptionType[]
+      .filter((obj) => obj !== null) as OptionType[],
   );
 
 export const motorcyclesAndAccessoriesCategoryProductTypesOptions: AnyOptionType[] =
   getOptions(
     motorcyclesAndAccessoriesCategoryProducts
       .map((product) => product.productType)
-      .filter((obj) => obj !== null) as OptionType[]
+      .filter((obj) => obj !== null) as OptionType[],
   );
 
 export const householdAppliancesCategoryProductTypesOptions: AnyOptionType[] =
   getOptions(
     householdAppliancesCategoryProducts
       .map((product) => product.productType)
-      .filter((obj) => obj !== null) as OptionType[]
+      .filter((obj) => obj !== null) as OptionType[],
   );
 
 export const gardenEquipmentCategoryProductTypesOptions: AnyOptionType[] =
   getOptions(
     gardenEquipmentCategoryProducts
       .map((product) => product.productType)
-      .filter((obj) => obj !== null) as OptionType[]
+      .filter((obj) => obj !== null) as OptionType[],
   );
 
 // Size Units x = number
@@ -3300,7 +3300,7 @@ export const gardenEquipmentCategoryProductTypesOptions: AnyOptionType[] =
 
 export const getSizeOptionsBySelectedProductType = (
   category?: string,
-  productType?: string
+  productType?: string,
 ) => {
   if (category && productType) {
     const filteredProductsByCategoryAndType = allProducts
@@ -3315,13 +3315,13 @@ export const getSizeOptionsBySelectedProductType = (
               // @ts-ignore
               item.size,
               category,
-              productType
+              productType,
             ),
             value: convertRangeSizeToOptionType(
               // @ts-ignore
               item.size,
               category,
-              productType
+              productType,
             ),
           };
           // @ts-ignore
@@ -3338,8 +3338,8 @@ export const getSizeOptionsBySelectedProductType = (
     return filteredProductsByCategoryAndType.length > 1
       ? getUniqueOptions(
           (filteredProductsByCategoryAndType.filter(
-            (item) => !!item
-          ) as OptionType[]) ?? []
+            (item) => !!item,
+          ) as OptionType[]) ?? [],
         )
       : [];
   } else if (category && !productType) {
@@ -3354,13 +3354,13 @@ export const getSizeOptionsBySelectedProductType = (
               // @ts-ignore
               item.size,
               category,
-              productType
+              productType,
             ),
             value: convertRangeSizeToOptionType(
               // @ts-ignore
               item.size,
               category,
-              productType
+              productType,
             ),
           };
           // @ts-ignore
@@ -3377,8 +3377,8 @@ export const getSizeOptionsBySelectedProductType = (
       ? getUniqueOptions(
           (filteredProductsByCategoryAndType.filter(
             // @ts-ignore
-            (item) => !!item || !!item?.value
-          ) as OptionType[]) ?? []
+            (item) => !!item || !!item?.value,
+          ) as OptionType[]) ?? [],
         )
       : [];
   }
@@ -3387,7 +3387,7 @@ export const getSizeOptionsBySelectedProductType = (
 
 export const getSpecificationOptionsBySelectedProduct = (
   category?: string,
-  productType?: string
+  productType?: string,
 ) => {
   if (!category || !productType) return [];
 
@@ -3410,8 +3410,8 @@ const getUniqueOptions = (array: { value: string; label: string }[]) => {
           (item, index, self) =>
             index ===
             self.findIndex(
-              (t) => t.value === item.value && t.label === item.label
-            )
+              (t) => t.value === item.value && t.label === item.label,
+            ),
         )
     : [];
 };

@@ -1,5 +1,5 @@
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export type ServiceProps = {
   title: string;
@@ -15,12 +15,12 @@ export type ServiceCardProps = {
   onSelect: () => void;
   selected: boolean;
   isParcelForce: boolean;
-  direction: 'UK-LT' | 'LT-UK' | 'LT-LT' | null;
+  direction: "UK-LT" | "LT-UK" | "LT-LT" | null;
   isDisabled: boolean;
 };
 
 const CheckmarkIcon = () => {
-  return <FontAwesomeIcon icon={faCircleCheck} color='#9AA61E' size='lg' />;
+  return <FontAwesomeIcon icon={faCircleCheck} color="#9AA61E" size="lg" />;
 };
 
 const ServiceCard = ({
@@ -31,16 +31,16 @@ const ServiceCard = ({
 }: ServiceCardProps) => {
   return (
     <div
-      className={`service-card ${selected ? 'active' : ''} ${
-        isDisabled ? 'disabled-card' : ''
+      className={`service-card ${selected ? "active" : ""} ${
+        isDisabled ? "disabled-card" : ""
       }`}
       onClick={onSelect}
     >
-      <div className='service-info'>
+      <div className="service-info">
         {service.icon}
-        <div className='service-description'>
-          <span className='card-title'>{service.title}</span>
-          <span className='card-description'>{service.desc}</span>
+        <div className="service-description">
+          <span className="card-title">{service.title}</span>
+          <span className="card-description">{service.desc}</span>
         </div>
       </div>
       {selected ? <CheckmarkIcon /> : null}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { Controller } from 'react-hook-form';
-import '../styles/textarea.css';
+import React from "react";
+import { Controller } from "react-hook-form";
+import "../styles/textarea.css";
 
 type CustomTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   label?: string;
@@ -22,7 +22,7 @@ const CustomTextarea = ({
         name={name}
         control={control}
         render={({ field }) => (
-          <div className='custom-textarea'>
+          <div className="custom-textarea">
             {label && <label htmlFor={name}>{label}</label>}
             <textarea
               {...field}
