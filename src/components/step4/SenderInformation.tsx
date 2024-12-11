@@ -4,11 +4,11 @@ import {
   FieldErrors,
   UseFormReturn,
   UseFormSetValue,
-} from 'react-hook-form';
-import Step from '../Step';
-import ClientInformationForm from './ClientInformationForm';
-import { FormType } from '../../utils/formTypes';
-import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+} from "react-hook-form";
+import Step from "../Step";
+import ClientInformationForm from "./ClientInformationForm";
+import { FormType } from "../../utils/formTypes";
+import { useCustomValidation } from "../../utils/validation/useCustomValidation";
 
 type SenderInformationProps = {
   control: Control<FormType, any>;
@@ -28,7 +28,7 @@ const SenderInformation = ({
   methods,
   step,
 }: SenderInformationProps) => {
-  const service = methods.watch('service');
+  const service = methods.watch("service");
 
   const validationRules = useCustomValidation({ service });
 
@@ -37,12 +37,12 @@ const SenderInformation = ({
   return (
     <Step title={stepLabel} step={step}>
       <ClientInformationForm
-        client='sender'
+        client="sender"
         control={control}
-        subName='senderInformation'
+        subName="senderInformation"
         formErrors={formErrors}
         isShipmentWithAddressServiceSelected={
-          selectedService === 'shipmentWithAddressService'
+          selectedService === "shipmentWithAddressService"
         }
         validationRules={senderValidationRules}
         methods={methods}

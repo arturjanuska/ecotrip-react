@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ClientInformationForm from '../step4/ClientInformationForm';
-import Step from '../Step';
-import '../step4/step4.css';
-import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
-import { FormType } from '../../utils/formTypes';
-import { useCustomValidation } from '../../utils/validation/useCustomValidation';
+import ClientInformationForm from "../step4/ClientInformationForm";
+import Step from "../Step";
+import "../step4/step4.css";
+import { Control, FieldErrors, UseFormReturn } from "react-hook-form";
+import { FormType } from "../../utils/formTypes";
+import { useCustomValidation } from "../../utils/validation/useCustomValidation";
 
 type Props = {
   control: Control<FormType, any>;
@@ -21,7 +21,7 @@ const RecipientInformation = ({
   stepLabel,
   step,
 }: Props) => {
-  const service = methods.watch('service');
+  const service = methods.watch("service");
 
   const validationRules = useCustomValidation({ service });
 
@@ -29,15 +29,15 @@ const RecipientInformation = ({
   return (
     <Step title={stepLabel} step={step}>
       <ClientInformationForm
-        client='recipient'
+        client="recipient"
         control={control}
-        subName='recipientInformation'
+        subName="recipientInformation"
         formErrors={formErrors}
         validationRules={recipientValidationRules}
         methods={methods}
         step={step}
         isShipmentWithAddressServiceSelected={
-          service === 'shipmentWithAddressService'
+          service === "shipmentWithAddressService"
         }
       />
     </Step>

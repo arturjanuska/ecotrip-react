@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/step.css';
+import React from "react";
+import "../styles/step.css";
 
 type Props = {
   id?: string;
@@ -21,19 +21,19 @@ const Step = ({
   const stepTitle = `${step}. ${title}`;
 
   return (
-    <div className={`step-columns ${className ? className : ''}`} id={id}>
-      <div className='title-column'>
+    <div className={`step-columns ${className ? className : ""}`} id={id}>
+      <div className="title-column">
         <span>{stepTitle}</span>
-        {instructions && <span className='instructions'>{instructions}</span>}
+        {instructions && <span className="instructions">{instructions}</span>}
       </div>
       <div
         style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'flex-end',
+          width: "100%",
+          display: "flex",
+          justifyContent: "flex-end",
         }}
       >
-        <div className='content-column'>{children}</div>
+        <div className="content-column">{children}</div>
       </div>
     </div>
   );

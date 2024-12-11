@@ -1,11 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { CSSProperties } from 'react';
-import { Controller, RegisterOptions } from 'react-hook-form';
-import '../styles/checkbox.css';
-import SimpleTextError from './SimpleTextError';
-import { FormType } from '../utils/formTypes';
+import React, { CSSProperties } from "react";
+import { Controller, RegisterOptions } from "react-hook-form";
+import "../styles/checkbox.css";
+import SimpleTextError from "./SimpleTextError";
+import { FormType } from "../utils/formTypes";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   children: React.ReactNode | Element;
@@ -17,7 +17,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   rules?:
     | Omit<
         RegisterOptions<FormType, keyof FormType>,
-        'disabled' | 'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+        "disabled" | "valueAsNumber" | "valueAsDate" | "setValueAs"
       >
     | undefined;
 };
@@ -41,24 +41,24 @@ const ControlledCheckboxWithLabel = ({
         return (
           <>
             <div
-              className={`form-control ${className ? className : ''}`}
+              className={`form-control ${className ? className : ""}`}
               style={style}
             >
-              <label className='label cursor-pointer'>
+              <label className="label cursor-pointer">
                 <input
                   {...field}
                   {...rest}
-                  type='checkbox'
+                  type="checkbox"
                   className={`checkbox checkbox-primary ${
-                    errorMessage ? 'error' : ''
+                    errorMessage ? "error" : ""
                   }`}
                   // @ts-ignore
                   checked={field.value ?? false}
                 />
-                <div className='custom-label-text'>{children}</div>
+                <div className="custom-label-text">{children}</div>
               </label>
             </div>
-            <SimpleTextError message={errorMessage} textAlign='right' />
+            <SimpleTextError message={errorMessage} textAlign="right" />
           </>
         );
       }}

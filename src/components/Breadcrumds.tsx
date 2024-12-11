@@ -1,7 +1,7 @@
-import '../styles/breadcrumds.css';
+import "../styles/breadcrumds.css";
 
 const Breadcrumds = () => {
-	return <h1 className='breadcrumds'>Siuntos skaičiuoklė / užsakymas</h1>;
+  return <h1 className="breadcrumds">Siuntos skaičiuoklė / užsakymas</h1>;
 };
 
 export default Breadcrumds;

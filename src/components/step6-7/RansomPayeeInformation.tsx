@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Step from '../Step';
-import ClientInformationForm from '../step4/ClientInformationForm';
-import FieldContainer from '../FieldContainer';
-import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
-import { FormType } from '../../utils/formTypes';
-import { useCustomValidation } from '../../utils/validation/useCustomValidation';
-import ControlledStyledSelect from '../ControlledStyledSelect';
+import Step from "../Step";
+import ClientInformationForm from "../step4/ClientInformationForm";
+import FieldContainer from "../FieldContainer";
+import { Control, FieldErrors, UseFormReturn } from "react-hook-form";
+import { FormType } from "../../utils/formTypes";
+import { useCustomValidation } from "../../utils/validation/useCustomValidation";
+import ControlledStyledSelect from "../ControlledStyledSelect";
 
 type Props = {
   control: Control<FormType, any>;
@@ -27,33 +27,33 @@ const RansomPayeeInformation = ({
 
   const options = [
     {
-      label: 'Siuntėjas',
-      value: 'sender',
+      label: "Siuntėjas",
+      value: "sender",
     },
     {
-      label: 'Kitas asmuo',
-      value: 'otherPerson',
+      label: "Kitas asmuo",
+      value: "otherPerson",
     },
   ];
 
   const ransomRecipientSelect = methods.watch(
-    'ransomPayeeInformation.ransomRecipient.value'
+    "ransomPayeeInformation.ransomRecipient.value",
   );
 
   return (
-    <Step step={6} title='Siuntos/prekės išpirkos gavėjo informacija'>
+    <Step step={6} title="Siuntos/prekės išpirkos gavėjo informacija">
       <>
         <div
           style={{
-            marginBottom: '30px',
+            marginBottom: "30px",
           }}
         >
           <FieldContainer
-            label='Kas yra siuntos/prekės išpirkos gavėjas?'
-            description='Nurodykite, kam ir kokiu adresu grąžinti iš siuntos gavėjos surinktą pinigų sumą. Įprastai tai yra siuntos siuntėjas.'
+            label="Kas yra siuntos/prekės išpirkos gavėjas?"
+            description="Nurodykite, kam ir kokiu adresu grąžinti iš siuntos gavėjos surinktą pinigų sumą. Įprastai tai yra siuntos siuntėjas."
           >
             <ControlledStyledSelect
-              name='ransomPayeeInformation.ransomRecipient'
+              name="ransomPayeeInformation.ransomRecipient"
               options={options}
               control={control}
               rules={
@@ -64,12 +64,12 @@ const RansomPayeeInformation = ({
             />
           </FieldContainer>
         </div>
-        {ransomRecipientSelect === 'otherPerson' ? (
+        {ransomRecipientSelect === "otherPerson" ? (
           <div>
             <ClientInformationForm
-              client='ransomPayee'
+              client="ransomPayee"
               control={control}
-              subName='ransomPayeeInformation'
+              subName="ransomPayeeInformation"
               formErrors={formErrors}
               validationRules={
                 ransomPayeeValidationRules

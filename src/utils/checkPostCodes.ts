@@ -1,5 +1,5 @@
-import { UKPostcodeType } from './types';
-import UK_POST_CODES from './ukPostCodes';
+import { UKPostcodeType } from "./types";
+import UK_POST_CODES from "./ukPostCodes";
 
 type CheckPostCodesProps = {
   address: {
@@ -9,7 +9,7 @@ type CheckPostCodesProps = {
 };
 
 export const checkPostCodes = ({ address }: CheckPostCodesProps) => {
-  let path: string = '';
+  let path: string = "";
   let foundPostcode: UKPostcodeType | null = null;
 
   const formattedData = Object.entries(address).map(([key, value]) => {
@@ -19,18 +19,18 @@ export const checkPostCodes = ({ address }: CheckPostCodesProps) => {
     };
   });
 
-  const fromObj = formattedData.find((obj) => obj.direction === 'from');
+  const fromObj = formattedData.find((obj) => obj.direction === "from");
 
   foundPostcode =
     UK_POST_CODES.find((ukObj) => {
       return fromObj?.value.toUpperCase().includes(ukObj.postcode);
     }) || null;
 
-  const isStandartPrices = foundPostcode?.basicPrice === 'Ecotrip pricelist';
+  const isStandartPrices = foundPostcode?.basicPrice === "Ecotrip pricelist";
   if (isStandartPrices) {
-    path = '/address-form/standart-prices';
+    path = "/address-form/standart-prices";
   } else {
-    path = '/address-form/parcel-force-prices';
+    path = "/address-form/parcel-force-prices";
   }
 
   return {
@@ -41,7 +41,7 @@ export const checkPostCodes = ({ address }: CheckPostCodesProps) => {
 
 export const test = (
   postcode: string,
-  setPostCodeObject: (obj: any) => void
+  setPostCodeObject: (obj: any) => void,
 ) => {
   if (!postcode) return false;
   const outcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?/;
@@ -53,7 +53,7 @@ export const test = (
     const isMatch = UK_POST_CODES.some(
       (item) =>
         item.postcode === outcode &&
-        item.additionalCharges === 'Parcel force pricelist'
+        item.additionalCharges === "Parcel force pricelist",
     );
     const obj = UK_POST_CODES.find((item) => item.postcode === outcode);
 

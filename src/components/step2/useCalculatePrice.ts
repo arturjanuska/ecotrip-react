@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useEffect } from 'react';
-import { OptionType } from '../../utils/types';
-import { allProducts } from '../../utils/products';
-import { UseFormSetValue } from 'react-hook-form';
-import { FormType } from '../../utils/formTypes';
-import { convertOptionTypeToRangeSize } from '../../utils/convertSizeOptions';
+import { useEffect } from "react";
+import { OptionType } from "../../utils/types";
+import { allProducts } from "../../utils/products";
+import { UseFormSetValue } from "react-hook-form";
+import { FormType } from "../../utils/formTypes";
+import { convertOptionTypeToRangeSize } from "../../utils/convertSizeOptions";
 import {
   calculateShipmentPrice,
   calculateVolume,
-} from '../../utils/calculateShipmentPrice';
+} from "../../utils/calculateShipmentPrice";
 
 type Props = {
   category: OptionType | null;
@@ -48,9 +48,9 @@ const useCalculatePrice = ({
 }: Props) => {
   useEffect(() => {
     if (
-      (category && category.value === 'removals') ||
-      (productType && productType.value === 'fridge') ||
-      (productType && productType.value === 'freezer')
+      (category && category.value === "removals") ||
+      (productType && productType.value === "fridge") ||
+      (productType && productType.value === "freezer")
     ) {
       if (length && width && height) {
         const { price, volume } = calculateVolume({
@@ -69,7 +69,7 @@ const useCalculatePrice = ({
       return;
     }
 
-    if (category && category.value === 'shipments') {
+    if (category && category.value === "shipments") {
       const { price, volume, extent } = calculateShipmentPrice({
         weight,
         length,
@@ -92,13 +92,13 @@ const useCalculatePrice = ({
 
     if (category && category.value) {
       filteredProducts = filteredProducts.filter(
-        (item) => item.category?.value === category.value
+        (item) => item.category?.value === category.value,
       );
     }
 
     if (productType && productType.value) {
       filteredProducts = filteredProducts.filter(
-        (item) => item.productType?.value === productType.value
+        (item) => item.productType?.value === productType.value,
       );
     }
 
@@ -109,30 +109,30 @@ const useCalculatePrice = ({
             // @ts-ignore
             item.size.from ===
               convertOptionTypeToRangeSize(
-                productType?.value ?? '',
+                productType?.value ?? "",
                 size.value,
-                category?.value ?? ''
+                category?.value ?? "",
               )?.from &&
             // @ts-ignore
             item.size.to ===
               convertOptionTypeToRangeSize(
-                productType?.value ?? '',
+                productType?.value ?? "",
                 size.value,
-                category?.value ?? ''
-              )?.to
+                category?.value ?? "",
+              )?.to,
         );
       } else {
         filteredProducts = filteredProducts.filter(
           (item) =>
             // @ts-ignore
-            item.size.label === size.label && item.size.value === size.value
+            item.size.label === size.label && item.size.value === size.value,
         );
       }
     }
 
     if (specification && specification.value) {
       filteredProducts = filteredProducts.filter(
-        (item) => item?.specification?.value === specification.value
+        (item) => item?.specification?.value === specification.value,
       );
     }
 
@@ -142,7 +142,7 @@ const useCalculatePrice = ({
       product = filteredProducts[0];
     }
     const productPrice = product ? product.price * Number(amount) : 0;
-    const finalPrice = productPrice.toFixed(2) ?? '0.00';
+    const finalPrice = productPrice.toFixed(2) ?? "0.00";
     // @ts-ignore
     setValue(name, finalPrice);
     if (product?.volume) {
