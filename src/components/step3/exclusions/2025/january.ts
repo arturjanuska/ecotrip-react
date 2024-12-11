@@ -57,8 +57,8 @@ export const getJanuaryDeliveryDays = ({
       }
       case "28 - 29": {
         return {
-          label: "Sausio 28 - Sausio 29",
-          value: "28 - 29",
+          label: "Sausio 31 - Vasario 2",
+          value: "31 - 2",
         };
       }
     }

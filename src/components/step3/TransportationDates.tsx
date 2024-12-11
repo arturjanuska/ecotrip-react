@@ -23,7 +23,7 @@ const TransportationDates = ({
 
   const yearFrom = watch("dates.from.year.value");
   const monthFrom = watch("dates.from.month.value");
-  const dayRangeFrom = watch("dates.from.day.value");
+  const dayRangeFromValue = watch("dates.from.day.value");
 
   const service = methods.watch("service");
 
@@ -34,8 +34,8 @@ const TransportationDates = ({
   };
 
   const pickupDate =
-    yearFrom && monthFrom && dayRangeFrom
-      ? `${yearFrom}/${monthFrom}/${dayRangeFrom.split(" - ")[0]}`
+    yearFrom && monthFrom && dayRangeFromValue
+      ? `${yearFrom}/${monthFrom}/${dayRangeFromValue.split(" - ")[0]}`
       : "";
 
   // Move this to DatePicker component to avoid unnecessary re-renders
@@ -43,7 +43,7 @@ const TransportationDates = ({
     pickupDate,
     direction,
     setValue,
-    dayRangeFrom,
+    dayRangeFrom: dayRangeFromValue,
     service,
     selectedYear: yearFrom || null,
   });

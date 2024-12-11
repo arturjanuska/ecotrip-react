@@ -40,12 +40,8 @@ const useDeliveryDate = ({
       const currentYear = dayjs().year();
       const nextYear = currentYear + 1;
 
-      console.log("dayRangeFrom ===", dayRangeFrom);
-
       const pickupStart = pickupDate;
-      console.log("pickupStart ===", pickupStart);
       const splittedDayRangeFrom = dayRangeFrom?.split(" - ");
-      console.log("splittedDayRangeFrom ===", splittedDayRangeFrom);
 
       const pickupEndDay =
         splittedDayRangeFrom?.length === 2
@@ -75,7 +71,6 @@ const useDeliveryDate = ({
 
       const getDeliveryYear = (selectedYear: string | null) => {
         const currentYear = dayjs().year();
-
         const nextYear = currentYear + 1;
 
         // if selectedYear is not null and it is equal to nextYear, delivery date year is always nextYear
@@ -83,7 +78,7 @@ const useDeliveryDate = ({
           return nextYear;
         }
 
-        if (pickupMonth == 12) {
+        if (pickupMonth === 12) {
           if (pickupEndDay === "1" || pickupEndDay === "2") {
             return nextYear;
           }
@@ -95,7 +90,7 @@ const useDeliveryDate = ({
       const getDeliveryMonth = () => {
         if (splittedDayRangeFrom && splittedDayRangeFrom.length === 2) {
           return pickupEndDay === "1" || pickupEndDay === "2"
-            ? pickupMonth + 1 < 13
+            ? pickupMonth < 12
               ? pickupMonth + 1
               : 1
             : pickupMonth;
@@ -133,7 +128,6 @@ const useDeliveryDate = ({
                   : parseInt(month, 10) - 1
               ]
             } ${deliveryEndDateDay}`;
-
       const deliveryYear = deliveryStartDate.format("YYYY");
       const deliveryMonth = deliveryStartDate.format("MM");
 
@@ -152,8 +146,6 @@ const useDeliveryDate = ({
         label: monthNamesForMonthSelect[deliveryStartDate.month()],
         value: deliveryDate.month,
       });
-
-      console.log("deliveryStartDate ===", deliveryStartDate.format("YYYY"));
 
       if (getDeliveryMonth() === 12) {
         // December hardcoded days
