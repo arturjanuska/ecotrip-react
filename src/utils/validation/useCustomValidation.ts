@@ -74,7 +74,11 @@ export const useCustomValidation = ({
   service,
   t,
 }: ValidationProps) => {
-  const combinedLTandUKPhoneNumberRegex = /^\+(44|370)\d+$/;
+
+  // const ltNumberRegex = /^\+370\s?\d{3}\s?\d{2}\s?\d{3}$/;
+  // const ukNumberRegex = /^\+44\s?\d{3,4}\s?\d{3}\s?\d{3,4}$/;
+
+  const combinedLTandUKPhoneNumberRegex = /^(?:\+370\s?\d{3}\s?\d{2}\s?\d{3}|\+44\s?\d{3,4}\s?\d{3}\s?\d{3,4})$/;
   return {
     pickupAddress:
       service !== 'shipmentWithAddressService'

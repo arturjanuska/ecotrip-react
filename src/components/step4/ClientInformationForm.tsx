@@ -120,6 +120,19 @@ const ClientInformationForm = ({
               errorMessage={getError(`${subName}.phoneNumber`, formErrors)}
               disabled={isFieldsDisabled}
               rules={validationRules?.phoneNumber}
+              onBlur={() => {
+                const phoneNumberValue = methods.getValues(
+                  `${subName}.phoneNumber` as keyof FormType
+                ) as string | null;
+                if (phoneNumberValue) {
+                  const trimmed = phoneNumberValue.trim().replace(/\s+/g, ' ');
+                  console.log('trimmed ===', trimmed);
+                  methods.setValue(
+                    `${subName}.phoneNumber` as keyof FormType,
+                    trimmed
+                  );
+                }
+              }}
             />
           </FieldContainer>
           <FieldContainer
