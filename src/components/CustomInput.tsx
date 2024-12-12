@@ -45,33 +45,34 @@ const CustomInput = ({
           control={control}
           rules={props.rules}
           render={({ field }) => {
-						const handleChange = (e: any) => {
-							if (props.onChange) {
-								props.onChange(e);
-							}
-							field.onChange(e);
-						};
+            const handleChange = (e: any) => {
+              if (props.onChange) {
+                props.onChange(e);
+              }
+              field.onChange(e);
+            };
 
-						return (
-							<div
-								className={`input-container ${
-									errorMessage || isError ? 'error-input' : ''
-								}`}>
-								{/* @ts-expect-error */}
-								<input
-									{...field}
-									{...props}
-									onChange={handleChange}
-									onBlur={(e) => {
-										field.onBlur();
-										if (props.onBlur) {
-											props.onBlur(e);
-										}
-									}}
-								/>
-							</div>
-						);
-					}}
+            return (
+              <div
+                className={`input-container ${
+                  errorMessage || isError ? "error-input" : ""
+                }`}
+              >
+                {/* @ts-expect-error */}
+                <input
+                  {...field}
+                  {...props}
+                  onChange={handleChange}
+                  onBlur={(e) => {
+                    field.onBlur();
+                    if (props.onBlur) {
+                      props.onBlur(e);
+                    }
+                  }}
+                />
+              </div>
+            );
+          }}
         />
       </>
       <SimpleTextError message={errorMessage} />
