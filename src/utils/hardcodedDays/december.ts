@@ -5,14 +5,14 @@ export const getDecemberPickupDays = (direction: "LT-UK" | "UK-LT" | null) => {
       // 	label: 'Gruodžio 3 - Gruodžio 4',
       // 	value: '3 - 4',
       // },
-      {
-        label: "Gruodžio 10 - Gruodžio 11",
-        value: "10 - 11",
-      },
-      {
-        label: "Gruodžio 13 - Gruodžio 15",
-        value: "13 - 15",
-      },
+      // {
+      //   label: "Gruodžio 10 - Gruodžio 11",
+      //   value: "10 - 11",
+      // },
+      // {
+      //   label: "Gruodžio 13 - Gruodžio 15",
+      //   value: "13 - 15",
+      // },
       {
         label: "Gruodžio 17 - Gruodžio 18",
         value: "17 - 18",
@@ -24,10 +24,10 @@ export const getDecemberPickupDays = (direction: "LT-UK" | "UK-LT" | null) => {
       // 	label: 'Gruodžio 6 - Gruodžio 8',
       // 	value: '6 - 8',
       // },
-      {
-        label: "Gruodžio 13 - Gruodžio 15",
-        value: "13 - 15",
-      },
+      // {
+      //   label: "Gruodžio 13 - Gruodžio 15",
+      //   value: "13 - 15",
+      // },
       {
         label: "Gruodžio 18 - Gruodžio 20",
         value: "18 - 20",
