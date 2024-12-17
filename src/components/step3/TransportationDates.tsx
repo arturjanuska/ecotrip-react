@@ -63,6 +63,9 @@ const TransportationDates = ({
       direction,
     });
 
+  const showWarningMessage =
+    direction === "LT-UK" && monthFrom === "12" && yearFrom === "2024";
+
   return (
     <Step step={3} title="Siuntos pervežimo datos">
       <>
@@ -88,19 +91,17 @@ const TransportationDates = ({
             resetToDates={resetToDates}
             service={service}
           />
-          {/* {direction === 'LT-UK' && dayRangeFrom === '17 - 18' ? (
-            <div className='warning-text'>
+          {showWarningMessage ? (
+            <div className="warning-text">
               <p>
-                Informuojame, kad gruodžio 18 d. išvykstame į
-                paskutinį 2024 metų reisą iš Lietuvos į Didžiąją
-                Britaniją.
+                Atsiprašome, tačiau vietos siuntoms iš Lietuvos į Didžiają
+                Britaniją gruodžio mėnesį nebeturime. Registracija uždaryta.
               </p>
-              <p>Rezervacijas priimame telefonu arba el paštu:</p>
               <p>+370 60122 060</p>
               <p>+44 7479 622299</p>
               <p>info@ecotrip.lt</p>
             </div>
-          ) : null} */}
+          ) : null}
         </div>
       </>
     </Step>
