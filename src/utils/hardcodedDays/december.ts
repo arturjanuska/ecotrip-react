@@ -1,6 +1,4 @@
-export const getDecemberPickupDays = (
-  direction: "LT-UK" | "UK-LT" | null
-) => {
+export const getDecemberPickupDays = (direction: "LT-UK" | "UK-LT" | null) => {
   if (direction === "LT-UK") {
     return [
       // {
@@ -44,7 +42,7 @@ export const getDecemberPickupDays = (
 
 export const getDecemberDeliveryDays = (
   direction: "LT-UK" | "UK-LT" | null,
-  pickupDayValue: string
+  pickupDayValue: string,
 ) => {
   if (direction === "LT-UK") {
     switch (pickupDayValue) {
