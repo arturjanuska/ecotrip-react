@@ -1,4 +1,6 @@
-export const getDecemberPickupDays = (direction: "LT-UK" | "UK-LT" | null) => {
+export const getDecemberPickupDays = (
+  direction: "LT-UK" | "UK-LT" | null
+) => {
   if (direction === "LT-UK") {
     return [
       // {
@@ -13,10 +15,10 @@ export const getDecemberPickupDays = (direction: "LT-UK" | "UK-LT" | null) => {
       //   label: "Gruodžio 13 - Gruodžio 15",
       //   value: "13 - 15",
       // },
-      {
-        label: "Gruodžio 17 - Gruodžio 18",
-        value: "17 - 18",
-      },
+      // {
+      //   label: "Gruodžio 17 - Gruodžio 18",
+      //   value: "17 - 18",
+      // },
     ];
   } else if (direction === "UK-LT") {
     return [
@@ -42,7 +44,7 @@ export const getDecemberPickupDays = (direction: "LT-UK" | "UK-LT" | null) => {
 
 export const getDecemberDeliveryDays = (
   direction: "LT-UK" | "UK-LT" | null,
-  pickupDayValue: string,
+  pickupDayValue: string
 ) => {
   if (direction === "LT-UK") {
     switch (pickupDayValue) {
