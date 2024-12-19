@@ -144,9 +144,7 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     },
     onError: (error) => {
       console.log(error);
-      setShowSubmitError(
-        'Serverio klaida. Susisiekite su vadybininku +370 601 22060'
-      );
+      setShowSubmitError(t('submitError'));
     },
   });
 

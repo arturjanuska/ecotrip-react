@@ -313,5 +313,6 @@
   "contacts": "Контакты",
   "domesticTransport": "Перевозки по Литве",
   "internationalTransport": "Международные перевозки",
-  "copyright": "@ 2024 ecotrip.lt | Все права защищены"
+  "copyright": "@ 2024 ecotrip.lt | Все права защищены",
+  "serverError": "Ошибка сервера. Свяжитесь с менеджером по номеру +370 601 22060"
 }

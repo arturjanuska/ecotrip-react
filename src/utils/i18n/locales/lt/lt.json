@@ -313,5 +313,6 @@
   "contacts": "Kontaktai",
   "domesticTransport": "Pervežimai Lietuvoje",
   "internationalTransport": "Pervežimai užsienyje",
-  "copyright": "@ 2024 ecotrip.lt | Visos teisės saugomos"
+  "copyright": "@ 2024 ecotrip.lt | Visos teisės saugomos",
+  "serverError": "Serverio klaida. Susisiekite su vadybininku +370 601 22060"
 }
