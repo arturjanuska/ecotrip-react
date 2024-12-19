@@ -19,6 +19,7 @@ import { useCustomValidation } from '../../utils/validation/useCustomValidation'
 import CustomAlert from '../CustomAlert';
 import { useTranslation } from 'react-i18next';
 import getOrderPrice from '../../utils/getOrderPrice';
+import getTranslatedOptions from '../../utils/getTranslatedOptions';
 
 type Props = {
   control: Control<FormType, any>;
@@ -61,31 +62,31 @@ const PayerInformation = ({
   // const [discountCode, setDiscountCode] = useState<string>('');
   const { t } = useTranslation();
 
-  const payerOptions = [
+  const payerOptions = getTranslatedOptions([
     {
-      label: t('thePayerIsTheSender'),
+      label: 'thePayerIsTheSender',
       value: 'thePayerIsTheSender',
     },
     {
-      label: t('thePayerIsTheRecipient'),
+      label: 'thePayerIsTheRecipient',
       value: 'thePayerIsTheRecipient',
     },
-  ];
+  ]);
 
-  const paymentMethodOptions = [
+  const paymentMethodOptions = getTranslatedOptions([
     {
-      label: t('cash'),
+      label: 'cash',
       value: 'cash',
     },
     {
-      label: t('card'),
+      label: 'card',
       value: 'card',
     },
     {
-      label: t('bankTransfer'),
+      label: 'bankTransfer',
       value: 'bankTransfer',
     },
-  ];
+  ]);
 
   const shipments = methods.watch('shipments');
 
@@ -93,7 +94,7 @@ const PayerInformation = ({
 
   const payer = methods.watch('customerInformation.payerOfTheShipment.value');
 
-  const validationRules = useCustomValidation({ service, t });
+  const validationRules = useCustomValidation({ service });
 
   useEffect(() => {
     getOrderPrice(

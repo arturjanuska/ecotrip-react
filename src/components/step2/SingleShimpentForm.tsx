@@ -87,33 +87,27 @@ const SingleShimpentForm = ({
       switch (selectedCategory.value) {
         case 'automotiveGoods':
           return getTranslatedOptions(
-            automotiveGoodsCategoryProductTypesOptions,
-            t
+            automotiveGoodsCategoryProductTypesOptions
           ) as OptionType[];
         case 'householdAppliances':
           return getTranslatedOptions(
-            householdAppliancesCategoryProductTypesOptions,
-            t
+            householdAppliancesCategoryProductTypesOptions
           ) as OptionType[];
         case 'bicyclesAndScooters':
           return getTranslatedOptions(
-            bicyclesAndScootersCategoryProductTypesOptions,
-            t
+            bicyclesAndScootersCategoryProductTypesOptions
           ) as OptionType[];
         case 'motorcyclesAndAccessories':
           return getTranslatedOptions(
-            motorcyclesAndAccessoriesCategoryProductTypesOptions,
-            t
+            motorcyclesAndAccessoriesCategoryProductTypesOptions
           ) as OptionType[];
         case 'goodsForChildren':
           return getTranslatedOptions(
-            goodsForChildrenCategoryProductTypesOptions,
-            t
+            goodsForChildrenCategoryProductTypesOptions
           ) as OptionType[];
         case 'gardenEquipment':
           return getTranslatedOptions(
-            gardenEquipmentCategoryProductTypesOptions,
-            t
+            gardenEquipmentCategoryProductTypesOptions
           ) as OptionType[];
         default:
           return [];
@@ -255,8 +249,7 @@ const SingleShimpentForm = ({
     getSizeOptionsBySelectedProductType(
       selectedCategory?.value,
       selectedProductType?.value
-    ),
-    t
+    )
   );
 
   const specificationOptions =
@@ -265,8 +258,7 @@ const SingleShimpentForm = ({
           getSpecificationOptionsBySelectedProduct(
             selectedCategory?.value,
             selectedProductType?.value
-          ),
-          t
+          )
         )
       : [];
 
@@ -293,7 +285,6 @@ const SingleShimpentForm = ({
   const validationRules = useCustomValidation({
     service: selectedService,
     formShipment: shipment,
-    t,
   });
 
   useCalculatePrice({

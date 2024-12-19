@@ -22,7 +22,6 @@ const ProductPurchaseServiceInformation = ({
 
   const validationRules = useCustomValidation({
     service: selectedService,
-    t,
   }) as {
     [key: string]: any;
   };

@@ -24,7 +24,6 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
   const validationRules = useCustomValidation({
     invoiceNeeded: needInvoice,
     service,
-    t,
   });
 
   const onChange = (name: keyof FormType, value: string) => {
