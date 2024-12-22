@@ -2,23 +2,23 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
-import FieldContainer from '../FieldContainer';
 import OrderPrice from './OrderPrice';
-import SecondaryButton from '../SecondaryButton';
 import './step6.css';
 import Link from '../Link';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
-import ControlledStyledSelect from '../ControlledStyledSelect';
-import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { useEffect } from 'react';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 // import UncontrolledInput from '../UncontrolledInput';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import CustomAlert from '../CustomAlert';
+import CustomAlert from '../form/error/CustomAlert';
 import { useTranslation } from 'react-i18next';
 import getOrderPrice from '../../utils/getOrderPrice';
+import FieldContainer from '../layout/FieldContainer';
+import ControlledStyledSelect from '../form/select/ControlledStyledSelect';
+import ControlledCheckboxWithLabel from '../form/checkbox/ControlledCheckboxWithLabel';
+import SecondaryButton from '../buttons/SecondaryButton';
 
 type Props = {
   control: Control<FormType, any>;

@@ -7,7 +7,7 @@ const getTranslatedOptions = (options: OptionType[], t: any) => {
       label: t(option.label),
       value: option.value,
     };
-  });
+  }) as OptionType[];
 };
 
 export default getTranslatedOptions;

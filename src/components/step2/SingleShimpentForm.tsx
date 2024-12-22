@@ -2,8 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import FieldContainer from '../FieldContainer';
-import CustomInput from '../CustomInput';
 import {
   automotiveGoodsCategoryProductTypesOptions,
   bicyclesAndScootersCategoryProductTypesOptions,
@@ -15,7 +13,6 @@ import {
   householdAppliancesCategoryProductTypesOptions,
   motorcyclesAndAccessoriesCategoryProductTypesOptions,
 } from '../../utils/products';
-import ControlledStyledSelect from '../ControlledStyledSelect';
 import {
   Control,
   FieldErrors,
@@ -24,7 +21,6 @@ import {
 } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { OptionType } from '../../utils/types';
-import PrimaryButton from '../PrimaryButton';
 import useCalculatePrice from './useCalculatePrice';
 import { getError } from '../../utils/validation/getError';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
@@ -32,6 +28,19 @@ import { useEffect, useState } from 'react';
 import { convertValue } from '../../utils/convertCurrency';
 import { t } from 'i18next';
 import getTranslatedOptions from '../../utils/getTranslatedOptions';
+import FieldContainer from '../layout/FieldContainer';
+import ControlledStyledSelect from '../form/select/ControlledStyledSelect';
+import CustomInput from '../form/input/CustomInput';
+import PrimaryButton from '../buttons/PrimaryButton';
+import CategorySelect from './CategorySelect';
+import TypeSelect from './TypeSelect';
+import { productTypesWithRequiredManagerCall } from '../../utils/shipmentsExlusions';
+import SizeSelect from './SizeSelect';
+import LengthInput from './LengthInput';
+import WidthInput from './WidthInput';
+import HeightInput from './HeightInput';
+import ExtendInput from './ExtendInput';
+import WeightInput from './WeightInput';
 
 type Props = {
   shipmentNumber: number;
@@ -319,8 +328,6 @@ const SingleShimpentForm = ({
     name: `shipments.${index}.estimatedPrice`,
   });
 
-  const productTypesWithRequiredManagerCall = ['interior', 'carQuarter'];
-
   const volumeErrorMessages = [
     errorMessages.length,
     errorMessages.width,
@@ -334,49 +341,15 @@ const SingleShimpentForm = ({
   return (
     <div className="single-shipment-container">
       <div className="left-column">
-        <FieldContainer
-          label={t('shipmentLeftColumnLabel', { count: shipmentNumber })}
-          description={t('shipmentLeftColumnDescription')}
-          className="left-column-item"
-        >
-          <ControlledStyledSelect
-            name={`shipments.${index}.category`}
-            control={control}
-            // @ts-ignore
-            rules={validationRules.shipments.category}
-            options={categoriesOptions.map((option) => {
-              if (
-                // @ts-ignore
-                option.value === 'shipments' &&
-                selectedService === 'parcelForceShipment'
-              ) {
-                return {
-                  label: t('shipments'),
-                  value: 'shipments',
-                };
-              } else {
-                return {
-                  label: t(option.label),
-                  value: option.value,
-                };
-              }
-            })}
-            isClearable
-            placeholder={t('shipmentCategoryPlaceholder')}
-            isDisabled={
-              selectedService === 'parcelForceShipment' ||
-              selectedService === 'shipmentWithAddressService' ||
-              selectedService === 'productSalesService'
-            }
-            onChange={() => {
-              setValue(`shipments.${index}.productType`, null);
-              setValue(`shipments.${index}.size`, null);
-              setValue(`shipments.${index}.specification`, null);
-              setValue(`shipments.${index}.amount`, 1);
-              setValue(`shipments.${index}.estimatedPrice`, '0.00');
-            }}
-          />
-        </FieldContainer>
+        <CategorySelect
+          control={control}
+          index={index}
+          shipmentNumber={shipmentNumber}
+          options={categoriesOptions}
+          selectedService={selectedService}
+          validationRules={validationRules}
+          setValue={setValue}
+        />
         <p className="estimated-price">
           {t('estimatedShipmentPriceLabel', { count: shipmentNumber })}{' '}
           <span>
@@ -390,57 +363,27 @@ const SingleShimpentForm = ({
       </div>
       <div className="right-column">
         {productTypeOptions.length > 0 && (
-          <FieldContainer
-            label={t('productTypeLabel', { count: shipmentNumber })}
-            description={`${
-              productTypesWithRequiredManagerCall.includes(
-                selectedProductType?.value ?? ''
-              )
-                ? t('wrongDirectionMessage1')
-                : ''
-            }`}
-          >
-            <ControlledStyledSelect
-              name={`shipments.${index}.productType`}
-              control={control}
-              isClearable
-              // @ts-ignore
-              rules={validationRules.shipments.productType}
-              errorMessage={getError(
-                `shipments.${index}.productType`,
-                formErrors
-              )}
-              options={productTypeOptions}
-              placeholder={t('productTypeSelectPlaceholder')}
-              onChange={() => {
-                setValue(`shipments.${index}.size`, null);
-                setValue(`shipments.${index}.specification`, null);
-                setValue(`shipments.${index}.estimatedPrice`, '0.00');
-              }}
-            />
-          </FieldContainer>
+          <TypeSelect
+            control={control}
+            index={index}
+            shipmentNumber={shipmentNumber}
+            options={productTypeOptions}
+            validationRules={validationRules}
+            formErrors={formErrors}
+            setValue={setValue}
+            selectedProductTypeValue={selectedProductType?.value}
+          />
         )}
         {selectedCategory?.value === 'flatScreenTv' ? (
-          <>
-            <FieldContainer
-              label={t('shipmentSizeFieldLabel', { number: shipmentNumber })}
-              description=""
-            >
-              <ControlledStyledSelect
-                name={`shipments.${index}.size`}
-                isClearable
-                control={control}
-                options={sizeOptions}
-                placeholder={t('shipmentSize')}
-                onChange={() => {
-                  setValue(`shipments.${index}.specification`, null);
-                }}
-                // @ts-ignore
-                rules={validationRules.shipments.size}
-                errorMessage={getError(`shipments.${index}.size`, formErrors)}
-              />
-            </FieldContainer>
-          </>
+          <SizeSelect
+            control={control}
+            index={index}
+            shipmentNumber={shipmentNumber}
+            options={sizeOptions}
+            validationRules={validationRules}
+            formErrors={formErrors}
+            setValue={setValue}
+          />
         ) : null}
         {productTypesThatNeedsPriceCalculation.includes(
           selectedProductType?.value ?? ''
@@ -449,7 +392,6 @@ const SingleShimpentForm = ({
             label={t('shipmentMeasurementsMFieldLabel', {
               number: shipmentNumber,
             })}
-            description={''}
           >
             <div
               style={{
@@ -459,68 +401,29 @@ const SingleShimpentForm = ({
               }}
             >
               <div className="volume-fields-container">
-                <CustomInput
-                  name={`shipments.${index}.length`}
+                <LengthInput
                   control={control}
-                  placeholder={t('length')}
-                  type="number"
-                  onFocus={(e) => {
-                    const value = e.target.value;
-                    if (Number(value) === 0) {
-                      setValue(`shipments.${index}.length`, '');
-                    }
-                  }}
-                  onChange={(e) => {
-                    handleValidation('length', e.target.value);
-                  }}
-                  // @ts-ignore
-                  rules={validationRules.shipments.length}
-                  errorMessage={getError(
-                    `shipments.${index}.length`,
-                    formErrors
-                  )}
+                  index={index}
+                  setValue={setValue}
+                  validationRules={validationRules}
+                  formErrors={formErrors}
+                  handleValidation={handleValidation}
                 />
-                <CustomInput
-                  name={`shipments.${index}.width`}
+                <WidthInput
                   control={control}
-                  placeholder={t('width')}
-                  type="number"
-                  onFocus={(e) => {
-                    const value = e.target.value;
-                    if (Number(value) === 0) {
-                      setValue(`shipments.${index}.width`, '');
-                    }
-                  }}
-                  onChange={(e) => {
-                    handleValidation('width', e.target.value);
-                  }}
-                  // @ts-ignore
-                  rules={validationRules.shipments.width}
-                  errorMessage={getError(
-                    `shipments.${index}.width`,
-                    formErrors
-                  )}
+                  index={index}
+                  formErrors={formErrors}
+                  setValue={setValue}
+                  validationRules={validationRules}
+                  handleValidation={handleValidation}
                 />
-                <CustomInput
-                  name={`shipments.${index}.height`}
+                <HeightInput
                   control={control}
-                  placeholder={t('height')}
-                  type="number"
-                  onFocus={(e) => {
-                    const value = e.target.value;
-                    if (Number(value) === 0) {
-                      setValue(`shipments.${index}.height`, '');
-                    }
-                  }}
-                  onChange={(e) => {
-                    handleValidation('height', e.target.value);
-                  }}
-                  // @ts-ignore
-                  rules={validationRules.shipments.height}
-                  errorMessage={getError(
-                    `shipments.${index}.height`,
-                    formErrors
-                  )}
+                  index={index}
+                  formErrors={formErrors}
+                  setValue={setValue}
+                  validationRules={validationRules}
+                  handleValidation={handleValidation}
                 />
               </div>
               <div className="errors">
@@ -542,50 +445,18 @@ const SingleShimpentForm = ({
         selectedCategory?.value === 'removals' ? (
           <>
             {selectedCategory?.value === 'shipments' ? (
-              <FieldContainer
-                label={t('shipmentWeightFieldLabel', {
-                  number: shipmentNumber,
-                })}
-                description={
-                  selectedService !== 'parcelForceShipment' &&
-                  weight &&
-                  !isNaN(Number(weight)) &&
-                  Number(weight) > 35
-                    ? t('parcelForceShipmentWeightWarningMessage')
-                    : t('shipmentApproximateWeightMessage')
-                }
-              >
-                <CustomInput
-                  name={`shipments.${index}.weight`}
-                  control={control}
-                  placeholder={t('shipmentWeight')}
-                  type="number"
-                  max={1000}
-                  min={0}
-                  onFocus={(e) => {
-                    const value = e.target.value;
-                    if (Number(value) === 0) {
-                      setValue(`shipments.${index}.weight`, '');
-                    }
-                  }}
-                  // @ts-ignore
-                  rules={validationRules.shipments.weight}
-                  errorMessage={
-                    errorMessages.weight ||
-                    getError(`shipments.${index}.weight`, formErrors)
-                  }
-                  onChange={(e) => {
-                    handleValidation('weight', e.target.value);
-                  }}
-                  onBlur={(e) => {
-                    // @ts-ignore
-                    const value: number = e?.target?.value || 0;
-                    if (value > 1000) {
-                      setValue(`shipments.${index}.weight`, '1000');
-                    }
-                  }}
-                />
-              </FieldContainer>
+              <WeightInput
+                shipmentNumber={shipmentNumber}
+                control={control}
+                index={index}
+                formErrors={formErrors}
+                setValue={setValue}
+                handleValidation={handleValidation}
+                validationRules={validationRules}
+                selectedService={selectedService}
+                weight={Number(weight) || 0}
+                errorMessages={errorMessages}
+              />
             ) : null}
             <FieldContainer
               label={t('shipmentMeasurementsCmFieldLabel', {
@@ -605,73 +476,31 @@ const SingleShimpentForm = ({
                 }}
               >
                 <div className="volume-fields-container">
-                  <CustomInput
-                    name={`shipments.${index}.length`}
+                  <LengthInput
                     control={control}
-                    placeholder={t('length')}
-                    type="number"
-                    onFocus={(e) => {
-                      const value = e.target.value;
-                      if (Number(value) === 0) {
-                        setValue(`shipments.${index}.length`, '');
-                      }
-                    }}
-                    min={0}
-                    onChange={(e) => {
-                      handleValidation('length', e.target.value);
-                    }}
-                    // @ts-ignore
-                    rules={validationRules.shipments.length}
-                    errorMessage={getError(
-                      `shipments.${index}.length`,
-                      formErrors
-                    )}
+                    index={index}
+                    setValue={setValue}
+                    validationRules={validationRules}
+                    formErrors={formErrors}
+                    handleValidation={handleValidation}
                     isError={!!errorMessages.length}
                   />
-                  <CustomInput
-                    name={`shipments.${index}.width`}
+                  <WidthInput
                     control={control}
-                    placeholder={t('width')}
-                    type="number"
-                    onFocus={(e) => {
-                      const value = e.target.value;
-                      if (Number(value) === 0) {
-                        setValue(`shipments.${index}.width`, '');
-                      }
-                    }}
-                    min={0}
-                    onChange={(e) => {
-                      handleValidation('width', e.target.value);
-                    }}
-                    // @ts-ignore
-                    rules={validationRules.shipments.width}
-                    errorMessage={getError(
-                      `shipments.${index}.width`,
-                      formErrors
-                    )}
+                    index={index}
+                    formErrors={formErrors}
+                    setValue={setValue}
+                    validationRules={validationRules}
+                    handleValidation={handleValidation}
                     isError={!!errorMessages.width}
                   />
-                  <CustomInput
-                    name={`shipments.${index}.height`}
+                  <HeightInput
                     control={control}
-                    placeholder={t('height')}
-                    type="number"
-                    onFocus={(e) => {
-                      const value = e.target.value;
-                      if (Number(value) === 0) {
-                        setValue(`shipments.${index}.height`, '');
-                      }
-                    }}
-                    min={0}
-                    onChange={(e) => {
-                      handleValidation('height', e.target.value);
-                    }}
-                    // @ts-ignore
-                    rules={validationRules.shipments.height}
-                    errorMessage={getError(
-                      `shipments.${index}.height`,
-                      formErrors
-                    )}
+                    index={index}
+                    formErrors={formErrors}
+                    setValue={setValue}
+                    validationRules={validationRules}
+                    handleValidation={handleValidation}
                     isError={!!errorMessages.height}
                   />
                 </div>
@@ -690,39 +519,25 @@ const SingleShimpentForm = ({
               </div>
             </FieldContainer>
             {selectedService === 'parcelForceShipment' ? (
-              <FieldContainer
-                label={t('extentFieldContainerLabel', {
-                  number: shipmentNumber,
-                })}
-              >
-                <CustomInput
-                  name={`shipments.${index}.extent`}
+              <>
+                <ExtendInput
+                  shipmentNumber={shipmentNumber}
                   control={control}
-                  type="number"
-                  onFocus={(e) => {
-                    const value = e.target.value;
-                    if (Number(value) === 0) {
-                      setValue(`shipments.${index}.extent`, '');
-                    }
-                  }}
-                  placeholder={t('extent')}
-                  onChange={(e) => {
-                    handleValidation('extent', e.target.value);
-                  }}
-                  // @ts-ignore
-                  rules={validationRules.shipments.extent}
-                  errorMessage={
-                    errorMessages.extent ||
-                    getError(`shipments.${index}.extent`, formErrors)
-                  }
+                  index={index}
+                  formErrors={formErrors}
+                  setValue={setValue}
+                  handleValidation={handleValidation}
+                  validationRules={validationRules}
+                  errorMessages={errorMessages}
                 />
-              </FieldContainer>
+              </>
             ) : null}
             {selectedService === 'shipmentWithAddressService' && (
               <FieldContainer
                 label={t('orderedShipmentNumberFieldLabel')}
                 description=""
               >
+                {/* TODO */}
                 <>
                   <CustomInput
                     name={`shipments.${index}.orderedShipmentNumber`}
@@ -846,29 +661,15 @@ const SingleShimpentForm = ({
                   selectedProductType?.value,
                   productTypeOptions ?? []
                 ) && sizeOptions.length > 0 ? (
-                  <FieldContainer
-                    label={t('shipmentSizeFieldLabel', {
-                      number: shipmentNumber,
-                    })}
-                    description=""
-                  >
-                    <ControlledStyledSelect
-                      name={`shipments.${index}.size`}
-                      isClearable
-                      control={control}
-                      options={sizeOptions}
-                      placeholder={t('shipmentSize')}
-                      onChange={() => {
-                        setValue(`shipments.${index}.specification`, null);
-                      }}
-                      // @ts-ignore
-                      rules={validationRules.shipments.size}
-                      errorMessage={getError(
-                        `shipments.${index}.size`,
-                        formErrors
-                      )}
-                    />
-                  </FieldContainer>
+                  <SizeSelect
+                    control={control}
+                    index={index}
+                    shipmentNumber={shipmentNumber}
+                    options={sizeOptions}
+                    validationRules={validationRules}
+                    formErrors={formErrors}
+                    setValue={setValue}
+                  />
                 ) : null}
                 {!!selectedProductType?.value &&
                 specificationOptions.length > 0 ? (
