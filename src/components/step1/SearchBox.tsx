@@ -2,9 +2,9 @@
 import usePlacesAutocomplete from 'use-places-autocomplete';
 import { useGoogleMapsScript, Libraries } from 'use-google-maps-script';
 import { OptionType } from '../../utils/types';
-import StyledSelect from '../StyledSelect';
 import { RegisterOptions } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
+import StyledSelect from '../form/select/StyledSelect';
 
 interface ISearchBoxProps {
   defaultValue: string;

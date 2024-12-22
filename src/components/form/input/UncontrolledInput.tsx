@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/input.css';
-import SimpleTextError from './SimpleTextError';
+import SimpleTextError from '../error/SimpleTextError';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   isError: boolean;

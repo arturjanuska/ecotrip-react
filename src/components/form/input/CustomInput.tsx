@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import '../styles/input.css';
 import { Control, Controller, RegisterOptions } from 'react-hook-form';
-import { FormType } from '../utils/formTypes';
-import SimpleTextError from './SimpleTextError';
+import { FormType } from '../../../utils/formTypes';
+import SimpleTextError from '../error/SimpleTextError';
+import '../../../styles/input.css';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   name: string;

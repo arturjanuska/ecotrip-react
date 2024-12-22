@@ -1,8 +1,8 @@
 import '../styles/modal.css';
-import SecondaryButton from '../components/SecondaryButton';
-import PrimaryButton from '../components/PrimaryButton';
 import useScrollToTop from '../hooks/useScrollToTop';
 import { useEffect } from 'react';
+import PrimaryButton from '../components/buttons/PrimaryButton';
+import SecondaryButton from '../components/buttons/SecondaryButton';
 
 const ModalPage = ({
   setOrderId,

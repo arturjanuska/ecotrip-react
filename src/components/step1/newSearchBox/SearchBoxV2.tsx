@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useGoogleMapsScript } from 'use-google-maps-script';
 import { Control, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../../utils/formTypes';
-import CustomInput from '../../CustomInput';
+import CustomInput from '../../form/input/CustomInput';
 
 type Props = {
   name: keyof FormType;

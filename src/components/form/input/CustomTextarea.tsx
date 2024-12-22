@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import '../styles/textarea.css';
+import '../../../styles/textarea.css';
 
 type CustomTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   label?: string;

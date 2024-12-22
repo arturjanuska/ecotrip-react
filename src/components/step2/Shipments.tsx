@@ -9,9 +9,9 @@ import {
 import Step from '../Step';
 import SingleShimpentForm from './SingleShimpentForm';
 import { CurrencyType, FormType } from '../../utils/formTypes';
-import PrimaryButton from '../PrimaryButton';
 import './step2.css';
 import { useTranslation } from 'react-i18next';
+import PrimaryButton from '../buttons/PrimaryButton';
 
 const Shipments = ({
   control,

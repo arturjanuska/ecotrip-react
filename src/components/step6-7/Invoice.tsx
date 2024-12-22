@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import FieldContainer from '../FieldContainer';
-import CustomInput from '../CustomInput';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
-import ControlledCheckboxWithLabel from '../ControlledCheckboxWithLabel';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
 import SearchBoxV2 from '../step1/newSearchBox/SearchBoxV2';
 import { useTranslation } from 'react-i18next';
+import ControlledCheckboxWithLabel from '../form/checkbox/ControlledCheckboxWithLabel';
+import FieldContainer from '../layout/FieldContainer';
+import CustomInput from '../form/input/CustomInput';
 
 type InvoiceProps = {
   control: Control<FormType, any>;

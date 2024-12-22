@@ -4,7 +4,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import AddressForm from '../components/step1/AddressForm';
 import Breadcrumds from '../components/Breadcrumds';
-import Divider from '../components/Divider';
 import SenderInformation from '../components/step4/SenderInformation';
 import TransportationDates from '../components/step3/TransportationDates';
 import Shipments from '../components/step2/Shipments';
@@ -22,11 +21,12 @@ import {
 import useCurrencyConverter from '../hooks/useCurrencyConverter';
 import { fetchWrapper } from '../components/api/fetchWrapper';
 import { useMutation } from '@tanstack/react-query';
-import LanguageSelect from '../components/LanguageSelect';
 import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
 import { useTranslation } from 'react-i18next';
-import PrimaryButton from '../components/PrimaryButton';
 import { checkParcelForcePostcodes } from '../utils/checkPostCodes';
+import PrimaryButton from '../components/buttons/PrimaryButton';
+import LanguageSelect from '../components/form/select/LanguageSelect';
+import Divider from '../components/layout/Divider';
 
 declare global {
   interface Window {

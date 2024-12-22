@@ -5,11 +5,26 @@
 import Select, { Props } from 'react-select';
 import { forwardRef } from 'react';
 import { Control, Controller, RegisterOptions } from 'react-hook-form';
-import { FormType } from '../utils/formTypes';
-import SimpleTextError from './SimpleTextError';
+import { FormType } from '../../../utils/formTypes';
+import SimpleTextError from '../error/SimpleTextError';
 
 // @ts-ignore
-const ControlledStyledSelect = forwardRef(
+const ControlledStyledSelect: React.ForwardRefExoticComponent<
+  Props & {
+    label?: string;
+    errorMessage?: string;
+    name: string;
+    control: Control<FormType>;
+    onChange?: (value: any) => void;
+    needMargin?: boolean;
+    rules?:
+      | Omit<
+          RegisterOptions<FormType, keyof FormType>,
+          'disabled' | 'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+        >
+      | undefined;
+  } & React.RefAttributes<any>
+> = forwardRef(
   (
     props: Props & {
       label?: string;

@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import FieldContainer from '../FieldContainer';
-import CustomInput from '../CustomInput';
-import CustomTextarea from '../CustomTextarea';
 import './step4.css';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
@@ -10,6 +7,9 @@ import { getError } from '../../utils/validation/getError';
 import { findPostcode } from '../../utils/findPostcode';
 import SearchBoxV2 from '../step1/newSearchBox/SearchBoxV2';
 import { useTranslation } from 'react-i18next';
+import FieldContainer from '../layout/FieldContainer';
+import CustomInput from '../form/input/CustomInput';
+import CustomTextarea from '../form/input/CustomTextarea';
 
 type Props = {
   client: 'sender' | 'recipient' | 'ransomPayee' | 'purchaseInformation';

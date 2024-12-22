@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
 import ClientInformationForm from '../step4/ClientInformationForm';
-import FieldContainer from '../FieldContainer';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
-import ControlledStyledSelect from '../ControlledStyledSelect';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import i18n from 'i18next';
 import { OptionType } from '../../utils/types';
+import FieldContainer from '../layout/FieldContainer';
+import ControlledStyledSelect from '../form/select/ControlledStyledSelect';
 
 type Props = {
   control: Control<FormType, any>;

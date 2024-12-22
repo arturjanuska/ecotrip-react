@@ -1,6 +1,6 @@
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../styles/alert.css';
+import '../../../styles/alert.css';
 
 const CustomAlert = ({ messages }: { messages: string[] }) => {
   if (messages.length === 0) return null;

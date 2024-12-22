@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/field-container.css';
+import '../../styles/field-container.css';
 
 type Props = {
   label?: string;

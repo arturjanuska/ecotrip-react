@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { UseFormReturn } from 'react-hook-form';
-import useTranslateParcelData from '../hooks/useTranslateParcelData';
 import StyledSelect from './StyledSelect';
 import { useTranslation } from 'react-i18next';
-import { FormType } from '../utils/formTypes';
-import useTranslateTransportationDate from '../hooks/useTranslateTransportationDate';
+import { FormType } from '../../../utils/formTypes';
+import useTranslateParcelData from '../../../hooks/useTranslateParcelData';
+import useTranslateTransportationDate from '../../../hooks/useTranslateTransportationDate';
 
 type Languages = 'lt' | 'en' | 'ru';
 

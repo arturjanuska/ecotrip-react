@@ -3,8 +3,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldErrors, UseFormReturn } from 'react-hook-form';
 import Step from '../Step';
-import FieldContainer from '../FieldContainer';
-import CustomInput from '../CustomInput';
 import './step1.css';
 import ServiceSection from './ServiceSection';
 import { DirectionType, FormType } from '../../utils/formTypes';
@@ -13,6 +11,8 @@ import { useCustomValidation } from '../../utils/validation/useCustomValidation'
 import SearchBoxV2 from './newSearchBox/SearchBoxV2';
 import { findPostcode } from '../../utils/findPostcode';
 import { useTranslation } from 'react-i18next';
+import FieldContainer from '../layout/FieldContainer';
+import CustomInput from '../form/input/CustomInput';
 
 const AddressForm = ({
   selectedService,

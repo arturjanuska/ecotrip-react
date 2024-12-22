@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import FieldContainer from './FieldContainer';
-import ControlledStyledSelect from './ControlledStyledSelect';
 import { Control, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import { DateDayType, FormType } from '../utils/formTypes';
 import { useCustomValidation } from '../utils/validation/useCustomValidation';
 import { useTranslation } from 'react-i18next';
+import FieldContainer from './layout/FieldContainer';
+import ControlledStyledSelect from './form/select/ControlledStyledSelect';
 
 type Props = {
   fiedsDisabled: boolean;

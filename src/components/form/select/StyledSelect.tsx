@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import Select, { Props } from 'react-select';
 import { forwardRef } from 'react';
-import SimpleTextError from './SimpleTextError';
+import SimpleTextError from '../error/SimpleTextError';
 
 const customStyles = {
   // @ts-ignore
@@ -51,19 +51,29 @@ const customStyles = {
   }),
 };
 
-export default forwardRef(
+const StyledSelect: React.ForwardRefExoticComponent<
+  Props & {
+    label?: string;
+    testId?: string;
+    errorMessage?: string;
+  } & React.RefAttributes<Select>
+> = forwardRef<
+  Select,
+  Props & { label?: string; testId?: string; errorMessage?: string }
+>(
   (
     props: Props & {
       label?: string;
       testId?: string;
       errorMessage?: string;
     },
-    ref: any
+    ref: React.Ref<Select>
   ) => {
     return (
       <div className="w-100">
         <Select
           styles={customStyles}
+          // @ts-ignore
           ref={ref}
           placeholder={false}
           {...props}
@@ -74,3 +84,5 @@ export default forwardRef(
     );
   }
 );
+
+export default StyledSelect;

@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { CSSProperties } from 'react';
 import { Controller, RegisterOptions } from 'react-hook-form';
-import '../styles/checkbox.css';
-import SimpleTextError from './SimpleTextError';
-import { FormType } from '../utils/formTypes';
+import SimpleTextError from '../error/SimpleTextError';
+import { FormType } from '../../../utils/formTypes';
+import '../../../styles/checkbox.css';
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   children: React.ReactNode | Element;
