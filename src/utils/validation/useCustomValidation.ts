@@ -1,70 +1,65 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { TFunction } from 'i18next';
+import i18next from 'i18next';
 import { ShipmentProps } from '../formTypes';
 
 type ValidationProps = {
   invoiceNeeded?: boolean;
   service?: string;
   formShipment?: ShipmentProps;
-  t: TFunction<'translation', undefined>;
 };
 
-const notZero = (value: string, t: TFunction<'translation', undefined>) => {
-  return parseFloat(value) === 0 ? t('nonZeroField') : true;
+const notZero = (value: string) => {
+  return parseFloat(value) === 0 ? i18next.t('nonZeroField') : true;
 };
 
-const useCustomShipmentsValidation = ({
-  t,
-}: {
-  t: TFunction<'translation', undefined>;
-}) => {
+const useCustomShipmentsValidation = () => {
   return {
-    category: { required: t('fieldRequired') },
-    productType: { required: t('fieldRequired') },
-    size: { required: t('fieldRequired') },
-    specification: { required: t('fieldRequired') },
-    estimatedPrice: { required: t('fieldRequired') },
+    category: { required: i18next.t('fieldRequired') },
+    productType: { required: i18next.t('fieldRequired') },
+    size: { required: i18next.t('fieldRequired') },
+    specification: { required: i18next.t('fieldRequired') },
+    estimatedPrice: { required: i18next.t('fieldRequired') },
     amount: {
-      required: t('fieldRequired'),
+      required: i18next.t('fieldRequired'),
       validate: {
-        notZero: (value: string) => notZero(value, t),
+        notZero: (value: string) => notZero(value),
       },
     },
     length: {
-      required: t('fieldRequired'),
+      required: i18next.t('fieldRequired'),
       validate: {
-        notZero: (value: string) => notZero(value, t),
+        notZero: (value: string) => notZero(value),
       },
     },
     width: {
-      required: t('fieldRequired'),
+      required: i18next.t('fieldRequired'),
       validate: {
-        notZero: (value: string) => notZero(value, t),
+        notZero: (value: string) => notZero(value),
       },
     },
     weight: {
-      required: t('fieldRequired'),
+      required: i18next.t('fieldRequired'),
       validate: {
-        notZero: (value: string) => notZero(value, t),
+        notZero: (value: string) => notZero(value),
       },
     },
     height: {
-      required: t('fieldRequired'),
+      required: i18next.t('fieldRequired'),
       validate: {
-        notZero: (value: string) => notZero(value, t),
+        notZero: (value: string) => notZero(value),
       },
     },
-    volume: { required: t('fieldRequired') },
-    extent: { required: t('fieldRequired') },
-    shipmentPrice: { required: t('fieldRequired') },
+    volume: { required: i18next.t('fieldRequired') },
+    extent: { required: i18next.t('fieldRequired') },
+    shipmentPrice: { required: i18next.t('fieldRequired') },
     purchasePriceOfTheItem: {
-      required: t('fieldRequired'),
+      required: i18next.t('fieldRequired'),
       validate: {
-        notZero: (value: string) => notZero(value, t),
+        notZero: (value: string) => notZero(value),
       },
     },
     orderedShipmentNumber: {
-      required: t('fieldRequired'),
+      required: i18next.t('fieldRequired'),
     },
   };
 };
@@ -72,7 +67,6 @@ const useCustomShipmentsValidation = ({
 export const useCustomValidation = ({
   invoiceNeeded = false,
   service,
-  t,
 }: ValidationProps) => {
   // const ltNumberRegex = /^\+370\s?\d{3}\s?\d{2}\s?\d{3}$/;
   // const ukNumberRegex = /^\+44\s?\d{3,4}\s?\d{3}\s?\d{3,4}$/;
@@ -82,130 +76,130 @@ export const useCustomValidation = ({
   return {
     pickupAddress:
       service !== 'shipmentWithAddressService'
-        ? { required: t('fieldRequired') }
+        ? { required: i18next.t('fieldRequired') }
         : { required: false },
     pickupAddressZipCode:
       service !== 'shipmentWithAddressService'
-        ? { required: t('fieldRequired') }
+        ? { required: i18next.t('fieldRequired') }
         : { required: false },
     deliveryAddress:
       service !== 'shipmentWithAddressService'
-        ? { required: t('fieldRequired') }
+        ? { required: i18next.t('fieldRequired') }
         : { required: false },
     deliveryAddressZipCode:
       service !== 'shipmentWithAddressService'
-        ? { required: t('fieldRequired') }
+        ? { required: i18next.t('fieldRequired') }
         : { required: false },
     dates: {
       from: {
         year: {
-          required: t('fieldRequired'),
+          required: i18next.t('fieldRequired'),
         },
         month: {
-          required: t('fieldRequired'),
+          required: i18next.t('fieldRequired'),
         },
         day: {
-          required: t('fieldRequired'),
+          required: i18next.t('fieldRequired'),
         },
       },
       to: {
         year: {
-          required: t('fieldRequired'),
+          required: i18next.t('fieldRequired'),
         },
         month: {
-          required: t('fieldRequired'),
+          required: i18next.t('fieldRequired'),
         },
         day: {
-          required: t('fieldRequired'),
+          required: i18next.t('fieldRequired'),
         },
       },
     },
-    shipments: useCustomShipmentsValidation({ t }),
+    shipments: useCustomShipmentsValidation(),
     senderInformation: {
       firstName: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
       lastName: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
       phoneNumber: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         pattern: {
           value: combinedLTandUKPhoneNumberRegex,
-          message: t('invalidPhoneNumberFormat'),
+          message: i18next.t('invalidPhoneNumberFormat'),
         },
       },
       email: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         pattern: {
           value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-          message: t('invalidEmailFormat'),
+          message: i18next.t('invalidEmailFormat'),
         },
       },
       address: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
       zipCode: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
     },
     recipientInformation: {
       firstName: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
       lastName: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
       phoneNumber: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         pattern: {
           value: combinedLTandUKPhoneNumberRegex,
-          message: t('invalidPhoneNumberFormat'),
+          message: i18next.t('invalidPhoneNumberFormat'),
         },
       },
       email: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         pattern: {
           value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-          message: t('invalidEmailFormat'),
+          message: i18next.t('invalidEmailFormat'),
         },
       },
       address: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
       zipCode: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
         minLength: {
           value: 3,
-          message: t('minLengthMsg'),
+          message: i18next.t('minLengthMsg'),
         },
       },
     },
@@ -213,52 +207,52 @@ export const useCustomValidation = ({
       service === 'productSalesService'
         ? {
             ransomRecipient: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               minLength: {
                 value: 3,
-                message: t('minLengthMsg'),
+                message: i18next.t('minLengthMsg'),
               },
             },
             firstName: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               minLength: {
                 value: 3,
-                message: t('minLengthMsg'),
+                message: i18next.t('minLengthMsg'),
               },
             },
             lastName: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               minLength: {
                 value: 3,
-                message: t('minLengthMsg'),
+                message: i18next.t('minLengthMsg'),
               },
             },
             phoneNumber: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               pattern: {
                 value: combinedLTandUKPhoneNumberRegex,
-                message: t('invalidPhoneNumberFormat'),
+                message: i18next.t('invalidPhoneNumberFormat'),
               },
             },
             email: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               pattern: {
                 value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-                message: t('invalidEmailFormat'),
+                message: i18next.t('invalidEmailFormat'),
               },
             },
             address: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               minLength: {
                 value: 3,
-                message: t('minLengthMsg'),
+                message: i18next.t('minLengthMsg'),
               },
             },
             zipCode: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               minLength: {
                 value: 3,
-                message: t('minLengthMsg'),
+                message: i18next.t('minLengthMsg'),
               },
             },
           }
@@ -267,87 +261,87 @@ export const useCustomValidation = ({
       service === 'productPurchaseService'
         ? {
             firstName: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               minLength: {
                 value: 3,
-                message: t('minLengthMsg'),
+                message: i18next.t('minLengthMsg'),
               },
             },
             lastName: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               minLength: {
                 value: 3,
-                message: t('minLengthMsg'),
+                message: i18next.t('minLengthMsg'),
               },
             },
             phoneNumber: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               pattern: {
                 value: combinedLTandUKPhoneNumberRegex,
-                message: t('invalidPhoneNumberFormat'),
+                message: i18next.t('invalidPhoneNumberFormat'),
               },
             },
             email: {
-              required: t('fieldRequired'),
+              required: i18next.t('fieldRequired'),
               pattern: {
                 value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-                message: t('invalidEmailFormat'),
+                message: i18next.t('invalidEmailFormat'),
               },
             },
-            address: { required: t('fieldRequired') },
-            zipCode: { required: t('fieldRequired') },
+            address: { required: i18next.t('fieldRequired') },
+            zipCode: { required: i18next.t('fieldRequired') },
           }
         : { required: false },
     customerInformation: {
       payerOfTheShipment: {
-        required: t('fieldRequired'),
+        required: i18next.t('fieldRequired'),
       },
-      paymentMethod: { required: t('fieldRequired') },
+      paymentMethod: { required: i18next.t('fieldRequired') },
     },
     invoiceInformation: invoiceNeeded
       ? {
           companyName: {
-            required: t('fieldRequired'),
+            required: i18next.t('fieldRequired'),
             minLength: {
               value: 3,
-              message: t('minLengthMsg'),
+              message: i18next.t('minLengthMsg'),
             },
           },
           companyCode: {
-            required: t('fieldRequired'),
+            required: i18next.t('fieldRequired'),
             minLength: {
               value: 3,
-              message: t('minLengthMsg'),
+              message: i18next.t('minLengthMsg'),
             },
           },
           pvmCode: {
-            required: t('fieldRequired'),
+            required: i18next.t('fieldRequired'),
             minLength: {
               value: 3,
-              message: t('minLengthMsg'),
+              message: i18next.t('minLengthMsg'),
             },
           },
           companyEmail: {
-            required: t('fieldRequired'),
+            required: i18next.t('fieldRequired'),
             pattern: {
               value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-              message: t('invalidEmailFormat'),
+              message: i18next.t('invalidEmailFormat'),
             },
           },
           companyAddress: {
-            required: t('fieldRequired'),
+            required: i18next.t('fieldRequired'),
             minLength: {
               value: 3,
-              message: t('minLengthMsg'),
+              message: i18next.t('minLengthMsg'),
             },
           },
         }
       : { required: false },
     packagingAndLabelingRules: {
-      required: t('agreeToTerms'),
+      required: i18next.t('agreeToTerms'),
     },
     transportRules: {
-      required: t('agreeToTerms'),
+      required: i18next.t('agreeToTerms'),
     },
   };
 };

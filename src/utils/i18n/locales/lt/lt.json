@@ -264,8 +264,8 @@
   "recipientInfoMsg": "Prekės pristatymo / gavėjo informacija",
   "deliveryInfoMsg": "Siuntos pristatymo / gavėjo informacija",
   "customerInfoMsg": "Užsakovo informacija",
-  "thePayerIsTheSender": "The customer is the sender",
-  "thePayerIsTheRecipient": "The customer is the recipient",
+  "thePayerIsTheSender": "Užsakovas yra siuntėjas",
+  "thePayerIsTheRecipient": "Užsakovas yra gavėjas",
   "cash": "Grynais",
   "card": "Kortele",
   "bankTransfer": "Bankiniu pavedimu (juridiniams asmenims)",
@@ -313,5 +313,6 @@
   "contacts": "Kontaktai",
   "domesticTransport": "Pervežimai Lietuvoje",
   "internationalTransport": "Pervežimai užsienyje",
-  "copyright": "@ 2024 ecotrip.lt | Visos teisės saugomos"
+  "copyright": "@ 2024 ecotrip.lt | Visos teisės saugomos",
+  "serverError": "Serverio klaida. Susisiekite su vadybininku +370 601 22060"
 }

@@ -9,7 +9,6 @@ import Step from '../Step';
 import ClientInformationForm from './ClientInformationForm';
 import { FormType } from '../../utils/formTypes';
 import { useCustomValidation } from '../../utils/validation/useCustomValidation';
-import { useTranslation } from 'react-i18next';
 
 type SenderInformationProps = {
   control: Control<FormType, any>;
@@ -31,9 +30,7 @@ const SenderInformation = ({
 }: SenderInformationProps) => {
   const service = methods.watch('service');
 
-  const { t } = useTranslation();
-
-  const validationRules = useCustomValidation({ service, t });
+  const validationRules = useCustomValidation({ service });
 
   const senderValidationRules = validationRules.senderInformation;
 

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { FormType } from '../../../utils/formTypes';
 import useTranslateParcelData from '../../../hooks/useTranslateParcelData';
 import useTranslateTransportationDate from '../../../hooks/useTranslateTransportationDate';
+import useTranslatePayerInformation from '../../../hooks/useTranslatePayerInformation';
 
 type Languages = 'lt' | 'en' | 'ru';
 
@@ -42,6 +43,11 @@ const LanguageSelect = ({
   });
 
   useTranslateTransportationDate({
+    currentLanguage: i18n.language,
+    methods,
+  });
+
+  useTranslatePayerInformation({
     currentLanguage: i18n.language,
     methods,
   });

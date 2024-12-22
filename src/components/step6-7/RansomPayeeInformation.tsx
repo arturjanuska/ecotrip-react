@@ -27,7 +27,7 @@ const RansomPayeeInformation = ({
   const { t } = useTranslation();
 
   const currentlLanguage = i18n.language;
-  const validationRules = useCustomValidation({ service: selectedService, t });
+  const validationRules = useCustomValidation({ service: selectedService });
 
   const ransomPayeeValidationRules =
     validationRules.ransomPayeeInformation as any;

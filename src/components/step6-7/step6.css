@@ -1,147 +1,147 @@
 .payer-info-container {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 30px;
-	gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  gap: 20px;
 }
 
 .checkboxes-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	gap: 8px;
-	margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .columns {
-	display: flex;
-	gap: 20px;
-	width: 100%;
-	margin-bottom: 14px;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 14px;
 }
 
 .columns .left-column {
-	flex: 1;
+  flex: 1;
 }
 .columns .right-column {
-	flex: 1;
+  flex: 1;
 }
 
 .invoice-form-container {
-	display: flex;
-	margin-bottom: 30px;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	row-gap: 30px;
+  display: flex;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 30px;
 }
 
 .order-price-container {
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	flex-direction: column;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
 .order-price {
-	display: flex;
-	justify-content: space-between;
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
-	text-align: right;
-	color: #7a7776;
-	margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.1px;
+  text-align: left;
+  color: #7a7776;
+  margin-bottom: 18px;
 }
 
 .price-description-container {
-	margin-bottom: 10px;
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-	gap: 2px;
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .price-description-row {
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 16.1px;
-	text-align: right;
-	color: #7a7776;
-	display: flex;
-	justify-content: space-between;
-	display: flex;
-	gap: 20px;
-	align-items: center;
-	width: 100%;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.1px;
+  text-align: right;
+  color: #7a7776;
+  display: flex;
+  justify-content: space-between;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
 }
 
 .price-description-row span {
-	text-align: left;
+  text-align: left;
 }
 
 .discount-section .input-container {
-	flex: 0.85;
+  flex: 0.85;
 }
 
 .discount-section .btn {
-	flex: 0.15;
+  flex: 0.15;
 }
 
 .right-column.discount-section {
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-	gap: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .errors {
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
-	margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
 }
 
 .error {
-	color: #7a777680;
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 13.8px;
-	text-align: left;
+  color: #7a777680;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13.8px;
+  text-align: left;
 }
 
 .error span {
-	color: #ff0000;
+  color: #ff0000;
 }
 
 @media (max-width: 768px) {
-	.payer-info-container {
-		flex-direction: column;
-		gap: 30px;
-	}
+  .payer-info-container {
+    flex-direction: column;
+    gap: 30px;
+  }
 
-	.columns {
-		margin-bottom: 40px;
-	}
+  .columns {
+    margin-bottom: 40px;
+  }
 
-	.columns .left-column.empty,
-	.columns .right-column.empty {
-		flex: 0;
-	}
+  .columns .left-column.empty,
+  .columns .right-column.empty {
+    flex: 0;
+  }
 
-	.columns {
-		gap: 0;
-	}
+  .columns {
+    gap: 0;
+  }
 }
 
 @media (max-width: 390px) {
-	.order-price {
-		font-size: 13px;
-	}
-	.price-description-row {
-		font-size: 11px;
-	}
+  .order-price {
+    font-size: 13px;
+  }
+  .price-description-row {
+    font-size: 11px;
+  }
 }

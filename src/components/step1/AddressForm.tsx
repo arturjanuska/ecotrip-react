@@ -58,7 +58,7 @@ const AddressForm = ({
     }
   };
 
-  const validationRules = useCustomValidation({ service, t });
+  const validationRules = useCustomValidation({ service });
 
   const selectedPickupAddress = methods.watch('pickupAddress');
   const selectedPickupAddressPostcode = methods.watch('pickupAddressZipCode');

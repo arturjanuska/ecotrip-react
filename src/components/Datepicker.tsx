@@ -38,7 +38,7 @@ const Datepicker = ({
 }: Props) => {
   const { t } = useTranslation();
 
-  const validationRules = useCustomValidation({ service, t });
+  const validationRules = useCustomValidation({ service });
 
   return (
     <FieldContainer label={label} className={className}>
