@@ -4,12 +4,13 @@ import FieldContainer from '../layout/FieldContainer';
 import { FormType } from '../../utils/formTypes';
 import ControlledStyledSelect from '../form/select/ControlledStyledSelect';
 import { useTranslation } from 'react-i18next';
+import { OptionType } from '../../utils/types';
 
 type Props = {
   control: Control<FormType, any>;
   index: number;
   shipmentNumber: number;
-  options: { label: string; value: string }[];
+  options: OptionType[];
   selectedService: string;
   validationRules: Record<string, any>;
   setValue: UseFormSetValue<FormType>;
