@@ -24,7 +24,6 @@ import { useMutation } from '@tanstack/react-query';
 import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
 import { useTranslation } from 'react-i18next';
 import { checkParcelForcePostcodes } from '../utils/checkPostCodes';
-import PrimaryButton from '../components/buttons/PrimaryButton';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
 
