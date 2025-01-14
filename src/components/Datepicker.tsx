@@ -40,6 +40,8 @@ const Datepicker = ({
 
   const validationRules = useCustomValidation({ service });
 
+  const placeholder = t('month');
+  console.log('placeholder ===> ', placeholder);
   return (
     <FieldContainer label={label} className={className}>
       <div className="date-picker-wrapper">
@@ -71,7 +73,7 @@ const Datepicker = ({
         </div>
         <div>
           <ControlledStyledSelect
-            placeholder={t('month')}
+            placeholder={placeholder}
             options={options?.months || []}
             isDisabled={fiedsDisabled}
             control={control}

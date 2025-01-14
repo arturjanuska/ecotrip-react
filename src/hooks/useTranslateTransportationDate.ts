@@ -17,10 +17,12 @@ const useTranslateTransportationDate = ({
 
   const dates = methods.watch('dates');
 
-  const selectedMonthIndex = parseInt(dates?.from?.month?.value || '0', 10);
+  const selectedMonthIndex = dates?.from?.month?.value
+    ? parseInt(dates?.from?.month?.value)
+    : null;
 
   const translatePickupDate = () => {
-    if (selectedMonthIndex !== undefined) {
+    if (selectedMonthIndex) {
       // Translates month name
       const monthKey = monthNamesForMonthSelect[selectedMonthIndex - 1];
       setValue('dates.from.month', {

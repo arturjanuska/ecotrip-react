@@ -39,6 +39,18 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 
   const methods = useForm<FormType>({
     defaultValues: {
+      dates: {
+        from: {
+          day: null,
+          month: null,
+          year: null,
+        },
+        to: {
+          day: null,
+          month: null,
+          year: null,
+        },
+      },
       invoiceRequired: false,
       packagingAndLabelingRules: false,
       transportRules: false,
@@ -179,12 +191,12 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 
   useLocaleStorageLanguage();
 
-  const fillTestForm = () => {
-    methods.setValue('pickupAddress', 'Blackpool FY1 6BF, UK');
-    methods.setValue('pickupAddressZipCode', 'FY1 6BF');
-    methods.setValue('deliveryAddress', '07123 Vilnius, Lithuania');
-    methods.setValue('deliveryAddressZipCode', '07123');
-  };
+  // const fillTestForm = () => {
+  //   methods.setValue('pickupAddress', 'Blackpool FY1 6BF, UK');
+  //   methods.setValue('pickupAddressZipCode', 'FY1 6BF');
+  //   methods.setValue('deliveryAddress', '07123 Vilnius, Lithuania');
+  //   methods.setValue('deliveryAddressZipCode', '07123');
+  // };
 
   const { isParcelForce, postcodeDetails } = checkParcelForcePostcodes({
     postcodes: direction
@@ -215,9 +227,9 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
             marginBottom: '20px',
           }}
         >
-          <PrimaryButton type="button" onClick={fillTestForm}>
+          {/* <PrimaryButton type="button" onClick={fillTestForm}>
             Fill form
-          </PrimaryButton>
+          </PrimaryButton> */}
           <LanguageSelect methods={methods} />
         </div>
         <Divider />
