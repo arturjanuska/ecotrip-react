@@ -94,7 +94,6 @@ const ClientInformationForm = ({
               control={control}
               name={`${subName}.firstName`}
               errorMessage={getError(`${subName}.firstName`, formErrors)}
-              disabled={isFieldsDisabled}
               rules={validationRules?.firstName}
             />
           </FieldContainer>
@@ -106,7 +105,6 @@ const ClientInformationForm = ({
               control={control}
               name={`${subName}.lastName`}
               errorMessage={getError(`${subName}.lastName`, formErrors)}
-              disabled={isFieldsDisabled}
               rules={validationRules?.lastName}
             />
           </FieldContainer>
