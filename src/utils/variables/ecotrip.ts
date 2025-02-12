@@ -3,6 +3,7 @@ export const ECOTRIP_CONTACT_INFO = {
   lastName: '----',
   phoneNumber: '+447849617392',
   email: 'info@ecotrip.lt',
-  address: 'Chart Hill Road, Staplehurst, Tonbridge, TN12 0DE',
+  address:
+    'Chart Hill Paddock, Chart Hill Road, Staplehurst, Tonbridge, TN12 0DE',
   zipCode: 'TN12 0DE',
 };
