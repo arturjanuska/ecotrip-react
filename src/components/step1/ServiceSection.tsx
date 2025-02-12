@@ -8,6 +8,7 @@ import scrollToSection from '../../utils/scrollToSection';
 import getServices from './getServices';
 import { isCardDisabled } from '../../utils/serviceUtils';
 import { useTranslation } from 'react-i18next';
+import { ECOTRIP_CONTACT_INFO } from '../../utils/variables/ecotrip';
 
 // const services = {
 // 	adressService: "shipmentWithAddressService",
@@ -37,15 +38,15 @@ const ServiceSection = ({
     const deliveryAddressPostcode = methods.getValues('deliveryAddressZipCode');
 
     if (service === 'shipmentWithAddressService') {
-      setValue(`senderInformation.firstName`, 'EcoTrip UK');
-      setValue(`senderInformation.lastName`, '----');
-      setValue(`senderInformation.phoneNumber`, '+447849617392');
-      setValue(`senderInformation.email`, 'info@ecotrip.lt');
+      setValue(`senderInformation.firstName`, '');
+      setValue(`senderInformation.lastName`, '');
       setValue(
-        `senderInformation.address`,
-        'Staplehurst, Tonbridge TN12 0DE, UK'
+        `senderInformation.phoneNumber`,
+        ECOTRIP_CONTACT_INFO.phoneNumber
       );
-      setValue(`senderInformation.zipCode`, 'TN12 0DE');
+      setValue(`senderInformation.email`, ECOTRIP_CONTACT_INFO.email);
+      setValue(`senderInformation.address`, ECOTRIP_CONTACT_INFO.address);
+      setValue(`senderInformation.zipCode`, ECOTRIP_CONTACT_INFO.zipCode);
     } else {
       setValue(`senderInformation.firstName`, '');
       setValue(`senderInformation.lastName`, '');
