@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/logo.ico" />
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script
-      async
-      custom-element="amp-analytics"
-      src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
-    ></script>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>EcoTrip siuntos užsakymo forma</title>
-  </head>
 
-  <body>
-    <div id="root"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="verify-paysera" content="59f55ab9ab0e19a78ae264baf3bf48b8">
+  <link rel="icon" type="image/x-icon" href="/logo.ico" />
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoTrip siuntos užsakymo forma</title>
+</head>
 
-    <amp-analytics type="gtag" data-credentials="include">
-      <script type="application/json">
+<body>
+  <div id="root"></div>
+
+  <amp-analytics type="gtag" data-credentials="include">
+    <script type="application/json">
         {
           "vars": {
             "gtag_id": "AW-792301087",
@@ -33,8 +28,9 @@
           "triggers": {}
         }
       </script>
-    </amp-analytics>
+  </amp-analytics>
 
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
