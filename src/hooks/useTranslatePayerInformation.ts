@@ -19,10 +19,8 @@ const useTranslatePayerInformation = ({
   const paymentMethodSelect = watch('customerInformation.paymentMethod');
 
   const translatePayerInformation = () => {
-    console.log('payerOfTheShipmentSelect ===> ', payerOfTheShipmentSelect);
     if (payerOfTheShipmentSelect?.value) {
       const translatedLabel = i18next.t(payerOfTheShipmentSelect.value);
-      console.log('translatedLabel ===> ', translatedLabel);
       setValue('customerInformation.payerOfTheShipment', {
         label: translatedLabel,
         value: payerOfTheShipmentSelect.value,

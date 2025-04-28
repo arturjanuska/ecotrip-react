@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { checkParcelForcePostcodes } from '../utils/checkPostCodes';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
+import PrimaryButton from '../components/buttons/PrimaryButton';
 
 declare global {
   interface Window {
@@ -142,6 +143,30 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     return response.json();
   };
 
+  const initiatePayment = async (
+    transformedData: TransformedFormData
+  ): Promise<{
+    message: string;
+    url: string;
+  }> => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(transformedData),
+    };
+
+    const response = await fetchWrapper(
+      'https://uzsakymas.ecotrip.lt/api/initiate-paysera-payment',
+      {
+        httpOptions: options,
+      }
+    );
+
+    return response.json();
+  };
+
   const createTaskMutation = useMutation({
     mutationKey: ['new-task'],
     mutationFn: (data: TransformedFormData) => {
@@ -159,10 +184,29 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     },
   });
 
+  const processPayseraPaymentMutation = useMutation({
+    mutationKey: ['paysera-payment'],
+    mutationFn: (data: TransformedFormData) => {
+      return initiatePayment(data);
+    },
+    onSuccess: (data) => {
+      const { url } = data;
+      window.location.href = url;
+    },
+    onError: (error) => {
+      alert('Klaida kuriant mokėjimą: ' + error.message);
+    },
+  });
+
   const onSubmit = async (data: FormType) => {
     triggerGoogleConversion();
     const transformedData = transformFormDataToEndpoint(data);
-    await createTaskMutation.mutateAsync(transformedData);
+
+    if (transformedData.paymentType === 'Paysera') {
+      await processPayseraPaymentMutation.mutateAsync(transformedData);
+    } else {
+      await createTaskMutation.mutateAsync(transformedData);
+    }
   };
 
   const isLoading = createTaskMutation.isPending ?? false;
@@ -206,6 +250,14 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
       : [],
   });
 
+  // TODO: remove this
+  const fillTestForm = () => {
+    methods.setValue('pickupAddress', 'Blackpool FY1 6BF, UK');
+    methods.setValue('pickupAddressZipCode', 'FY1 6BF');
+    methods.setValue('deliveryAddress', '07123 Vilnius, Lithuania');
+    methods.setValue('deliveryAddressZipCode', '07123');
+  };
+
   return (
     <form
       className="main"
@@ -226,9 +278,9 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
             marginBottom: '20px',
           }}
         >
-          {/* <PrimaryButton type="button" onClick={fillTestForm}>
+          <PrimaryButton type="button" onClick={fillTestForm}>
             Fill form
-          </PrimaryButton> */}
+          </PrimaryButton>
           <LanguageSelect methods={methods} />
         </div>
         <Divider />

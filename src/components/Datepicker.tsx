@@ -41,7 +41,6 @@ const Datepicker = ({
   const validationRules = useCustomValidation({ service });
 
   const placeholder = t('month');
-  console.log('placeholder ===> ', placeholder);
   return (
     <FieldContainer label={label} className={className}>
       <div className="date-picker-wrapper">

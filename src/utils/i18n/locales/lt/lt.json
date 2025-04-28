@@ -269,6 +269,7 @@
   "cash": "Grynais",
   "card": "Kortele",
   "bankTransfer": "Bankiniu pavedimu (juridiniams asmenims)",
+  "paysera": "Paysera",
   "sender": "Siuntėjas",
   "otherPerson": "Kitas asmuo",
   "step6Title": "Siuntos/prekės išpirkos gavėjo informacija",

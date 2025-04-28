@@ -37,24 +37,36 @@ const ServiceSection = ({
     const pickupAddressPostcode = methods.getValues('pickupAddressZipCode');
     const deliveryAddressPostcode = methods.getValues('deliveryAddressZipCode');
 
-    if (service === 'shipmentWithAddressService') {
-      setValue(`senderInformation.firstName`, '');
-      setValue(`senderInformation.lastName`, '');
-      setValue(
-        `senderInformation.phoneNumber`,
-        ECOTRIP_CONTACT_INFO.phoneNumber
-      );
-      setValue(`senderInformation.email`, ECOTRIP_CONTACT_INFO.email);
-      setValue(`senderInformation.address`, ECOTRIP_CONTACT_INFO.address);
-      setValue(`senderInformation.zipCode`, ECOTRIP_CONTACT_INFO.zipCode);
-    } else {
-      setValue(`senderInformation.firstName`, '');
-      setValue(`senderInformation.lastName`, '');
-      setValue(`senderInformation.phoneNumber`, '');
-      setValue(`senderInformation.email`, '');
-      setValue('senderInformation.address', pickupAddress ?? '');
-      setValue('senderInformation.zipCode', pickupAddressPostcode ?? '');
-    }
+    // TODO uncomment
+    // if (service === 'shipmentWithAddressService') {
+    //   setValue(`senderInformation.firstName`, '');
+    //   setValue(`senderInformation.lastName`, '');
+    //   setValue(
+    //     `senderInformation.phoneNumber`,
+    //     ECOTRIP_CONTACT_INFO.phoneNumber
+    //   );
+    //   setValue(`senderInformation.email`, ECOTRIP_CONTACT_INFO.email);
+    //   setValue(`senderInformation.address`, ECOTRIP_CONTACT_INFO.address);
+    //   setValue(`senderInformation.zipCode`, ECOTRIP_CONTACT_INFO.zipCode);
+    // } else {
+    //   setValue(`senderInformation.firstName`, '');
+    //   setValue(`senderInformation.lastName`, '');
+    //   setValue(`senderInformation.phoneNumber`, '');
+    //   setValue(`senderInformation.email`, '');
+    //   setValue('senderInformation.address', pickupAddress ?? '');
+    //   setValue('senderInformation.zipCode', pickupAddressPostcode ?? '');
+    // }
+
+    setValue(`senderInformation.firstName`, 'asdasd');
+    setValue(`senderInformation.lastName`, 'asdasd');
+    setValue(`senderInformation.phoneNumber`, '+37067272727');
+    setValue(`senderInformation.email`, 'asdads@ASD.COM');
+    setValue('senderInformation.address', pickupAddress);
+    setValue('senderInformation.zipCode', pickupAddressPostcode);
+    setValue(`recipientInformation.firstName`, 'asdasd');
+    setValue(`recipientInformation.lastName`, 'asdasd');
+    setValue(`recipientInformation.phoneNumber`, '+37067272727');
+    setValue(`recipientInformation.email`, 'asdads@ASD.COM');
 
     setValue('recipientInformation.address', deliveryAddress ?? '');
     setValue('recipientInformation.zipCode', deliveryAddressPostcode ?? '');

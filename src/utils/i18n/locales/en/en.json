@@ -269,6 +269,7 @@
   "cash": "Cash",
   "card": "Card",
   "bankTransfer": "Bank transfer (for legal entities)",
+  "paysera": "Paysera",
   "sender": "Sender",
   "otherPerson": "Other person",
   "step6Title": "Shipment/item ransom recipient information",

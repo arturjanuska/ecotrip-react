@@ -124,7 +124,6 @@ const ClientInformationForm = ({
                 ) as string | null;
                 if (phoneNumberValue) {
                   const trimmed = phoneNumberValue.trim().replace(/\s+/g, ' ');
-                  console.log('trimmed ===', trimmed);
                   methods.setValue(
                     `${subName}.phoneNumber` as keyof FormType,
                     trimmed

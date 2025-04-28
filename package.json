@@ -31,6 +31,7 @@
     "react-hook-form": "^7.52.1",
     "react-i18next": "^15.1.2",
     "react-query": "^3.39.3",
+    "react-router-dom": "^6.30.0",
     "react-select": "^5.8.0",
     "use-google-maps-script": "^0.1.2",
     "use-places-autocomplete": "^4.0.1",
