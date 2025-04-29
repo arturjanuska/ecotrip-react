@@ -1,21 +1,16 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prefer-spread */
-/* eslint-disable prefer-rest-params */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './globals.css';
 import Form from './pages/Form';
-import ModalPage from './pages/ModalPage';
+import SuccessModalPage from './pages/SuccessModalPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet';
 import ReactPixel from 'react-facebook-pixel';
+import ErrorModalPage from './pages/ErrorModalPage';
 
 const queryClient = new QueryClient();
 
 function App() {
-  const [orderId, setOrderId] = useState<string | null>(null);
-
   useEffect(() => {
     ReactPixel.init('1060218774766985');
     ReactPixel.pageView();
@@ -39,22 +34,23 @@ function App() {
           </script>
         </Helmet>
 
-        <>
-          {!orderId ? (
-            <Form setOrderId={(id: string) => setOrderId(id)} />
-          ) : (
-            <ModalPage setOrderId={() => setOrderId(null)} orderId={orderId} />
-          )}
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{ display: 'none' }}
-              src="https://www.facebook.com/tr?id=1060218774766985&ev=PageView&noscript=1"
-              alt="fb pixel"
-            />
-          </noscript>
-        </>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Form />} />
+            <Route path="/success" element={<SuccessModalPage />} />
+            <Route path="/failed" element={<ErrorModalPage />} />
+          </Routes>
+        </BrowserRouter>
+
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1060218774766985&ev=PageView&noscript=1"
+            alt="fb pixel"
+          />
+        </noscript>
       </>
     </QueryClientProvider>
   );

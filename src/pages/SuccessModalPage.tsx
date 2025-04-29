@@ -1,17 +1,17 @@
 import '../styles/modal.css';
-import useScrollToTop from '../hooks/useScrollToTop';
 import { useEffect } from 'react';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import SecondaryButton from '../components/buttons/SecondaryButton';
+import { useNavigate } from 'react-router-dom';
 
-const ModalPage = ({
-  setOrderId,
-  orderId,
-}: {
-  setOrderId: () => void;
-  orderId: string;
-}) => {
-  useScrollToTop();
+const SuccessModalPage = () => {
+  const orderId = new URLSearchParams(window.location.search).get('orderId');
+
+  const nav = useNavigate();
+
+  const tryAgain = () => {
+    nav('/');
+  };
 
   useEffect(() => {
     const triggerGoogleConversion = () => {
@@ -48,12 +48,12 @@ const ModalPage = ({
           <PrimaryButton
             type="button"
             onClick={() => {
-              window.open('https://www.ecotrip.lt');
+              window.location.href = 'https://www.ecotrip.lt';
             }}
           >
             Grižti į pradinį puslapį
           </PrimaryButton>
-          <SecondaryButton type="button" onClick={setOrderId}>
+          <SecondaryButton type="button" onClick={tryAgain}>
             Užsakyti dar kartą
           </SecondaryButton>
         </div>
@@ -62,4 +62,4 @@ const ModalPage = ({
   );
 };
 
-export default ModalPage;
+export default SuccessModalPage;

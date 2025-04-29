@@ -26,7 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { checkParcelForcePostcodes } from '../utils/checkPostCodes';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
-import PrimaryButton from '../components/buttons/PrimaryButton';
+import { useNavigate } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -34,8 +34,10 @@ declare global {
   }
 }
 
-const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
+const Form = () => {
   const { t } = useTranslation();
+
+  const nav = useNavigate();
 
   const methods = useForm<FormType>({
     defaultValues: {
@@ -124,30 +126,12 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     }
   }, [pickupAddressZipCode, deliveryAddressZipCode]);
 
-  const postData = async (transformedData: TransformedFormData) => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(transformedData),
-    };
-
-    const response = await fetchWrapper(
-      'https://api.uzsakymas.ecotrip.lt/api/orders',
-      {
-        httpOptions: options,
-      }
-    );
-
-    return response.json();
-  };
-
-  const initiatePayment = async (
+  const postData = async (
     transformedData: TransformedFormData
   ): Promise<{
     message: string;
-    url: string;
+    orderId: string;
+    url?: string;
   }> => {
     const options = {
       method: 'POST',
@@ -158,7 +142,8 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     };
 
     const response = await fetchWrapper(
-      'https://uzsakymas.ecotrip.lt/api/initiate-paysera-payment',
+      'http://localhost:3000/api/orders',
+      // 'https://api.uzsakymas.ecotrip.lt/api/orders',
       {
         httpOptions: options,
       }
@@ -173,9 +158,12 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
       return postData(data);
     },
     onSuccess: (data) => {
-      const orderId = data.orderId;
+      if (data.url) {
+        window.location.href = data.url;
+        return;
+      }
+      nav(`/success?orderId=${data.orderId}`);
       setShowSubmitError(null);
-      setOrderId(orderId);
       methods.reset();
     },
     onError: (error) => {
@@ -184,29 +172,10 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
     },
   });
 
-  const processPayseraPaymentMutation = useMutation({
-    mutationKey: ['paysera-payment'],
-    mutationFn: (data: TransformedFormData) => {
-      return initiatePayment(data);
-    },
-    onSuccess: (data) => {
-      const { url } = data;
-      window.location.href = url;
-    },
-    onError: (error) => {
-      alert('Klaida kuriant mokėjimą: ' + error.message);
-    },
-  });
-
   const onSubmit = async (data: FormType) => {
     triggerGoogleConversion();
     const transformedData = transformFormDataToEndpoint(data);
-
-    if (transformedData.paymentType === 'Paysera') {
-      await processPayseraPaymentMutation.mutateAsync(transformedData);
-    } else {
-      await createTaskMutation.mutateAsync(transformedData);
-    }
+    await createTaskMutation.mutateAsync(transformedData);
   };
 
   const isLoading = createTaskMutation.isPending ?? false;
@@ -234,13 +203,6 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
 
   useLocaleStorageLanguage();
 
-  // const fillTestForm = () => {
-  //   methods.setValue('pickupAddress', 'Blackpool FY1 6BF, UK');
-  //   methods.setValue('pickupAddressZipCode', 'FY1 6BF');
-  //   methods.setValue('deliveryAddress', '07123 Vilnius, Lithuania');
-  //   methods.setValue('deliveryAddressZipCode', '07123');
-  // };
-
   const { isParcelForce, postcodeDetails } = checkParcelForcePostcodes({
     postcodes: direction
       ? [
@@ -249,14 +211,6 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
         ]
       : [],
   });
-
-  // TODO: remove this
-  const fillTestForm = () => {
-    methods.setValue('pickupAddress', 'Blackpool FY1 6BF, UK');
-    methods.setValue('pickupAddressZipCode', 'FY1 6BF');
-    methods.setValue('deliveryAddress', '07123 Vilnius, Lithuania');
-    methods.setValue('deliveryAddressZipCode', '07123');
-  };
 
   return (
     <form
@@ -278,9 +232,6 @@ const Form = ({ setOrderId }: { setOrderId: (id: string) => void }) => {
             marginBottom: '20px',
           }}
         >
-          <PrimaryButton type="button" onClick={fillTestForm}>
-            Fill form
-          </PrimaryButton>
           <LanguageSelect methods={methods} />
         </div>
         <Divider />
