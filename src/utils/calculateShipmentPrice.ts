@@ -29,10 +29,10 @@ export const calculateShipmentPrice = ({
   const nLengthInMeters = Number(length) / 100;
   const nWidthInMeters = Number(width) / 100;
   const nHeightInMeters = Number(height) / 100;
-  if (nWeight <= 1 && nWeight !== 0) {
+  if (nWeight <= 2 && nWeight !== 0) {
     priceCalculatedByWeight = 25;
   }
-  if (nWeight > 1 && nWeight <= 5) {
+  if (nWeight > 2 && nWeight <= 5) {
     priceCalculatedByWeight = 35;
   }
   if (nWeight > 5 && nWeight <= 15) {
@@ -41,21 +41,27 @@ export const calculateShipmentPrice = ({
   if (nWeight > 15 && nWeight <= 30) {
     priceCalculatedByWeight = 45;
   }
-  if (nWeight > 30 && nWeight <= 35) {
-    priceCalculatedByWeight = nWeight * 1.5;
+  if (nWeight > 30 && nWeight <= 40) {
+    // priceCalculatedByWeight = nWeight * 1.5; // old algorithm
+    priceCalculatedByWeight = 60;
   }
-  if (nWeight > 35) {
-    priceCalculatedByWeight = nWeight * 1.49;
-    priceCalculatedByWeight = priceCalculatedByWeight * 1.05;
+  if (nWeight > 40 && nWeight <= 50) {
+    // priceCalculatedByWeight = nWeight * 1.49; old algorithm
+    // priceCalculatedByWeight = priceCalculatedByWeight * 1.05; old algorithm
+    priceCalculatedByWeight = 75;
   }
-  // if (nWeight > 50 && nWeight <= 100) {
-  // 	priceCalculatedByWeight = nWeight * 1.46;
-  // 	priceCalculatedByWeight = priceCalculatedByWeight * 1.07;
-  // }
-  // if (nWeight > 100) {
-  // 	priceCalculatedByWeight = nWeight * 1.35;
-  // 	priceCalculatedByWeight = priceCalculatedByWeight * 1.1;
-  // }
+  if (nWeight > 50 && nWeight <= 75) {
+    // priceCalculatedByWeight = nWeight * 1.46; old algorithm
+    // priceCalculatedByWeight = priceCalculatedByWeight * 1.07;  old algorithm
+    priceCalculatedByWeight = 110;
+  }
+  if (nWeight > 75 && nWeight <= 100) {
+    priceCalculatedByWeight = 135;
+  }
+  if (nWeight > 100) {
+    priceCalculatedByWeight = nWeight * 1.35;
+    priceCalculatedByWeight = priceCalculatedByWeight * 1.1;
+  }
 
   priceCalculatedByWeight = priceCalculatedByWeight * amount;
 
