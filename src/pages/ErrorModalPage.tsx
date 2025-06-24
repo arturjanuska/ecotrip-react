@@ -1,4 +1,3 @@
-import React from 'react';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import SecondaryButton from '../components/buttons/SecondaryButton';
 import { useNavigate } from 'react-router-dom';

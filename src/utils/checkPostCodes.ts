@@ -59,7 +59,7 @@ export const validatePostcode = (postcode: string) => {
   }
 };
 
-type PostCodeObject = {
+export type PostCodeObject = {
   postcode: string;
   eastings: string;
   northings: string;

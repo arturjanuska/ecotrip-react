@@ -142,8 +142,7 @@ const Form = () => {
     };
 
     const response = await fetchWrapper(
-      'http://localhost:3000/api/orders',
-      // 'https://api.uzsakymas.ecotrip.lt/api/orders',
+      'https://api.uzsakymas.ecotrip.lt/api/orders',
       {
         httpOptions: options,
       }
@@ -269,6 +268,7 @@ const Form = () => {
                   methods={methods}
                   formErrors={formErrors}
                   direction={direction}
+                  postcodeDetails={postcodeDetails}
                 />
                 {showPurchaseInformation && (
                   <>

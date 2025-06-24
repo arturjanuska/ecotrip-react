@@ -7,6 +7,14 @@ import {
 import { OptionType } from '../utils/types';
 import { DateDayType, DirectionType } from '../utils/formTypes';
 import i18next from 'i18next';
+import { PostCodeObject } from '../utils/checkPostCodes';
+import isoWeek from 'dayjs/plugin/isoWeek';
+import {
+  evenWeeksDeliveryPostcodes,
+  oddWeeksDeliveryPostcodes,
+} from '../utils/blockedDates';
+
+dayjs.extend(isoWeek);
 
 export const getPickupDay = (
   pickupStartDay: number,
@@ -52,16 +60,37 @@ export const getPickupDay = (
   };
 };
 
+const shouldIncludeDateRange = (
+  isEvenWeek: boolean,
+  postcode?: string
+): boolean => {
+  if (!postcode) return true;
+
+  if (oddWeeksDeliveryPostcodes.includes(postcode)) {
+    return !isEvenWeek;
+  }
+
+  if (evenWeeksDeliveryPostcodes.includes(postcode)) {
+    return isEvenWeek;
+  }
+
+  return true;
+};
+
 const useDateOptions = ({
   selectedMonth,
   direction,
   service,
+  postcodeDetails,
 }: {
   selectedMonth: string | null;
   direction: DirectionType;
   service: string;
+  postcodeDetails: PostCodeObject;
 }) => {
   const currentLanguage = i18next.language;
+
+  const postcode = postcodeDetails?.postcode;
 
   const [dateOptions, setDateOptions] = useState<{
     years: OptionType[]; // OptionType is { label: string, value: string }
@@ -135,19 +164,26 @@ const useDateOptions = ({
               }
             }
 
-            // Format the label
-            const startDay = startDateRange.date();
-            const endDay = endDateRange.date();
+            const weekNumber = startDateRange.isoWeek();
+            const isEvenWeek = weekNumber % 2 === 0;
 
-            const day = getPickupDay(
-              startDay,
-              endDay,
-              selectedMonthIndex,
-              is_UK_LT ? 2 : 1
-            );
-            // TODO: HARDCODED FOR DECEMBER MONTH, PROBABLY NEED TO REMOVE AFTER NY
-            if (day.value !== '1 - 1') {
-              days.push(day);
+            const shouldInclude = shouldIncludeDateRange(isEvenWeek, postcode);
+
+            if (shouldInclude) {
+              // Format the label
+              const startDay = startDateRange.date();
+              const endDay = endDateRange.date();
+
+              const day = getPickupDay(
+                startDay,
+                endDay,
+                selectedMonthIndex,
+                is_UK_LT ? 2 : 1
+              );
+              // TODO: HARDCODED FOR DECEMBER MONTH, PROBABLY NEED TO REMOVE AFTER NY
+              if (day.value !== '1 - 1') {
+                days.push(day);
+              }
             }
 
             // Move the date pointer to the day after the end of this range
@@ -158,13 +194,6 @@ const useDateOptions = ({
         }
       }
       setDateOptions({ years, months, days });
-
-      // if (selectedMonth === '12') {
-      //   // days = getDecemberPickupDays(direction);
-      //   setDateOptions({ years, months, days });
-      // } else {
-      //   setDateOptions({ years, months, days });
-      // }
     };
 
     calculateDateOptions();

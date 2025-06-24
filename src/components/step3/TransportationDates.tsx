@@ -7,17 +7,20 @@ import { DirectionType, FormType } from '../../utils/formTypes';
 import useDeliveryDate from '../../hooks/useDeliveryDate';
 import useDateOptions from '../../hooks/useDateOptions';
 import { useTranslation } from 'react-i18next';
+import type { PostCodeObject } from '../../utils/checkPostCodes';
 
 type TransportationDatesProps = {
   methods: UseFormReturn<FormType, any, undefined>;
   formErrors: FieldErrors<FormType>;
   direction: DirectionType;
+  postcodeDetails: PostCodeObject;
 };
 
 const TransportationDates = ({
   methods,
   formErrors,
   direction,
+  postcodeDetails,
 }: TransportationDatesProps) => {
   const { watch, setValue } = methods;
 
@@ -52,6 +55,7 @@ const TransportationDates = ({
     selectedMonth: monthFrom || null,
     direction,
     service,
+    postcodeDetails,
   });
 
   return (
