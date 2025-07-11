@@ -66,12 +66,6 @@ export const evenWeeksDeliveryPostcodes = [
   'CW9',
   'SY14',
   'WA6',
-];
-
-export const oddWeeksDeliveryPostcodes = [
-  'PL12',
-  'PL17',
-  'PL18',
   'BB10',
   'BB11',
   'BB12',
@@ -95,6 +89,12 @@ export const oddWeeksDeliveryPostcodes = [
   'PR6',
   'PR7',
   'WN8',
+];
+
+export const oddWeeksDeliveryPostcodes = [
+  'PL12',
+  'PL17',
+  'PL18',
   'CF46',
   'NP26',
   'SA10',
