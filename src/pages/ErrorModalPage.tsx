@@ -1,6 +1,5 @@
-import PrimaryButton from '../components/buttons/PrimaryButton';
-import SecondaryButton from '../components/buttons/SecondaryButton';
 import { useNavigate } from 'react-router-dom';
+import CustomModal from '../components/modal/CustomModal';
 
 const ErrorModalPage = () => {
   const orderId = new URLSearchParams(window.location.search).get('orderId');
@@ -12,12 +11,12 @@ const ErrorModalPage = () => {
   };
 
   return (
-    <div className="modal-wrapper">
-      <div className="modal-container">
-        <div className="modal-title">Apmokėjimo klaida</div>
-        <div className="modal-body">
+    <CustomModal
+      modalTitle="Apmokėjimo klaida"
+      modalBody={
+        <>
           <p>
-            Apmokėjimo metu įvyko klaida užsakymo ID:{' '}
+            Apmokėjimo metu įvyko klaida užsakymo ID:
             <span className="order-id">{orderId || ''}</span>.
           </p>
           <p>
@@ -30,22 +29,23 @@ const ErrorModalPage = () => {
             <span className="contact-number">+370 601 22060</span> arba{' '}
             <span className="contact-number">+44 7479 622299</span>{' '}
           </p>
-        </div>
-        <div className="modal-footer">
-          <PrimaryButton
-            type="button"
-            onClick={() => {
-              window.location.href = 'https://www.ecotrip.lt';
-            }}
-          >
-            Grižti į pradinį puslapį
-          </PrimaryButton>
-          <SecondaryButton type="button" onClick={tryAgain}>
-            Bandyti dar kartą
-          </SecondaryButton>
-        </div>
-      </div>
-    </div>
+        </>
+      }
+      footerProps={{
+        primaryButtonProps: {
+          type: 'button',
+          onClick: () => {
+            window.location.href = 'https://www.ecotrip.lt';
+          },
+          children: 'Grižti į pradinį puslapį',
+        },
+        secondaryButtonProps: {
+          type: 'button',
+          onClick: tryAgain,
+          children: 'Bandyti dar kartą',
+        },
+      }}
+    />
   );
 };
 
