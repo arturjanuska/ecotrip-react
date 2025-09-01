@@ -86,10 +86,10 @@ const PayerInformation = ({
       label: 'bankTransfer',
       value: 'bankTransfer',
     },
-    {
-      label: 'paysera',
-      value: 'paysera',
-    },
+    // {
+    //   label: 'paysera',
+    //   value: 'paysera',
+    // },
   ]);
 
   const shipments = methods.watch('shipments');
