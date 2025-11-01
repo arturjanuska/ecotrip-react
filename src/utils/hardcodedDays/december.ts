@@ -1,44 +1,45 @@
-export const getDecemberPickupDays = (direction: 'LT-UK' | 'UK-LT' | null) => {
+import i18next from 'i18next';
+import { DateDayType } from '../formTypes';
+
+export const getDecemberPickupDays = (
+  direction: 'LT-UK' | 'UK-LT' | null
+): DateDayType[] => {
   if (direction === 'LT-UK') {
     return [
       {
-        label: 'Gruodžio 3 - Gruodžio 4',
-        value: '3 - 4',
-      },
-      // {
-      //   label: 'Gruodžio 6 - Gruodžio 8',
-      //   value: '6 - 8',
-      // },
-      {
-        label: 'Gruodžio 10 - Gruodžio 11',
-        value: '10 - 11',
+        label: `${i18next.t('inDecember')} 2 - ${i18next.t('inDecember')} 3`,
+        value: '2 - 3',
+        key: {
+          one: 'inDecember',
+          two: 'inDecember',
+        },
       },
       {
-        label: 'Gruodžio 13 - Gruodžio 15',
-        value: '13 - 15',
-      },
-      {
-        label: 'Gruodžio 17 - Gruodžio 18',
-        value: '17 - 18',
+        label: `${i18next.t('inDecember')} 10 - ${i18next.t('inDecember')} 12`,
+        value: '10 - 12',
+        key: {
+          one: 'inDecember',
+          two: 'inDecember',
+        },
       },
     ];
   } else if (direction === 'UK-LT') {
     return [
       {
-        label: 'Gruodžio 6 - Gruodžio 8',
-        value: '6 - 8',
+        label: `${i18next.t('inDecember')} 5 - ${i18next.t('inDecember')} 7`,
+        value: '5 - 7',
+        key: {
+          one: 'inDecember',
+          two: 'inDecember',
+        },
       },
       {
-        label: 'Gruodžio 13 - Gruodžio 15',
-        value: '13 - 15',
-      },
-      {
-        label: 'Gruodžio 18 - Gruodžio 20',
-        value: '18 - 20',
-      },
-      {
-        label: 'Gruodžio 20 - Gruodžio 22',
-        value: '20 - 22',
+        label: `${i18next.t('inDecember')} 15 - ${i18next.t('inDecember')} 18`,
+        value: '15 - 18',
+        key: {
+          one: 'inDecember',
+          two: 'inDecember',
+        },
       },
     ];
   } else return [];
@@ -50,73 +51,47 @@ export const getDecemberDeliveryDays = (
 ) => {
   if (direction === 'LT-UK') {
     switch (pickupDayValue) {
-      case '3 - 4': {
+      case '2 - 3': {
         return {
-          label: 'Gruodžio 6 - Gruodžio 8',
-          value: '6 - 8',
+          label: `${i18next.t('inDecember')} 5 - ${i18next.t('inDecember')} 7`,
+          value: '5 - 7',
+          key: {
+            one: 'inDecember',
+            two: 'inDecember',
+          },
         };
       }
-      // case '6 - 8': {
-      //   return {
-      //     label: 'Gruodžio 10 - Gruodžio 13',
-      //     value: '10 - 13',
-      //   };
-      // }
-      case '10 - 11': {
+      case '10 - 12': {
         return {
-          label: 'Gruodžio 13 - Gruodžio 15',
-          value: '13 - 15',
-        };
-      }
-      case '13 - 15': {
-        return {
-          label: 'Gruodžio 18 - Gruodžio 20',
-          value: '18 - 20',
-        };
-      }
-      case '17 - 18': {
-        return {
-          label: 'Gruodžio 20 - Gruodžio 22',
-          value: '20 - 22',
+          label: `${i18next.t('inDecember')} 15 - ${i18next.t('inDecember')} 18`,
+          value: '15 - 18',
+          key: {
+            one: 'inDecember',
+            two: 'inDecember',
+          },
         };
       }
     }
   } else if (direction === 'UK-LT') {
     switch (pickupDayValue) {
-      case '29 - 1': {
+      case '5 - 7': {
         return {
-          label: 'Gruodžio 3 - Gruodžio 4',
-          value: '3 - 4',
+          label: `${i18next.t('inDecember')} 10 - ${i18next.t('inDecember')} 12`,
+          value: '10 - 12',
+          key: {
+            one: 'inDecember',
+            two: 'inDecember',
+          },
         };
       }
-      case '6 - 8': {
+      case '15 - 18': {
         return {
-          label: 'Gruodžio 10 - Gruodžio 11',
-          value: '10 - 11',
-        };
-      }
-      case '13 - 15': {
-        return {
-          label: 'Gruodžio 17 - Gruodžio 18',
-          value: '17 - 18',
-        };
-      }
-      // case '14 - 16': {
-      //   return {
-      //     label: 'Gruodžio 15 - Gruodžio 16',
-      //     value: '15 - 16',
-      //   };
-      // }
-      case '18 - 20': {
-        return {
-          label: 'Gruodžio 23',
-          value: '23 - 23',
-        };
-      }
-      case '20 - 22': {
-        return {
-          label: 'Gruodžio 27 - Gruodžio 30',
-          value: '27 - 30',
+          label: `${i18next.t('inDecember')} 21 - ${i18next.t('inDecember')} 22`,
+          value: '21 - 22',
+          key: {
+            one: 'inDecember',
+            two: 'inDecember',
+          },
         };
       }
     }

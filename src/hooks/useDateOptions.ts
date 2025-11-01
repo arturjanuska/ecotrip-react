@@ -13,49 +13,47 @@ import {
   evenWeeksDeliveryPostcodes,
   oddWeeksDeliveryPostcodes,
 } from '../utils/blockedDates';
+import { getDecemberPickupDays } from '../utils/hardcodedDays/december';
+import { getJanuaryPickupDays } from '../utils/hardcodedDays/january';
 
 dayjs.extend(isoWeek);
 
 export const getPickupDay = (
   pickupStartDay: number,
   pickupEndDay: number,
-  selectedMonthIndex: number,
+  selectedMonth: number,
   diff: 1 | 2 | 0
 ) => {
   const currentYear = dayjs().year();
 
-  const selectedMonthDate = dayjs(`${currentYear}-${selectedMonthIndex}-01`);
+  const selectedMonthDate = dayjs(`${currentYear}-${selectedMonth}-01`);
   const daysInMonth = selectedMonthDate.daysInMonth();
 
   if (pickupStartDay + diff > daysInMonth) {
     const dayDifference = pickupStartDay + diff - daysInMonth;
     return {
       label: `${i18next.t(
-        monthNamesForDaySelect[selectedMonthIndex - 1]
+        monthNamesForDaySelect[selectedMonth - 1]
       )} ${pickupStartDay} - ${i18next.t(
-        monthNamesForDaySelect[
-          selectedMonthIndex === 12 ? 0 : selectedMonthIndex
-        ]
+        monthNamesForDaySelect[selectedMonth === 12 ? 0 : selectedMonth]
       )} ${dayDifference}`,
       value: `${pickupStartDay} - ${dayDifference}`,
       key: {
-        one: monthNamesForDaySelect[selectedMonthIndex - 1],
-        two: monthNamesForDaySelect[
-          selectedMonthIndex === 12 ? 0 : selectedMonthIndex
-        ],
+        one: monthNamesForDaySelect[selectedMonth - 1],
+        two: monthNamesForDaySelect[selectedMonth === 12 ? 0 : selectedMonth],
       },
     };
   }
   return {
     label: `${i18next.t(
-      monthNamesForDaySelect[selectedMonthIndex - 1]
+      monthNamesForDaySelect[selectedMonth - 1]
     )} ${pickupStartDay} - ${i18next.t(
-      monthNamesForDaySelect[selectedMonthIndex - 1]
+      monthNamesForDaySelect[selectedMonth - 1]
     )} ${pickupEndDay}`,
     value: `${pickupStartDay} - ${pickupEndDay}`,
     key: {
-      one: monthNamesForDaySelect[selectedMonthIndex - 1],
-      two: monthNamesForDaySelect[selectedMonthIndex - 1],
+      one: monthNamesForDaySelect[selectedMonth - 1],
+      two: monthNamesForDaySelect[selectedMonth - 1],
     },
   };
 };
@@ -129,7 +127,7 @@ const useDateOptions = ({
 
       const days: DateDayType[] = [];
 
-      if (selectedMonth) {
+      if (selectedMonth && selectedMonth !== '12') {
         const selectedMonthIndex = parseInt(selectedMonth, 10);
         // Start from the first day of the selected month
         let date = dayjs(`${currentYear}-${selectedMonth}-01`);
@@ -193,7 +191,25 @@ const useDateOptions = ({
           }
         }
       }
-      setDateOptions({ years, months, days });
+
+      if (selectedMonth === '12') {
+        // December hardcoded days
+        setDateOptions({
+          years,
+          months,
+          days: getDecemberPickupDays(direction),
+        });
+      } else if (selectedMonth === '1') {
+        // January hardcoded days
+        setDateOptions({
+          years,
+          months,
+          days: getJanuaryPickupDays(direction),
+        });
+      } else {
+        // Default logic
+        setDateOptions({ years, months, days });
+      }
     };
 
     calculateDateOptions();
