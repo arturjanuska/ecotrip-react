@@ -13,6 +13,7 @@ import { getDecemberDeliveryDays } from '../utils/hardcodedDays/december';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import { getJanuaryDeliveryDays } from '../utils/hardcodedDays/january';
+import { getFebruaryDeliveryDays } from '../utils/hardcodedDays/february';
 
 type Props = {
   pickupDate: string;
@@ -144,10 +145,24 @@ const useDeliveryDate = ({
           getDecemberDeliveryDays(direction, dayRangeFrom as string) || null
         );
       } else if (deliveryMonth === 1) {
+        setValue('dates.to.year', {
+          label: '2026',
+          value: '2026',
+        });
         // January hardcoded days
         setValue(
           'dates.to.day',
           getJanuaryDeliveryDays(direction, dayRangeFrom as string) || null
+        );
+      } else if (deliveryMonth === 2) {
+        setValue('dates.to.year', {
+          label: '2026',
+          value: '2026',
+        });
+        // February hardcoded days
+        setValue(
+          'dates.to.day',
+          getFebruaryDeliveryDays(direction, dayRangeFrom as string) || null
         );
       } else {
         // Default logic

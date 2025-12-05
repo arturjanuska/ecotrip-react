@@ -15,6 +15,7 @@ import {
 } from '../utils/blockedDates';
 import { getDecemberPickupDays } from '../utils/hardcodedDays/december';
 import { getJanuaryPickupDays } from '../utils/hardcodedDays/january';
+import { getFebruaryPickupDays } from '../utils/hardcodedDays/february';
 
 dayjs.extend(isoWeek);
 
@@ -76,11 +77,13 @@ const shouldIncludeDateRange = (
 };
 
 const useDateOptions = ({
+  selectedYear,
   selectedMonth,
   direction,
   service,
   postcodeDetails,
 }: {
+  selectedYear: string | null;
   selectedMonth: string | null;
   direction: DirectionType;
   service: string;
@@ -111,20 +114,27 @@ const useDateOptions = ({
 
       const now = dayjs();
       const currentYear = now.year();
+      const nextYear = currentYear + 1;
       const currentMonthIndex = now.month() + 1; // Day.js months are 0-indexed
 
       const years = [
         { label: currentYear.toString(), value: currentYear.toString() },
+        { label: nextYear.toString(), value: nextYear.toString() },
       ];
 
-      const months = Array.from(
-        { length: 12 - currentMonthIndex + 1 },
-        (_, i) => currentMonthIndex + i
-      ).map((month) => ({
-        label: i18next.t(monthNamesForMonthSelect[month - 1]),
-        value: month.toString(),
-      }));
-
+      const months =
+        selectedYear && parseInt(selectedYear) === currentYear
+          ? Array.from(
+              { length: 12 - currentMonthIndex + 1 },
+              (_, i) => currentMonthIndex + i
+            ).map((month) => ({
+              label: i18next.t(monthNamesForMonthSelect[month - 1]),
+              value: month.toString(),
+            }))
+          : Array.from({ length: 2 }, (_, i) => i + 1).map((month) => ({
+              label: i18next.t(monthNamesForMonthSelect[month - 1]),
+              value: month.toString(),
+            }));
       const days: DateDayType[] = [];
 
       if (selectedMonth && selectedMonth !== '12') {
@@ -206,6 +216,13 @@ const useDateOptions = ({
           months,
           days: getJanuaryPickupDays(direction),
         });
+      } else if (selectedMonth === '2') {
+        // February hardcoded days
+        setDateOptions({
+          years,
+          months,
+          days: getFebruaryPickupDays(direction),
+        });
       } else {
         // Default logic
         setDateOptions({ years, months, days });
@@ -213,7 +230,7 @@ const useDateOptions = ({
     };
 
     calculateDateOptions();
-  }, [selectedMonth, direction, service, currentLanguage]);
+  }, [selectedMonth, selectedYear, direction, service, currentLanguage]);
 
   return dateOptions;
 };
