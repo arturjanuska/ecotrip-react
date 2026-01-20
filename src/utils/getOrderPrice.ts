@@ -245,26 +245,39 @@ const getOrderPrice = (
             ? '5%'
             : null;
 
-  if (percentage) {
-    priceDescription.push({
-      title: i18next.t('quantityDiscountMsg'),
-      price: `${percentage}`,
-    });
-  }
   const secondDiscountPercentage =
     postcodeDetails?.discount === '10%' &&
     service !== 'shipmentWithAddressService'
       ? 0.9
       : 1;
 
-  if (secondDiscountPercentage === 0.9) {
-    priceDescription.push({
-      title: i18next.t('addressDiscountMsg'),
-      price: `10%`,
-    });
-  }
+  let finalPrice = price;
 
-  const finalPrice = price * discountPercentage * secondDiscountPercentage;
+  if (secondDiscountPercentage === 1) {
+    finalPrice = finalPrice * discountPercentage;
+    if (percentage) {
+      priceDescription.push({
+        title: i18next.t('quantityDiscountMsg'),
+        price: `${percentage}`,
+      });
+    }
+  } else if (secondDiscountPercentage === 0.9) {
+    if (discountPercentage >= 0.9) {
+      finalPrice = finalPrice * secondDiscountPercentage;
+      priceDescription.push({
+        title: i18next.t('addressDiscountMsg'),
+        price: `10%`,
+      });
+    } else {
+      finalPrice = finalPrice * discountPercentage;
+      if (percentage) {
+        priceDescription.push({
+          title: i18next.t('quantityDiscountMsg'),
+          price: `${percentage}`,
+        });
+      }
+    }
+  }
 
   setPriceDescription(priceDescription);
   methods.setValue('estimatedShipmentPrice', finalPrice.toFixed(2) ?? '0.00');

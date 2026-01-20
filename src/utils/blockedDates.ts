@@ -1,4 +1,4 @@
-export const evenWeeksDeliveryPostcodes = [
+export const oddWeeksDeliveryPostcodes = [
   'HU1',
   'HU2',
   'HU3',
@@ -91,7 +91,7 @@ export const evenWeeksDeliveryPostcodes = [
   'WN8',
 ];
 
-export const oddWeeksDeliveryPostcodes = [
+export const evenWeeksDeliveryPostcodes = [
   'PL12',
   'PL17',
   'PL18',
