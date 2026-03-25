@@ -7,10 +7,10 @@ import i18next from 'i18next';
 const getDiscountPercentage = (itemsCount: number) => {
   if (itemsCount === 0 || itemsCount === 1) return 1;
 
-  if (itemsCount === 2) return 0.95;
-  if (itemsCount === 3) return 0.9;
-  if (itemsCount === 4) return 0.85;
-  if (itemsCount > 4) return 0.8;
+  if (itemsCount === 2) return 1;
+  if (itemsCount === 3) return 0.95;
+  if (itemsCount === 4) return 0.9;
+  if (itemsCount > 4) return 0.85;
   return 1;
 };
 
@@ -235,15 +235,13 @@ const getOrderPrice = (
   const discountPercentage = getDiscountPercentage(shipmentsArray.length || 0);
 
   const percentage =
-    discountPercentage === 0.8
-      ? '20%'
-      : discountPercentage === 0.85
-        ? '15%'
-        : discountPercentage === 0.9
-          ? '10%'
-          : discountPercentage === 0.95
-            ? '5%'
-            : null;
+    discountPercentage === 0.85
+      ? '15%'
+      : discountPercentage === 0.9
+        ? '10%'
+        : discountPercentage === 0.95
+          ? '5%'
+          : null;
 
   const secondDiscountPercentage =
     postcodeDetails?.discount === '10%' &&

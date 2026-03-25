@@ -1440,7 +1440,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 14,
     specification: null,
-    price: 50,
+    price: 55,
   },
   // electricBike
   {
@@ -3052,10 +3052,10 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
     productType: null,
     size: {
       from: 0,
-      to: 4,
+      to: 1,
     },
     specification: null,
-    price: 35,
+    price: 30,
   },
   {
     category: {
@@ -3064,7 +3064,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
     },
     productType: null,
     size: {
-      from: 5,
+      from: 1,
       to: 14,
     },
     specification: null,
@@ -3091,53 +3091,10 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
     productType: null,
     size: {
       from: 30,
-      to: 34,
-    },
-    specification: null,
-    price: 0, // 1.5 * size(kg)
-    surcharge: 10, // %
-  },
-  {
-    category: {
-      label: 'shipments',
-      value: 'shipments',
-    },
-    productType: null,
-    size: {
-      from: 35,
-      to: 49,
-    },
-    specification: null,
-    price: 0, // 1.49 * size(kg)
-    surcharge: 10, // %
-  },
-  {
-    category: {
-      label: 'shipments',
-      value: 'shipments',
-    },
-    productType: null,
-    size: {
-      from: 50,
-      to: 99,
-    },
-    specification: null,
-    price: 0, // 1.46 * size(kg)
-    surcharge: 10, // %
-  },
-  {
-    category: {
-      label: 'shipments',
-      value: 'shipments',
-    },
-    productType: null,
-    size: {
-      from: 100,
       to: Infinity,
     },
     specification: null,
     price: 0, // 1.35 * size(kg)
-    surcharge: 10, // %
   },
 ];
 

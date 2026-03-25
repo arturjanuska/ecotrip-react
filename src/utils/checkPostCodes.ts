@@ -1,5 +1,5 @@
 import { UKPostcodeType } from './types';
-import UK_POST_CODES from './ukPostCodes';
+import UK_POST_CODES from './ukPostCodes.ts';
 
 type CheckPostCodesProps = {
   address: {

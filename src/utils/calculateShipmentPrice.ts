@@ -29,33 +29,17 @@ export const calculateShipmentPrice = ({
   const nLengthInMeters = Number(length) / 100;
   const nWidthInMeters = Number(width) / 100;
   const nHeightInMeters = Number(height) / 100;
-  if (nWeight <= 2 && nWeight !== 0) {
-    priceCalculatedByWeight = 25;
+  if (nWeight <= 1 && nWeight !== 0) {
+    priceCalculatedByWeight = 30;
   }
-  if (nWeight > 2 && nWeight <= 5) {
-    priceCalculatedByWeight = 35;
-  }
-  if (nWeight > 5 && nWeight <= 15) {
+  if (nWeight > 1 && nWeight <= 15) {
     priceCalculatedByWeight = 40;
   }
   if (nWeight > 15 && nWeight <= 30) {
     priceCalculatedByWeight = 45;
   }
-  if (nWeight > 30 && nWeight <= 40) {
-    priceCalculatedByWeight = 60;
-  }
-  if (nWeight > 40 && nWeight <= 50) {
-    priceCalculatedByWeight = 75;
-  }
-  if (nWeight > 50 && nWeight <= 75) {
-    priceCalculatedByWeight = 110;
-  }
-  if (nWeight > 75 && nWeight <= 100) {
-    priceCalculatedByWeight = 135;
-  }
-  if (nWeight > 100) {
-    priceCalculatedByWeight = nWeight * 1.35;
-    priceCalculatedByWeight = priceCalculatedByWeight * 1.1;
+  if (nWeight > 30) {
+    priceCalculatedByWeight = nWeight * 1.5;
   }
 
   priceCalculatedByWeight = priceCalculatedByWeight * amount;
