@@ -8,11 +8,10 @@ import scrollToSection from '../../utils/scrollToSection';
 import getServices from './getServices';
 import { isCardDisabled } from '../../utils/serviceUtils';
 import { useTranslation } from 'react-i18next';
-import { ECOTRIP_CONTACT_INFO } from '../../utils/variables/ecotrip';
-
-// const services = {
-// 	adressService: "shipmentWithAddressService",
-// }
+import {
+  ECOTRIP_CONTACT_INFO,
+  WAREHOUSE_CONTACT_INFO,
+} from '../../utils/variables/ecotrip';
 
 const ServiceSection = ({
   setValue,
@@ -42,7 +41,7 @@ const ServiceSection = ({
       setValue(`senderInformation.lastName`, '');
       setValue(
         `senderInformation.phoneNumber`,
-        ECOTRIP_CONTACT_INFO.phoneNumber
+        WAREHOUSE_CONTACT_INFO.phoneNumber
       );
       setValue(`senderInformation.email`, ECOTRIP_CONTACT_INFO.email);
       setValue(`senderInformation.address`, ECOTRIP_CONTACT_INFO.address);
