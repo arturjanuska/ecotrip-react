@@ -1,5 +1,5 @@
 import { UKPostcodeType } from './types';
-import UK_POST_CODES from './ukPostCodes.ts';
+import { UK_POST_CODES } from './ukPostCodesv2.ts';
 
 type CheckPostCodesProps = {
   address: {
@@ -61,10 +61,6 @@ export const validatePostcode = (postcode: string) => {
 
 export type PostCodeObject = {
   postcode: string;
-  eastings: string;
-  northings: string;
-  latitude: string;
-  longitude: string;
   town: string;
   region: string;
   country: string;

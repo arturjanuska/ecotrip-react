@@ -12,7 +12,7 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import {
   evenWeeksDeliveryPostcodes,
   oddWeeksDeliveryPostcodes,
-} from '../utils/blockedDates';
+} from '../utils/ukPostCodesv2';
 
 dayjs.extend(isoWeek);
 

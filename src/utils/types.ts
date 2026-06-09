@@ -151,17 +151,13 @@ export type AddressesFormType = {
 
 export type UKPostcodeType = {
   postcode: string;
-  eastings: string;
-  northings: string;
-  latitude: string;
-  longitude: string;
-  town: string | null;
+  town: string;
   region: string;
   country: string;
   countryString: string;
   basicPrice: string;
   additionalCharges: string;
   parcelForceZone: string;
-  discount: string | null;
-  calendar: string | null;
+  discount: string;
+  calendar: string;
 };
