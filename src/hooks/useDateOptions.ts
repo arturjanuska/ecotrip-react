@@ -180,8 +180,14 @@ const useDateOptions = ({
                 selectedMonthIndex,
                 is_UK_LT ? 2 : 1
               );
+
               // TODO: HARDCODED FOR DECEMBER MONTH, PROBABLY NEED TO REMOVE AFTER NY
-              if (day.value !== '1 - 1') {
+              const isHardcodedExcludedNYDay = day.value === '1 - 1';
+              // TODO: TEMPORARY HARDCODE, REMOVE WHEN NO LONGER NEEDED
+              const isHardcodedExcludedJulyDay =
+                is_UK_LT && selectedMonthIndex === 7 && day.value === '17 - 19';
+
+              if (!isHardcodedExcludedNYDay && !isHardcodedExcludedJulyDay) {
                 days.push(day);
               }
             }
