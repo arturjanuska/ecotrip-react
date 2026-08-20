@@ -3873,7 +3873,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'BL8',
@@ -3885,7 +3885,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'BL9',
@@ -3897,7 +3897,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M25',
@@ -3909,7 +3909,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M26',
@@ -3921,7 +3921,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M45',
@@ -3933,7 +3933,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'HU1',
@@ -17745,7 +17745,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: 'Neygin\u0117s savait\u0117s',
+    calendar: 'Neyginės savaitės',
   },
   {
     postcode: 'SP11',
@@ -17757,7 +17757,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: 'Neygin\u0117s savait\u0117s',
+    calendar: 'Neyginės savaitės',
   },
   {
     postcode: 'SP6',
@@ -17781,7 +17781,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: 'Neygin\u0117s savait\u0117s',
+    calendar: 'Neyginės savaitės',
   },
   {
     postcode: 'BR8',
@@ -22029,7 +22029,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'OL10',
@@ -22041,7 +22041,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'OL11',
@@ -22053,7 +22053,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'OL12',
@@ -22065,7 +22065,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'OL15',
@@ -22077,7 +22077,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'OL16',
@@ -22089,7 +22089,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'S25',
@@ -22209,7 +22209,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M28',
@@ -22221,7 +22221,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M3',
@@ -22233,7 +22233,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M30',
@@ -22245,7 +22245,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M38',
@@ -22257,7 +22257,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M44',
@@ -22269,7 +22269,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M5',
@@ -22281,7 +22281,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M6',
@@ -22293,7 +22293,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'M7',
@@ -22305,7 +22305,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'B43',
@@ -22917,7 +22917,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: 'Even',
+    calendar: 'Odd',
   },
   {
     postcode: 'BA11',
@@ -22929,7 +22929,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: 'Even',
+    calendar: 'Odd',
   },
   {
     postcode: 'BA16',
@@ -23001,7 +23001,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: 'Even',
+    calendar: 'Odd',
   },
   {
     postcode: 'BA5',
@@ -23913,7 +23913,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'ST5',
@@ -23925,7 +23925,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'ST7',
@@ -23937,7 +23937,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'ST8',
@@ -23949,7 +23949,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'ST9',
@@ -23961,7 +23961,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WS11',
@@ -26085,7 +26085,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WA13',
@@ -26097,7 +26097,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WA2',
@@ -26109,7 +26109,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WA3',
@@ -26121,7 +26121,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WA4',
@@ -26133,7 +26133,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WA5',
@@ -26145,7 +26145,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'B46',
@@ -27153,7 +27153,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WN1',
@@ -27165,7 +27165,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WN2',
@@ -27177,7 +27177,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WN3',
@@ -27189,7 +27189,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WN4',
@@ -27201,7 +27201,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WN5',
@@ -27213,7 +27213,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WN6',
@@ -27225,7 +27225,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'WN7',
@@ -27237,7 +27237,7 @@ export const UK_POST_CODES = [
     additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
   {
     postcode: 'BA12',
@@ -34236,16 +34236,16 @@ export const UK_POST_CODES = [
     calendar: '',
   },
   {
-    postcode: 'WR13',
-    town: '',
-    region: 'Worcestershire',
-    country: 'ENG',
-    countryString: 'England',
+    postcode: 'M90',
+    town: 'Manchester',
+    region: 'Greater Manchester',
+    country: '',
+    countryString: '',
     basicPrice: 'Ecotrip pricelist',
-    additionalCharges: 'Parcel force pricelist',
+    additionalCharges: '',
     parcelForceZone: 'Zone 1',
     discount: '',
-    calendar: '',
+    calendar: 'Odd',
   },
 ];
 
