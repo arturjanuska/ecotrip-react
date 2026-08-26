@@ -51,26 +51,6 @@ const useDeliveryDate = ({
 
       const deliveryDays = is_UK_LT ? [2, 3] : [0, 5, 6];
 
-      const pickupStartDay = dayRangeFrom
-        ? parseInt(dayRangeFrom.split(' - ')[0], 10)
-        : NaN;
-      const pickupEndDayNum = pickupEndDay ? parseInt(pickupEndDay, 10) : NaN;
-      const isMonthWrap =
-        !Number.isNaN(pickupEndDayNum) &&
-        !Number.isNaN(pickupStartDay) &&
-        pickupEndDayNum < pickupStartDay;
-
-      const getDeliveryYear = () => {
-        const currentYear = dayjs().year();
-        const nextYear = dayjs().add(1, 'year').year();
-        return pickupMonth === 12 && isMonthWrap ? nextYear : currentYear;
-      };
-
-      const getDeliveryMonth = () => {
-        if (!isMonthWrap) return pickupMonth;
-        return pickupMonth + 1 < 13 ? pickupMonth + 1 : 1;
-      };
-
       const findNextValidDay = (date: Dayjs, validDays: number[]) => {
         while (!validDays.includes(date.day())) {
           date = date.add(1, 'day');
@@ -83,6 +63,28 @@ const useDeliveryDate = ({
         date = date.add(7, 'day');
         date = findNextValidDay(date, validDays);
         return date;
+      };
+
+      const getDeliveryYear = () => {
+        const currentYear = dayjs().year();
+
+        const nextYear = dayjs().add(1, 'year').year();
+
+        if (pickupMonth == 12) {
+          if (pickupEndDay === '1' || pickupEndDay === '2') {
+            return nextYear;
+          }
+          return currentYear;
+        }
+        return currentYear;
+      };
+
+      const getDeliveryMonth = () => {
+        return pickupEndDay === '1' || pickupEndDay === '2'
+          ? pickupMonth + 1 < 13
+            ? pickupMonth + 1
+            : 1
+          : pickupMonth;
       };
 
       const pickupEndDate = dayjs(
