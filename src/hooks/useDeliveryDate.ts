@@ -49,7 +49,27 @@ const useDeliveryDate = ({
 
       const is_UK_LT = direction === 'UK-LT';
 
-      const deliveryDays = is_UK_LT ? [2, 3] : [0, 5, 6];
+      const deliveryDays = is_UK_LT ? [3, 4] : [0, 5, 6];
+
+      const pickupStartDay = dayRangeFrom
+        ? parseInt(dayRangeFrom.split(' - ')[0], 10)
+        : NaN;
+      const pickupEndDayNum = pickupEndDay ? parseInt(pickupEndDay, 10) : NaN;
+      const isMonthWrap =
+        !Number.isNaN(pickupEndDayNum) &&
+        !Number.isNaN(pickupStartDay) &&
+        pickupEndDayNum < pickupStartDay;
+
+      const getDeliveryYear = () => {
+        const currentYear = dayjs().year();
+        const nextYear = dayjs().add(1, 'year').year();
+        return pickupMonth === 12 && isMonthWrap ? nextYear : currentYear;
+      };
+
+      const getDeliveryMonth = () => {
+        if (!isMonthWrap) return pickupMonth;
+        return pickupMonth + 1 < 13 ? pickupMonth + 1 : 1;
+      };
 
       const findNextValidDay = (date: Dayjs, validDays: number[]) => {
         while (!validDays.includes(date.day())) {
@@ -65,28 +85,6 @@ const useDeliveryDate = ({
         return date;
       };
 
-      const getDeliveryYear = () => {
-        const currentYear = dayjs().year();
-
-        const nextYear = dayjs().add(1, 'year').year();
-
-        if (pickupMonth == 12) {
-          if (pickupEndDay === '1' || pickupEndDay === '2') {
-            return nextYear;
-          }
-          return currentYear;
-        }
-        return currentYear;
-      };
-
-      const getDeliveryMonth = () => {
-        return pickupEndDay === '1' || pickupEndDay === '2'
-          ? pickupMonth + 1 < 13
-            ? pickupMonth + 1
-            : 1
-          : pickupMonth;
-      };
-
       const pickupEndDate = dayjs(
         `${getDeliveryYear()}-${getDeliveryMonth()}-${pickupEndDay}`
       ).add(1, 'day');
@@ -100,24 +98,15 @@ const useDeliveryDate = ({
 
       const deliveryStartDateDay = deliveryStartDate.format('D');
       const deliveryEndDateDay = deliveryEndDate.format('D');
-      const month = deliveryStartDate.format('MM');
 
+      // useDeliveryDate.ts
       const deliveryStartDateDayLabel = `${t(
-        monthNamesForDaySelect[parseInt(month, 10) - 1]
+        monthNamesForDaySelect[deliveryStartDate.month()]
       )} ${deliveryStartDateDay}`;
 
-      const deliveryEndDateDayLabel =
-        parseInt(month, 10) === 12 && parseInt(deliveryStartDateDay, 10) > 29
-          ? `${t(monthNamesForDaySelect[0])} ${deliveryEndDateDay}`
-          : `${t(
-              monthNamesForDaySelect[
-                parseInt(deliveryEndDateDay, 10) === 1 ||
-                parseInt(deliveryEndDateDay, 10) === 2
-                  ? parseInt(month, 10)
-                  : parseInt(month, 10) - 1
-              ]
-            )} ${deliveryEndDateDay}`;
-
+      const deliveryEndDateDayLabel = `${t(
+        monthNamesForDaySelect[deliveryEndDate.month()]
+      )} ${deliveryEndDateDay}`;
       const deliveryDate = {
         year: deliveryStartDate.format('YYYY'),
         month: deliveryStartDate.format('MM'),
@@ -145,18 +134,10 @@ const useDeliveryDate = ({
       //   setValue('dates.to.day', {
       //     label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
       //     value: deliveryDate.day,
-      //     key: {
-      //       one: monthNamesForDaySelect[parseInt(month, 10) - 1],
-      //       two:
-      //         parseInt(month, 10) === 12
-      //           ? monthNamesForDaySelect[0]
-      //           : monthNamesForDaySelect[
-      //               parseInt(deliveryEndDateDay, 10) === 1 ||
-      //               parseInt(deliveryEndDateDay, 10) === 2
-      //                 ? parseInt(month, 10)
-      //                 : parseInt(month, 10) - 1
-      //             ],
-      //     },
+      // key: {
+      //   one: monthNamesForDaySelect[deliveryStartDate.month()],
+      //   two: monthNamesForDaySelect[deliveryEndDate.month()],
+      // },
       //   });
       // }
 
@@ -164,16 +145,8 @@ const useDeliveryDate = ({
         label: `${deliveryStartDateDayLabel} - ${deliveryEndDateDayLabel}`,
         value: deliveryDate.day,
         key: {
-          one: monthNamesForDaySelect[parseInt(month, 10) - 1],
-          two:
-            parseInt(month, 10) === 12
-              ? monthNamesForDaySelect[0]
-              : monthNamesForDaySelect[
-                  parseInt(deliveryEndDateDay, 10) === 1 ||
-                  parseInt(deliveryEndDateDay, 10) === 2
-                    ? parseInt(month, 10)
-                    : parseInt(month, 10) - 1
-                ],
+          one: monthNamesForDaySelect[deliveryStartDate.month()],
+          two: monthNamesForDaySelect[deliveryEndDate.month()],
         },
       });
     };
