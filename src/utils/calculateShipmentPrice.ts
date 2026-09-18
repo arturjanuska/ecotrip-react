@@ -39,7 +39,7 @@ export const calculateShipmentPrice = ({
     priceCalculatedByWeight = 45;
   }
   if (nWeight > 30) {
-    priceCalculatedByWeight = nWeight * 1.5;
+    priceCalculatedByWeight = nWeight * 1.65;
   }
 
   priceCalculatedByWeight = priceCalculatedByWeight * amount;

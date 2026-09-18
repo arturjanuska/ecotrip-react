@@ -25,7 +25,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withoutTires',
       value: 'withoutTires',
     },
-    price: 60,
+    price: 66,
   },
   {
     category: {
@@ -46,7 +46,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withTires',
       value: 'withTires',
     },
-    price: 70,
+    price: 77,
   },
   {
     category: {
@@ -67,7 +67,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withoutTires',
       value: 'withoutTires',
     },
-    price: 80,
+    price: 88,
   },
   {
     category: {
@@ -88,7 +88,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withTires',
       value: 'withTires',
     },
-    price: 90,
+    price: 99,
   },
   {
     category: {
@@ -109,7 +109,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withoutTires',
       value: 'withoutTires',
     },
-    price: 100,
+    price: 110,
   },
   {
     category: {
@@ -130,7 +130,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withTires',
       value: 'withTires',
     },
-    price: 110,
+    price: 121,
   },
   {
     category: {
@@ -151,7 +151,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withoutTires',
       value: 'withoutTires',
     },
-    price: 120,
+    price: 132,
   },
   {
     category: {
@@ -172,7 +172,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'withTires',
       value: 'withTires',
     },
-    price: 130,
+    price: 143,
   },
   // Kita sub kategorija
 
@@ -193,7 +193,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.15,
     weight: 15,
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -211,7 +211,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.18,
     weight: 18,
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -229,7 +229,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.2,
     weight: 20,
     specification: null,
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -247,7 +247,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 22,
     specification: null,
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -265,7 +265,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 25,
     specification: null,
-    price: 55,
+    price: 60,
   },
   {
     category: {
@@ -283,7 +283,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.35,
     weight: 30,
     specification: null,
-    price: 55,
+    price: 60,
   },
   {
     category: {
@@ -301,7 +301,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 35,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -319,7 +319,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.45,
     weight: 40,
     specification: null,
-    price: 85,
+    price: 95,
   },
   // interior
   // allways need to call manager
@@ -376,7 +376,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.12,
     weight: 8,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -394,7 +394,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.15,
     weight: 10,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -412,7 +412,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.18,
     weight: 12,
     specification: null,
-    price: 70,
+    price: 75,
   },
   {
     category: {
@@ -430,7 +430,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.22,
     weight: 15,
     specification: null,
-    price: 75,
+    price: 80,
   },
   {
     category: {
@@ -448,7 +448,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 18,
     specification: null,
-    price: 80,
+    price: 90,
   },
   {
     category: {
@@ -466,7 +466,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.28,
     weight: 20,
     specification: null,
-    price: 85,
+    price: 90,
   },
   {
     category: {
@@ -484,7 +484,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 22,
     specification: null,
-    price: 85,
+    price: 90,
   },
   {
     category: {
@@ -502,7 +502,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.35,
     weight: 25,
     specification: null,
-    price: 85,
+    price: 90,
   },
   // cover
   {
@@ -521,7 +521,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.12,
     weight: 10,
     specification: null,
-    price: 55,
+    price: 60,
   },
   {
     category: {
@@ -539,7 +539,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.15,
     weight: 12,
     specification: null,
-    price: 55,
+    price: 60,
   },
   {
     category: {
@@ -557,7 +557,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.18,
     weight: 15,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -575,7 +575,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.22,
     weight: 18,
     specification: null,
-    price: 65,
+    price: 70,
   },
   {
     category: {
@@ -593,7 +593,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 20,
     specification: null,
-    price: 80,
+    price: 90,
   },
   {
     category: {
@@ -611,7 +611,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.28,
     weight: 22,
     specification: null,
-    price: 80,
+    price: 90,
   },
   {
     category: {
@@ -629,7 +629,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 25,
     specification: null,
-    price: 80,
+    price: 90,
   },
   {
     category: {
@@ -647,7 +647,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.35,
     weight: 28,
     specification: null,
-    price: 85,
+    price: 890,
   },
   // engine
   // engine full = true
@@ -671,7 +671,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 80,
+    price: 90,
   },
   {
     category: {
@@ -692,7 +692,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 120,
+    price: 130,
   },
   {
     category: {
@@ -713,7 +713,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 100,
+    price: 110,
   },
   {
     category: {
@@ -734,7 +734,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 170,
+    price: 190,
   },
   {
     category: {
@@ -755,7 +755,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 120,
+    price: 130,
   },
   {
     category: {
@@ -776,7 +776,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 200,
+    price: 220,
   },
   {
     category: {
@@ -797,7 +797,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 150,
+    price: 165,
   },
   {
     category: {
@@ -818,7 +818,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 250,
+    price: 275,
   },
   {
     category: {
@@ -839,7 +839,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 180,
+    price: 200,
   },
   {
     category: {
@@ -860,7 +860,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 300,
+    price: 330,
   },
   {
     category: {
@@ -881,7 +881,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 200,
+    price: 220,
   },
   {
     category: {
@@ -902,7 +902,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 350,
+    price: 385,
   },
   {
     category: {
@@ -923,7 +923,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 230,
+    price: 250,
   },
   {
     category: {
@@ -944,7 +944,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 370,
+    price: 410,
   },
   {
     category: {
@@ -965,7 +965,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'empty',
       value: 'empty',
     },
-    price: 250,
+    price: 270,
   },
   {
     category: {
@@ -986,7 +986,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'full',
       value: 'full',
     },
-    price: 400,
+    price: 440,
   },
 
   // transmision
@@ -1011,7 +1011,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -1032,7 +1032,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -1053,7 +1053,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 65,
+    price: 70,
   },
   {
     category: {
@@ -1074,7 +1074,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -1095,7 +1095,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 75,
+    price: 85,
   },
   {
     category: {
@@ -1116,7 +1116,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -1137,7 +1137,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 85,
+    price: 95,
   },
   {
     category: {
@@ -1158,7 +1158,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 75,
+    price: 85,
   },
   {
     category: {
@@ -1179,7 +1179,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 120,
+    price: 135,
   },
   {
     category: {
@@ -1200,7 +1200,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 85,
+    price: 95,
   },
   {
     category: {
@@ -1221,7 +1221,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 120,
+    price: 135,
   },
   {
     category: {
@@ -1242,7 +1242,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 120,
+    price: 135,
   },
   {
     category: {
@@ -1263,7 +1263,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 120,
+    price: 135,
   },
   {
     category: {
@@ -1284,7 +1284,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 120,
+    price: 135,
   },
   {
     category: {
@@ -1305,7 +1305,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'automatic',
       value: 'automatic',
     },
-    price: 120,
+    price: 135,
   },
   {
     category: {
@@ -1326,7 +1326,7 @@ export const automotiveGoodsCategoryProducts: CommonProductTypeExample[] = [
       label: 'manual',
       value: 'manual',
     },
-    price: 120,
+    price: 135,
   },
 ];
 
@@ -1348,7 +1348,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.35,
     weight: 7,
     specification: null,
-    price: 40,
+    price: 45,
   },
   {
     category: {
@@ -1366,7 +1366,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 7,
     specification: null,
-    price: 35,
+    price: 40,
   },
   // teenagersBike
   {
@@ -1385,7 +1385,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.45,
     weight: 12,
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -1403,7 +1403,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 12,
     specification: null,
-    price: 40,
+    price: 45,
   },
   // adultBike
   {
@@ -1422,7 +1422,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.55,
     weight: 14,
     specification: null,
-    price: 65,
+    price: 70,
   },
   {
     category: {
@@ -1440,7 +1440,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 14,
     specification: null,
-    price: 55,
+    price: 60,
   },
   // electricBike
   {
@@ -1459,7 +1459,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.65,
     weight: 25,
     specification: null,
-    price: 75,
+    price: 80,
   },
   {
     category: {
@@ -1477,7 +1477,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.55,
     weight: 25,
     specification: null,
-    price: 65,
+    price: 70,
   },
   // childBicycleTrailer
   {
@@ -1496,7 +1496,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 10,
     specification: null,
-    price: 75,
+    price: 80,
   },
   {
     category: {
@@ -1514,7 +1514,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 8,
     specification: null,
-    price: 60,
+    price: 65,
   },
   // electricScooter
   {
@@ -1533,7 +1533,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.15,
     weight: 12,
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -1551,7 +1551,7 @@ export const bicyclesAndScootersCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.18,
     weight: 15,
     specification: null,
-    price: 60,
+    price: 65,
   },
 ];
 
@@ -1574,7 +1574,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.1,
     weight: 7,
     specification: null,
-    price: 40,
+    price: 45,
   },
   {
     category: {
@@ -1592,7 +1592,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.15,
     weight: 10,
     specification: null,
-    price: 45,
+    price: 50,
   },
 
   // strollers
@@ -1613,7 +1613,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.8,
     weight: 5,
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -1631,7 +1631,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.2,
     weight: 12,
     specification: null,
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -1649,7 +1649,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 14,
     specification: null,
-    price: 65,
+    price: 70,
   },
   {
     category: {
@@ -1667,7 +1667,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.35,
     weight: 20,
     specification: null,
-    price: 75,
+    price: 80,
   },
   {
     category: {
@@ -1685,7 +1685,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 15,
     specification: null,
-    price: 75,
+    price: 80,
   },
   {
     category: {
@@ -1703,7 +1703,7 @@ export const goodsForChildrenCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 18,
     specification: null,
-    price: 85,
+    price: 95,
   },
 ];
 
@@ -1726,7 +1726,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.4,
       weight: 45,
       specification: null,
-      price: 120,
+      price: 135,
     },
     {
       category: {
@@ -1744,7 +1744,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.5,
       weight: 90,
       specification: null,
-      price: 160,
+      price: 180,
     },
     {
       category: {
@@ -1762,7 +1762,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.6,
       weight: 130,
       specification: null,
-      price: 200,
+      price: 220,
     },
     {
       category: {
@@ -1780,7 +1780,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.7,
       weight: 170,
       specification: null,
-      price: 270,
+      price: 300,
     },
     // Standartinis motociklas standardMotorcycle
     {
@@ -1799,7 +1799,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.55,
       weight: 170,
       specification: null,
-      price: 250,
+      price: 275,
     },
     {
       category: {
@@ -1817,7 +1817,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.65,
       weight: 190,
       specification: null,
-      price: 270,
+      price: 300,
     },
     {
       category: {
@@ -1835,7 +1835,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.75,
       weight: 210,
       specification: null,
-      price: 300,
+      price: 330,
     },
     {
       category: {
@@ -1853,7 +1853,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.9,
       weight: 230,
       specification: null,
-      price: 330,
+      price: 365,
     },
     // Krosinis motociklas motocrossMotorcycle
     {
@@ -1872,7 +1872,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.5,
       weight: 75,
       specification: null,
-      price: 150,
+      price: 165,
     },
     {
       category: {
@@ -1890,7 +1890,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.55,
       weight: 105,
       specification: null,
-      price: 180,
+      price: 200,
     },
     {
       category: {
@@ -1908,7 +1908,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.6,
       weight: 115,
       specification: null,
-      price: 230,
+      price: 255,
     },
     {
       category: {
@@ -1926,7 +1926,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.6,
       weight: 115,
       specification: null,
-      price: 260,
+      price: 275,
     },
     // Kelioninis  motociklass touringMotorcycle
     {
@@ -1945,7 +1945,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.8,
       weight: 230,
       specification: null,
-      price: 300,
+      price: 330,
     },
     {
       category: {
@@ -1963,7 +1963,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.95,
       weight: 260,
       specification: null,
-      price: 350,
+      price: 385,
     },
     {
       category: {
@@ -1981,7 +1981,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 1.1,
       weight: 320,
       specification: null,
-      price: 400,
+      price: 440,
     },
     {
       category: {
@@ -1999,7 +1999,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 1.25,
       weight: 400,
       specification: null,
-      price: 430,
+      price: 475,
     },
     // Sportinis  motociklas sportsMotorcycle
     {
@@ -2018,7 +2018,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.45,
       weight: 160,
       specification: null,
-      price: 230,
+      price: 250,
     },
     {
       category: {
@@ -2036,7 +2036,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.55,
       weight: 195,
       specification: null,
-      price: 260,
+      price: 285,
     },
     {
       category: {
@@ -2054,7 +2054,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.65,
       weight: 210,
       specification: null,
-      price: 280,
+      price: 310,
     },
     // chopper chopper
     {
@@ -2073,7 +2073,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.65,
       weight: 220,
       specification: null,
-      price: 300,
+      price: 330,
     },
     {
       category: {
@@ -2091,7 +2091,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.75,
       weight: 250,
       specification: null,
-      price: 350,
+      price: 385,
     },
     {
       category: {
@@ -2109,7 +2109,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.8,
       weight: 320,
       specification: null,
-      price: 400,
+      price: 440,
     },
     // Enduro enduro
     {
@@ -2128,7 +2128,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.5,
       weight: 135,
       specification: null,
-      price: 200,
+      price: 220,
     },
     {
       category: {
@@ -2146,7 +2146,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.6,
       weight: 170,
       specification: null,
-      price: 230,
+      price: 255,
     },
     {
       category: {
@@ -2164,7 +2164,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.75,
       weight: 230,
       specification: null,
-      price: 250,
+      price: 275,
     },
     {
       category: {
@@ -2182,7 +2182,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.9,
       weight: 250,
       specification: null,
-      price: 280,
+      price: 310,
     },
     // quadBike quadBike
     {
@@ -2201,7 +2201,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.8,
       weight: 220,
       specification: null,
-      price: 330,
+      price: 365,
     },
     {
       category: {
@@ -2219,7 +2219,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 1,
       weight: 280,
       specification: null,
-      price: 360,
+      price: 400,
     },
     {
       category: {
@@ -2237,7 +2237,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 1.25,
       weight: 340,
       specification: null,
-      price: 400,
+      price: 440,
     },
     {
       category: {
@@ -2255,7 +2255,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 1.5,
       weight: 400,
       specification: null,
-      price: 400,
+      price: 440,
     },
     // Motociklo variklis motorcycleEngine
     {
@@ -2274,7 +2274,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.01,
       weight: 15,
       specification: null,
-      price: 45,
+      price: 50,
     },
     {
       category: {
@@ -2292,7 +2292,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.02,
       weight: 25,
       specification: null,
-      price: 55,
+      price: 60,
     },
     {
       category: {
@@ -2310,7 +2310,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.03,
       weight: 35,
       specification: null,
-      price: 65,
+      price: 70,
     },
     {
       category: {
@@ -2328,7 +2328,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.04,
       weight: 50,
       specification: null,
-      price: 80,
+      price: 90,
     },
     {
       category: {
@@ -2346,7 +2346,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.06,
       weight: 70,
       specification: null,
-      price: 90,
+      price: 99,
     },
     {
       category: {
@@ -2364,7 +2364,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.07,
       weight: 90,
       specification: null,
-      price: 110,
+      price: 120,
     },
     {
       category: {
@@ -2382,7 +2382,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.09,
       weight: 110,
       specification: null,
-      price: 150,
+      price: 165,
     },
     {
       category: {
@@ -2400,7 +2400,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.11,
       weight: 130,
       specification: null,
-      price: 190,
+      price: 210,
     },
 
     // goodsForMotorcycles Prekės motociklams
@@ -2420,7 +2420,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.01,
       weight: 5,
       specification: null,
-      price: 35,
+      price: 40,
     },
     {
       category: {
@@ -2438,7 +2438,7 @@ export const motorcyclesAndAccessoriesCategoryProducts: CommonProductTypeExample
       volume: 0.01,
       weight: 5,
       specification: null,
-      price: 40,
+      price: 45,
     },
   ];
 
@@ -2456,7 +2456,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.04,
     weight: 4,
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -2471,7 +2471,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.06,
     weight: 5,
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
@@ -2486,7 +2486,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.08,
     weight: 8,
     specification: null,
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -2501,7 +2501,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.1,
     weight: 9,
     specification: null,
-    price: 55,
+    price: 60,
   },
   {
     category: {
@@ -2516,7 +2516,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.12,
     weight: 12,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -2531,7 +2531,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.15,
     weight: 14,
     specification: null,
-    price: 65,
+    price: 70,
   },
   {
     category: {
@@ -2546,7 +2546,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.2,
     weight: 18,
     specification: null,
-    price: 75,
+    price: 80,
   },
   {
     category: {
@@ -2561,7 +2561,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 22,
     specification: null,
-    price: 80,
+    price: 90,
   },
   {
     category: {
@@ -2576,7 +2576,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 25,
     specification: null,
-    price: 85,
+    price: 95,
   },
   {
     category: {
@@ -2591,7 +2591,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.35,
     weight: 30,
     specification: null,
-    price: 95,
+    price: 105,
   },
   {
     category: {
@@ -2606,7 +2606,7 @@ export const flatScreenTvCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.4,
     weight: 35,
     specification: null,
-    price: 105,
+    price: 115,
   },
 ];
 
@@ -2658,7 +2658,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     size: null,
     specification: null,
     // skaiciuojama pagal kubus 1 kubinis metras 200 eu  aukshtis*plotis*gylis
-    price: 70,
+    price: 75,
   },
   {
     category: {
@@ -2674,7 +2674,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     size: null,
     specification: null,
     // skaiciuojama pagal kubus 1 kubinis metras 200 eu  aukshtis*plotis*gylis
-    price: 60,
+    price: 65,
   },
   // Skalbimo mašina washingMachine
   {
@@ -2693,7 +2693,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.15,
     weight: 40,
     specification: null,
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -2711,7 +2711,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.2,
     weight: 60,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -2729,7 +2729,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.25,
     weight: 70,
     specification: null,
-    price: 70,
+    price: 75,
   },
   {
     category: {
@@ -2747,7 +2747,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.3,
     weight: 80,
     specification: null,
-    price: 80,
+    price: 90,
   },
   {
     category: {
@@ -2762,7 +2762,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     weight: 40,
     size: null,
     specification: null,
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -2777,7 +2777,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     weight: 40,
     size: null,
     specification: null,
-    price: 50,
+    price: 55,
   },
   {
     category: {
@@ -2792,7 +2792,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     weight: 15,
     size: null,
     specification: null,
-    price: 45,
+    price: 50,
   },
   // Viryklė stove
   {
@@ -2811,7 +2811,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.2,
     weight: 50,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -2829,7 +2829,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.6,
     weight: 60,
     specification: null,
-    price: 70,
+    price: 80,
   },
   {
     category: {
@@ -2847,7 +2847,7 @@ export const householdAppliancesCategoryProducts: CommonProductTypeExample[] = [
     volume: 0.7,
     weight: 80,
     specification: null,
-    price: 90,
+    price: 100,
   },
 ];
 
@@ -2873,7 +2873,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
       label: 'withoutAssemblyBag',
       value: 'withoutAssemblyBag',
     },
-    price: 200,
+    price: 220,
   },
   {
     category: {
@@ -2894,7 +2894,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
       label: 'withoutAssemblyBag',
       value: 'withoutAssemblyBag',
     },
-    price: 230,
+    price: 250,
   },
   {
     category: {
@@ -2915,7 +2915,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
       label: 'withoutAssemblyBag',
       value: 'withoutAssemblyBag',
     },
-    price: 280,
+    price: 310,
   },
   {
     category: {
@@ -2936,7 +2936,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
       label: 'withAssemblyBag',
       value: 'withAssemblyBag',
     },
-    price: 240,
+    price: 265,
   },
   {
     category: {
@@ -2957,7 +2957,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
       label: 'withAssemblyBag',
       value: 'withAssemblyBag',
     },
-    price: 270,
+    price: 299,
   },
   {
     category: {
@@ -2978,7 +2978,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
       label: 'withAssemblyBag',
       value: 'withAssemblyBag',
     },
-    price: 320,
+    price: 350,
   },
   {
     category: {
@@ -2993,7 +2993,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     weight: 15,
     size: null,
     specification: null,
-    price: 60,
+    price: 65,
   },
   {
     category: {
@@ -3008,7 +3008,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     weight: 25,
     size: null,
     specification: null,
-    price: 70,
+    price: 75,
   },
   {
     category: {
@@ -3023,7 +3023,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     weight: 30,
     size: null,
     specification: null,
-    price: 70,
+    price: 75,
   },
   {
     category: {
@@ -3038,7 +3038,7 @@ export const gardenEquipmentCategoryProducts: CommonProductTypeExample[] = [
     weight: 40,
     size: null,
     specification: null,
-    price: 80,
+    price: 85,
   },
 ];
 
@@ -3055,7 +3055,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 1,
     },
     specification: null,
-    price: 30,
+    price: 35,
   },
   {
     category: {
@@ -3068,7 +3068,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 14,
     },
     specification: null,
-    price: 40,
+    price: 45,
   },
   {
     category: {
@@ -3081,7 +3081,7 @@ export const shipmentsCategoryProducts: CommonProductTypeExample[] = [
       to: 29,
     },
     specification: null,
-    price: 45,
+    price: 50,
   },
   {
     category: {
