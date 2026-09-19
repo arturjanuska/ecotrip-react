@@ -14,6 +14,18 @@ const getDiscountPercentage = (itemsCount: number) => {
   return 1;
 };
 
+const parseDiscount = (value: unknown): number => {
+  if (value === null || value === undefined || value === '') {
+    return 0;
+  }
+
+  const parsed = Number(
+    typeof value === 'string' ? value.replace('%', '').trim() : value
+  );
+
+  return Number.isFinite(parsed) ? parsed : 0;
+};
+
 const getOrderPrice = (
   shipmentsArray: ShipmentProps[],
   postcodeDetails: any,
@@ -107,11 +119,11 @@ const getOrderPrice = (
               }`
         }:`,
         price:
-          `${currency}${shipmentPrice.toFixed(2)} - ${convertValue(
+          `${currency}${shipmentPrice.toFixed(2)} (${convertValue(
             currency,
             shipmentPrice,
             rate
-          )}` || '0.00',
+          )})` || '0.00',
       });
     }
   }
@@ -140,7 +152,7 @@ const getOrderPrice = (
         price += 5;
         priceDescription.push({
           title: i18next.t('purchaseServiceMsg'),
-          price: `${currency}5.00 - ${convertValue(currency, 5, rate)}`,
+          price: `${currency}5.00 (${convertValue(currency, 5, rate)})`,
         });
       } else {
         price += threePercentOfThePrice;
@@ -148,7 +160,7 @@ const getOrderPrice = (
           title: i18next.t('purchaseServiceMsg'),
           price: `${currency}${threePercentOfThePrice.toFixed(
             2
-          )} - ${convertValue(currency, threePercentOfThePrice, rate)}`,
+          )} (${convertValue(currency, threePercentOfThePrice, rate)})`,
         });
       }
     }
@@ -159,13 +171,13 @@ const getOrderPrice = (
         price += 15;
         priceDescription.push({
           title: i18next.t('purchaseServiceMsg'),
-          price: `${currency}15.00 - ${convertValue(currency, 15, rate)}`,
+          price: `${currency}15.00 (${convertValue(currency, 15, rate)})`,
         });
       } else if (twoPercentOfThePrice > 50) {
         price += 50;
         priceDescription.push({
           title: i18next.t('purchaseServiceMsg'),
-          price: `${currency}50.00 - ${convertValue(currency, 50, rate)}`,
+          price: `${currency}50.00 (${convertValue(currency, 50, rate)})`,
         });
       } else {
         price += twoPercentOfThePrice;
@@ -173,7 +185,7 @@ const getOrderPrice = (
           title: i18next.t('purchaseServiceMsg'),
           price: `${currency}${twoPercentOfThePrice.toFixed(
             2
-          )} - ${convertValue(currency, twoPercentOfThePrice, rate)}`,
+          )} (${convertValue(currency, twoPercentOfThePrice, rate)})`,
         });
       }
     }
@@ -184,7 +196,7 @@ const getOrderPrice = (
         title: i18next.t('purchaseAmountMsg'),
         price: `${currency}${purchaseServiceShipmentsPrices.toFixed(
           2
-        )}  - ${convertValue(currency, purchaseServiceShipmentsPrices, rate)}`,
+        )} (${convertValue(currency, purchaseServiceShipmentsPrices, rate)})`,
       });
     }
   }
@@ -195,13 +207,13 @@ const getOrderPrice = (
       price += 15;
       priceDescription.push({
         title: i18next.t('salesServiceMsg'),
-        price: `${currency}15.00  - ${convertValue(currency, 15, rate)}`,
+        price: `${currency}15.00 (${convertValue(currency, 15, rate)})`,
       });
     } else if (twoPercentOfThePrice > 50) {
       price += 50;
       priceDescription.push({
         title: i18next.t('salesAmountMsg'),
-        price: `${currency}50.00  - ${convertValue(currency, 50, rate)}`,
+        price: `${currency}50.00 (${convertValue(currency, 50, rate)})`,
       });
     } else {
       price += twoPercentOfThePrice;
@@ -209,26 +221,27 @@ const getOrderPrice = (
         title: i18next.t('salesAmountMsg'),
         price: `${currency}${twoPercentOfThePrice.toFixed(
           2
-        )}  - ${convertValue(currency, twoPercentOfThePrice, rate)}`,
+        )} (${convertValue(currency, twoPercentOfThePrice, rate)})`,
       });
     }
   }
 
+  const additionalCharges = Number(postcodeDetails?.additionalCharges);
+
   if (
-    postcodeDetails?.additionalCharges &&
-    !isNaN(Number(postcodeDetails?.additionalCharges)) &&
+    Number.isFinite(additionalCharges) &&
+    additionalCharges !== 0 &&
     service !== 'shipmentWithAddressService'
   ) {
-    price += Number(postcodeDetails?.additionalCharges) || 0;
+    price += additionalCharges;
+
     priceDescription.push({
       title: i18next.t('addressFeeMsg'),
-      price: `${currency}${Number(postcodeDetails.additionalCharges).toFixed(
-        2
-      )} - ${convertValue(
+      price: `${currency}${additionalCharges.toFixed(2)} (${convertValue(
         currency,
-        Number(postcodeDetails.additionalCharges),
+        additionalCharges,
         rate
-      )}`,
+      )})`,
     });
   }
 
@@ -243,37 +256,30 @@ const getOrderPrice = (
           ? '5%'
           : null;
 
-  const secondDiscountPercentage =
-    postcodeDetails?.discount === '10%' &&
-    service !== 'shipmentWithAddressService'
-      ? 0.9
+  const postcodeDiscount = parseDiscount(postcodeDetails?.discount);
+
+  const postcodeDiscountPercentage =
+    postcodeDiscount > 0 && service !== 'shipmentWithAddressService'
+      ? 1 - postcodeDiscount / 100
       : 1;
 
   let finalPrice = price;
 
-  if (secondDiscountPercentage === 1) {
-    finalPrice = finalPrice * discountPercentage;
+  if (postcodeDiscountPercentage < discountPercentage) {
+    finalPrice *= postcodeDiscountPercentage;
+
+    priceDescription.push({
+      title: i18next.t('addressDiscountMsg'),
+      price: `${postcodeDiscount}%`,
+    });
+  } else {
+    finalPrice *= discountPercentage;
+
     if (percentage) {
       priceDescription.push({
         title: i18next.t('quantityDiscountMsg'),
         price: `${percentage}`,
       });
-    }
-  } else if (secondDiscountPercentage === 0.9) {
-    if (discountPercentage >= 0.9) {
-      finalPrice = finalPrice * secondDiscountPercentage;
-      priceDescription.push({
-        title: i18next.t('addressDiscountMsg'),
-        price: `10%`,
-      });
-    } else {
-      finalPrice = finalPrice * discountPercentage;
-      if (percentage) {
-        priceDescription.push({
-          title: i18next.t('quantityDiscountMsg'),
-          price: `${percentage}`,
-        });
-      }
     }
   }
 

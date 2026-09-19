@@ -78,6 +78,10 @@
   width: 100%;
 }
 
+.price-description-row strong {
+  min-width: fit-content;
+}
+
 .price-description-row span {
   text-align: left;
 }

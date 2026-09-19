@@ -47,7 +47,7 @@ const OrderPrice = ({
         <strong>
           {currency}
           {sum
-            ? `${sum} - ${convertValue(currency, Number(sum) ?? 0, rate)}`
+            ? `${sum} (${convertValue(currency, Number(sum) ?? 0, rate)})`
             : '0.00'}
         </strong>
       </p>
