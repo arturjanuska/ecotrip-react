@@ -30,13 +30,13 @@ export const calculateShipmentPrice = ({
   const nWidthInMeters = Number(width) / 100;
   const nHeightInMeters = Number(height) / 100;
   if (nWeight <= 1 && nWeight !== 0) {
-    priceCalculatedByWeight = 30;
+    priceCalculatedByWeight = 35;
   }
   if (nWeight > 1 && nWeight <= 15) {
-    priceCalculatedByWeight = 40;
+    priceCalculatedByWeight = 45;
   }
   if (nWeight > 15 && nWeight <= 30) {
-    priceCalculatedByWeight = 45;
+    priceCalculatedByWeight = 50;
   }
   if (nWeight > 30) {
     priceCalculatedByWeight = nWeight * 1.65;
