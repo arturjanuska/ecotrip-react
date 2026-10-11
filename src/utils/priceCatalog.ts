@@ -200,14 +200,8 @@ const measuredPrice = (
       : (length * width * height) / 1e6;
   const result = { volume, weight: isMissing(weight) ? null : weight };
 
-  // A base without its input makes the whole price 0, as the old
-  // calculateShipmentPrice / calculateVolume did.
-  if (
-    (pricing.byWeight && result.weight === null) ||
-    (pricing.byVolume && volume === null)
-  )
-    return { ...result, price: 0 };
-
+  // Each base is priced from the input it has, so a partly filled form
+  // still shows a price; with no usable input at all the price is 0.
   const byWeight =
     pricing.byWeight && result.weight !== null
       ? tierPrice(pricing.byWeight, result.weight, direction)

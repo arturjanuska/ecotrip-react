@@ -1,3 +1,5 @@
+// DEPRECATED: not used. Prices come from Ecotrip CMS (src/utils/priceCatalog.ts,
+// src/hooks/usePriceCatalog.ts). Kept only for reference; do not import.
 export const convertRangeSizeToOptionType = (
   size: { from: number; to: number },
   category: string,

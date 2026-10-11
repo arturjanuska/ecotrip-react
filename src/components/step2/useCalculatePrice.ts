@@ -58,8 +58,7 @@ const useCalculatePrice = ({
         size: size?.value,
         specification: specification?.value,
         amount: Number(amount),
-        // The old shipment formula read an untouched weight as 0.
-        weight: weight === undefined ? 0 : toNumber(weight),
+        weight: toNumber(weight),
         length: toNumber(length),
         width: toNumber(width),
         height: toNumber(height),

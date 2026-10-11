@@ -273,26 +273,62 @@ describe('calculatePrice', () => {
     ).toBeCloseTo(102.5, 2);
   });
 
-  it('gives 0 when a base lacks its input', () => {
+  it('prices each base from the input it has', () => {
     const shipments = pricingOf('shipments');
-    const dims = { length: 100, width: 100, height: 50 };
-    expect(calculatePrice(shipments, { amount: 1, ...dims }, 'UK-LT')).toEqual({
-      price: 0,
-      volume: 0.5,
-      weight: null,
-    });
+    const dims = { length: 50, width: 40, height: 30 };
+    // Weight only: 20 kg → 50 per parcel.
+    expect(
+      calculatePrice(shipments, { amount: 1, weight: 20 }, 'UK-LT')
+    ).toEqual({ price: 50, volume: null, weight: 20 });
+    // Weight and an incomplete set of dimensions: priced by weight.
     expect(
       calculatePrice(
         shipments,
-        { amount: 1, weight: 10, length: 100, width: null, height: 50 },
+        { amount: 2, weight: 5, length: 50, width: 40, height: null },
         'UK-LT'
       )
-    ).toEqual({ price: 0, volume: null, weight: 10 });
+    ).toEqual({ price: 90, volume: null, weight: 5 });
+    // Dimensions only: 0.06 m3 × 230.
+    const byVolume = calculatePrice(shipments, { amount: 1, ...dims }, 'UK-LT');
+    expect(byVolume.price).toBeCloseTo(13.8, 2);
+    expect(byVolume.weight).toBeNull();
+    // A weight of 0 is priced at 0, the volume still counts.
+    expect(
+      calculatePrice(shipments, { amount: 1, weight: 0, ...dims }, 'UK-LT')
+        .price
+    ).toBeCloseTo(13.8, 2);
     // Removals have no weight base, so weight is not needed.
     expect(
-      calculatePrice(pricingOf('removals'), { amount: 1, ...dims }, 'UK-LT')
-        .price
+      calculatePrice(
+        pricingOf('removals'),
+        { amount: 1, length: 100, width: 100, height: 50 },
+        'UK-LT'
+      ).price
     ).toBeCloseTo(100, 2);
+  });
+
+  it('gives 0 when no base has its input', () => {
+    const shipments = pricingOf('shipments');
+    expect(
+      calculatePrice(
+        shipments,
+        { amount: 1, length: 50, width: null, height: 30 },
+        'UK-LT'
+      )
+    ).toEqual({ price: 0, volume: null, weight: null });
+    // The fridge is priced by volume only: a weight does not help.
+    const appliances = findCategory(catalog, 'householdAppliances');
+    const fridge = pricingFor(
+      appliances,
+      findSubCategory(appliances, 'fridge')
+    ) as Pricing;
+    expect(
+      calculatePrice(
+        fridge,
+        { amount: 1, weight: 40, length: 60, width: 60, height: null },
+        'UK-LT'
+      ).price
+    ).toBe(0);
   });
 
   it('uses the per-direction tier rate', () => {
