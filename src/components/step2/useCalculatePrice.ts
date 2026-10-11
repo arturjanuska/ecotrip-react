@@ -1,18 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect } from 'react';
 import { OptionType } from '../../utils/types';
-import { allProducts } from '../../utils/products';
 import { UseFormSetValue } from 'react-hook-form';
 import { FormType } from '../../utils/formTypes';
-import { convertOptionTypeToRangeSize } from '../../utils/convertSizeOptions';
-import {
-  calculateShipmentPrice,
-  calculateVolume,
-} from '../../utils/calculateShipmentPrice';
+import { calculateExtent } from '../../utils/calculateShipmentPrice';
+import { calculatePrice, Direction, Pricing } from '../../utils/priceCatalog';
 
 type Props = {
   category: OptionType | null;
-  productType: OptionType | null;
+  pricing: Pricing | null;
+  direction: Direction;
   size: OptionType | null;
   amount: number;
   specification?: OptionType | null;
@@ -22,16 +19,19 @@ type Props = {
   length?: string;
   width?: string;
   height?: string;
-  pricePerUnit?: number;
   volumePropName: string;
   weightPropName: string;
   extentPropName: string;
-  service: string;
 };
+
+// An empty input is missing; "0" is a value, as in the old formulas.
+const toNumber = (value?: string) =>
+  value === undefined || value === '' ? null : Number(value);
 
 const useCalculatePrice = ({
   category,
-  productType,
+  pricing,
+  direction,
   size,
   amount = 1,
   specification,
@@ -44,114 +44,60 @@ const useCalculatePrice = ({
   volumePropName,
   weightPropName,
   extentPropName,
-  service,
 }: Props) => {
   useEffect(() => {
-    if (
-      (category && category.value === 'removals') ||
-      (productType && productType.value === 'fridge') ||
-      (productType && productType.value === 'freezer')
-    ) {
-      if (length && width && height) {
-        const { price, volume } = calculateVolume({
-          length,
-          width,
-          height,
-          categoryValue: category?.value,
-          amount,
-        });
+    if (!pricing) {
+      // @ts-ignore
+      setValue(name, '0.00');
+      return;
+    }
+
+    const result = calculatePrice(
+      pricing,
+      {
+        size: size?.value,
+        specification: specification?.value,
+        amount: Number(amount),
+        // The old shipment formula read an untouched weight as 0.
+        weight: weight === undefined ? 0 : toNumber(weight),
+        length: toNumber(length),
+        width: toNumber(width),
+        height: toNumber(height),
+      },
+      direction
+    );
+    // @ts-ignore
+    setValue(name, (result.price ?? 0).toFixed(2));
+
+    if (pricing.type === 'measured') {
+      if (category?.value === 'shipments') {
+        // ParcelForce limits read the volume and extent of every parcel.
+        const extent =
+          result.volume === null
+            ? 0
+            : calculateExtent({ length, width, height });
         // @ts-ignore
-        setValue(volumePropName, volume);
+        setValue(volumePropName, result.volume ?? 0);
         // @ts-ignore
-        setValue(name, price);
-        return;
+        setValue(extentPropName, extent);
+      } else if (result.volume !== null) {
+        // @ts-ignore
+        setValue(volumePropName, result.volume);
       }
       return;
     }
 
-    if (category && category.value === 'shipments') {
-      const { price, volume, extent } = calculateShipmentPrice({
-        weight,
-        length,
-        width,
-        height,
-        amount,
-        service,
-      });
+    if (result.volume) {
       // @ts-ignore
-      setValue(volumePropName, volume);
+      setValue(volumePropName, result.volume);
+    }
+    if (result.weight && !weight) {
       // @ts-ignore
-      setValue(extentPropName, extent);
-      // @ts-ignore
-      setValue(name, price);
-
-      return;
-    }
-
-    let filteredProducts = allProducts;
-
-    if (category && category.value) {
-      filteredProducts = filteredProducts.filter(
-        (item) => item.category?.value === category.value
-      );
-    }
-
-    if (productType && productType.value) {
-      filteredProducts = filteredProducts.filter(
-        (item) => item.productType?.value === productType.value
-      );
-    }
-
-    if (size !== null) {
-      filteredProducts = filteredProducts.filter((item) => {
-        if (!item.size) return false;
-        if ('from' in item.size && 'to' in item.size) {
-          return (
-            item.size.from ===
-              convertOptionTypeToRangeSize(
-                productType?.value ?? '',
-                size.value,
-                category?.value ?? ''
-              )?.from &&
-            // @ts-ignore
-            item.size.to ===
-              convertOptionTypeToRangeSize(
-                productType?.value ?? '',
-                size.value,
-                category?.value ?? ''
-              )?.to
-          );
-        } else {
-          return item.size.value === size.value;
-        }
-      });
-    }
-
-    if (specification && specification.value) {
-      filteredProducts = filteredProducts.filter(
-        (item) => item?.specification?.value === specification.value
-      );
-    }
-
-    let product = null;
-
-    if (filteredProducts.length === 1) {
-      product = filteredProducts[0];
-    }
-    const productPrice = product ? product.price * Number(amount) : 0;
-    const finalPrice = productPrice.toFixed(2) ?? '0.00';
-    // @ts-ignore
-    setValue(name, finalPrice);
-    if (product?.volume) {
-      // @ts-ignore
-      setValue(volumePropName, product?.volume);
-    }
-    if (product?.weight && !weight) {
-      // @ts-ignore
-      setValue(weightPropName, product.weight);
+      setValue(weightPropName, result.weight);
     }
   }, [
-    JSON.stringify(productType),
+    pricing,
+    direction,
     JSON.stringify(size),
     JSON.stringify(specification),
     amount,

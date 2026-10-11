@@ -1,18 +1,14 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
 import {
-  automotiveGoodsCategoryProductTypesOptions,
-  bicyclesAndScootersCategoryProductTypesOptions,
-  categoriesOptions,
-  gardenEquipmentCategoryProductTypesOptions,
-  getSizeOptionsBySelectedProductType,
-  getSpecificationOptionsBySelectedProduct,
-  goodsForChildrenCategoryProductTypesOptions,
-  householdAppliancesCategoryProductTypesOptions,
-  motorcyclesAndAccessoriesCategoryProductTypesOptions,
-} from '../../utils/products';
+  categoryOptions,
+  findCategory,
+  findSubCategory,
+  priceDirection,
+  pricingFor,
+  sizeOptions as getSizeOptions,
+  specificationOptions as getSpecificationOptions,
+  subCategoryOptions,
+} from '../../utils/priceCatalog';
+import usePriceCatalog from '../../hooks/usePriceCatalog';
 import {
   Control,
   FieldErrors,
@@ -30,10 +26,6 @@ import FieldContainer from '../layout/FieldContainer';
 import PrimaryButton from '../buttons/PrimaryButton';
 import CategorySelect from './CategorySelect';
 import TypeSelect from './TypeSelect';
-import {
-  productTypesThatNeedsPriceCalculation,
-  productTypesWithRequiredManagerCall,
-} from '../../utils/shipmentsExlusions';
 import SizeSelect from './SizeSelect';
 import LengthInput from './LengthInput';
 import WidthInput from './WidthInput';
@@ -80,56 +72,9 @@ const SingleShimpentForm = ({
 }: Props) => {
   const { t } = useTranslation();
 
-  const categoriesWithProductType = [
-    'automotiveGoods',
-    'householdAppliances',
-    'bicyclesAndScooters',
-    'motorcyclesAndAccessories',
-    'goodsForChildren',
-    'gardenEquipment',
-  ];
+  const catalog = usePriceCatalog();
 
   const [shipmentPriceErrorMessage, setShipmentPriceError] = useState('');
-
-  const getOptionsBySelectedCategory = (
-    selectedCategory: OptionType | null
-  ): OptionType[] => {
-    if (
-      !!selectedCategory &&
-      categoriesWithProductType.includes(selectedCategory.value)
-    ) {
-      switch (selectedCategory.value) {
-        case 'automotiveGoods':
-          return getTranslatedOptions(
-            automotiveGoodsCategoryProductTypesOptions
-          ) as OptionType[];
-        case 'householdAppliances':
-          return getTranslatedOptions(
-            householdAppliancesCategoryProductTypesOptions
-          ) as OptionType[];
-        case 'bicyclesAndScooters':
-          return getTranslatedOptions(
-            bicyclesAndScootersCategoryProductTypesOptions
-          ) as OptionType[];
-        case 'motorcyclesAndAccessories':
-          return getTranslatedOptions(
-            motorcyclesAndAccessoriesCategoryProductTypesOptions
-          ) as OptionType[];
-        case 'goodsForChildren':
-          return getTranslatedOptions(
-            goodsForChildrenCategoryProductTypesOptions
-          ) as OptionType[];
-        case 'gardenEquipment':
-          return getTranslatedOptions(
-            gardenEquipmentCategoryProductTypesOptions
-          ) as OptionType[];
-        default:
-          return [];
-      }
-    } else {
-      return [];
-    }
-  };
 
   const handleValidation = (field: string, value: string) => {
     const getErrorMessage = (field: string, value: string) => {
@@ -206,12 +151,20 @@ const SingleShimpentForm = ({
     name: `shipments.${index}.category`,
   });
 
-  const productTypeOptions = getOptionsBySelectedCategory(selectedCategory);
-
   const selectedProductType = useWatch({
     control,
     name: `shipments.${index}.productType`,
   });
+
+  const direction = useWatch({ control, name: 'direction' });
+
+  const category = findCategory(catalog, selectedCategory?.value);
+  const subCategory = findSubCategory(category, selectedProductType?.value);
+  const pricing = pricingFor(category, subCategory);
+  const requiresManagerCall = subCategory?.pricing.type === 'callManager';
+  const needsMeasurements = subCategory?.pricing.type === 'measured';
+
+  const productTypeOptions = getTranslatedOptions(subCategoryOptions(category));
 
   const selectedLength = useWatch({
     control,
@@ -237,49 +190,16 @@ const SingleShimpentForm = ({
     handleValidation('extent', extent.toString());
   }, [extent]);
 
-  const showSizeOptions = (
-    options: OptionType[],
-    productTypeValue: string | undefined,
-    productTypeOptions: OptionType[]
-  ) => {
-    const sizeOptionsCopy = options ? options : [];
-    if (sizeOptionsCopy.length > 0) {
-      if (productTypeValue && productTypeOptions.length > 0) {
-        return true;
-      }
-      if (!productTypeValue && productTypeOptions.length > 0) {
-        return false;
-      }
-      if (!productTypeValue && productTypeOptions.length === 0) {
-        return false;
-      }
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const sizeOptions = getTranslatedOptions(
-    getSizeOptionsBySelectedProductType(
-      selectedCategory?.value,
-      selectedProductType?.value
-    )
-  );
-
-  const specificationOptions =
-    selectedCategory?.value !== 'shipments'
-      ? getTranslatedOptions(
-          getSpecificationOptionsBySelectedProduct(
-            selectedCategory?.value,
-            selectedProductType?.value
-          )
-        )
-      : [];
+  const sizeOptions = getTranslatedOptions(getSizeOptions(pricing));
 
   const selectedSize = useWatch({
     control,
     name: `shipments.${index}.size`,
   });
+
+  const specificationOptions = getTranslatedOptions(
+    getSpecificationOptions(pricing, (selectedSize as OptionType)?.value)
+  );
 
   const weight = useWatch({
     control,
@@ -303,7 +223,8 @@ const SingleShimpentForm = ({
 
   useCalculatePrice({
     category: selectedCategory as OptionType,
-    productType: selectedProductType as OptionType,
+    pricing,
+    direction: priceDirection(selectedService, direction),
     size: (selectedSize as OptionType) ?? null,
     amount,
     specification: selectedSpecification,
@@ -316,7 +237,6 @@ const SingleShimpentForm = ({
     length: selectedLength,
     width: selectedWidth,
     height: selectedHeight,
-    service: selectedService,
   });
 
   const estimatedPrice = useWatch({
@@ -341,7 +261,7 @@ const SingleShimpentForm = ({
           control={control}
           index={index}
           shipmentNumber={shipmentNumber}
-          options={categoriesOptions}
+          options={categoryOptions(catalog)}
           selectedService={selectedService}
           validationRules={validationRules}
           setValue={setValue}
@@ -367,23 +287,10 @@ const SingleShimpentForm = ({
             validationRules={validationRules}
             formErrors={formErrors}
             setValue={setValue}
-            selectedProductTypeValue={selectedProductType?.value}
+            requiresManagerCall={requiresManagerCall}
           />
         )}
-        {selectedCategory?.value === 'flatScreenTv' ? (
-          <SizeSelect
-            control={control}
-            index={index}
-            shipmentNumber={shipmentNumber}
-            options={sizeOptions}
-            validationRules={validationRules}
-            formErrors={formErrors}
-            setValue={setValue}
-          />
-        ) : null}
-        {productTypesThatNeedsPriceCalculation.includes(
-          selectedProductType?.value ?? ''
-        ) ? (
+        {needsMeasurements ? (
           <FieldContainer
             label={t('shipmentMeasurementsMFieldLabel', {
               number: shipmentNumber,
@@ -596,15 +503,9 @@ const SingleShimpentForm = ({
           </>
         ) : (
           <>
-            {!productTypesWithRequiredManagerCall.includes(
-              selectedProductType?.value ?? ''
-            ) ? (
+            {!requiresManagerCall ? (
               <>
-                {showSizeOptions(
-                  sizeOptions ?? [],
-                  selectedProductType?.value,
-                  productTypeOptions ?? []
-                ) && sizeOptions.length > 0 ? (
+                {sizeOptions.length > 0 ? (
                   <SizeSelect
                     control={control}
                     index={index}
@@ -615,8 +516,7 @@ const SingleShimpentForm = ({
                     setValue={setValue}
                   />
                 ) : null}
-                {!!selectedProductType?.value &&
-                specificationOptions.length > 0 ? (
+                {specificationOptions.length > 0 ? (
                   <SpecificationSelect
                     control={control}
                     index={index}
@@ -655,6 +555,7 @@ const SingleShimpentForm = ({
                   validationRules={validationRules}
                   setValue={setValue}
                   selectedCategory={selectedCategory}
+                  requiresManagerCall={pricing?.type === 'callManager'}
                 />
               </>
             ) : null}

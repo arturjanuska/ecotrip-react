@@ -126,3 +126,11 @@ export const calculateVolume = ({
     return { price: '0.00', volume };
   }
 };
+
+// Length + 2 × width + 2 × height in cm: ParcelForce limits a parcel by it.
+export const calculateExtent = ({
+  length,
+  width,
+  height,
+}: Pick<Props, 'length' | 'width' | 'height'>) =>
+  Number(length) + Number(width) * 2 + Number(height) * 2;

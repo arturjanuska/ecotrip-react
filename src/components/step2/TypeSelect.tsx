@@ -5,7 +5,6 @@ import { FormType } from '../../utils/formTypes';
 import { useTranslation } from 'react-i18next';
 import { OptionType } from '../../utils/types';
 import ControlledStyledSelect from '../form/select/ControlledStyledSelect';
-import { productTypesWithRequiredManagerCall } from '../../utils/shipmentsExlusions';
 import { getError } from '../../utils/validation/getError';
 
 type Props = {
@@ -16,7 +15,7 @@ type Props = {
   validationRules: Record<string, any>;
   formErrors: FieldErrors<FormType>;
   setValue: UseFormSetValue<FormType>;
-  selectedProductTypeValue?: string;
+  requiresManagerCall: boolean;
 };
 
 const TypeSelect = ({
@@ -27,20 +26,14 @@ const TypeSelect = ({
   validationRules,
   formErrors,
   setValue,
-  selectedProductTypeValue,
+  requiresManagerCall,
 }: Props) => {
   const { t } = useTranslation();
 
   return (
     <FieldContainer
       label={t('productTypeLabel', { count: shipmentNumber })}
-      description={`${
-        productTypesWithRequiredManagerCall.includes(
-          selectedProductTypeValue ?? ''
-        )
-          ? t('wrongDirectionMessage1')
-          : ''
-      }`}
+      description={requiresManagerCall ? t('wrongDirectionMessage1') : ''}
     >
       <ControlledStyledSelect
         name={`shipments.${index}.productType`}

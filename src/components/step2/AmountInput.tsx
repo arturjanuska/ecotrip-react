@@ -16,6 +16,8 @@ type Props = {
   validationRules: Record<string, any>;
   setValue: UseFormSetValue<FormType>;
   selectedCategory: OptionType | null;
+  // Category priced by the manager (palettes): the amount is still asked.
+  requiresManagerCall: boolean;
 };
 
 const AmountInput = ({
@@ -26,6 +28,7 @@ const AmountInput = ({
   validationRules,
   setValue,
   selectedCategory,
+  requiresManagerCall,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -38,9 +41,7 @@ const AmountInput = ({
       label={t('shipmentPriceFieldContainerLabel', {
         number: shipmentNumber,
       })}
-      description={`${
-        selectedCategory.value === 'palettes' ? t('wrongDirectionMessage1') : ''
-      }`}
+      description={requiresManagerCall ? t('wrongDirectionMessage1') : ''}
     >
       <CustomInput
         name={`shipments.${index}.amount`}
