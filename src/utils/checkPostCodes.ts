@@ -1,3 +1,5 @@
+// DEPRECATED: not used. Postcodes come from Ecotrip CMS (src/utils/postcodes.ts,
+// src/hooks/usePostcodeDetails.ts). Kept only for reference; do not import.
 import { UKPostcodeType } from './types';
 import { UK_POST_CODES } from './ukPostCodesv2.ts';
 

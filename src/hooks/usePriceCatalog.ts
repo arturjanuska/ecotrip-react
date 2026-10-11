@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { PriceCatalog } from '../utils/priceCatalog';
 import snapshot from '../data/priceCatalog.snapshot.json';
 
-// Bundled at build time (see scripts/update-price-snapshot.mjs): the form
+// Bundled at build time (see scripts/update-cms-snapshots.mjs): the form
 // renders with it at once and keeps working on it when the CMS is down.
 const priceCatalogSnapshot = snapshot as unknown as PriceCatalog;
 

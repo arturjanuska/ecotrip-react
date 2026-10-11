@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "prebuild": "node scripts/update-price-snapshot.mjs",
+    "prebuild": "node scripts/update-cms-snapshots.mjs",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",

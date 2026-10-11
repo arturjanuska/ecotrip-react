@@ -7,12 +7,8 @@ import {
 import { OptionType } from '../utils/types';
 import { DateDayType, DirectionType } from '../utils/formTypes';
 import i18next from 'i18next';
-import { PostCodeObject } from '../utils/checkPostCodes';
+import { isDeliveryWeek, PostcodeRecord } from '../utils/postcodes';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import {
-  evenWeeksDeliveryPostcodes,
-  oddWeeksDeliveryPostcodes,
-} from '../utils/ukPostCodesv2';
 
 dayjs.extend(isoWeek);
 
@@ -60,23 +56,6 @@ export const getPickupDay = (
   };
 };
 
-const shouldIncludeDateRange = (
-  isEvenWeek: boolean,
-  postcode?: string
-): boolean => {
-  if (!postcode) return true;
-
-  if (oddWeeksDeliveryPostcodes.includes(postcode)) {
-    return !isEvenWeek;
-  }
-
-  if (evenWeeksDeliveryPostcodes.includes(postcode)) {
-    return isEvenWeek;
-  }
-
-  return true;
-};
-
 const useDateOptions = ({
   selectedMonth,
   direction,
@@ -86,11 +65,11 @@ const useDateOptions = ({
   selectedMonth: string | null;
   direction: DirectionType;
   service: string;
-  postcodeDetails: PostCodeObject;
+  postcodeDetails: PostcodeRecord | null;
 }) => {
   const currentLanguage = i18next.language;
 
-  const postcode = postcodeDetails?.postcode;
+  const calendar = postcodeDetails?.calendar;
 
   const [dateOptions, setDateOptions] = useState<{
     years: OptionType[]; // OptionType is { label: string, value: string }
@@ -167,7 +146,7 @@ const useDateOptions = ({
             const weekNumber = startDateRange.isoWeek();
             const isEvenWeek = weekNumber % 2 === 0;
 
-            const shouldInclude = shouldIncludeDateRange(isEvenWeek, postcode);
+            const shouldInclude = isDeliveryWeek(isEvenWeek, calendar);
 
             if (shouldInclude) {
               // Format the label
@@ -203,7 +182,7 @@ const useDateOptions = ({
     };
 
     calculateDateOptions();
-  }, [selectedMonth, direction, service, currentLanguage]);
+  }, [selectedMonth, direction, service, currentLanguage, calendar]);
 
   return dateOptions;
 };

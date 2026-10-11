@@ -7,13 +7,13 @@ import { DirectionType, FormType } from '../../utils/formTypes';
 import useDeliveryDate from '../../hooks/useDeliveryDate';
 import useDateOptions from '../../hooks/useDateOptions';
 import { useTranslation } from 'react-i18next';
-import type { PostCodeObject } from '../../utils/checkPostCodes';
+import type { PostcodeRecord } from '../../utils/postcodes';
 
 type TransportationDatesProps = {
   methods: UseFormReturn<FormType, any, undefined>;
   formErrors: FieldErrors<FormType>;
   direction: DirectionType;
-  postcodeDetails: PostCodeObject;
+  postcodeDetails: PostcodeRecord | null;
 };
 
 const TransportationDates = ({

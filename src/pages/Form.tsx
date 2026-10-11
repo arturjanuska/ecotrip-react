@@ -23,7 +23,7 @@ import { fetchWrapper } from '../components/api/fetchWrapper';
 import { useMutation } from '@tanstack/react-query';
 import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
 import { useTranslation } from 'react-i18next';
-import { checkParcelForcePostcodes } from '../utils/checkPostCodes';
+import usePostcodeDetails from '../hooks/usePostcodeDetails';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
 import { useNavigate } from 'react-router-dom';
@@ -202,14 +202,11 @@ const Form = () => {
 
   useLocaleStorageLanguage();
 
-  const { isParcelForce, postcodeDetails } = checkParcelForcePostcodes({
-    postcodes: direction
-      ? [
-          selectedPickupAddressPostcode as string,
-          selectedDeliveryAddressPostcode as string,
-        ]
-      : [],
-  });
+  const { isParcelForce, postcodeDetails } = usePostcodeDetails(
+    direction
+      ? [selectedPickupAddressPostcode, selectedDeliveryAddressPostcode]
+      : []
+  );
 
   return (
     <form
