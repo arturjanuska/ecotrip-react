@@ -72,7 +72,7 @@ const SingleShimpentForm = ({
 }: Props) => {
   const { t } = useTranslation();
 
-  const catalog = usePriceCatalog();
+  const { catalog } = usePriceCatalog();
 
   const [shipmentPriceErrorMessage, setShipmentPriceError] = useState('');
 

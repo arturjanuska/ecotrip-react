@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldErrors, UseFormReturn } from 'react-hook-form';
 import Step from '../Step';
+import Loader from '../Loader';
 import './step1.css';
 import ServiceSection from './ServiceSection';
 import { DirectionType, FormType } from '../../utils/formTypes';
@@ -22,6 +23,7 @@ const AddressForm = ({
   formErrors,
   rate,
   isParcelForce,
+  isPostcodeReady,
 }: {
   selectedService: string;
   methods: UseFormReturn<FormType, any, undefined>;
@@ -30,6 +32,8 @@ const AddressForm = ({
   formErrors: FieldErrors<FormType>;
   rate: number;
   isParcelForce: boolean;
+  // The services wait for the CMS answer about the entered postcodes.
+  isPostcodeReady: boolean;
 }) => {
   const { t } = useTranslation();
 
@@ -192,7 +196,10 @@ const AddressForm = ({
         </FieldContainer>
       </div>
 
-      {direction && direction !== 'LT-LT' ? (
+      {direction && direction !== 'LT-LT' && !isPostcodeReady ? (
+        <Loader />
+      ) : null}
+      {direction && direction !== 'LT-LT' && isPostcodeReady ? (
         <ServiceSection
           setValue={setValue}
           selectedService={selectedService}

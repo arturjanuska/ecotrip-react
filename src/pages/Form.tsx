@@ -24,6 +24,10 @@ import { useMutation } from '@tanstack/react-query';
 import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
 import { useTranslation } from 'react-i18next';
 import usePostcodeDetails from '../hooks/usePostcodeDetails';
+import usePriceCatalog from '../hooks/usePriceCatalog';
+import { useGoogleMapsScript } from 'use-google-maps-script';
+import { GOOGLE_MAPS_SCRIPT_OPTIONS } from '../utils/googleMapsScript';
+import Loader from '../components/Loader';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
 import { useNavigate } from 'react-router-dom';
@@ -202,7 +206,18 @@ const Form = () => {
 
   useLocaleStorageLanguage();
 
-  const { isParcelForce, postcodeDetails } = usePostcodeDetails(
+  // The form is shown once prices and the address autocomplete are ready.
+  const { isReady: isPriceCatalogReady } = usePriceCatalog();
+  const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript(
+    GOOGLE_MAPS_SCRIPT_OPTIONS
+  );
+  const isFormReady = isPriceCatalogReady && isGoogleMapsLoaded;
+
+  const {
+    isParcelForce,
+    postcodeDetails,
+    isReady: isPostcodeReady,
+  } = usePostcodeDetails(
     direction
       ? [selectedPickupAddressPostcode, selectedDeliveryAddressPostcode]
       : []
@@ -231,115 +246,128 @@ const Form = () => {
           <LanguageSelect methods={methods} />
         </div>
         <Divider />
-        <AddressForm
-          selectedService={selectedService}
-          methods={methods}
-          direction={direction}
-          currency={currency}
-          formErrors={formErrors}
-          rate={rate}
-          isParcelForce={isParcelForce}
-        />
-        <Divider />
-        {direction === 'LT-LT' ? (
-          <div className="direction-message">
-            <p>{t('wrongDirectionMessage1')}</p>
-            <p>Info@ecotrip.lt</p>
-          </div>
-        ) : (
+        {!isFormReady && <Loader />}
+        {/* Hidden, not unmounted, while loading: the page column takes its
+            width from the form, so it does not jump when the form appears. */}
+        <div
+          className={isFormReady ? undefined : 'form-pending'}
+          aria-hidden={!isFormReady}
+        >
+          <AddressForm
+            isPostcodeReady={isPostcodeReady}
+            selectedService={selectedService}
+            methods={methods}
+            direction={direction}
+            currency={currency}
+            formErrors={formErrors}
+            rate={rate}
+            isParcelForce={isParcelForce}
+          />
+        </div>
+        {isFormReady && (
           <>
-            {!!selectedService && (
+            <Divider />
+            {!isPostcodeReady ? null : direction === 'LT-LT' ? (
+              <div className="direction-message">
+                <p>{t('wrongDirectionMessage1')}</p>
+                <p>Info@ecotrip.lt</p>
+              </div>
+            ) : (
               <>
-                <Shipments
-                  control={methods.control}
-                  selectedService={selectedService}
-                  methods={methods}
-                  currency={currency}
-                  formErrors={formErrors}
-                  errorMessages={errorMessages}
-                  setErrorMessages={setErrorMessages}
-                  rate={rate}
-                />
-                <Divider />
-                <TransportationDates
-                  methods={methods}
-                  formErrors={formErrors}
-                  direction={direction}
-                  postcodeDetails={postcodeDetails}
-                />
-                {showPurchaseInformation && (
+                {!!selectedService && (
                   <>
-                    <Divider />
-                    <ProductPurchaseServiceInformation
+                    <Shipments
                       control={methods.control}
+                      selectedService={selectedService}
+                      methods={methods}
+                      currency={currency}
                       formErrors={formErrors}
+                      errorMessages={errorMessages}
+                      setErrorMessages={setErrorMessages}
+                      rate={rate}
+                    />
+                    <Divider />
+                    <TransportationDates
+                      methods={methods}
+                      formErrors={formErrors}
+                      direction={direction}
+                      postcodeDetails={postcodeDetails}
+                    />
+                    {showPurchaseInformation && (
+                      <>
+                        <Divider />
+                        <ProductPurchaseServiceInformation
+                          control={methods.control}
+                          formErrors={formErrors}
+                          selectedService={service}
+                          methods={methods}
+                        />
+                      </>
+                    )}
+                    <Divider />
+                    <SenderInformation
+                      control={methods.control}
+                      stepLabel={
+                        selectedService === 'productSalesService' ||
+                        selectedService === 'productPurchaseService'
+                          ? t('pickupInfoMsg')
+                          : selectedService === 'shipmentWithAddressService'
+                            ? t('warehouseDetailsMsg')
+                            : t('senderInfoMsg')
+                      }
+                      formErrors={formErrors}
+                      setValue={methods.setValue}
                       selectedService={service}
                       methods={methods}
+                      step={showPurchaseInformation ? 5 : 4}
+                    />
+                    <Divider />
+                    <RecipientInformation
+                      control={methods.control}
+                      formErrors={formErrors}
+                      methods={methods}
+                      stepLabel={
+                        selectedService === 'productSalesService'
+                          ? t('recipientInfoMsg')
+                          : t('deliveryInfoMsg')
+                      }
+                      step={showPurchaseInformation ? 6 : 5}
+                    />
+                    {selectedService === 'productSalesService' && (
+                      <>
+                        <Divider />
+                        <RansomPayeeInformation
+                          control={methods.control}
+                          formErrors={formErrors}
+                          selectedService={service}
+                          methods={methods}
+                        />
+                      </>
+                    )}
+                    <Divider />
+                    <PayerInformation
+                      control={methods.control}
+                      step={
+                        selectedService === 'productSalesService'
+                          ? 7
+                          : showPurchaseInformation
+                            ? 7
+                            : 6
+                      }
+                      stepLabel={t('customerInfoMsg')}
+                      formErrors={formErrors}
+                      methods={methods}
+                      currency={currency}
+                      errorMessages={errorMessages}
+                      submitErrorMessage={submitErrorMessage}
+                      postcodeDetails={postcodeDetails}
+                      setPriceDescription={setPriceDescription}
+                      priceDescription={priceDescription}
+                      rate={rate}
+                      isLoading={isLoading}
                     />
                   </>
                 )}
-                <Divider />
-                <SenderInformation
-                  control={methods.control}
-                  stepLabel={
-                    selectedService === 'productSalesService' ||
-                    selectedService === 'productPurchaseService'
-                      ? t('pickupInfoMsg')
-                      : selectedService === 'shipmentWithAddressService'
-                        ? t('warehouseDetailsMsg')
-                        : t('senderInfoMsg')
-                  }
-                  formErrors={formErrors}
-                  setValue={methods.setValue}
-                  selectedService={service}
-                  methods={methods}
-                  step={showPurchaseInformation ? 5 : 4}
-                />
-                <Divider />
-                <RecipientInformation
-                  control={methods.control}
-                  formErrors={formErrors}
-                  methods={methods}
-                  stepLabel={
-                    selectedService === 'productSalesService'
-                      ? t('recipientInfoMsg')
-                      : t('deliveryInfoMsg')
-                  }
-                  step={showPurchaseInformation ? 6 : 5}
-                />
-                {selectedService === 'productSalesService' && (
-                  <>
-                    <Divider />
-                    <RansomPayeeInformation
-                      control={methods.control}
-                      formErrors={formErrors}
-                      selectedService={service}
-                      methods={methods}
-                    />
-                  </>
-                )}
-                <Divider />
-                <PayerInformation
-                  control={methods.control}
-                  step={
-                    selectedService === 'productSalesService'
-                      ? 7
-                      : showPurchaseInformation
-                        ? 7
-                        : 6
-                  }
-                  stepLabel={t('customerInfoMsg')}
-                  formErrors={formErrors}
-                  methods={methods}
-                  currency={currency}
-                  errorMessages={errorMessages}
-                  submitErrorMessage={submitErrorMessage}
-                  postcodeDetails={postcodeDetails}
-                  setPriceDescription={setPriceDescription}
-                  priceDescription={priceDescription}
-                  rate={rate}
-                  isLoading={isLoading}
-                />
               </>
             )}
           </>

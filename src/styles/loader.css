@@ -1,0 +1,27 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+
+/* Laid out (it gives the page its width) but not shown. */
+.form-pending {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.loader__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #9aa61e;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: loader-spin 0.8s linear infinite;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -6,6 +6,7 @@ import { useGoogleMapsScript } from 'use-google-maps-script';
 import { Control, UseFormReturn } from 'react-hook-form';
 import { FormType } from '../../../utils/formTypes';
 import CustomInput from '../../form/input/CustomInput';
+import { GOOGLE_MAPS_SCRIPT_OPTIONS } from '../../../utils/googleMapsScript';
 
 type Props = {
   name: keyof FormType;
@@ -18,8 +19,6 @@ type Props = {
   disabled?: boolean;
   country?: string[];
 };
-
-const libraries: 'places'[] = ['places'];
 
 function SearchBoxV2({
   name,
@@ -34,11 +33,7 @@ function SearchBoxV2({
 }: Props) {
   const inputRef = useRef<null | google.maps.places.Autocomplete>(null);
 
-  const { isLoaded } = useGoogleMapsScript({
-    id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCB42EkwaC9P-8-XV6zSqLiLWalfvqgHIA',
-    libraries,
-  });
+  const { isLoaded } = useGoogleMapsScript(GOOGLE_MAPS_SCRIPT_OPTIONS);
 
   const handleOnPlacesChanged = () => {
     const address = inputRef.current?.getPlace();

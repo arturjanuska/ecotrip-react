@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { PriceCatalog } from '../utils/priceCatalog';
 import snapshot from '../data/priceCatalog.snapshot.json';
+import useWaitExpired from './useWaitExpired';
 
 // Bundled at build time (see scripts/update-cms-snapshots.mjs): the form
-// renders with it at once and keeps working on it when the CMS is down.
+// works on it when the CMS fails or is too slow to answer.
 const priceCatalogSnapshot = snapshot as unknown as PriceCatalog;
 
 export const getPriceCatalog = async (): Promise<PriceCatalog> => {
@@ -15,24 +16,30 @@ export const getPriceCatalog = async (): Promise<PriceCatalog> => {
   return response.json();
 };
 
-const usePriceCatalog = (): PriceCatalog => {
-  const { data, error } = useQuery({
+// isReady: the CMS answered, failed, or the wait expired; until then the
+// form is not shown.
+const usePriceCatalog = (): { catalog: PriceCatalog; isReady: boolean } => {
+  const { data, isError } = useQuery({
     queryKey: ['priceCatalog'],
     queryFn: getPriceCatalog,
     staleTime: 5 * 60 * 1000,
-    placeholderData: priceCatalogSnapshot,
+    // One retry: the form waits for the answer, so an unreachable CMS
+    // should fall back to the snapshot quickly.
+    retry: 1,
   });
+  const waitExpired = useWaitExpired('priceCatalog');
+  const usesSnapshot = data === undefined && (isError || waitExpired);
 
   useEffect(() => {
-    if (error) {
-      console.warn(
-        'Prices: CMS unavailable, using the bundled snapshot',
-        error
-      );
+    if (usesSnapshot) {
+      console.warn('Prices: CMS unavailable, using the bundled snapshot');
     }
-  }, [error]);
+  }, [usesSnapshot]);
 
-  return data ?? priceCatalogSnapshot;
+  return {
+    catalog: data ?? priceCatalogSnapshot,
+    isReady: data !== undefined || usesSnapshot,
+  };
 };
 
 export default usePriceCatalog;
