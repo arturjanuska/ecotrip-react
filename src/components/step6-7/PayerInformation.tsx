@@ -15,6 +15,7 @@ import { useCustomValidation } from '../../utils/validation/useCustomValidation'
 import CustomAlert from '../form/error/CustomAlert';
 import { useTranslation } from 'react-i18next';
 import getOrderPrice from '../../utils/getOrderPrice';
+import useFeeSettings from '../../hooks/useFeeSettings';
 import FieldContainer from '../layout/FieldContainer';
 import ControlledStyledSelect from '../form/select/ControlledStyledSelect';
 import ControlledCheckboxWithLabel from '../form/checkbox/ControlledCheckboxWithLabel';
@@ -100,10 +101,13 @@ const PayerInformation = ({
 
   const validationRules = useCustomValidation({ service });
 
+  const { fees } = useFeeSettings();
+
   useEffect(() => {
     getOrderPrice(
       shipments,
       postcodeDetails,
+      fees,
       service,
       currency,
       rate,
@@ -117,6 +121,7 @@ const PayerInformation = ({
     payer,
     service,
     JSON.stringify(postcodeDetails),
+    fees,
   ]);
 
   const orderPrice = methods.watch('estimatedShipmentPrice');

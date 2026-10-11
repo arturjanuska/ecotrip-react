@@ -71,6 +71,23 @@ const getPostcodes = async () => {
   return { data, count: items.length };
 };
 
+const FEE_FIELDS = [
+  'addressService',
+  'purchaseService',
+  'salesService',
+  'parcelForce',
+  'quantityDiscounts',
+];
+
+const getFeeSettings = async () => {
+  const fees = await getJson('/api/fees');
+  if (!Array.isArray(fees?.quantityDiscounts) || !fees.parcelForce) {
+    throw new Error('GET /api/fees: unexpected answer');
+  }
+  const data = Object.fromEntries(FEE_FIELDS.map((f) => [f, fees[f]]));
+  return { data, count: 1 };
+};
+
 const SNAPSHOTS = [
   {
     name: 'prices',
@@ -81,6 +98,11 @@ const SNAPSHOTS = [
     name: 'postcodes',
     file: '../src/data/postcodes.snapshot.json',
     load: getPostcodes,
+  },
+  {
+    name: 'fees',
+    file: '../src/data/feeSettings.snapshot.json',
+    load: getFeeSettings,
   },
 ];
 

@@ -25,6 +25,7 @@ import useLocaleStorageLanguage from '../hooks/useLocaleStorageLanguage';
 import { useTranslation } from 'react-i18next';
 import usePostcodeDetails from '../hooks/usePostcodeDetails';
 import usePriceCatalog from '../hooks/usePriceCatalog';
+import useFeeSettings from '../hooks/useFeeSettings';
 import { useGoogleMapsScript } from 'use-google-maps-script';
 import { GOOGLE_MAPS_SCRIPT_OPTIONS } from '../utils/googleMapsScript';
 import Loader from '../components/Loader';
@@ -206,12 +207,15 @@ const Form = () => {
 
   useLocaleStorageLanguage();
 
-  // The form is shown once prices and the address autocomplete are ready.
+  // The form is shown once prices, fees and the address autocomplete are
+  // ready.
   const { isReady: isPriceCatalogReady } = usePriceCatalog();
+  const { isReady: isFeeSettingsReady } = useFeeSettings();
   const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript(
     GOOGLE_MAPS_SCRIPT_OPTIONS
   );
-  const isFormReady = isPriceCatalogReady && isGoogleMapsLoaded;
+  const isFormReady =
+    isPriceCatalogReady && isFeeSettingsReady && isGoogleMapsLoaded;
 
   const {
     isParcelForce,
