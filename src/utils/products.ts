@@ -1,3 +1,5 @@
+// DEPRECATED: not used. Prices come from Ecotrip CMS (src/utils/priceCatalog.ts,
+// src/hooks/usePriceCatalog.ts). Kept only for reference; do not import.
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { CommonProductTypeExample, OptionType } from './types';

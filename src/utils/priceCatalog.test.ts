@@ -20,6 +20,9 @@ import {
   type Pricing,
   type Variant,
 } from './priceCatalog';
+import en from './i18n/locales/en/en.json';
+import lt from './i18n/locales/lt/lt.json';
+import ru from './i18n/locales/ru/ru.json';
 
 const catalog = snapshot as PriceCatalog;
 
@@ -432,5 +435,36 @@ describe('parity with the old calculateVolume', () => {
         }).price
       )
     ).toBeCloseTo(3.5 * 150, 2);
+  });
+});
+
+describe('i18n', () => {
+  // Literal labels such as "<R18" or ">4000 cm3" are shown as they are.
+  const isLiteral = (label: string) => /^[<>]/.test(label);
+
+  const labels = new Set<string>();
+  const addPricing = (pricing: Pricing | null) => {
+    if (pricing?.type !== 'fixed') return;
+    pricing.variants.forEach((v) => {
+      if (v.size) labels.add(v.size.label);
+      if (v.specification) labels.add(v.specification.label);
+    });
+  };
+  catalog.categories.forEach((category) => {
+    labels.add(category.label);
+    addPricing(category.pricing);
+    category.subCategories.forEach((sub) => {
+      labels.add(sub.label);
+      addPricing(sub.pricing);
+    });
+  });
+  const keys = [...labels].filter((label) => !isLiteral(label)).sort();
+
+  it.each([
+    ['en', en],
+    ['lt', lt],
+    ['ru', ru],
+  ])('%s has every catalog label', (_, translations) => {
+    expect(keys.filter((key) => !(key in translations))).toEqual([]);
   });
 });
