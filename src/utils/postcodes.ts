@@ -8,8 +8,10 @@ export type PostcodeRecord = {
   country: string;
   countryString: string;
   basicPrice: string;
-  // "Parcel force pricelist" marks a ParcelForce area.
+  // "" or an amount added to the order: "15", "-5".
   additionalCharges: string;
+  // A ParcelForce area: ParcelForce service, surcharges and delivery dates.
+  isParcelForce: boolean;
   parcelForceZone: string;
   // "" or a percentage, "7.5".
   discount: string;
@@ -18,8 +20,6 @@ export type PostcodeRecord = {
 };
 
 export type PostcodeSnapshot = { items: PostcodeRecord[] };
-
-const PARCEL_FORCE_PRICELIST = 'Parcel force pricelist';
 
 // Outward code at the start of a full postcode: "FY1 1AA" → "FY1".
 export const outcodeOf = (postcode?: string | null): string | null =>
@@ -32,7 +32,7 @@ export const findPostcodeRecord = (
   (outcode && records.find((record) => record.postcode === outcode)) || null;
 
 export const isParcelForceArea = (record: PostcodeRecord | null) =>
-  record?.additionalCharges === PARCEL_FORCE_PRICELIST;
+  record?.isParcelForce === true;
 
 // The order is ParcelForce when any of its postcodes is in a ParcelForce area;
 // the details of the first known postcode drive dates, zone and discount.

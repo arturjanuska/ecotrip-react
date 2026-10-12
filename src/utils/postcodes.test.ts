@@ -27,6 +27,7 @@ const record = (fields: Partial<PostcodeRecord>): PostcodeRecord => ({
   countryString: '',
   basicPrice: '',
   additionalCharges: '',
+  isParcelForce: false,
   parcelForceZone: '',
   discount: '',
   calendar: '',
@@ -61,7 +62,7 @@ describe('summarizePostcodes', () => {
   const plain = record({ postcode: 'AB1' });
   const parcelForce = record({
     postcode: 'PF1',
-    additionalCharges: 'Parcel force pricelist',
+    isParcelForce: true,
   });
 
   it('is ParcelForce when any postcode is in a ParcelForce area', () => {
@@ -89,6 +90,26 @@ describe('isDeliveryWeek', () => {
   });
 });
 
+// The old list marked ParcelForce areas in additionalCharges; the CMS has
+// isParcelForce for that and keeps additionalCharges a number.
+const fromOldShape = (old: object | null | undefined) => {
+  if (!old) return null;
+  const { additionalCharges, ...rest } = old as PostcodeRecord;
+  const isParcelForce = /^parcel force pricelist$/i.test(additionalCharges);
+  return {
+    ...rest,
+    additionalCharges: isParcelForce ? '' : additionalCharges,
+    isParcelForce,
+  };
+};
+
+const sortedJson = (value: object | null) =>
+  JSON.stringify(value && Object.fromEntries(Object.entries(value).sort()));
+
+// Marked "parcel force pricelist" in lower case, so the old code did not take
+// them as ParcelForce areas; now they are.
+const NOW_PARCEL_FORCE = ['TQ1', 'TQ2', 'TQ3', 'TQ4', 'TQ5'];
+
 describe('parity with the old hardcoded postcodes', () => {
   const samples = [
     ...records.flatMap((r) => [r.postcode, `${r.postcode} 1AA`]),
@@ -103,11 +124,13 @@ describe('parity with the old hardcoded postcodes', () => {
       const now = summarizePostcodes([lookup(postcode)]);
       return (
         old.isParcelForce !== now.isParcelForce ||
-        JSON.stringify(old.postcodeDetails ?? null) !==
-          JSON.stringify(now.postcodeDetails)
+        sortedJson(fromOldShape(old.postcodeDetails)) !==
+          sortedJson(now.postcodeDetails)
       );
     });
-    expect(mismatches).toEqual([]);
+    expect(mismatches).toEqual(
+      NOW_PARCEL_FORCE.flatMap((postcode) => [postcode, `${postcode} 1AA`])
+    );
   });
 
   it('gives the same answer for pairs of pickup and delivery postcodes', () => {
@@ -120,7 +143,7 @@ describe('parity with the old hardcoded postcodes', () => {
       const old = checkParcelForcePostcodes({ postcodes });
       const now = summarizePostcodes(postcodes.map(lookup));
       expect(now.isParcelForce).toBe(old.isParcelForce);
-      expect(now.postcodeDetails).toEqual(old.postcodeDetails ?? null);
+      expect(now.postcodeDetails).toEqual(fromOldShape(old.postcodeDetails));
     });
   });
 

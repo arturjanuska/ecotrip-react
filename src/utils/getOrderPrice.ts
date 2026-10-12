@@ -10,6 +10,7 @@ import {
   purchaseServiceFee,
   quantityDiscountPercent,
 } from './orderFees';
+import { isParcelForceArea } from './postcodes';
 
 const parseDiscount = (value: unknown): number => {
   if (value === null || value === undefined || value === '') {
@@ -61,9 +62,7 @@ const getOrderPrice = (
             },
             postcodeDetails
               ? {
-                  isParcelForceArea:
-                    postcodeDetails.additionalCharges ===
-                    'Parcel force pricelist',
+                  isParcelForceArea: isParcelForceArea(postcodeDetails),
                   zone: postcodeDetails.parcelForceZone || '',
                 }
               : null,

@@ -16,6 +16,7 @@ const POSTCODE_FIELDS = [
   'countryString',
   'basicPrice',
   'additionalCharges',
+  'isParcelForce',
   'parcelForceZone',
   'discount',
   'calendar',
@@ -65,7 +66,12 @@ const getPostcodes = async () => {
   }
   const data = {
     items: items.map((item) =>
-      Object.fromEntries(POSTCODE_FIELDS.map((f) => [f, item[f] ?? '']))
+      Object.fromEntries(
+        POSTCODE_FIELDS.map((f) => [
+          f,
+          f === 'isParcelForce' ? item[f] === true : (item[f] ?? ''),
+        ])
+      )
     ),
   };
   return { data, count: items.length };
