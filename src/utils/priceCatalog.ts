@@ -179,9 +179,12 @@ const uniqueOptions = (options: (PriceOption | null)[]): PriceOption[] => {
 const selectable = (options: PriceOption[]) =>
   options.length < 2 ? [] : options;
 
+// As on the old site, the size is asked whenever there is more than one
+// variant, even with a single size (garden tractors differ only by the
+// specification): the order then carries the size.
 export const sizeOptions = (pricing?: Pricing | null): PriceOption[] =>
-  pricing?.type === 'fixed'
-    ? selectable(uniqueOptions(pricing.variants.map((v) => v.size)))
+  pricing?.type === 'fixed' && pricing.variants.length > 1
+    ? uniqueOptions(pricing.variants.map((v) => v.size))
     : [];
 
 export const specificationOptions = (

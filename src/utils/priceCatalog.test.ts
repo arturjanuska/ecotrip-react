@@ -549,3 +549,17 @@ describe('isPriceCatalog', () => {
     expect(isPriceCatalog(textTier)).toBe(false);
   });
 });
+
+describe('sizeOptions as on the old site', () => {
+  it('asks a single size when the variants differ by specification', () => {
+    expect(
+      sizeOptions(pricingOf('gardenEquipment', 'smallGardenTractor'))
+    ).toHaveLength(1);
+  });
+
+  it('asks no size for a single variant', () => {
+    expect(sizeOptions(pricingOf('householdAppliances', 'dishwasher'))).toEqual(
+      []
+    );
+  });
+});
