@@ -42,7 +42,7 @@ export type DateOverride = {
 };
 
 // Trips are offered this far ahead of today.
-export const HORIZON_WEEKS = 12;
+export const HORIZON_MONTHS = 6;
 
 // ParcelForce delivers a week after the usual delivery.
 const PARCEL_FORCE_DELAY_DAYS = 7;
@@ -127,7 +127,8 @@ export const getTrips = ({
   overrides?: DateOverride[];
 }): Trip[] => {
   const start = format(today);
-  const horizonEnd = format(today.add(HORIZON_WEEKS, 'week'));
+  const horizon = today.add(HORIZON_MONTHS, 'month');
+  const horizonEnd = format(horizon);
 
   const overridden = overrides.filter(
     (override) => override.direction === direction
@@ -138,7 +139,7 @@ export const getTrips = ({
   const calculated = calculatedTrips(
     direction,
     today.startOf('isoWeek').subtract(1, 'week'),
-    HORIZON_WEEKS + 2
+    Math.ceil(horizon.diff(today, 'day') / 7) + 2
   ).filter((trip) => !overriddenMonths.has(monthKey(trip.pickup.from)));
 
   const byHand = overridden.flatMap((override) =>

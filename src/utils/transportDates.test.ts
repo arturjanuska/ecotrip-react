@@ -6,7 +6,7 @@ import {
   getDateOptions,
   getDeliveryValues,
   getTrips,
-  HORIZON_WEEKS,
+  HORIZON_MONTHS,
   isEvenWeek,
   RouteDirection,
   Trip,
@@ -44,7 +44,7 @@ describe('same dates as before the refactor', () => {
         let compared = 0;
 
         for (const today of daysOf('2026-01-01', '2026-12-31')) {
-          const horizonEnd = today.add(HORIZON_WEEKS, 'week');
+          const horizonEnd = today.add(HORIZON_MONTHS, 'month');
           const trips = getTrips({ direction, today, calendar });
 
           const before = new Map<string, string>();
@@ -207,14 +207,21 @@ describe('odd and even weeks', () => {
 });
 
 describe('getTrips', () => {
-  it(`offers ${HORIZON_WEEKS} weeks ahead, also into next year`, () => {
+  it(`offers ${HORIZON_MONTHS} months ahead, also into next year`, () => {
     const trips = getTrips({ direction: 'UK-LT', today: dayjs('2026-12-01') });
-    expect(trips).toHaveLength(HORIZON_WEEKS);
     expect(trips[0].pickup).toEqual({ from: '2026-12-04', to: '2026-12-06' });
+    // The last pickup starting before 1 June 2027.
     expect(trips.at(-1)!.pickup).toEqual({
-      from: '2027-02-19',
-      to: '2027-02-21',
+      from: '2027-05-28',
+      to: '2027-05-30',
     });
+    expect(trips).toHaveLength(26);
+  });
+
+  it('stops at the end of the horizon', () => {
+    const trips = getTrips({ direction: 'LT-UK', today: dayjs('2026-10-12') });
+    // 12 April 2027 is a Monday: the last pickup is Tuesday 6 April.
+    expect(trips.at(-1)!.pickup.from).toBe('2027-04-06');
   });
 
   it('offers a window that has started from today', () => {
@@ -263,17 +270,13 @@ describe('dates set by hand', () => {
       today,
       overrides: [december],
     });
-    expect(pickups(trips)).toEqual([
+    expect(pickups(trips).slice(0, 6)).toEqual([
       '2026-11-24',
       '2026-12-01',
       '2026-12-08',
       '2026-12-17',
       '2027-01-05',
       '2027-01-12',
-      '2027-01-19',
-      '2027-01-26',
-      '2027-02-02',
-      '2027-02-09',
     ]);
     expect(trips[3].delivery).toEqual({ from: '2026-12-20', to: '2026-12-22' });
 
@@ -379,7 +382,14 @@ describe('selects', () => {
   it('list the years, the months of the year and the trips of the month', () => {
     const options = getDateOptions(trips, '2027', '1');
     expect(options.years.map((o) => o.value)).toEqual(['2026', '2027']);
-    expect(options.months.map((o) => o.value)).toEqual(['1', '2', '3']);
+    expect(options.months.map((o) => o.value)).toEqual([
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+    ]);
     expect(options.days.map((o) => o?.value)).toEqual([
       '1 - 3',
       '8 - 10',
