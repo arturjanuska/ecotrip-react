@@ -1,5 +1,6 @@
 // Catalog types are a copy of Ecotrip CMS `lib/price-types.ts` (GET /api/prices):
 // keep them in sync and change both together.
+import { isArrayOf, isNumber, isObject, isOptional, isString } from './guards';
 
 export const DIRECTIONS = ['UK-LT', 'LT-UK'] as const;
 export type Direction = (typeof DIRECTIONS)[number];
@@ -65,6 +66,61 @@ export type StoredCategory = Category & {
 };
 
 export type PriceCatalog = { categories: StoredCategory[] };
+
+const isOption = (value: unknown): value is PriceOption =>
+  isObject(value) && isString(value.value) && isString(value.label);
+
+const isMoney = (value: unknown): value is Money =>
+  isObject(value) &&
+  DIRECTIONS.every((direction) => isNumber(value[direction]));
+
+const isTier = (value: unknown): value is Tier =>
+  isObject(value) &&
+  (value.upTo === null || isNumber(value.upTo)) &&
+  isMoney(value.price) &&
+  typeof value.perUnit === 'boolean';
+
+const isVariant = (value: unknown): value is Variant =>
+  isObject(value) &&
+  isOptional(isOption)(value.size) &&
+  isOptional(isOption)(value.specification) &&
+  isOptional(isNumber)(value.volume) &&
+  isOptional(isNumber)(value.weight) &&
+  isMoney(value.price);
+
+const isPricing = (value: unknown): value is Pricing => {
+  if (!isObject(value)) return false;
+  switch (value.type) {
+    case 'fixed':
+      return isArrayOf(isVariant)(value.variants);
+    case 'measured':
+      return (
+        isOptional(isArrayOf(isTier))(value.byWeight) &&
+        isOptional(isArrayOf(isTier))(value.byVolume)
+      );
+    case 'callManager':
+      return true;
+    default:
+      return false;
+  }
+};
+
+const isSubCategory = (value: unknown): value is SubCategory =>
+  isObject(value) && isPricing(value.pricing) && isOption(value);
+
+const isCategory = (value: unknown): value is StoredCategory =>
+  isObject(value) &&
+  isNumber(value.order) &&
+  isArrayOf(isSubCategory)(value.subCategories) &&
+  isOptional(isPricing)(value.pricing) &&
+  isOption(value);
+
+// GET /api/prices as the site reads it. An empty catalog is rejected too: the
+// form would offer nothing to price, and orders would go out at 0.
+export const isPriceCatalog = (value: unknown): value is PriceCatalog =>
+  isObject(value) &&
+  isArrayOf(isCategory)(value.categories) &&
+  value.categories.length > 0;
 
 // Same expression as `route` in transformFormDataToEndpoint.ts, so the price
 // is taken for the direction the order is sent with. The catalog has no LT-LT

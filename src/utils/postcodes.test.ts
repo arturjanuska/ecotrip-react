@@ -3,6 +3,7 @@ import snapshot from '../data/postcodes.snapshot.json';
 import {
   findPostcodeRecord,
   isDeliveryWeek,
+  isPostcodeList,
   outcodeOf,
   PostcodeRecord,
   PostcodeSnapshot,
@@ -162,5 +163,24 @@ describe('parity with the old hardcoded postcodes', () => {
         );
       });
     });
+  });
+});
+
+describe('isPostcodeList', () => {
+  it('accepts the snapshot and an empty list', () => {
+    expect(isPostcodeList(snapshot)).toBe(true);
+    expect(isPostcodeList({ items: [], total: 0 })).toBe(true);
+  });
+
+  it('accepts a record of a CMS not yet migrated (no isParcelForce)', () => {
+    expect(
+      isPostcodeList({ items: [{ postcode: 'FY1', calendar: 'Odd' }] })
+    ).toBe(true);
+  });
+
+  it('rejects answers without records', () => {
+    expect(isPostcodeList({ data: 123 })).toBe(false);
+    expect(isPostcodeList({ items: [null] })).toBe(false);
+    expect(isPostcodeList({ items: [{ postcode: 1 }] })).toBe(false);
   });
 });

@@ -214,9 +214,8 @@ const Form = () => {
   const { isReady: isFeeSettingsReady } = useFeeSettings();
   const { overrides: dateOverrides, isReady: isDateOverridesReady } =
     useDateOverrides();
-  const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript(
-    GOOGLE_MAPS_SCRIPT_OPTIONS
-  );
+  const { isLoaded: isGoogleMapsLoaded, loadError: googleMapsLoadError } =
+    useGoogleMapsScript(GOOGLE_MAPS_SCRIPT_OPTIONS);
   const isFormReady =
     isPriceCatalogReady &&
     isFeeSettingsReady &&
@@ -256,7 +255,16 @@ const Form = () => {
           <LanguageSelect methods={methods} />
         </div>
         <Divider />
-        {!isFormReady && <Loader />}
+        {/* Without the address autocomplete no address can be entered: the
+            customer orders through the manager instead. */}
+        {googleMapsLoadError ? (
+          <div className="direction-message">
+            <p>{t('formLoadError')}</p>
+            <p>Info@ecotrip.lt</p>
+          </div>
+        ) : (
+          !isFormReady && <Loader />
+        )}
         {/* Hidden, not unmounted, while loading: the page column takes its
             width from the form, so it does not jump when the form appears. */}
         <div

@@ -15,6 +15,7 @@ import {
 import { DateDayType } from './formTypes';
 import { OptionType } from './types';
 import { isDeliveryWeek } from './postcodes';
+import { isArrayOf, isNumber, isObject, isOptional, isString } from './guards';
 
 dayjs.extend(isoWeek);
 
@@ -40,6 +41,30 @@ export type DateOverride = {
   month: number;
   trips: Trip[];
 };
+
+const isDateRange = (value: unknown): value is DateRange =>
+  isObject(value) && isString(value.from) && isString(value.to);
+
+// Dates themselves are checked by getTrips: a trip with invalid dates is
+// left out.
+const isTrip = (value: unknown): value is Trip =>
+  isObject(value) &&
+  isDateRange(value.pickup) &&
+  isDateRange(value.delivery) &&
+  isOptional(isDateRange)(value.parcelForceDelivery);
+
+const isDateOverride = (value: unknown): value is DateOverride =>
+  isObject(value) &&
+  (value.direction === 'UK-LT' || value.direction === 'LT-UK') &&
+  isNumber(value.year) &&
+  isNumber(value.month) &&
+  isArrayOf(isTrip)(value.trips);
+
+// GET /api/date-overrides as the site reads it; no months set is valid.
+export const isDateOverrideList = (
+  value: unknown
+): value is { items: DateOverride[] } =>
+  isObject(value) && isArrayOf(isDateOverride)(value.items);
 
 // Trips are offered this far ahead of today.
 export const HORIZON_MONTHS = 6;

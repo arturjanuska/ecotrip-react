@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useQueries } from '@tanstack/react-query';
 import {
   findPostcodeRecord,
+  isPostcodeList,
   outcodeOf,
   PostcodeRecord,
   PostcodeSnapshot,
@@ -27,8 +28,11 @@ export const getPostcode = async (
   if (!response.ok) {
     throw new Error(`GET /api/postcodes failed: ${response.status}`);
   }
-  const { items } = (await response.json()) as { items: PostcodeRecord[] };
-  return findPostcodeRecord(items, outcode);
+  const list: unknown = await response.json();
+  if (!isPostcodeList(list)) {
+    throw new Error('GET /api/postcodes: unexpected answer');
+  }
+  return findPostcodeRecord(list.items, outcode);
 };
 
 // isReady: every postcode has an answer (from the CMS, also an earlier one,

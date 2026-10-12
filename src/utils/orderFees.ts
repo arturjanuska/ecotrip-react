@@ -1,6 +1,7 @@
 // Order fees and discounts from Ecotrip CMS (GET /api/fees). The types are a
 // copy of Ecotrip CMS `lib/fee-types.ts`: keep them in sync and change both
 // together. Every amount is one number, used as £ or € by the order currency.
+import { isArrayOf, isNumber, isObject, isString } from './guards';
 
 // A percentage of an amount, kept within optional bounds.
 export type PercentFee = {
@@ -34,6 +35,51 @@ export type StoredFeeSettings = FeeSettings & {
   _id: string;
   createdAt: string;
   updatedAt: string;
+};
+
+const isPercentFee = (value: unknown): value is PercentFee =>
+  isObject(value) &&
+  isNumber(value.percent) &&
+  (value.min === null || isNumber(value.min)) &&
+  (value.max === null || isNumber(value.max));
+
+const isWeightTier = (
+  value: unknown
+): value is FeeSettings['parcelForce']['medium']['tiers'][number] =>
+  isObject(value) && isNumber(value.upToWeight) && isNumber(value.fee);
+
+const isZoneFee = (value: unknown): value is { zone: string; fee: number } =>
+  isObject(value) && isString(value.zone) && isNumber(value.fee);
+
+const isDiscountRow = (
+  value: unknown
+): value is FeeSettings['quantityDiscounts'][number] =>
+  isObject(value) && isNumber(value.fromParcels) && isNumber(value.percent);
+
+// GET /api/fees as the site reads it.
+export const isFeeSettings = (value: unknown): value is FeeSettings => {
+  if (!isObject(value)) return false;
+  const { addressService, purchaseService, salesService, parcelForce } = value;
+  return (
+    isObject(addressService) &&
+    isNumber(addressService.fee) &&
+    isObject(purchaseService) &&
+    isNumber(purchaseService.threshold) &&
+    isPercentFee(purchaseService.ownMoney) &&
+    isPercentFee(purchaseService.clientMoney) &&
+    isPercentFee(salesService) &&
+    isObject(parcelForce) &&
+    isObject(parcelForce.small) &&
+    isNumber(parcelForce.small.maxSide) &&
+    isNumber(parcelForce.small.maxWeight) &&
+    isNumber(parcelForce.small.fee) &&
+    isObject(parcelForce.medium) &&
+    isNumber(parcelForce.medium.maxSide) &&
+    isArrayOf(isWeightTier)(parcelForce.medium.tiers) &&
+    isArrayOf(isZoneFee)(parcelForce.zones) &&
+    isArrayOf(isDiscountRow)(value.quantityDiscounts) &&
+    value.quantityDiscounts.length > 0
+  );
 };
 
 export const percentFee = (amount: number, rule: PercentFee) => {

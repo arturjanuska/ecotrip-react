@@ -1,4 +1,4 @@
-import { DateOverride } from '../utils/transportDates';
+import { DateOverride, isDateOverrideList } from '../utils/transportDates';
 import snapshot from '../data/dateOverrides.snapshot.json';
 import useCmsResource from './useCmsResource';
 
@@ -8,7 +8,8 @@ const useDateOverrides = () => {
   const { data, isReady } = useCmsResource(
     'dateOverrides',
     '/api/date-overrides',
-    snapshot as DateOverrideList
+    snapshot as DateOverrideList,
+    isDateOverrideList
   );
   return { overrides: data.items, isReady };
 };

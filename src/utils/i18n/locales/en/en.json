@@ -316,5 +316,6 @@
   "domesticTransport": "Domestic transport",
   "internationalTransport": "International transport",
   "copyright": "@ 2024 ecotrip.lt | All rights reserved",
-  "serverError": "Server error. Contact the manager at +370 601 22060"
+  "serverError": "Server error. Contact the manager at +370 601 22060",
+  "formLoadError": "The order form could not be loaded. Contact the manager +370 601 22060"
 }

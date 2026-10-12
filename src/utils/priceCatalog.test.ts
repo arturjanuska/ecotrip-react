@@ -10,12 +10,15 @@ import {
   findCategory,
   findSubCategory,
   findVariant,
+  isPriceCatalog,
   priceDirection,
   pricingFor,
   sizeOptions,
   specificationOptions,
   subCategoryOptions,
+  type Category,
   type FixedPricing,
+  type MeasuredPricing,
   type PriceCatalog,
   type Pricing,
   type Variant,
@@ -502,5 +505,47 @@ describe('i18n', () => {
     ['ru', ru],
   ])('%s has every catalog label', (_, translations) => {
     expect(keys.filter((key) => !(key in translations))).toEqual([]);
+  });
+});
+
+describe('isPriceCatalog', () => {
+  const copy = () => structuredClone(snapshot) as unknown as PriceCatalog;
+
+  it('accepts the snapshot', () => {
+    expect(isPriceCatalog(snapshot)).toBe(true);
+  });
+
+  it('rejects answers the form cannot read', () => {
+    expect(isPriceCatalog(null)).toBe(false);
+    expect(isPriceCatalog({ data: 123 })).toBe(false);
+    expect(isPriceCatalog('<html></html>')).toBe(false);
+  });
+
+  it('rejects an empty catalog', () => {
+    expect(isPriceCatalog({ categories: [] })).toBe(false);
+  });
+
+  it('rejects a broken category, subcategory, variant or tier', () => {
+    const noSubCategories = copy();
+    delete (noSubCategories.categories[1] as Partial<Category>).subCategories;
+    expect(isPriceCatalog(noSubCategories)).toBe(false);
+
+    const unknownPricing = copy();
+    unknownPricing.categories[1].subCategories[0].pricing = {
+      type: 'other',
+    } as unknown as Pricing;
+    expect(isPriceCatalog(unknownPricing)).toBe(false);
+
+    const noPrice = copy();
+    const pricing = noPrice.categories[1].subCategories[0]
+      .pricing as FixedPricing;
+    (pricing.variants[0] as Partial<Variant>).price = undefined;
+    expect(isPriceCatalog(noPrice)).toBe(false);
+
+    const textTier = copy();
+    const shipments = findCategory(textTier, 'shipments')!
+      .pricing as MeasuredPricing;
+    (shipments.byWeight![0] as unknown as { upTo: string }).upTo = '1';
+    expect(isPriceCatalog(textTier)).toBe(false);
   });
 });

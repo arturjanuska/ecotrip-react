@@ -1,5 +1,7 @@
 // UK postcode areas from Ecotrip CMS (GET /api/postcodes). The fields are a
 // copy of the CMS postcode record: keep them in sync.
+import { isArrayOf, isObject, isString } from './guards';
+
 export type PostcodeRecord = {
   // Outward code: "FY1", "SW1A".
   postcode: string;
@@ -20,6 +22,16 @@ export type PostcodeRecord = {
 };
 
 export type PostcodeSnapshot = { items: PostcodeRecord[] };
+
+// GET /api/postcodes as the site reads it. Only the code is required: the
+// other fields are read leniently (a CMS not yet migrated has no
+// isParcelForce).
+export const isPostcodeList = (value: unknown): value is PostcodeSnapshot =>
+  isObject(value) &&
+  isArrayOf(
+    (item: unknown): item is PostcodeRecord =>
+      isObject(item) && isString(item.postcode)
+  )(value.items);
 
 // Outward code at the start of a full postcode: "FY1 1AA" → "FY1".
 export const outcodeOf = (postcode?: string | null): string | null =>

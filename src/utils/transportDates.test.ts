@@ -7,6 +7,7 @@ import {
   getDeliveryValues,
   getTrips,
   HORIZON_MONTHS,
+  isDateOverrideList,
   isEvenWeek,
   RouteDirection,
   Trip,
@@ -419,5 +420,43 @@ describe('selects', () => {
       month: { value: '01' },
       day: { value: '6 - 7' },
     });
+  });
+});
+
+describe('isDateOverrideList', () => {
+  const trip = {
+    pickup: { from: '2026-12-04', to: '2026-12-06' },
+    delivery: { from: '2026-12-09', to: '2026-12-10' },
+  };
+  const month = { direction: 'UK-LT', year: 2026, month: 12, trips: [trip] };
+
+  it('accepts months set in the CMS, and none', () => {
+    expect(isDateOverrideList({ items: [] })).toBe(true);
+    expect(isDateOverrideList({ items: [month] })).toBe(true);
+    expect(
+      isDateOverrideList({
+        items: [
+          {
+            ...month,
+            trips: [
+              {
+                ...trip,
+                parcelForceDelivery: { from: '2026-12-16', to: '2026-12-17' },
+              },
+            ],
+          },
+        ],
+      })
+    ).toBe(true);
+  });
+
+  it('rejects answers getTrips cannot read', () => {
+    expect(isDateOverrideList({ data: 123 })).toBe(false);
+    expect(isDateOverrideList({ items: [{ ...month, trips: [{}] }] })).toBe(
+      false
+    );
+    expect(
+      isDateOverrideList({ items: [{ ...month, direction: 'LT-LT' }] })
+    ).toBe(false);
   });
 });

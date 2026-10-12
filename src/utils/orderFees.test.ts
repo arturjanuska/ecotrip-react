@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import snapshot from '../data/feeSettings.snapshot.json';
 import {
   FeeSettings,
+  isFeeSettings,
   parcelForceSurcharge,
   percentFee,
   purchaseServiceFee,
@@ -86,5 +87,26 @@ describe('quantityDiscountPercent', () => {
     expect(
       [0, 1, 2, 3, 4, 5, 9].map((n) => quantityDiscountPercent(n, fees))
     ).toEqual([0, 0, 0, 5, 10, 15, 15]);
+  });
+});
+
+describe('isFeeSettings', () => {
+  it('accepts the snapshot', () => {
+    expect(isFeeSettings(snapshot)).toBe(true);
+  });
+
+  it('rejects answers the order price cannot read', () => {
+    expect(isFeeSettings({})).toBe(false);
+    expect(isFeeSettings({ data: 123 })).toBe(false);
+    expect(isFeeSettings({ ...fees, quantityDiscounts: [] })).toBe(false);
+    expect(
+      isFeeSettings({ ...fees, salesService: { percent: '2', min: 15 } })
+    ).toBe(false);
+    expect(
+      isFeeSettings({
+        ...fees,
+        parcelForce: { ...fees.parcelForce, zones: undefined },
+      })
+    ).toBe(false);
   });
 });
