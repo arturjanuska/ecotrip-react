@@ -1,14 +1,16 @@
 .alert-container {
 	width: 100%;
-	border: 1px solid #ff0000;
-	border-radius: 4px;
+	max-width: 36rem;
 	display: flex;
-	padding: 12px 16px;
-	background-color: #ff00000d;
 	align-items: flex-start;
-	gap: 12px;
 	justify-content: flex-start;
-	margin-bottom: 26px;
+	gap: 0.75rem;
+	padding: 1rem 1.2rem;
+	margin-bottom: 1.6rem;
+	border: 1px solid var(--ecotrip-error);
+	border-radius: 0.8rem;
+	color: var(--ecotrip-error);
+	background-color: rgba(164, 48, 48, 0.06);
 }
 
 .alert-messages {
@@ -18,14 +20,13 @@
 }
 
 .alert-messages span {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
-	color: #7a7776;
+	color: var(--ecotrip-ink);
+	font-size: 0.95rem;
+	line-height: 1.5;
 }
+
 @media (max-width: 768px) {
 	.alert-container {
-		width: auto;
+		max-width: none;
 	}
 }

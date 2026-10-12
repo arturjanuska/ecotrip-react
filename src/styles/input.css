@@ -1,54 +1,55 @@
+/* Underlined field, as in the ecotrip.lt enquiry form. */
 .input-container {
 	width: 100%;
-	border: 1px solid #0000001a;
-	border-radius: 5px;
-	box-sizing: border-box;
-	height: 38px;
+	min-height: 3.6rem;
 	display: flex;
 	align-items: center;
-	padding: 0 10px;
-}
-
-.input-container input::placeholder {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
-	text-align: left;
-	color: #7a777680;
+	border-bottom: 1px solid var(--ecotrip-field-border);
+	background: transparent;
+	transition:
+		border-color 220ms ease,
+		box-shadow 220ms ease;
 }
 
 .input-container input {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
-	text-align: left;
 	width: 100%;
-	height: 30px;
-	box-sizing: border-box;
+	min-height: 2.6rem;
+	padding: 0;
 	border: none;
-	color: #7a7776;
+	color: var(--ecotrip-ink);
+	background: transparent;
+	font: 500 1.05rem/1.4 var(--ecotrip-font-body);
+	text-align: left;
+}
+
+.input-container input::placeholder {
+	color: var(--ecotrip-ink);
+	opacity: 0.5;
 }
 
 .input-container:has(input:disabled) {
-	background-color: #f4f4f4;
+	border-bottom-style: dashed;
+}
+
+.input-container input:disabled {
+	color: var(--ecotrip-text-muted);
+	-webkit-text-fill-color: var(--ecotrip-text-muted);
 }
 
 .input-container:focus-within {
-	border-color: #9aa61e;
+	border-color: var(--ecotrip-brand);
+	box-shadow: 0 2px 0 var(--ecotrip-brand);
 }
 
-.input-container input:focus {
-	outline: none;
-}
-
+.input-container input:focus,
 .input-container input:focus-visible {
 	border: none;
 	outline: none;
 	outline-offset: 0px;
 }
 
-.error-input {
-	border: 1px solid #ff0000;
+.error-input,
+.input-container.error-input:focus-within {
+	border-color: var(--ecotrip-error);
+	box-shadow: 0 1px 0 var(--ecotrip-error);
 }

@@ -14,7 +14,7 @@
 .loader__spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #9aa61e;
+  border: 3px solid var(--ecotrip-brand-deep);
   border-top-color: transparent;
   border-radius: 50%;
   animation: loader-spin 0.8s linear infinite;

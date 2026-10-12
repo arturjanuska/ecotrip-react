@@ -1,21 +1,27 @@
 .address-form-section-wrapper {
 	display: flex;
-	gap: 22px;
-	margin-bottom: 30px;
+	gap: clamp(1.25rem, 2.6vw, 2.5rem);
+	margin-bottom: 2rem;
 }
 
-.instructions {
-	margin-top: 4px;
+.address-form-section-wrapper .field-container {
+	flex: 1 1 0;
+	width: auto;
+	min-width: 0;
+}
+
+.field-container .instructions {
 	display: block;
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 13.8px;
+	color: var(--ecotrip-error);
+	font-size: 0.875rem;
+	line-height: 1.45;
 	text-align: left;
-	color: #ff0000;
 }
 
 .service-section-wrapper {
+	margin-top: 1rem;
+	padding-top: 2rem;
+	border-top: 1px solid var(--ecotrip-border-light);
 }
 
 .service-section-container {
@@ -23,115 +29,115 @@
 	flex-direction: column;
 }
 
+.service-section-container .title {
+	margin: 0 auto 1.25rem 0;
+	color: var(--ecotrip-ink);
+	font: 700 0.8rem/1.3 var(--ecotrip-font-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+/* Service options: four equal cards, 2 x 2 (one column on phones). */
+.services-mapping-container {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-auto-rows: 1fr;
+	gap: 1rem;
+}
+
 .service-section-container .services-mapping-container-service-card {
-	width: min(360px, 100%);
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	min-width: 0;
+	overflow: hidden;
+	border: 1px solid var(--ecotrip-border-light);
+	border-radius: 1rem;
+	background: transparent;
+	transition:
+		border-color 220ms ease,
+		background-color 220ms ease,
+		box-shadow 220ms ease;
 }
 
-.services-mapping-container-service-card a {
-	margin: 0 !important;
+.services-mapping-container-service-card:hover:not(:has(.disabled-card)) {
+	border-color: rgba(7, 17, 13, 0.45);
 }
 
-.service-section-container a {
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 13.8px;
-	text-align: left;
+.services-mapping-container-service-card:has(.service-card.active) {
+	border-color: var(--ecotrip-brand-deep);
+	background: var(--ecotrip-white);
+	box-shadow: inset 0 0 0 1px var(--ecotrip-brand-deep);
 }
 
-.service-section-container .title {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
-	text-align: left;
-	color: #7a7776;
-	margin-bottom: 16px;
-	margin-right: auto;
+.services-mapping-container-service-card:has(.disabled-card) {
+	opacity: 0.55;
+}
+
+.services-mapping-container-service-card .ecotrip-link {
+	margin: 0 1.5rem 1.5rem !important;
+	font-size: 0.9rem;
+}
+
+.service-section-container > .ecotrip-link {
+	font-size: 0.95rem;
 }
 
 .service-card {
-	box-sizing: border-box;
-	width: min(360px, 100%);
-	border-radius: 5px;
-	border: 1px solid #7a777680;
 	display: flex;
-	align-items: center;
+	flex: 1;
+	align-items: flex-start;
 	justify-content: space-between;
-	padding: 19px 21px;
-}
-
-.service-card:hover {
+	gap: 1rem;
+	padding: 1.5rem;
 	cursor: pointer;
-	border: 1px solid #9aa61e;
 }
 
-.service-card.disabled-card:hover {
-	cursor: auto;
-	border: 1px solid #7a777680;
+.service-card:focus-visible {
+	outline: 3px solid var(--ecotrip-ink);
+	outline-offset: -3px;
+	border-radius: 1rem;
+}
+
+.service-card.disabled-card {
+	cursor: not-allowed;
 }
 
 .service-info {
 	display: flex;
-	align-items: center;
-	gap: 20px;
-}
-
-.active {
-	background-color: #9aa61e1a;
-	border: 1px solid #9aa61e;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 .service-description {
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: 0.4rem;
 }
 
 .card-title {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 16.1px;
-	text-align: left;
-	color: #7a7776;
-}
-
-.service-card.disabled-card .card-title,
-.service-card.disabled-card .card-description {
-	color: #7a777680;
+	color: var(--ecotrip-ink);
+	font-family: var(--ecotrip-font-display);
+	font-size: 1.25rem;
+	font-weight: 480;
+	line-height: 1.15;
+	letter-spacing: -0.03em;
 }
 
 .card-description {
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 13.8px;
-	text-align: left;
-	color: #7a7776;
-}
-
-.services-mapping-container {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
-	align-content: center;
-	justify-content: flex-end;
+	color: var(--ecotrip-text-muted);
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
 .service-section-sub-text {
-	margin-top: 18px;
+	margin-top: 1.25rem;
 }
+
 .service-section-sub-text span {
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 13.8px;
-	text-align: left;
-	color: #7a7776;
+	color: var(--ecotrip-text-muted);
+	font-size: 0.95rem;
+	line-height: 1.6;
 }
 
 @media (max-width: 768px) {
@@ -139,12 +145,8 @@
 		flex-direction: column;
 	}
 
-	.service-card {
-		max-width: none;
-		width: 100%;
-	}
-
-	.service-section-container .services-mapping-container-service-card {
-		width: 100%;
+	.services-mapping-container {
+		grid-template-columns: 1fr;
+		grid-auto-rows: auto;
 	}
 }

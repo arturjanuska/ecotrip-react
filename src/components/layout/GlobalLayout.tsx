@@ -5,7 +5,7 @@ type Props = {
 };
 
 const GlobalLayout = ({ children }: Props) => {
-  return <div className="container">{children}</div>;
+  return <div className="page">{children}</div>;
 };
 
 export default GlobalLayout;

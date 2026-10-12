@@ -31,7 +31,7 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
   };
 
   return (
-    <>
+    <div className="invoice-section">
       <ControlledCheckboxWithLabel control={control} name="invoiceRequired">
         <span>{t('needInvoiceMsg')}</span>
       </ControlledCheckboxWithLabel>
@@ -92,7 +92,7 @@ const Invoice = ({ control, formErrors, methods }: InvoiceProps) => {
           </FieldContainer>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

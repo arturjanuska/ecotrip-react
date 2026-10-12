@@ -4,10 +4,11 @@ export const getIconColor = (
   service: string,
   isParcelForce: boolean,
   direction: DirectionType
-): '#9AA61E' | '#7A777680' => {
+): string => {
+  // brand-deep, or ink at 30% when the service cannot be chosen.
   return isCardDisabled(service, isParcelForce, direction)
-    ? '#7A777680'
-    : '#9AA61E';
+    ? 'rgba(7, 17, 13, 0.3)'
+    : '#5f7300';
 };
 
 export const isCardDisabled = (

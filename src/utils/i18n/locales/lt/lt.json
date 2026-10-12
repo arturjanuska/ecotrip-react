@@ -317,5 +317,11 @@
   "internationalTransport": "Pervežimai užsienyje",
   "copyright": "@ 2024 ecotrip.lt | Visos teisės saugomos",
   "serverError": "Serverio klaida. Susisiekite su vadybininku +370 601 22060",
-  "formLoadError": "Nepavyko įkelti užsakymo formos. Susisiekite su vadybininku +370 601 22060"
+  "formLoadError": "Nepavyko įkelti užsakymo formos. Susisiekite su vadybininku +370 601 22060",
+
+  "stepLabel": "Žingsnis",
+  "heroEyebrow": "Užsakymas / Lietuva ⇄ Jungtinė Karalystė",
+  "heroTitle": "Registruokite siuntą.",
+  "heroAccent": "Kaina matoma iš karto.",
+  "heroLead": "Įveskite paėmimo ir pristatymo adresus, pasirinkite paslaugą ir aprašykite siuntą. Užsakymo patvirtinimą gausite nurodytu el. paštu."
 }

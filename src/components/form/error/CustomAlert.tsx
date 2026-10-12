@@ -7,7 +7,7 @@ const CustomAlert = ({ messages }: { messages: string[] }) => {
   return (
     <div className="alert-container">
       <div>
-        <FontAwesomeIcon icon={faCircleExclamation} color="#ff0000" />
+        <FontAwesomeIcon icon={faCircleExclamation} color="#a43030" />
       </div>
       <div className="alert-messages">
         {messages &&

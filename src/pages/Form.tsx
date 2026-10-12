@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import AddressForm from '../components/step1/AddressForm';
-import Breadcrumds from '../components/Breadcrumds';
 import SenderInformation from '../components/step4/SenderInformation';
 import TransportationDates from '../components/step3/TransportationDates';
 import Shipments from '../components/step2/Shipments';
@@ -32,6 +31,8 @@ import { GOOGLE_MAPS_SCRIPT_OPTIONS } from '../utils/googleMapsScript';
 import Loader from '../components/Loader';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
+import SiteHeader from '../components/layout/SiteHeader';
+import FormHero from '../components/layout/FormHero';
 import { useNavigate } from 'react-router-dom';
 
 declare global {
@@ -233,166 +234,158 @@ const Form = () => {
   );
 
   return (
-    <form
-      className="main"
-      onSubmit={methods.handleSubmit(onSubmit)}
-      autoComplete="off"
-    >
-      <div
-        style={{
-          marginBottom: '70px',
-        }}
-      >
-        <Breadcrumds />
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            marginBottom: '20px',
-          }}
+    <>
+      <SiteHeader>
+        <LanguageSelect methods={methods} />
+      </SiteHeader>
+      <main>
+        <FormHero />
+        <form
+          className="main container"
+          onSubmit={methods.handleSubmit(onSubmit)}
+          autoComplete="off"
         >
-          <LanguageSelect methods={methods} />
-        </div>
-        <Divider />
-        {/* Without the address autocomplete no address can be entered: the
+          <div className="form-body">
+            {/* Without the address autocomplete no address can be entered: the
             customer orders through the manager instead. */}
-        {googleMapsLoadError ? (
-          <div className="direction-message">
-            <p>{t('formLoadError')}</p>
-            <p>Info@ecotrip.lt</p>
-          </div>
-        ) : (
-          !isFormReady && <Loader />
-        )}
-        {/* Hidden, not unmounted, while loading: the page column takes its
-            width from the form, so it does not jump when the form appears. */}
-        <div
-          className={isFormReady ? undefined : 'form-pending'}
-          aria-hidden={!isFormReady}
-        >
-          <AddressForm
-            isPostcodeReady={isPostcodeReady}
-            selectedService={selectedService}
-            methods={methods}
-            direction={direction}
-            currency={currency}
-            formErrors={formErrors}
-            rate={rate}
-            isParcelForce={isParcelForce}
-          />
-        </div>
-        {isFormReady && (
-          <>
-            <Divider />
-            {!isPostcodeReady ? null : direction === 'LT-LT' ? (
+            {googleMapsLoadError ? (
               <div className="direction-message">
-                <p>{t('wrongDirectionMessage1')}</p>
+                <p>{t('formLoadError')}</p>
                 <p>Info@ecotrip.lt</p>
               </div>
             ) : (
+              !isFormReady && <Loader />
+            )}
+            {/* Hidden, not unmounted, while loading: the page column takes its
+            width from the form, so it does not jump when the form appears. */}
+            <div
+              className={isFormReady ? undefined : 'form-pending'}
+              aria-hidden={!isFormReady}
+            >
+              <AddressForm
+                isPostcodeReady={isPostcodeReady}
+                selectedService={selectedService}
+                methods={methods}
+                direction={direction}
+                currency={currency}
+                formErrors={formErrors}
+                rate={rate}
+                isParcelForce={isParcelForce}
+              />
+            </div>
+            {isFormReady && (
               <>
-                {!!selectedService && (
+                <Divider />
+                {!isPostcodeReady ? null : direction === 'LT-LT' ? (
+                  <div className="direction-message">
+                    <p>{t('wrongDirectionMessage1')}</p>
+                    <p>Info@ecotrip.lt</p>
+                  </div>
+                ) : (
                   <>
-                    <Shipments
-                      control={methods.control}
-                      selectedService={selectedService}
-                      methods={methods}
-                      currency={currency}
-                      formErrors={formErrors}
-                      errorMessages={errorMessages}
-                      setErrorMessages={setErrorMessages}
-                      rate={rate}
-                    />
-                    <Divider />
-                    <TransportationDates
-                      methods={methods}
-                      formErrors={formErrors}
-                      direction={direction}
-                      postcodeDetails={postcodeDetails}
-                      dateOverrides={dateOverrides}
-                    />
-                    {showPurchaseInformation && (
+                    {!!selectedService && (
                       <>
-                        <Divider />
-                        <ProductPurchaseServiceInformation
+                        <Shipments
                           control={methods.control}
+                          selectedService={selectedService}
+                          methods={methods}
+                          currency={currency}
                           formErrors={formErrors}
+                          errorMessages={errorMessages}
+                          setErrorMessages={setErrorMessages}
+                          rate={rate}
+                        />
+                        <Divider />
+                        <TransportationDates
+                          methods={methods}
+                          formErrors={formErrors}
+                          direction={direction}
+                          postcodeDetails={postcodeDetails}
+                          dateOverrides={dateOverrides}
+                        />
+                        {showPurchaseInformation && (
+                          <>
+                            <Divider />
+                            <ProductPurchaseServiceInformation
+                              control={methods.control}
+                              formErrors={formErrors}
+                              selectedService={service}
+                              methods={methods}
+                            />
+                          </>
+                        )}
+                        <Divider />
+                        <SenderInformation
+                          control={methods.control}
+                          stepLabel={
+                            selectedService === 'productSalesService' ||
+                            selectedService === 'productPurchaseService'
+                              ? t('pickupInfoMsg')
+                              : selectedService === 'shipmentWithAddressService'
+                                ? t('warehouseDetailsMsg')
+                                : t('senderInfoMsg')
+                          }
+                          formErrors={formErrors}
+                          setValue={methods.setValue}
                           selectedService={service}
                           methods={methods}
+                          step={showPurchaseInformation ? 5 : 4}
+                        />
+                        <Divider />
+                        <RecipientInformation
+                          control={methods.control}
+                          formErrors={formErrors}
+                          methods={methods}
+                          stepLabel={
+                            selectedService === 'productSalesService'
+                              ? t('recipientInfoMsg')
+                              : t('deliveryInfoMsg')
+                          }
+                          step={showPurchaseInformation ? 6 : 5}
+                        />
+                        {selectedService === 'productSalesService' && (
+                          <>
+                            <Divider />
+                            <RansomPayeeInformation
+                              control={methods.control}
+                              formErrors={formErrors}
+                              selectedService={service}
+                              methods={methods}
+                            />
+                          </>
+                        )}
+                        <Divider />
+                        <PayerInformation
+                          control={methods.control}
+                          step={
+                            selectedService === 'productSalesService'
+                              ? 7
+                              : showPurchaseInformation
+                                ? 7
+                                : 6
+                          }
+                          stepLabel={t('customerInfoMsg')}
+                          formErrors={formErrors}
+                          methods={methods}
+                          currency={currency}
+                          errorMessages={errorMessages}
+                          submitErrorMessage={submitErrorMessage}
+                          postcodeDetails={postcodeDetails}
+                          setPriceDescription={setPriceDescription}
+                          priceDescription={priceDescription}
+                          rate={rate}
+                          isLoading={isLoading}
                         />
                       </>
                     )}
-                    <Divider />
-                    <SenderInformation
-                      control={methods.control}
-                      stepLabel={
-                        selectedService === 'productSalesService' ||
-                        selectedService === 'productPurchaseService'
-                          ? t('pickupInfoMsg')
-                          : selectedService === 'shipmentWithAddressService'
-                            ? t('warehouseDetailsMsg')
-                            : t('senderInfoMsg')
-                      }
-                      formErrors={formErrors}
-                      setValue={methods.setValue}
-                      selectedService={service}
-                      methods={methods}
-                      step={showPurchaseInformation ? 5 : 4}
-                    />
-                    <Divider />
-                    <RecipientInformation
-                      control={methods.control}
-                      formErrors={formErrors}
-                      methods={methods}
-                      stepLabel={
-                        selectedService === 'productSalesService'
-                          ? t('recipientInfoMsg')
-                          : t('deliveryInfoMsg')
-                      }
-                      step={showPurchaseInformation ? 6 : 5}
-                    />
-                    {selectedService === 'productSalesService' && (
-                      <>
-                        <Divider />
-                        <RansomPayeeInformation
-                          control={methods.control}
-                          formErrors={formErrors}
-                          selectedService={service}
-                          methods={methods}
-                        />
-                      </>
-                    )}
-                    <Divider />
-                    <PayerInformation
-                      control={methods.control}
-                      step={
-                        selectedService === 'productSalesService'
-                          ? 7
-                          : showPurchaseInformation
-                            ? 7
-                            : 6
-                      }
-                      stepLabel={t('customerInfoMsg')}
-                      formErrors={formErrors}
-                      methods={methods}
-                      currency={currency}
-                      errorMessages={errorMessages}
-                      submitErrorMessage={submitErrorMessage}
-                      postcodeDetails={postcodeDetails}
-                      setPriceDescription={setPriceDescription}
-                      priceDescription={priceDescription}
-                      rate={rate}
-                      isLoading={isLoading}
-                    />
                   </>
                 )}
               </>
             )}
-          </>
-        )}
-      </div>
-    </form>
+          </div>
+        </form>
+      </main>
+    </>
   );
 };
 

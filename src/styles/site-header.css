@@ -1,0 +1,87 @@
+.site-header {
+	position: relative;
+	z-index: 20;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 1.5rem;
+	min-height: 6rem;
+	padding: 0 var(--ecotrip-gutter);
+	color: var(--ecotrip-paper);
+	background: var(--ecotrip-ink);
+	border-bottom: 1px solid var(--ecotrip-border-dark);
+}
+
+.site-header a:focus-visible {
+	outline-color: var(--ecotrip-brand);
+}
+
+.site-header__brand {
+	display: flex;
+	align-items: center;
+	gap: clamp(0.75rem, 1.25vw, 1.15rem);
+	min-width: 0;
+}
+
+.site-header__wordmark {
+	display: inline-flex;
+	width: clamp(9.5rem, 12vw, 12.5rem);
+	padding-block: 0.25rem;
+}
+
+.site-header__wordmark img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.site-header__phones {
+	display: flex;
+	gap: 2rem;
+}
+
+.site-header__phones a {
+	position: relative;
+	color: inherit;
+	font: 650 0.8rem/1 var(--ecotrip-font-mono);
+	letter-spacing: 0.08em;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.site-header__phones a::after {
+	position: absolute;
+	right: 0;
+	bottom: -0.45rem;
+	left: 0;
+	height: 1px;
+	content: '';
+	background: var(--ecotrip-brand);
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 320ms var(--ecotrip-ease);
+}
+
+.site-header__phones a:hover::after {
+	transform: scaleX(1);
+	transform-origin: left;
+}
+
+@media (max-width: 900px) {
+	.site-header__phones {
+		display: none;
+	}
+}
+
+@media (max-width: 600px) {
+	.site-header {
+		min-height: 4.75rem;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		gap: 0.75rem;
+	}
+
+	.site-header__wordmark {
+		width: clamp(8.25rem, 31vw, 9.5rem);
+	}
+}

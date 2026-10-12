@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import '../styles/step.css';
 
 type Props = {
@@ -18,24 +19,19 @@ const Step = ({
   id,
   instructions,
 }: Props) => {
-  const stepTitle = `${step}. ${title}`;
+  const { t } = useTranslation();
 
   return (
-    <div className={`step-columns ${className ? className : ''}`} id={id}>
+    <section className={`step-columns ${className ? className : ''}`} id={id}>
       <div className="title-column">
-        <span>{stepTitle}</span>
-        {instructions && <span className="instructions">{instructions}</span>}
+        <p className="ecotrip-eyebrow step-marker">
+          {String(step).padStart(2, '0')} / {t('stepLabel')}
+        </p>
+        <h2 className="step-title">{title}</h2>
+        {instructions && <p className="instructions">{instructions}</p>}
       </div>
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <div className="content-column">{children}</div>
-      </div>
-    </div>
+      <div className="content-column">{children}</div>
+    </section>
   );
 };
 

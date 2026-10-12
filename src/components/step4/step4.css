@@ -1,23 +1,28 @@
 .client-form-container {
 	display: flex;
-	margin-bottom: 30px;
 	flex-direction: column;
-	gap: 20px;
+	gap: 1.75rem;
+	margin-bottom: 2rem;
 }
 
 .client-form-row {
 	display: flex;
 	align-items: flex-start;
-	gap: 20px;
+	gap: clamp(1.25rem, 2.6vw, 2.5rem);
+}
+
+.client-form-row > .field-container {
+	flex: 1 1 0;
+	width: auto;
+	min-width: 0;
 }
 
 @media (max-width: 768px) {
-	.client-form-container {
+	.client-form-row {
 		flex-direction: column;
 	}
 
-	.client-form-row {
-		display: flex;
-		flex-direction: column;
+	.client-form-row > .field-container {
+		width: 100%;
 	}
 }

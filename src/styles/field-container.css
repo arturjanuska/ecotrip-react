@@ -1,26 +1,21 @@
 .field-container {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 0.4rem;
 	width: min(360px, 100%);
 }
 
 .field-container label {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
+	color: var(--ecotrip-ink);
+	font: 700 0.95rem/1.35 var(--ecotrip-font-body);
 	text-align: left;
-	color: #7a7776;
 }
 
 .field-container p {
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 13.8px;
+	color: var(--ecotrip-text-muted);
+	font-size: 0.875rem;
+	line-height: 1.55;
 	text-align: left;
-	color: #7a777680;
 }
 
 @media (max-width: 768px) {

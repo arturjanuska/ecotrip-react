@@ -1,85 +1,112 @@
 .payer-info-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
-  gap: 20px;
+  gap: clamp(1.25rem, 2.6vw, 2.5rem);
+  margin-bottom: 2.5rem;
+}
+
+.payer-info-container > .field-container {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
 }
 
 .checkboxes-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
 }
 
 .columns {
   display: flex;
-  gap: 20px;
+  gap: clamp(1.25rem, 2.6vw, 2.5rem);
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 2rem;
 }
 
 .columns .left-column {
   flex: 1;
 }
+
 .columns .right-column {
   flex: 1;
 }
 
-.invoice-form-container {
-  display: flex;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 30px;
+.invoice-section {
+  margin-bottom: 0.75rem;
 }
 
+.invoice-form-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem clamp(1.25rem, 2.6vw, 2.5rem);
+  margin: 1.5rem 0 2rem;
+  text-align: left;
+}
+
+.invoice-form-container .field-container {
+  width: 100%;
+}
+
+/* Order summary: hairline rows like the site's price tables, total in display type. */
 .order-price-container {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ecotrip-ink);
 }
 
 .order-price {
   display: flex;
   justify-content: space-between;
-  font-family: Arial;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16.1px;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--ecotrip-ink);
+  font: 700 1rem/1.4 var(--ecotrip-font-body);
   text-align: left;
-  color: #7a7776;
-  margin-bottom: 18px;
+}
+
+.order-price strong {
+  color: var(--ecotrip-ink);
+  font-family: var(--ecotrip-font-display);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 480;
+  letter-spacing: -0.03em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .price-description-container {
-  margin-bottom: 10px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
-  gap: 2px;
+  margin-bottom: 1.25rem;
 }
 
 .price-description-row {
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16.1px;
-  text-align: right;
-  color: #7a7776;
   display: flex;
   justify-content: space-between;
-  display: flex;
-  gap: 20px;
-  align-items: center;
+  align-items: baseline;
+  gap: 1.25rem;
   width: 100%;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--ecotrip-border-light);
+  color: var(--ecotrip-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: right;
 }
 
 .price-description-row strong {
   min-width: fit-content;
+  color: var(--ecotrip-brand-deep);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
 }
 
 .price-description-row span {
@@ -109,26 +136,24 @@
 }
 
 .error {
-  color: #7a777680;
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 13.8px;
+  color: var(--ecotrip-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
   text-align: left;
 }
 
 .error span {
-  color: #ff0000;
+  color: var(--ecotrip-error);
 }
 
 @media (max-width: 768px) {
   .payer-info-container {
     flex-direction: column;
-    gap: 30px;
+    gap: 1.75rem;
   }
 
-  .columns {
-    margin-bottom: 40px;
+  .invoice-form-container {
+    grid-template-columns: 1fr;
   }
 
   .columns .left-column.empty,
@@ -138,14 +163,5 @@
 
   .columns {
     gap: 0;
-  }
-}
-
-@media (max-width: 390px) {
-  .order-price {
-    font-size: 13px;
-  }
-  .price-description-row {
-    font-size: 11px;
   }
 }

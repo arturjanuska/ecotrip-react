@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Step from '../Step';
 import OrderPrice from './OrderPrice';
+import Invoice from './Invoice';
 import './step6.css';
 import Link from '../Link';
 import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
@@ -194,14 +195,13 @@ const PayerInformation = ({
             <OrderPrice
               sum={orderPrice}
               currency={currency}
-              control={control}
-              formErrors={formErrors}
-              methods={methods}
               priceDescription={priceDescription}
               rate={rate}
             />
           </div>
         </div>
+        {/* Full width, so the invoice fields line up with the other steps. */}
+        <Invoice control={control} formErrors={formErrors} methods={methods} />
         <div className="checkboxes-container">
           <ControlledCheckboxWithLabel
             control={control}

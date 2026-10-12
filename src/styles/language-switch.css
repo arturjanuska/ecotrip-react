@@ -1,0 +1,131 @@
+/* Language switch, ported from the ecotrip.lt header (.ecotrip-language-switch). */
+.language-switch {
+	position: relative;
+	padding-left: clamp(0.7rem, 1vw, 1rem);
+	border-left: 1px solid rgba(255, 255, 255, 0.2);
+	color: var(--ecotrip-paper);
+}
+
+.language-switch__toggle {
+	display: inline-flex;
+	gap: 0.55rem;
+	align-items: center;
+	min-width: 3rem;
+	min-height: var(--ecotrip-control-sm);
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	color: inherit;
+	background: transparent;
+	font: 700 0.8rem/1 var(--ecotrip-font-mono);
+	letter-spacing: 0.08em;
+	cursor: pointer;
+	transition: color 240ms ease;
+}
+
+.language-switch__toggle:hover,
+.language-switch__toggle[aria-expanded='true'] {
+	color: var(--ecotrip-brand);
+}
+
+.language-switch__toggle:focus-visible {
+	outline-color: var(--ecotrip-brand);
+}
+
+/* Chevron drawn from two borders; turns up when open. */
+.language-switch__toggle i {
+	width: 0.4rem;
+	height: 0.4rem;
+	border-right: 1.5px solid currentColor;
+	border-bottom: 1.5px solid currentColor;
+	transform: translateY(-0.1rem) rotate(45deg);
+	transition: transform 280ms var(--ecotrip-ease);
+}
+
+.language-switch__toggle[aria-expanded='true'] i {
+	transform: translateY(0.1rem) rotate(225deg);
+}
+
+.language-switch__panel {
+	position: absolute;
+	z-index: 40;
+	top: calc(100% + 0.7rem);
+	left: 0;
+	width: 13rem;
+	padding: 0.45rem;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: 1rem;
+	color: var(--ecotrip-paper);
+	background: rgba(7, 17, 13, 0.94);
+	box-shadow: 0 1.4rem 3.5rem rgba(0, 0, 0, 0.28);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-0.45rem);
+	transition:
+		opacity 220ms ease,
+		visibility 220ms ease,
+		transform 320ms var(--ecotrip-ease);
+	-webkit-backdrop-filter: blur(18px);
+	backdrop-filter: blur(18px);
+}
+
+.language-switch__panel.is-open {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+}
+
+.language-switch__panel button {
+	display: grid;
+	grid-template-columns: 2.2rem 1fr;
+	gap: 0.65rem;
+	align-items: baseline;
+	width: 100%;
+	padding: 0.8rem 0.75rem;
+	border: 0;
+	border-radius: 0.7rem;
+	color: inherit;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+	transition:
+		color 160ms ease,
+		background-color 160ms ease;
+}
+
+.language-switch__panel button:hover,
+.language-switch__panel button:focus-visible {
+	color: var(--ecotrip-ink);
+	background: var(--ecotrip-brand);
+	outline: none;
+}
+
+.language-switch__panel button[aria-current='true'] span {
+	color: var(--ecotrip-brand);
+}
+
+.language-switch__panel button[aria-current='true']:hover span,
+.language-switch__panel button[aria-current='true']:focus-visible span {
+	color: inherit;
+}
+
+.language-switch__panel span {
+	font: 700 0.8rem/1 var(--ecotrip-font-mono);
+	letter-spacing: 0.06em;
+}
+
+.language-switch__panel small {
+	font: 650 0.95rem/1.2 var(--ecotrip-font-body);
+}
+
+@media (max-width: 600px) {
+	.language-switch {
+		padding-left: 0.65rem;
+	}
+
+	.language-switch__panel {
+		right: 0;
+		left: auto;
+		width: min(12rem, calc(100vw - 2rem));
+	}
+}

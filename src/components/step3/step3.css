@@ -1,7 +1,7 @@
 .date-fields-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1.75rem;
 }
 
 .date-fields-container .field-container {
@@ -10,12 +10,13 @@
 
 .date-picker-wrapper {
   display: flex;
-  gap: 16px;
+  gap: 1rem;
   width: 100%;
 }
 
 .date-picker-wrapper > div {
   flex: 1 1 0%;
+  min-width: 0;
 }
 
 .warning-text {
@@ -26,18 +27,15 @@
 }
 
 .warning-text p {
-  font-family: Arial;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 13.8px;
+  color: var(--ecotrip-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
   text-align: left;
-  color: #7a777680;
 }
 
 @media (max-width: 768px) {
   .date-fields-container {
     width: 100%;
-    flex-direction: column;
   }
 
   .date-picker-wrapper {

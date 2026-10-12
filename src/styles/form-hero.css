@@ -1,0 +1,110 @@
+.form-hero {
+	color: var(--ecotrip-paper);
+	background: var(--ecotrip-ink);
+}
+
+.form-hero__inner {
+	display: grid;
+	gap: 1.75rem;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: clamp(3rem, 7vw, 6.5rem) var(--ecotrip-gutter) clamp(2.5rem, 5vw, 4rem);
+}
+
+.form-hero__marker {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+	color: var(--ecotrip-muted);
+}
+
+.form-hero__marker::after {
+	width: clamp(2rem, 4vw, 3.5rem);
+	height: 1px;
+	margin-top: 0.58em;
+	flex: 0 0 auto;
+	content: '';
+	background: var(--ecotrip-brand);
+	opacity: 0.72;
+}
+
+.form-hero__title {
+	max-width: 15ch;
+	font-family: var(--ecotrip-font-display);
+	font-size: clamp(2.4rem, 5.6vw, 5.4rem);
+	font-weight: 480;
+	line-height: 0.94;
+	letter-spacing: -0.05em;
+	text-wrap: balance;
+}
+
+.form-hero__title span {
+	display: block;
+}
+
+.form-hero__accent {
+	color: var(--ecotrip-brand);
+	font-weight: 300;
+}
+
+.form-hero__lead {
+	max-width: 40rem;
+	color: rgba(244, 242, 233, 0.72);
+	font-size: clamp(1rem, 1.4vw, 1.2rem);
+	line-height: 1.55;
+}
+
+/* Route line between the two countries, the site's hero motif. */
+.form-hero__route {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 1rem;
+	margin-top: clamp(1rem, 3vw, 2.5rem);
+	font: 650 0.8rem/1 var(--ecotrip-font-mono);
+	letter-spacing: 0.08em;
+}
+
+.form-hero__line {
+	position: relative;
+	height: 1px;
+	background: rgba(255, 255, 255, 0.22);
+}
+
+.form-hero__line::before,
+.form-hero__line::after {
+	position: absolute;
+	top: 50%;
+	width: 0.75rem;
+	aspect-ratio: 1;
+	content: '';
+	border: 2px solid var(--ecotrip-brand);
+	border-radius: 50%;
+	background: var(--ecotrip-ink);
+	transform: translateY(-50%);
+}
+
+.form-hero__line::before {
+	left: 0;
+}
+
+.form-hero__line::after {
+	right: 0;
+}
+
+.form-hero__line i {
+	position: absolute;
+	inset: 0;
+	background: var(--ecotrip-brand);
+	transform-origin: left;
+	animation: form-hero-route 2.4s var(--ecotrip-ease) 0.3s both;
+}
+
+@keyframes form-hero-route {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}

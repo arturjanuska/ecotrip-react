@@ -9,7 +9,7 @@ const PrimaryButton = (props: ButtonProps) => {
   return (
     <button
       {...props}
-      className={`btn primary-button ${props.className ? props.className : ''}${
+      className={`btn primary-button ${props.className ? props.className : ''} ${
         props.disabled ? 'disabled' : ''
       }`}
     >

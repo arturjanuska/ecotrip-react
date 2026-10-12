@@ -24,7 +24,7 @@ export type ServiceCardProps = {
 };
 
 const CheckmarkIcon = () => {
-  return <FontAwesomeIcon icon={faCircleCheck} color="#9AA61E" size="lg" />;
+  return <FontAwesomeIcon icon={faCircleCheck} color="#5f7300" size="lg" />;
 };
 
 const ServiceCard = ({
@@ -41,6 +41,16 @@ const ServiceCard = ({
         isDisabled ? 'disabled-card' : ''
       }`}
       onClick={onSelect}
+      role="button"
+      tabIndex={isDisabled ? -1 : 0}
+      aria-pressed={selected}
+      aria-disabled={isDisabled}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
     >
       <div className="service-info">
         {service.icon}

@@ -5,14 +5,7 @@ type Props = {
 
 const Link = (props: Props) => {
   return (
-    <a
-      href={props.href}
-      style={{
-        color: '#9AA61E',
-        margin: '18px 0 0 0',
-        marginRight: 'auto',
-      }}
-    >
+    <a className="ecotrip-link" href={props.href}>
       {props.text}
     </a>
   );

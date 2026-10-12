@@ -1,29 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Invoice from './Invoice';
-import { Control, FieldErrors, UseFormReturn } from 'react-hook-form';
-import { CurrencyType, FormType } from '../../utils/formTypes';
+import { CurrencyType } from '../../utils/formTypes';
 import { convertValue } from '../../utils/convertCurrency';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
   sum: string;
-  control: Control<FormType, any>;
-  formErrors: FieldErrors<FormType>;
   currency: CurrencyType;
-  methods: UseFormReturn<FormType, any, undefined>;
   priceDescription: { title: string; price: string }[];
   rate: number;
 };
 
-const OrderPrice = ({
-  sum,
-  control,
-  formErrors,
-  currency,
-  methods,
-  priceDescription,
-  rate,
-}: Props) => {
+const OrderPrice = ({ sum, currency, priceDescription, rate }: Props) => {
   const { t } = useTranslation();
 
   return (
@@ -51,7 +37,6 @@ const OrderPrice = ({
             : '0.00'}
         </strong>
       </p>
-      <Invoice control={control} formErrors={formErrors} methods={methods} />
     </div>
   );
 };

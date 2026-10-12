@@ -1,87 +1,71 @@
 .modal-wrapper {
-	min-height: 59vh;
-	width: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+	width: 100%;
+	padding: clamp(3rem, 8vw, 7rem) var(--ecotrip-gutter);
 }
 
 .modal-container {
-	box-sizing: border-box;
-	padding: 20px;
-	border: 1px solid #9b9b9b6e;
-	max-width: 490px;
-	height: 300px;
-	border-radius: 6px;
-	box-shadow: 2px 2px 16px 2px #9b9b9b;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	gap: 2rem;
+	width: 100%;
+	max-width: 44rem;
+	padding: clamp(1.6rem, 4vw, 3rem);
+	border: 1px solid var(--ecotrip-border-light);
+	border-radius: var(--ecotrip-radius);
+	background: var(--ecotrip-paper);
 }
 
 .modal-title {
-	font-family: Arial;
-	font-size: 22px;
-	font-weight: 700;
-	line-height: 41.4px;
-	text-align: left;
-	color: #7a7776;
+	font-family: var(--ecotrip-font-display);
+	font-size: clamp(1.75rem, 3.2vw, 2.8rem);
+	font-weight: 480;
+	line-height: 0.98;
+	letter-spacing: -0.045em;
+	text-wrap: balance;
 }
 
 .modal-body {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 1rem;
 }
 
 .modal-body p {
-	font-family: Arial;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 18.8px;
-	color: #7a7776;
+	color: var(--ecotrip-text-muted);
+	font-size: 1.05rem;
+	line-height: 1.6;
 }
 
 .modal-body p span.order-id {
-	font-weight: 600;
+	color: var(--ecotrip-ink);
+	font-weight: 700;
 }
 
 .contact-number {
-	color: #9aa61e;
+	color: var(--ecotrip-ink);
+	font-weight: 650;
+	white-space: nowrap;
 }
 
 .modal-footer {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
-	gap: 16px;
+	gap: 0.75rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--ecotrip-border-light);
 }
 
 @media (max-width: 768px) {
-	.modal-wrapper {
-		min-height: 90vh;
-	}
-	.modal-container {
-		box-sizing: border-box;
-		padding: 20px;
-		width: max(490px, 100%);
-		height: max-content;
-		gap: 12px;
-	}
-
 	.modal-footer {
-		width: 100%;
-		margin-top: 10px;
-		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		align-items: stretch;
 	}
 
 	.modal-footer .btn {
 		width: 100%;
-	}
-
-	.modal-title {
-		font-size: 22px;
-		line-height: normal;
 	}
 }

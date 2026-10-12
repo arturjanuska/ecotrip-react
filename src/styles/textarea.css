@@ -1,50 +1,38 @@
 .custom-textarea {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 0.55rem;
 }
 
 .custom-textarea label {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
+	color: var(--ecotrip-ink);
+	font: 700 0.95rem/1.35 var(--ecotrip-font-body);
 	text-align: left;
-	color: #7a7776;
 }
 
 .custom-textarea textarea {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
-	text-align: left;
-	color: #7a7776;
 	width: 100%;
-	min-height: 60px;
-	max-height: 200px;
-	box-sizing: border-box;
-	padding: 12px;
-	border: 1px solid #0000001a;
-	border-radius: 5px;
+	min-height: 8rem;
+	max-height: 20rem;
+	padding: 1.1rem 1.2rem;
+	border: 1px solid rgba(7, 17, 13, 0.3);
+	border-radius: 0.8rem;
+	color: var(--ecotrip-ink);
+	background: transparent;
+	font: 500 1rem/1.5 var(--ecotrip-font-body);
+	text-align: left;
 	resize: vertical;
-}
-
-.custom-textarea textarea:hover {
-	border-color: #9aa61e;
+	transition: border-color 220ms ease;
 }
 
 .custom-textarea textarea::placeholder {
-	font-family: Arial;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 16.1px;
-	text-align: left;
-	color: #7a777680;
+	color: var(--ecotrip-ink);
+	opacity: 0.42;
 }
 
+.custom-textarea textarea:hover,
 .custom-textarea textarea:focus-visible {
-	border-color: #9aa61e;
+	border-color: var(--ecotrip-brand);
 	outline: none;
 	outline-offset: 0px;
 }
@@ -53,6 +41,5 @@
 	.custom-textarea textarea {
 		max-width: 100%;
 		min-width: 100%;
-		min-height: 80px;
 	}
 }
