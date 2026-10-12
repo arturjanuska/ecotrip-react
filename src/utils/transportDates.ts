@@ -23,7 +23,13 @@ export type RouteDirection = 'UK-LT' | 'LT-UK';
 // Both ends included, as YYYY-MM-DD.
 export type DateRange = { from: string; to: string };
 
-export type Trip = { pickup: DateRange; delivery: DateRange };
+// parcelForceDelivery: set in the CMS for a ParcelForce order; without it
+// ParcelForce delivers a week after `delivery`.
+export type Trip = {
+  pickup: DateRange;
+  delivery: DateRange;
+  parcelForceDelivery?: DateRange;
+};
 
 // Ecotrip CMS (GET /api/date-overrides): the trips of one month and direction,
 // set by hand. They replace the calculated trips of that month.
@@ -69,10 +75,13 @@ export const isEvenWeek = (date: string | Dayjs) => {
 const isValidDate = (date: string) =>
   /^\d{4}-\d{2}-\d{2}$/.test(date) && format(dayjs(date)) === date;
 
-const isValidTrip = ({ pickup, delivery }: Trip) =>
-  [pickup.from, pickup.to, delivery.from, delivery.to].every(isValidDate) &&
-  pickup.from <= pickup.to &&
-  delivery.from <= delivery.to;
+const isValidRange = ({ from, to }: DateRange) =>
+  isValidDate(from) && isValidDate(to) && from <= to;
+
+const isValidTrip = ({ pickup, delivery, parcelForceDelivery }: Trip) =>
+  isValidRange(pickup) &&
+  isValidRange(delivery) &&
+  (!parcelForceDelivery || isValidRange(parcelForceDelivery));
 
 const calculatedTrips = (
   direction: RouteDirection,
@@ -216,12 +225,26 @@ export const findTrip = (
       toDayOption(trip.pickup)?.value === day
   ) ?? null;
 
+// The delivery of a trip for the service: ParcelForce gets its own dates
+// from the CMS, else a week after the usual delivery.
+const deliveryOf = (trip: Trip, service?: string): DateRange => {
+  if (service !== 'parcelForceShipment') {
+    return trip.delivery;
+  }
+  if (trip.parcelForceDelivery) {
+    return trip.parcelForceDelivery;
+  }
+  return {
+    from: format(dayjs(trip.delivery.from).add(PARCEL_FORCE_DELAY_DAYS, 'day')),
+    to: format(dayjs(trip.delivery.to).add(PARCEL_FORCE_DELAY_DAYS, 'day')),
+  };
+};
+
 // Values of the delivery selects. The month is zero-padded ("09"), as the
 // order has always sent it.
 export const getDeliveryValues = (trip: Trip, service?: string) => {
-  const delay = service === 'parcelForceShipment' ? PARCEL_FORCE_DELAY_DAYS : 0;
-  const from = dayjs(trip.delivery.from).add(delay, 'day');
-  const to = dayjs(trip.delivery.to).add(delay, 'day');
+  const delivery = deliveryOf(trip, service);
+  const from = dayjs(delivery.from);
 
   return {
     year: { label: from.format('YYYY'), value: from.format('YYYY') },
@@ -229,6 +252,6 @@ export const getDeliveryValues = (trip: Trip, service?: string) => {
       label: i18next.t(monthNamesForMonthSelect[from.month()]),
       value: from.format('MM'),
     },
-    day: toDayOption({ from: format(from), to: format(to) }),
+    day: toDayOption(delivery),
   };
 };

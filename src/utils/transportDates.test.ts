@@ -330,7 +330,40 @@ describe('dates set by hand', () => {
     expect(pickups(trips).some((day) => day.startsWith('2026-12'))).toBe(false);
   });
 
-  it('are delivered a week later by ParcelForce', () => {
+  it('give ParcelForce its own delivery dates when set', () => {
+    const trip: Trip = {
+      pickup: { from: '2026-12-18', to: '2026-12-20' },
+      delivery: { from: '2026-12-22', to: '2026-12-24' },
+      parcelForceDelivery: { from: '2026-12-23', to: '2026-12-24' },
+    };
+    expect(getDeliveryValues(trip, 'parcelForceShipment').day).toMatchObject({
+      value: '23 - 24',
+    });
+    expect(getDeliveryValues(trip, 'standartShipment').day).toMatchObject({
+      value: '22 - 24',
+    });
+  });
+
+  it('ignore a trip whose ParcelForce dates end before they start', () => {
+    const trips = getTrips({
+      direction: 'LT-UK',
+      today,
+      overrides: [
+        {
+          ...december,
+          trips: [
+            {
+              ...december.trips[0],
+              parcelForceDelivery: { from: '2026-12-12', to: '2026-12-11' },
+            },
+          ],
+        },
+      ],
+    });
+    expect(pickups(trips).some((day) => day.startsWith('2026-12'))).toBe(false);
+  });
+
+  it('are delivered a week later by ParcelForce without its own dates', () => {
     const trip = december.trips[2];
     expect(getDeliveryValues(trip, 'parcelForceShipment')).toMatchObject({
       year: { value: '2026' },
