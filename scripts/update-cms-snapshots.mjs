@@ -88,6 +88,22 @@ const getFeeSettings = async () => {
   return { data, count: 1 };
 };
 
+const DATE_OVERRIDE_FIELDS = ['direction', 'year', 'month', 'trips'];
+
+// An empty list is a valid answer: no month is set by hand.
+const getDateOverrides = async () => {
+  const list = await getJson('/api/date-overrides');
+  if (!Array.isArray(list?.items)) {
+    throw new Error('GET /api/date-overrides: no items');
+  }
+  const data = {
+    items: list.items.map((item) =>
+      Object.fromEntries(DATE_OVERRIDE_FIELDS.map((f) => [f, item[f]]))
+    ),
+  };
+  return { data, count: list.items.length };
+};
+
 const SNAPSHOTS = [
   {
     name: 'prices',
@@ -103,6 +119,11 @@ const SNAPSHOTS = [
     name: 'fees',
     file: '../src/data/feeSettings.snapshot.json',
     load: getFeeSettings,
+  },
+  {
+    name: 'date overrides',
+    file: '../src/data/dateOverrides.snapshot.json',
+    load: getDateOverrides,
   },
 ];
 

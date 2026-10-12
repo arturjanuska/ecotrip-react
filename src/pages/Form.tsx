@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import usePostcodeDetails from '../hooks/usePostcodeDetails';
 import usePriceCatalog from '../hooks/usePriceCatalog';
 import useFeeSettings from '../hooks/useFeeSettings';
+import useDateOverrides from '../hooks/useDateOverrides';
 import { useGoogleMapsScript } from 'use-google-maps-script';
 import { GOOGLE_MAPS_SCRIPT_OPTIONS } from '../utils/googleMapsScript';
 import Loader from '../components/Loader';
@@ -207,15 +208,20 @@ const Form = () => {
 
   useLocaleStorageLanguage();
 
-  // The form is shown once prices, fees and the address autocomplete are
-  // ready.
+  // The form is shown once prices, fees, dates set in the CMS and the address
+  // autocomplete are ready.
   const { isReady: isPriceCatalogReady } = usePriceCatalog();
   const { isReady: isFeeSettingsReady } = useFeeSettings();
+  const { overrides: dateOverrides, isReady: isDateOverridesReady } =
+    useDateOverrides();
   const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript(
     GOOGLE_MAPS_SCRIPT_OPTIONS
   );
   const isFormReady =
-    isPriceCatalogReady && isFeeSettingsReady && isGoogleMapsLoaded;
+    isPriceCatalogReady &&
+    isFeeSettingsReady &&
+    isDateOverridesReady &&
+    isGoogleMapsLoaded;
 
   const {
     isParcelForce,
@@ -296,6 +302,7 @@ const Form = () => {
                       formErrors={formErrors}
                       direction={direction}
                       postcodeDetails={postcodeDetails}
+                      dateOverrides={dateOverrides}
                     />
                     {showPurchaseInformation && (
                       <>

@@ -5,7 +5,6 @@ import StyledSelect from './StyledSelect';
 import { useTranslation } from 'react-i18next';
 import { FormType } from '../../../utils/formTypes';
 import useTranslateParcelData from '../../../hooks/useTranslateParcelData';
-import useTranslateTransportationDate from '../../../hooks/useTranslateTransportationDate';
 import useTranslatePayerInformation from '../../../hooks/useTranslatePayerInformation';
 
 type Languages = 'lt' | 'en' | 'ru';
@@ -38,11 +37,6 @@ const LanguageSelect = ({
   };
 
   useTranslateParcelData({
-    currentLanguage: i18n.language,
-    methods,
-  });
-
-  useTranslateTransportationDate({
     currentLanguage: i18n.language,
     methods,
   });
