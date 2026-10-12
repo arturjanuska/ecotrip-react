@@ -90,15 +90,17 @@ describe('isDeliveryWeek', () => {
   });
 });
 
-// The old list marked ParcelForce areas in additionalCharges; the CMS has
-// isParcelForce for that and keeps additionalCharges a number.
+// The old list marked ParcelForce areas in additionalCharges and left
+// numbers empty; the CMS has isParcelForce for that, and additionalCharges and
+// discount are numbers, 0 when not set.
 const fromOldShape = (old: object | null | undefined) => {
   if (!old) return null;
-  const { additionalCharges, ...rest } = old as PostcodeRecord;
+  const { additionalCharges, discount, ...rest } = old as PostcodeRecord;
   const isParcelForce = /^parcel force pricelist$/i.test(additionalCharges);
   return {
     ...rest,
-    additionalCharges: isParcelForce ? '' : additionalCharges,
+    additionalCharges: (!isParcelForce && additionalCharges) || '0',
+    discount: discount || '0',
     isParcelForce,
   };
 };

@@ -8,12 +8,12 @@ export type PostcodeRecord = {
   country: string;
   countryString: string;
   basicPrice: string;
-  // "" or an amount added to the order: "15", "-5".
+  // An amount added to the order: "0", "15", "-5".
   additionalCharges: string;
   // A ParcelForce area: ParcelForce service, surcharges and delivery dates.
   isParcelForce: boolean;
   parcelForceZone: string;
-  // "" or a percentage, "7.5".
+  // A percentage: "0", "7.5".
   discount: string;
   // "", "Odd" or "Even": weeks of delivery.
   calendar: string;
