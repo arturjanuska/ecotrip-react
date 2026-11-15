@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useQueries } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import {
   findPostcodeRecord,
   isPostcodeList,
@@ -8,12 +8,15 @@ import {
   PostcodeSnapshot,
   summarizePostcodes,
 } from '../utils/postcodes';
-import snapshot from '../data/postcodes.snapshot.json';
 import useWaitExpired from './useWaitExpired';
 
-// Bundled at build time (see scripts/update-cms-snapshots.mjs): answers when
-// the CMS fails or is too slow.
-const postcodeSnapshot = (snapshot as PostcodeSnapshot).items;
+// Saved at build time (see scripts/update-cms-snapshots.mjs): answers when
+// the CMS fails or is too slow. About 1 MB, so it is a separate file that the
+// browser downloads only when it is needed.
+const loadPostcodeSnapshot = async () => {
+  const module = await import('../data/postcodes.snapshot.json');
+  return (module.default as PostcodeSnapshot).items;
+};
 
 // The API matches by prefix ("M4" also finds "M40"), so pick the exact one.
 // null: the area is unknown or was deleted in the CMS.
@@ -36,8 +39,9 @@ export const getPostcode = async (
 };
 
 // isReady: every postcode has an answer (from the CMS, also an earlier one,
-// or from the snapshot after a failure or the wait); until then the services
-// and the rest of the form are not shown.
+// or from the snapshot after a failure or the wait, once the snapshot is
+// downloaded); until then the services and the rest of the form are not
+// shown.
 const usePostcodeDetails = (postcodes: (string | null | undefined)[]) => {
   const outcodes = postcodes.map(outcodeOf);
 
@@ -57,9 +61,22 @@ const usePostcodeDetails = (postcodes: (string | null | undefined)[]) => {
   const answered = queries.map(
     (query, i) => outcodes[i] === null || query.data !== undefined
   );
+  const gaveUp = queries.map((query) => query.isError || waitExpired);
   const usesSnapshot = answered.some(
-    (isAnswered, i) => !isAnswered && (queries[i].isError || waitExpired)
+    (isAnswered, i) => !isAnswered && gaveUp[i]
   );
+
+  const snapshotQuery = useQuery({
+    queryKey: ['postcodeSnapshot'],
+    queryFn: loadPostcodeSnapshot,
+    enabled: usesSnapshot,
+    staleTime: Infinity,
+    gcTime: Infinity,
+  });
+  const snapshot = snapshotQuery.data;
+  // A snapshot that failed to download as well: go on without the details
+  // rather than keep the form hidden.
+  const snapshotSettled = snapshot !== undefined || snapshotQuery.isError;
 
   useEffect(() => {
     if (usesSnapshot) {
@@ -70,13 +87,15 @@ const usePostcodeDetails = (postcodes: (string | null | undefined)[]) => {
   const records = outcodes.map((outcode, i) =>
     queries[i].data !== undefined
       ? queries[i].data
-      : findPostcodeRecord(postcodeSnapshot, outcode)
+      : snapshot
+        ? findPostcodeRecord(snapshot, outcode)
+        : null
   );
 
   return {
     ...summarizePostcodes(records),
     isReady: answered.every(
-      (isAnswered, i) => isAnswered || queries[i].isError || waitExpired
+      (isAnswered, i) => isAnswered || (gaveUp[i] && snapshotSettled)
     ),
   };
 };
