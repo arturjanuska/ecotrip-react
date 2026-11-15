@@ -113,6 +113,12 @@ const sortedJson = (value: object | null) =>
 // them as ParcelForce areas; now they are.
 const NOW_PARCEL_FORCE = ['TQ1', 'TQ2', 'TQ3', 'TQ4', 'TQ5'];
 
+// Corrected in the CMS: M90 got its country (ENG); SP9-SP11 had the calendar
+// "Neyginės savaitės", which the old code did not read (every week), and are
+// now "Odd".
+const FIXED_IN_CMS = ['M90', 'SP10', 'SP11', 'SP9'];
+const NOW_ODD_WEEKS = ['SP9', 'SP10', 'SP11'];
+
 describe('parity with the old hardcoded postcodes', () => {
   const samples = [
     ...records.flatMap((r) => [r.postcode, `${r.postcode} 1AA`]),
@@ -132,7 +138,10 @@ describe('parity with the old hardcoded postcodes', () => {
       );
     });
     expect(mismatches).toEqual(
-      NOW_PARCEL_FORCE.flatMap((postcode) => [postcode, `${postcode} 1AA`])
+      [...FIXED_IN_CMS, ...NOW_PARCEL_FORCE].flatMap((postcode) => [
+        postcode,
+        `${postcode} 1AA`,
+      ])
     );
   });
 
@@ -156,12 +165,22 @@ describe('parity with the old hardcoded postcodes', () => {
       if (evenWeeksDeliveryPostcodes.includes(postcode)) return isEvenWeek;
       return true;
     };
-    records.forEach((r) => {
-      [true, false].forEach((isEvenWeek) => {
-        expect(isDeliveryWeek(isEvenWeek, r.calendar)).toBe(
-          oldWeek(isEvenWeek, r.postcode)
-        );
+    records
+      .filter((r) => !NOW_ODD_WEEKS.includes(r.postcode))
+      .forEach((r) => {
+        [true, false].forEach((isEvenWeek) => {
+          expect(isDeliveryWeek(isEvenWeek, r.calendar)).toBe(
+            oldWeek(isEvenWeek, r.postcode)
+          );
+        });
       });
+  });
+
+  it('delivers the areas corrected to odd weeks on odd weeks only', () => {
+    NOW_ODD_WEEKS.forEach((postcode) => {
+      const record = lookup(postcode);
+      expect(isDeliveryWeek(false, record?.calendar)).toBe(true);
+      expect(isDeliveryWeek(true, record?.calendar)).toBe(false);
     });
   });
 });

@@ -1,3 +1,4 @@
+/* eslint-env node */
 // Refreshes the CMS snapshots in src/data before a build. They are the site's
 // fallback when the CMS is unreachable, so a failed download must not fail
 // the build: the previous snapshot stays.

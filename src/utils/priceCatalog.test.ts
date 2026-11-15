@@ -112,15 +112,15 @@ describe('options', () => {
     const wheels = pricingOf('automotiveGoods', 'setOfWheels');
     expect(values(sizeOptions(wheels))).toEqual([
       '<R16',
-      '<R18',
-      '<R22',
+      'R16 - R18',
+      'R19 - R22',
       '>R22',
     ]);
     expect(values(specificationOptions(wheels))).toEqual([
       'withoutTires',
       'withTires',
     ]);
-    expect(values(specificationOptions(wheels, '<R18'))).toEqual([
+    expect(values(specificationOptions(wheels, 'R16 - R18'))).toEqual([
       'withoutTires',
       'withTires',
     ]);
@@ -151,7 +151,7 @@ describe('options', () => {
     expect(specificationOptions(stove)).toEqual([]);
     expect(specificationOptions(stove, 'built-in')).toEqual([]);
     const engine = pricingOf('automotiveGoods', 'engine');
-    expect(values(specificationOptions(engine, '<1000 cm3'))).toEqual([
+    expect(values(specificationOptions(engine, '>1000 cm3'))).toEqual([
       'empty',
       'full',
     ]);
@@ -244,7 +244,7 @@ describe('calculatePrice', () => {
     expect(
       calculatePrice(
         engine,
-        { size: '<2000 cm3', specification: 'full', amount: 2 },
+        { size: '1500 - 2000 cm3', specification: 'full', amount: 2 },
         'UK-LT'
       ).price
     ).toBe(440);
@@ -478,8 +478,9 @@ describe('parity with the old calculateVolume', () => {
 });
 
 describe('i18n', () => {
-  // Literal labels such as "<R18" or ">4000 cm3" are shown as they are.
-  const isLiteral = (label: string) => /^[<>]/.test(label);
+  // Size labels such as "<R16", "R16 - R18", ">4000 cm3" or "23 - 31 inch"
+  // are shown as they are (as on the old site; the order sends them as is).
+  const isLiteral = (label: string) => /^([<>]|\d|R\d)/.test(label);
 
   const labels = new Set<string>();
   const addPricing = (pricing: Pricing | null) => {
