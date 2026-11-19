@@ -12,7 +12,7 @@ import RansomPayeeInformation from '../components/step6-7/RansomPayeeInformation
 import PayerInformation from '../components/step6-7/PayerInformation';
 import { FormType, ShipmentProps } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 import {
   TransformedFormData,
@@ -33,6 +33,8 @@ import Loader from '../components/Loader';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
 import { useNavigate } from 'react-router-dom';
+import { buildOrderSummary, type OrderSummary } from '../measurement/policy';
+import { trackBeginCheckout, trackOrderSaved } from '../measurement/measurement';
 
 declare global {
   interface Window {
@@ -132,6 +134,18 @@ const Form = () => {
     }
   }, [pickupAddressZipCode, deliveryAddressZipCode]);
 
+  useEffect(() => {
+    const summary = buildOrderSummary({
+      service,
+      direction,
+      currency,
+      price: undefined,
+    });
+    if (summary) trackBeginCheckout(summary);
+  }, [service]);
+
+  const orderSummaryRef = useRef<OrderSummary | null>(null);
+
   const postData = async (
     transformedData: TransformedFormData
   ): Promise<{
@@ -163,6 +177,9 @@ const Form = () => {
       return postData(data);
     },
     onSuccess: (data) => {
+      if (orderSummaryRef.current && data.orderId) {
+        trackOrderSaved(orderSummaryRef.current, data.orderId);
+      }
       if (data.url) {
         window.location.href = data.url;
         return;
@@ -179,6 +196,12 @@ const Form = () => {
 
   const onSubmit = async (data: FormType) => {
     triggerGoogleConversion();
+    orderSummaryRef.current = buildOrderSummary({
+      service: data.service,
+      direction: data.direction,
+      currency: data.currency ?? '€',
+      price: data.estimatedShipmentPrice,
+    });
     const transformedData = transformFormDataToEndpoint(data);
     await createTaskMutation.mutateAsync(transformedData);
   };
