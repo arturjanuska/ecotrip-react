@@ -43,7 +43,7 @@ Prieš pakraunant `gtm.js` į `dataLayer` įrašomi šie raktai (po to dar viena
 - Consent Mode numatytosios reikšmės: `analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization` = `denied`; `ads_data_redaction: true`; `url_passthrough: false`. Po sutikimo `ad_personalization` lieka `denied` visada.
 - Atsisakius sutikimo išvalomi `_ga*`, `_gcl_*`, `_fbp`, `_fbc` (šiame domene ir `.ecotrip.lt`) ir puslapis perkraunamas.
 
-**Prašymas:** kad vienas pasirinkimas galiotų abiejose svetainėse, prašome WP įskiepį `ecotrip-measurement` pritaikyti taip, kad jis taip pat skaitytų ir rašytų slapuką `ecotrip_consent_v1` domene `.ecotrip.lt` (dabar jis naudoja tik `localStorage`, kurio subdomenas nmato).
+**Prašymas:** kad vienas pasirinkimas galiotų abiejose svetainėse, prašome WP įskiepį `ecotrip-measurement` pritaikyti taip, kad jis taip pat skaitytų ir rašytų slapuką `ecotrip_consent_v1` domene `.ecotrip.lt` (dabar jis naudoja tik `localStorage`, kurio subdomenas nemato).
 
 **GA4 nustatymas:** į nepageidaujamų nukreipėjų (unwanted referrals) sąrašą įtraukti `ecotrip.lt`, kad perėjimas iš pagrindinės svetainės nesukurtų naujo šaltinio.
 
@@ -56,4 +56,4 @@ Prieš pakraunant `gtm.js` į `dataLayer` įrašomi šie raktai (po to dar viena
 ## Kaip tikrinti
 
 - Gamyboje: atverti `uzsakymas.ecotrip.lt`, GTM Preview, paspausti „Sutinku su visais“ ir praeiti formą. Turi pasirodyti `ecotrip_measurement_ready`, `begin_checkout`, `order_created`, `purchase`.
-- Lokaliai (`localhost`, peržiūros): nieko nesiunčiama (dry-run), užkrovimai ir įvykiai spausdinami konsolėje (`[measurement]`) ir kaip naršyklės įvykis `ecotrip:measurement-preview`.
+- Lokaliai (`localhost`, peržiūros): nieko nesiunčiama (dry-run), duomenų paketai spausdinami konsolėje (`[measurement]`) ir kaip naršyklės įvykis `ecotrip:measurement-preview`.
