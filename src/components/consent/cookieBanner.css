@@ -1,0 +1,177 @@
+.ecotrip-consent {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 16px 24px;
+	background: #fff;
+	color: #333;
+	font-family: Arial, sans-serif;
+	box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.18);
+}
+
+.ecotrip-consent__copy {
+	flex: 1 1 360px;
+	min-width: 0;
+}
+
+.ecotrip-consent h2,
+.ecotrip-consent-dialog h2 {
+	margin: 0 0 6px;
+	font-size: 18px;
+	font-weight: 700;
+	color: #333;
+}
+
+.ecotrip-consent p,
+.ecotrip-consent-dialog p {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.45;
+}
+
+.ecotrip-consent__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.ecotrip-consent__actions button,
+.ecotrip-cookie-preferences {
+	box-sizing: border-box;
+	min-height: 40px;
+	padding: 8px 16px;
+	border: 1px solid #9aa61e;
+	border-radius: 5px;
+	background: #fff;
+	color: #333;
+	font: inherit;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.ecotrip-consent__actions .ecotrip-consent__primary {
+	background: #9aa61e;
+	color: #fff;
+}
+
+.ecotrip-consent__actions button:focus-visible,
+.ecotrip-cookie-preferences:focus-visible,
+.ecotrip-consent-dialog__close:focus-visible {
+	outline: 2px solid #333;
+	outline-offset: 2px;
+}
+
+.ecotrip-consent-dialog {
+	box-sizing: border-box;
+	width: min(560px, calc(100vw - 32px));
+	max-height: calc(100vh - 32px);
+	padding: 20px;
+	border: 0;
+	border-radius: 6px;
+	background: #fff;
+	color: #333;
+	font-family: Arial, sans-serif;
+	overflow-y: auto;
+}
+
+.ecotrip-consent-dialog::backdrop {
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.ecotrip-consent-dialog[open] {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.ecotrip-consent-dialog__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.ecotrip-consent-dialog__header h2 {
+	margin: 0;
+}
+
+.ecotrip-consent-dialog__close {
+	width: 40px;
+	height: 40px;
+	border: 0;
+	background: transparent;
+	font-size: 28px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.ecotrip-consent-dialog__body {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.ecotrip-consent-option {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	font-size: 14px;
+	line-height: 1.4;
+}
+
+.ecotrip-consent-option input {
+	flex: none;
+	width: 18px;
+	height: 18px;
+	margin-top: 2px;
+	accent-color: #9aa61e;
+}
+
+.ecotrip-consent-option strong {
+	display: block;
+}
+
+.ecotrip-consent__retention {
+	color: #7a7776;
+}
+
+.ecotrip-consent-dialog a {
+	font-size: 14px;
+	color: #6f7a12;
+}
+
+.ecotrip-cookie-preferences {
+	margin-top: 8px;
+	align-self: flex-start;
+	background: transparent;
+	color: #fff;
+	border-color: #fff;
+}
+
+@media (max-width: 768px) {
+	.ecotrip-consent {
+		padding: 12px 16px;
+		max-height: 70vh;
+		overflow-y: auto;
+	}
+
+	.ecotrip-consent__actions {
+		width: 100%;
+	}
+
+	.ecotrip-consent__actions button {
+		flex: 1 1 100%;
+	}
+
+	.ecotrip-consent-dialog {
+		padding: 16px;
+	}
+}

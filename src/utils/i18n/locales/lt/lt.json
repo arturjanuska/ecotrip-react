@@ -317,5 +317,21 @@
   "internationalTransport": "Pervežimai užsienyje",
   "copyright": "@ 2024 ecotrip.lt | Visos teisės saugomos",
   "serverError": "Serverio klaida. Susisiekite su vadybininku +370 601 22060",
-  "formLoadError": "Nepavyko įkelti užsakymo formos. Susisiekite su vadybininku +370 601 22060"
+  "formLoadError": "Nepavyko įkelti užsakymo formos. Susisiekite su vadybininku +370 601 22060",
+  "cookieTitle": "Slapukų pasirinkimas",
+  "cookieIntro": "Naudojame slapukus sklandžiam svetainės veikimui. Jums sutikus, papildomi slapukai padeda gerinti svetainę ir vertinti reklamos rezultatus.",
+  "cookieReject": "Tik būtinieji",
+  "cookieAccept": "Sutinku su visais",
+  "cookieSettings": "Keisti nustatymus",
+  "cookieSave": "Išsaugoti pasirinkimą",
+  "cookieClose": "Uždaryti",
+  "cookiePreferences": "Slapukų nustatymai",
+  "cookieAnalytics": "Lankomumo analizė",
+  "cookieAnalyticsText": "„Google Analytics“ padeda suprasti, kaip naudojama užsakymo forma. Skaičiuojame užsakymo žingsnius ir sėkmingus užsakymus neperduodami formos laukų turinio.",
+  "cookieMarketing": "„Google Ads“ reklamos matavimas",
+  "cookieMarketingText": "Leidžia susieti apsilankymus ir užklausas su „Google Ads“ reklama. Veikia kartu su lankomumo analize; suasmenintos reklamos neįjungia.",
+  "cookieMeta": "„Meta“ reklamos matavimas",
+  "cookieMetaText": "„Meta Pixel“ padeda įvertinti „Facebook“ ir „Instagram“ reklamos rezultatus pagal puslapių peržiūras. Duomenys perduodami „Meta“, kuri gali juos susieti su jūsų paskyra ir naudoti reklamai.",
+  "cookieRetention": "Pasirinkimą bet kada pakeisite svetainės apačioje.",
+  "cookiePrivacy": "Privatumo politika"
 }

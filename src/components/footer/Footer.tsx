@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import IconWithContainer from '../IconWithContainer';
 import { useTranslation } from 'react-i18next';
+import { openCookieSettings } from '../../measurement/measurement';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -80,6 +81,13 @@ const Footer = () => {
                   icon={faLocationDot}
                   content="Dubysos g. 37, Klaipėda"
                 />
+                <button
+                  type="button"
+                  className="ecotrip-cookie-preferences"
+                  onClick={openCookieSettings}
+                >
+                  {t('cookiePreferences')}
+                </button>
                 <div className="contacts-icons">
                   <IconWithContainer
                     icon={faFacebookF}

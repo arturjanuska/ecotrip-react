@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Footer from './components/footer/Footer.tsx';
+import CookieBanner from './components/consent/CookieBanner.tsx';
 import App from './App.tsx';
 
 import './utils/i18n/index.ts';
@@ -15,5 +16,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <App />
     </GlobalLayout>
     <Footer />
+    <CookieBanner />
   </React.StrictMode>
 );

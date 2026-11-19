@@ -317,5 +317,21 @@
   "internationalTransport": "International transport",
   "copyright": "@ 2024 ecotrip.lt | All rights reserved",
   "serverError": "Server error. Contact the manager at +370 601 22060",
-  "formLoadError": "The order form could not be loaded. Contact the manager +370 601 22060"
+  "formLoadError": "The order form could not be loaded. Contact the manager +370 601 22060",
+  "cookieTitle": "Your cookie choices",
+  "cookieIntro": "We use cookies to keep the website working smoothly. With your consent, additional cookies help us improve the website and measure advertising results.",
+  "cookieReject": "Essential only",
+  "cookieAccept": "Accept all",
+  "cookieSettings": "Choose settings",
+  "cookieSave": "Save choices",
+  "cookieClose": "Close",
+  "cookiePreferences": "Cookie settings",
+  "cookieAnalytics": "Visitor analytics",
+  "cookieAnalyticsText": "Google Analytics helps us understand how the order form is used. We count order steps and successful orders without sending form field contents.",
+  "cookieMarketing": "Google Ads measurement",
+  "cookieMarketingText": "Links visits and enquiries to Google Ads advertising. Requires visitor analytics; does not enable personalised advertising.",
+  "cookieMeta": "Meta advertising measurement",
+  "cookieMetaText": "Meta Pixel helps measure Facebook and Instagram advertising through page views. Data is shared with Meta, which may link it to your account and use it for advertising.",
+  "cookieRetention": "You can change your choice at any time in the website footer.",
+  "cookiePrivacy": "Privacy policy"
 }
