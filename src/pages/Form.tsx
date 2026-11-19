@@ -34,7 +34,10 @@ import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
 import { useNavigate } from 'react-router-dom';
 import { buildOrderSummary, type OrderSummary } from '../measurement/policy';
-import { trackBeginCheckout, trackOrderSaved } from '../measurement/measurement';
+import {
+  trackBeginCheckout,
+  trackOrderSaved,
+} from '../measurement/measurement';
 
 declare global {
   interface Window {
@@ -203,6 +206,7 @@ const Form = () => {
       direction: data.direction,
       currency: data.currency ?? '€',
       price: data.estimatedShipmentPrice,
+      parcels: data.shipments,
     });
     const transformedData = transformFormDataToEndpoint(data);
     await createTaskMutation.mutateAsync(transformedData);

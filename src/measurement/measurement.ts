@@ -5,7 +5,6 @@ import {
   cleanPageLocation,
   consentState,
   orderCreatedPayload,
-  purchasePayload,
   type ConsentChoice,
   type OrderSummary,
 } from './policy';
@@ -286,6 +285,5 @@ function markOrderTracked(orderId: string): void {
 export function trackOrderSaved(s: OrderSummary, orderId: string): void {
   if (!orderId || orderTracked(orderId)) return;
   if (!push(orderCreatedPayload(s, orderId))) return;
-  push(purchasePayload(s, orderId));
   markOrderTracked(orderId);
 }

@@ -156,17 +156,17 @@ describe('production with analytics consent', () => {
     expect(env.dataset.ecotripMeasurement).toBe('enabled');
   });
 
-  it('sends order_created and purchase once per order id', async () => {
+  it('sends only order_created, once per order id', async () => {
     env = setup('uzsakymas.ecotrip.lt');
     const m = await load();
     m.saveChoice(true, true, false);
     m.trackOrderSaved(summary, '12345');
     m.trackOrderSaved(summary, '12345');
     expect(events('order_created')).toHaveLength(1);
-    expect(events('purchase')).toHaveLength(1);
+    expect(events('purchase')).toHaveLength(0);
     const dl = env.win.dataLayer ?? [];
-    const purchaseAt = dl.indexOf(events('purchase')[0]);
-    expect(dl[purchaseAt - 1]).toEqual({ ecommerce: null });
+    const orderAt = dl.indexOf(events('order_created')[0]);
+    expect(dl[orderAt - 1]).toEqual({ ecommerce: null });
   });
 
   it('sends begin_checkout chosen before consent once consent is given', async () => {
@@ -264,7 +264,9 @@ describe('dry-run outside production', () => {
     });
     m.saveChoice(true, false, true);
     expect(env.reload).not.toHaveBeenCalled();
-    expect(consentUpdates().at(-1)?.[2]).toMatchObject({ ad_storage: 'denied' });
+    expect(consentUpdates().at(-1)?.[2]).toMatchObject({
+      ad_storage: 'denied',
+    });
     expect(events('begin_checkout')).toHaveLength(0);
   });
 });

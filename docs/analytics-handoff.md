@@ -2,7 +2,7 @@
 
 ## Kas padaryta
 
-Užsakymo formoje (`uzsakymas.ecotrip.lt`) įdiegtas GTM konteineris `GTM-TDDPFVS` (GA4 `G-XNCGY4H0DG`) ir trys užsakymo piltuvo įvykiai. GTM kraunamas tik po analitikos sutikimo ir tik šiame domene. Formoje yra savas slapukų baneris, Consent Mode numatytosios reikšmės nustatomos `index.html` prieš bet kokį kitą skriptą. Į įvykius asmens duomenys nededami: siunčiami tik paslaugos id, kryptis, kaina, valiuta ir užsakymo numeris.
+Užsakymo formoje (`uzsakymas.ecotrip.lt`) įdiegtas GTM konteineris `GTM-TDDPFVS` (GA4 `G-XNCGY4H0DG`) ir du užsakymo piltuvo įvykiai: `begin_checkout` ir `order_created`. GTM kraunamas tik po analitikos sutikimo ir tik šiame domene. Formoje yra savas slapukų baneris, Consent Mode numatytosios reikšmės nustatomos `index.html` prieš bet kokį kitą skriptą. Į įvykius asmens duomenys nededami: siunčiami tik paslaugos id, kryptis, siuntų katalogo raktai, kiekiai, kainos, valiuta ir užsakymo numeris.
 
 GTM žymų, trigerių ir GA4 nustatymų čia nėra, juos konfigūruoja analitikas.
 
@@ -10,17 +10,28 @@ GTM žymų, trigerių ir GA4 nustatymų čia nėra, juos konfigūruoja analitika
 
 Visi įvykiai siunčiami į `dataLayer` tik esant analitikos sutikimui. Prieš kiekvieną `ecommerce` įvykį pirmiausia išvaloma `ecommerce: null`.
 
-Paslaugų id (iš `getServices.ts`): `shipmentWithAddressService`, `productPurchaseService`, `productSalesService`. Kryptis: `LT-UK`, `UK-LT` arba `LT-LT` (`shipmentWithAddressService` visada `UK-LT`; jei krypties nėra, `unknown`). Krypčiai `LT-LT` forma paslaugų nerodo, todėl praktiškai įvykiuose bus `LT-UK` arba `UK-LT`. Valiuta: `EUR` arba `GBP`.
+Paslaugų id (iš `getServices.ts`): `standartShipment`, `parcelForceShipment`, `shipmentWithAddressService`, `productPurchaseService`, `productSalesService`. Kryptis: `LT-UK`, `UK-LT` arba `LT-LT` (`shipmentWithAddressService` visada `UK-LT`; jei krypties nėra, `unknown`). Krypčiai `LT-LT` forma paslaugų nerodo, todėl praktiškai įvykiuose bus `LT-UK` arba `UK-LT`. Valiuta: `EUR` arba `GBP`.
 
 | Įvykis | Kada siunčiamas | Laukai (pavyzdžiai) |
 |---|---|---|
-| `begin_checkout` | Pirmą kartą pasirinkus paslaugą 1 žingsnyje arba iškart po sutikimo, jei paslauga jau pasirinkta (kartą per puslapio įkėlimą) | `ecommerce.currency: 'EUR'`, `ecommerce.items: [{item_id: 'productPurchaseService', item_name: 'productPurchaseService', item_category: 'LT-UK'}]`. `value` kol kas nesiunčiamas, nes kaina dar nežinoma |
-| `order_created` | Užsakymą sėkmingai išsaugojus (API atsakymas OK) | `transaction_id: '12345'`, `value: 23.5`, `currency: 'EUR'`, `service: 'productPurchaseService'`, `direction: 'LT-UK'` |
-| `purchase` | Kartu su `order_created` | `ecommerce.transaction_id: '12345'`, `ecommerce.value: 23.5`, `ecommerce.currency: 'EUR'`, `ecommerce.items: [...]` kaip aukščiau |
+| `begin_checkout` | Pirmą kartą pasirinkus paslaugą 1 žingsnyje arba iškart po sutikimo, jei paslauga jau pasirinkta (kartą per puslapio įkėlimą) | `service: 'productPurchaseService'`, `direction: 'LT-UK'`, `ecommerce.currency: 'EUR'`, `ecommerce.items: [{item_id: 'productPurchaseService', item_name: 'productPurchaseService'}]`. Siuntų šiuo metu dar nėra, todėl item yra paslauga; `value` nesiunčiamas, nes kaina dar nežinoma |
+| `order_created` | Užsakymą sėkmingai išsaugojus (API atsakymas OK) | `service: 'productPurchaseService'`, `direction: 'LT-UK'`, `ecommerce.transaction_id: '12345'`, `ecommerce.value: 113.5`, `ecommerce.currency: 'EUR'`, `ecommerce.items`: po vieną kiekvienai užsakymo siuntai (žr. žemiau) |
 
-- `order_created` ir `purchase` siunčiami po vieną kartą kiekvienam užsakymo numeriui (apsauga per `sessionStorage`).
-- `purchase` reiškia, kad užsakymas išsaugotas. Internetinio apmokėjimo nėra (mokama grynaisiais, kortele ar pavedimu už sistemos ribų), todėl tai ne apmokėjimo faktas.
-- `value` yra apskaičiuota preliminari užsakymo kaina (skaičius, 2 skaitmenys po kablelio), ne faktiškai gauta suma. Jei kainos nėra, laukas praleidžiamas.
+`order_created` siuntų `items` (raktai iš CMS katalogo, ne išversti pavadinimai, todėl nepriklauso nuo lankytojo kalbos):
+
+| Laukas | Reikšmė | Pavyzdys |
+|---|---|---|
+| `item_id`, `item_name` | subkategorija, o jei jos nėra, kategorija | `fridge`, `shipments` |
+| `item_category` | kategorija | `householdAppliances` |
+| `item_category2` | subkategorija (jei yra) | `fridge` |
+| `item_variant` | dydis arba specifikacija (jei yra) | `large` |
+| `quantity` | kiekis | `2` |
+| `price` | vieneto kaina (siuntos kaina / kiekis), užsakymo valiuta; praleidžiama, jei kaina nežinoma (0) | `45` |
+
+- `purchase` įvykio nėra: užsakymas siunčiamas vienu įvykiu `order_created` su pilnu GA4 `ecommerce` bloku. Jei GA4 pajamų ataskaitoms reikia `purchase`, GTM žymoje GA4 įvykio pavadinimą galima nustatyti `purchase` su trigeriu `order_created` ir „Send Ecommerce data“ iš `dataLayer`.
+- `order_created` siunčiamas vieną kartą kiekvienam užsakymo numeriui (apsauga per `sessionStorage`). Tai užsakymo išsaugojimas, ne apmokėjimas: internetinio apmokėjimo nėra (mokama grynaisiais, kortele ar pavedimu už sistemos ribų).
+- `value` yra apskaičiuota preliminari visa užsakymo kaina su visais mokesčiais (skaičius, 2 skaitmenys po kablelio), ne faktiškai gauta suma. Todėl `items` kainų suma gali būti mažesnė už `value`. Jei kainos nėra, laukas praleidžiamas.
+- Siuntos numeris (`orderedShipmentNumber`) ir prekės pirkimo kaina į įvykius nededami.
 - `begin_checkout` siunčiamas pirmą kartą pasirinkus paslaugą, jei yra analitikos sutikimas. Jei paslauga pasirinkta prieš atsakant į banerį, įvykis (su paskutine pasirinkta paslauga) išsiunčiamas iškart po analitikos sutikimo. Be sutikimo jis nesiunčiamas.
 
 ## Metaduomenys prieš `gtm.js`
@@ -42,7 +53,7 @@ Jei rinkodaros sutikimas duodamas jau įkėlus GTM, į `dataLayer` dar kartą į
 
 ## Sutikimas
 
-- Baneris su tomis pačiomis kategorijomis kaip ecotrip.lt: būtini / analitika / Google Ads (rinkodara) / Meta. Mygtukai: tik būtini, sutinku su visais, pasirinkti nustatymus. Poraštėje yra nuoroda nustatymams atidaryti iš naujo.
+- Baneris su tomis pačiomis kategorijomis kaip ecotrip.lt: būtini / analitika / Google Ads (rinkodara) / Meta. Mygtukai: tik būtini, sutinku su visais, pasirinkti nustatymus. Kol lankytojas nepasirenka (bet kurio varianto, ir „Tik būtinieji“), baneris yra modalinis ir forma už jo neaktyvi. Poraštės apačioje yra nuoroda nustatymams atidaryti iš naujo.
 - Pasirinkimas saugomas slapuke `ecotrip_consent_v1`, `Domain=.ecotrip.lt`, `Path=/`, `SameSite=Lax`, `Secure`, galioja 180 dienų. Reikšmė (URL užkoduotas JSON) tokia pati kaip pagrindinėje svetainėje: `{"version":2,"savedAt":<ms>,"analytics":bool,"marketing":bool,"meta":bool}`. Rinkodara galioja tik kartu su analitika.
 - Consent Mode numatytosios reikšmės: `analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization` = `denied`; `ads_data_redaction: true`; `url_passthrough: false`. Po sutikimo `ad_personalization` lieka `denied` visada.
 - Atsisakius sutikimo išvalomi neleidžiami slapukai `_ga*`, `_gcl_*`, `_fbp`, `_fbc` (šiame domene ir `.ecotrip.lt`). Puslapis perkraunamas tik tada, kai analitikos ar rinkodaros sutikimas atšaukiamas jau įkėlus GTM. Davus sutikimą ar pakeitus tik Meta, puslapis neperkraunamas (sutikimo būsena atnaujinama vietoje).
@@ -59,5 +70,5 @@ Jei rinkodaros sutikimas duodamas jau įkėlus GTM, į `dataLayer` dar kartą į
 
 ## Kaip tikrinti
 
-- Gamyboje: atverti `uzsakymas.ecotrip.lt`, GTM Preview, paspausti „Sutinku su visais“ ir praeiti formą. Turi pasirodyti `ecotrip_measurement_ready`, `begin_checkout`, `order_created`, `purchase`.
+- Gamyboje: atverti `uzsakymas.ecotrip.lt`, GTM Preview, paspausti „Sutinku su visais“ ir praeiti formą. Turi pasirodyti `ecotrip_measurement_ready`, `begin_checkout`, `order_created`.
 - Lokaliai (`localhost`, peržiūros): naujas GTM/GA4 matavimas veikia dry-run režimu: GTM nekraunamas, duomenų paketai spausdinami konsolėje (`[measurement]`) ir kaip naršyklės įvykis `ecotrip:measurement-preview`. Senas Google Ads gtag (`AW-792301087`) kraunasi ir čia, o po „Sutinku su visais“ gauna sutikimo atnaujinimą.

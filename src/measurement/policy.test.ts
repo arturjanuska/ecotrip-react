@@ -7,7 +7,7 @@ import {
   consentState,
   orderCreatedPayload,
   parseChoice,
-  purchasePayload,
+  parcelItems,
 } from './policy';
 
 const now = Date.UTC(2026, 10, 19);
@@ -96,40 +96,133 @@ describe('measurement policy', () => {
     ).toBeNull();
   });
   it('payloads have the GA4 shapes and nothing else', () => {
+    const items = [
+      {
+        item_id: 'fridge',
+        item_name: 'fridge',
+        item_category: 'household',
+        quantity: 1,
+      },
+    ];
     const s = {
       service: 'productSalesService',
       direction: 'LT-UK',
       currency: 'EUR' as const,
       value: 30,
-    };
-    const item = {
-      item_id: 'productSalesService',
-      item_name: 'productSalesService',
-      item_category: 'LT-UK',
+      items,
     };
     expect(beginCheckoutPayload(s)).toEqual({
       event: 'begin_checkout',
-      ecommerce: { currency: 'EUR', value: 30, items: [item] },
+      service: 'productSalesService',
+      direction: 'LT-UK',
+      ecommerce: {
+        currency: 'EUR',
+        value: 30,
+        items: [
+          { item_id: 'productSalesService', item_name: 'productSalesService' },
+        ],
+      },
     });
     expect(orderCreatedPayload(s, 'A1')).toEqual({
       event: 'order_created',
-      transaction_id: 'A1',
-      value: 30,
-      currency: 'EUR',
       service: 'productSalesService',
       direction: 'LT-UK',
-    });
-    expect(purchasePayload(s, 'A1')).toEqual({
-      event: 'purchase',
       ecommerce: {
         transaction_id: 'A1',
         value: 30,
         currency: 'EUR',
-        items: [item],
+        items,
       },
     });
+    const bare = orderCreatedPayload(
+      { ...s, value: undefined, items: undefined },
+      'A1'
+    ).ecommerce;
+    expect(bare).not.toHaveProperty('value');
+    expect(bare.items).toEqual([]);
+  });
+
+  it('parcelItems makes one item per parcel from catalog keys', () => {
     expect(
-      purchasePayload({ ...s, value: undefined }, 'A1').ecommerce
-    ).not.toHaveProperty('value');
+      parcelItems([
+        {
+          category: { value: 'householdAppliances' },
+          productType: { value: 'fridge' },
+          size: { value: 'large' },
+          amount: 2,
+          estimatedPrice: '90.00',
+        },
+        {
+          category: { value: 'shipments' },
+          specification: { value: 'fragile' },
+          amount: '1',
+          estimatedPrice: '12.5',
+        },
+      ])
+    ).toEqual([
+      {
+        item_id: 'fridge',
+        item_name: 'fridge',
+        item_category: 'householdAppliances',
+        item_category2: 'fridge',
+        item_variant: 'large',
+        quantity: 2,
+        price: 45,
+      },
+      {
+        item_id: 'shipments',
+        item_name: 'shipments',
+        item_category: 'shipments',
+        item_variant: 'fragile',
+        quantity: 1,
+        price: 12.5,
+      },
+    ]);
+  });
+
+  it('parcelItems skips parcels without a category and unknown prices', () => {
+    expect(
+      parcelItems([
+        { category: null, amount: 1, estimatedPrice: '5' },
+        {
+          category: { value: 'palettes' },
+          size: { value: { from: 1, to: 2 } },
+          amount: 0,
+          estimatedPrice: '0.00',
+        },
+      ])
+    ).toEqual([
+      {
+        item_id: 'palettes',
+        item_name: 'palettes',
+        item_category: 'palettes',
+        quantity: 1,
+      },
+    ]);
+  });
+
+  it('buildOrderSummary adds parcel items only when parcels are given', () => {
+    expect(
+      buildOrderSummary({
+        service: 'standartShipment',
+        direction: 'UK-LT',
+        currency: '€',
+        parcels: [{ category: { value: 'shipments' }, amount: 1 }],
+      })?.items
+    ).toEqual([
+      {
+        item_id: 'shipments',
+        item_name: 'shipments',
+        item_category: 'shipments',
+        quantity: 1,
+      },
+    ]);
+    expect(
+      buildOrderSummary({
+        service: 'standartShipment',
+        direction: 'UK-LT',
+        currency: '€',
+      })
+    ).not.toHaveProperty('items');
   });
 });
