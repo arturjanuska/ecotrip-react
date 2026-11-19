@@ -36,6 +36,8 @@ let initialized = false;
 let started = false;
 let gtmLoaded = false;
 let beginCheckoutSent = false;
+// begin_checkout asked for before analytics consent; sent once consent starts.
+let pendingBeginCheckout: OrderSummary | null = null;
 const trackedOrders = new Set<string>();
 
 function setSnapshot(next: Partial<MeasurementSnapshot>): void {
@@ -103,6 +105,7 @@ function start(choice: ConsentChoice): void {
   gtag('consent', 'update', consentState(choice));
   if (!isProduction()) {
     document.documentElement.dataset.ecotripMeasurement = 'dry-run';
+    sendPendingBeginCheckout();
     return;
   }
   const meta = metadata(choice);
@@ -116,6 +119,7 @@ function start(choice: ConsentChoice): void {
   gtmLoaded = true;
   dataLayer.push({ event: 'ecotrip_measurement_ready', ...meta });
   document.documentElement.dataset.ecotripMeasurement = 'enabled';
+  sendPendingBeginCheckout();
 }
 
 function clearDisallowedCookies(choice: ConsentChoice): void {
@@ -190,11 +194,14 @@ export function saveChoice(
     marketing: analytics && marketing,
     meta,
   };
-  const changed =
-    !previous ||
-    previous.analytics !== choice.analytics ||
-    previous.marketing !== choice.marketing ||
-    previous.meta !== choice.meta;
+  const withdrawn =
+    previous !== null &&
+    ((previous.analytics && !choice.analytics) ||
+      (previous.marketing && !choice.marketing));
+  const googleConsentChanged =
+    previous !== null &&
+    (previous.analytics !== choice.analytics ||
+      previous.marketing !== choice.marketing);
 
   try {
     document.cookie = choiceCookie(choice, window.location.hostname);
@@ -204,15 +211,29 @@ export function saveChoice(
   clearDisallowedCookies(choice);
   setSnapshot({ choice, settingsOpen: false });
 
-  if (gtmLoaded && changed) {
+  if (gtmLoaded && withdrawn) {
+    // GTM tags cannot be unloaded: stop GA, then reload into the new state.
     (window as unknown as Record<string, unknown>)[GA_DISABLE_KEY] = true;
     gtag('consent', 'update', consentState(choice));
     window.location.reload();
     return;
   }
-  if (started && changed) {
-    // Dry-run already started: no GTM to unload, just follow the new state.
-    gtag('consent', 'update', consentState(choice));
+  if (started) {
+    // Already measuring: a grant (or a withdrawal in dry-run) updates the
+    // consent state in place; a Meta-only change needs nothing from Google.
+    if (googleConsentChanged) {
+      gtag('consent', 'update', consentState(choice));
+      if (gtmLoaded) {
+        ensureDataLayer().push({
+          ecotrip_marketing: choice.marketing,
+          ecotrip_page_location: cleanPageLocation(
+            window.location.href,
+            choice.marketing
+          ),
+        });
+      }
+      sendPendingBeginCheckout();
+    }
     return;
   }
   start(choice);
@@ -228,7 +249,20 @@ export function closeCookieSettings(): void {
 
 export function trackBeginCheckout(s: OrderSummary): void {
   if (beginCheckoutSent) return;
-  if (push(beginCheckoutPayload(s))) beginCheckoutSent = true;
+  if (push(beginCheckoutPayload(s))) {
+    beginCheckoutSent = true;
+    pendingBeginCheckout = null;
+  } else {
+    // No analytics consent yet: keep the latest service for when it starts.
+    pendingBeginCheckout = s;
+  }
+}
+
+function sendPendingBeginCheckout(): void {
+  const pending = pendingBeginCheckout;
+  if (!pending) return;
+  pendingBeginCheckout = null;
+  trackBeginCheckout(pending);
 }
 
 function orderTracked(orderId: string): boolean {
