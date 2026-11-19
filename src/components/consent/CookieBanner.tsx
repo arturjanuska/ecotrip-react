@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   closeCookieSettings,
@@ -15,6 +21,7 @@ const CookieBanner = () => {
   const { t } = useTranslation();
   const { choice, settingsOpen } = useSyncExternalStore(subscribe, getSnapshot);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const bannerRef = useRef<HTMLDialogElement>(null);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
   const [meta, setMeta] = useState(false);
@@ -34,16 +41,36 @@ const CookieBanner = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsOpen]);
 
+  // The site stays blocked (modal banner, page inert) until the visitor makes
+  // any choice; "Essential only" is offered next to "Accept all".
+  const showBanner = useCallback(() => {
+    const banner = bannerRef.current;
+    if (banner && !banner.open && !getSnapshot().choice) banner.showModal();
+  }, []);
+
+  useEffect(() => {
+    if (!choice) showBanner();
+  }, [choice, showBanner]);
+
   return (
     <>
       {!choice && (
-        <section className="ecotrip-consent" aria-label={t('cookieTitle')}>
+        <dialog
+          ref={bannerRef}
+          className="ecotrip-consent"
+          aria-labelledby="ecotrip-consent-title"
+          onCancel={(e) => e.preventDefault()}
+          onClose={showBanner}
+        >
           <div className="ecotrip-consent__copy">
-            <h2>{t('cookieTitle')}</h2>
+            <h2 id="ecotrip-consent-title">{t('cookieTitle')}</h2>
             <p>{t('cookieIntro')}</p>
           </div>
           <div className="ecotrip-consent__actions">
-            <button type="button" onClick={() => saveChoice(false, false, false)}>
+            <button
+              type="button"
+              onClick={() => saveChoice(false, false, false)}
+            >
               {t('cookieReject')}
             </button>
             <button
@@ -57,7 +84,7 @@ const CookieBanner = () => {
               {t('cookieSettings')}
             </button>
           </div>
-        </section>
+        </dialog>
       )}
       <dialog
         ref={dialogRef}

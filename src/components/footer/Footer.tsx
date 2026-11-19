@@ -81,13 +81,6 @@ const Footer = () => {
                   icon={faLocationDot}
                   content="Dubysos g. 37, Klaipėda"
                 />
-                <button
-                  type="button"
-                  className="ecotrip-cookie-preferences"
-                  onClick={openCookieSettings}
-                >
-                  {t('cookiePreferences')}
-                </button>
                 <div className="contacts-icons">
                   <IconWithContainer
                     icon={faFacebookF}
@@ -123,7 +116,16 @@ const Footer = () => {
               <News />
             </div>
           </div>
-          <p className="copyright">{t('copyright')}</p>
+          <div className="footer-bottom">
+            <p className="copyright">{t('copyright')}</p>
+            <button
+              type="button"
+              className="ecotrip-cookie-preferences"
+              onClick={openCookieSettings}
+            >
+              {t('cookiePreferences')}
+            </button>
+          </div>
         </div>
       </div>
     </div>
