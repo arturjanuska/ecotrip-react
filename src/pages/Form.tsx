@@ -142,6 +142,8 @@ const Form = () => {
       price: undefined,
     });
     if (summary) trackBeginCheckout(summary);
+    // Fires only when the service changes, not on direction or currency changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [service]);
 
   const orderSummaryRef = useRef<OrderSummary | null>(null);
