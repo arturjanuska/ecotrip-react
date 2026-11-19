@@ -5,6 +5,9 @@ import App from './App.tsx';
 
 import './utils/i18n/index.ts';
 import GlobalLayout from './components/layout/GlobalLayout.tsx';
+import { initMeasurement } from './measurement/measurement.ts';
+
+initMeasurement();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
