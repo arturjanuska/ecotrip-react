@@ -12,7 +12,7 @@ import RansomPayeeInformation from '../components/step6-7/RansomPayeeInformation
 import PayerInformation from '../components/step6-7/PayerInformation';
 import { FormType, ShipmentProps } from '../utils/formTypes';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProductPurchaseServiceInformation from '../components/step6-7/ProductPurchaseServiceInformation';
 import {
   TransformedFormData,
@@ -33,12 +33,11 @@ import Loader from '../components/Loader';
 import LanguageSelect from '../components/form/select/LanguageSelect';
 import Divider from '../components/layout/Divider';
 import { useNavigate } from 'react-router-dom';
-
-declare global {
-  interface Window {
-    gtag: any;
-  }
-}
+import { buildOrderSummary, type OrderSummary } from '../measurement/policy';
+import {
+  trackBeginCheckout,
+  trackOrderSaved,
+} from '../measurement/measurement';
 
 const Form = () => {
   const { t } = useTranslation();
@@ -119,18 +118,25 @@ const Form = () => {
 
   // const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
 
-  const triggerGoogleConversion = () => {
-    window.gtag('event', 'conversion', {
-      send_to: 'AW-792301087',
-      value: 'Triggered send button',
-    });
-  };
-
   useEffect(() => {
     if (service !== 'shipmentWithAddressService') {
       methods.setValue('service', '');
     }
   }, [pickupAddressZipCode, deliveryAddressZipCode]);
+
+  useEffect(() => {
+    const summary = buildOrderSummary({
+      service,
+      direction,
+      currency,
+      price: undefined,
+    });
+    if (summary) trackBeginCheckout(summary);
+    // Fires only when the service changes, not on direction or currency changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [service]);
+
+  const orderSummaryRef = useRef<OrderSummary | null>(null);
 
   const postData = async (
     transformedData: TransformedFormData
@@ -162,8 +168,15 @@ const Form = () => {
     mutationFn: (data: TransformedFormData) => {
       return postData(data);
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
+      const tracked =
+        orderSummaryRef.current && data.orderId
+          ? trackOrderSaved(orderSummaryRef.current, data.orderId)
+          : Promise.resolve();
       if (data.url) {
+        // Leaving the site would cancel the order_created hit: wait for GTM
+        // (trackOrderSaved resolves after at most a short timeout).
+        await tracked;
         window.location.href = data.url;
         return;
       }
@@ -178,7 +191,13 @@ const Form = () => {
   });
 
   const onSubmit = async (data: FormType) => {
-    triggerGoogleConversion();
+    orderSummaryRef.current = buildOrderSummary({
+      service: data.service,
+      direction: data.direction,
+      currency: data.currency ?? '€',
+      price: data.estimatedShipmentPrice,
+      parcels: data.shipments,
+    });
     const transformedData = transformFormDataToEndpoint(data);
     await createTaskMutation.mutateAsync(transformedData);
   };

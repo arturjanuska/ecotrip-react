@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import IconWithContainer from '../IconWithContainer';
 import { useTranslation } from 'react-i18next';
+import { openCookieSettings } from '../../measurement/measurement';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -115,7 +116,16 @@ const Footer = () => {
               <News />
             </div>
           </div>
-          <p className="copyright">{t('copyright')}</p>
+          <div className="footer-bottom">
+            <p className="copyright">{t('copyright')}</p>
+            <button
+              type="button"
+              className="ecotrip-cookie-preferences"
+              onClick={openCookieSettings}
+            >
+              {t('cookiePreferences')}
+            </button>
+          </div>
         </div>
       </div>
     </div>
