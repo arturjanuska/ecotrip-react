@@ -39,12 +39,6 @@ import {
   trackOrderSaved,
 } from '../measurement/measurement';
 
-declare global {
-  interface Window {
-    gtag: any;
-  }
-}
-
 const Form = () => {
   const { t } = useTranslation();
 
@@ -124,13 +118,6 @@ const Form = () => {
 
   // const pricesOfItems = sumOfPurchasePrice(shipments ?? []);
 
-  const triggerGoogleConversion = () => {
-    window.gtag('event', 'conversion', {
-      send_to: 'AW-792301087',
-      value: 'Triggered send button',
-    });
-  };
-
   useEffect(() => {
     if (service !== 'shipmentWithAddressService') {
       methods.setValue('service', '');
@@ -181,11 +168,15 @@ const Form = () => {
     mutationFn: (data: TransformedFormData) => {
       return postData(data);
     },
-    onSuccess: (data) => {
-      if (orderSummaryRef.current && data.orderId) {
-        trackOrderSaved(orderSummaryRef.current, data.orderId);
-      }
+    onSuccess: async (data) => {
+      const tracked =
+        orderSummaryRef.current && data.orderId
+          ? trackOrderSaved(orderSummaryRef.current, data.orderId)
+          : Promise.resolve();
       if (data.url) {
+        // Leaving the site would cancel the order_created hit: wait for GTM
+        // (trackOrderSaved resolves after at most a short timeout).
+        await tracked;
         window.location.href = data.url;
         return;
       }
@@ -200,7 +191,6 @@ const Form = () => {
   });
 
   const onSubmit = async (data: FormType) => {
-    triggerGoogleConversion();
     orderSummaryRef.current = buildOrderSummary({
       service: data.service,
       direction: data.direction,

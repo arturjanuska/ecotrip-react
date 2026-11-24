@@ -209,3 +209,38 @@ export function orderCreatedPayload(s: OrderSummary, orderId: string) {
     },
   };
 }
+
+const META_CLICK_IDS = ['fbclid', 'gclid', 'gbraid', 'wbraid'];
+
+// Meta reads the real URL and referrer, so a query may carry only campaign
+// labels and click ids; anything else (form data, order ids) keeps it off.
+function metaSafeQuery(url: URL): boolean {
+  for (const [name, value] of url.searchParams) {
+    if (UTM_KEYS.includes(name)) {
+      if (!UTM_VALUE.test(value) || /\d{9}/.test(value)) return false;
+    } else if (META_CLICK_IDS.includes(name)) {
+      if (!/^[A-Za-z0-9_-]{10,512}$/.test(value)) return false;
+    } else {
+      return false;
+    }
+  }
+  return !url.hash || /^#[A-Za-z][A-Za-z0-9_-]{0,80}$/.test(url.hash);
+}
+
+/** Whether the Meta PageView may start on this page (production form only). */
+export function metaPageAllowed(href: string, referrer: string): boolean {
+  try {
+    const url = new URL(href);
+    if (
+      url.protocol !== 'https:' ||
+      url.hostname !== 'uzsakymas.ecotrip.lt' ||
+      url.pathname !== '/' ||
+      !metaSafeQuery(url)
+    ) {
+      return false;
+    }
+    return !referrer || metaSafeQuery(new URL(referrer));
+  } catch {
+    return false;
+  }
+}

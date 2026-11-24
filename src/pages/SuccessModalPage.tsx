@@ -1,5 +1,4 @@
 import '../styles/modal.css';
-import { useEffect } from 'react';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import SecondaryButton from '../components/buttons/SecondaryButton';
 import { useNavigate } from 'react-router-dom';
@@ -12,18 +11,6 @@ const SuccessModalPage = () => {
   const tryAgain = () => {
     nav('/');
   };
-
-  useEffect(() => {
-    const triggerGoogleConversion = () => {
-      window.gtag('event', 'conversion', {
-        send_to: 'AW-792301087',
-        value: 'Success order',
-      });
-    };
-    if (orderId) {
-      triggerGoogleConversion();
-    }
-  }, [orderId]);
 
   return (
     <div className="modal-wrapper">

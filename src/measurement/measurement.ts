@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import { choiceCookie, clearingCookies, readChoice } from './consentCookie';
+import { revokeMeta, startMeta } from './meta';
 import {
   beginCheckoutPayload,
   cleanPageLocation,
@@ -22,6 +23,8 @@ const SITE_ID = 'uzsakymas-v1';
 const LANGUAGES = ['lt', 'en', 'ru'];
 const PREVIEW_EVENT = 'ecotrip:measurement-preview';
 const ORDER_KEY_PREFIX = 'ecotrip_tracked_order_';
+// Longest wait for GTM before leaving the site after an order.
+const REDIRECT_WAIT_MS = 2000;
 
 export type MeasurementSnapshot = {
   choice: ConsentChoice | null;
@@ -135,8 +138,15 @@ function clearDisallowedCookies(choice: ConsentChoice): void {
   }
 }
 
-/** Sends one payload; returns false when it was dropped for lack of consent. */
-function push(payload: Record<string, unknown>): boolean {
+/**
+ * Sends one payload; returns false when it was dropped for lack of consent.
+ * With GTM loaded, `eventCallback` is called once GTM has fired its tags
+ * for this event (or after `REDIRECT_WAIT_MS` if they take longer).
+ */
+function push(
+  payload: Record<string, unknown>,
+  eventCallback?: () => void
+): boolean {
   if (snapshot.choice?.analytics !== true) return false;
   if (!isProduction()) {
     console.debug('[measurement]', payload);
@@ -145,8 +155,20 @@ function push(payload: Record<string, unknown>): boolean {
   }
   const dataLayer = ensureDataLayer();
   if ('ecommerce' in payload) dataLayer.push({ ecommerce: null });
-  dataLayer.push(payload);
+  dataLayer.push(
+    eventCallback && gtmLoaded
+      ? { ...payload, eventCallback, eventTimeout: REDIRECT_WAIT_MS }
+      : payload
+  );
   return true;
+}
+
+function syncMeta(previous: ConsentChoice | null, choice: ConsentChoice) {
+  if (choice.meta) {
+    startMeta(window.location.href, document.referrer);
+  } else if (previous?.meta) {
+    revokeMeta();
+  }
 }
 
 export function initMeasurement(): void {
@@ -162,6 +184,7 @@ export function initMeasurement(): void {
   if (!choice) return;
   clearDisallowedCookies(choice);
   setSnapshot({ choice });
+  syncMeta(null, choice);
   start(choice);
 }
 
@@ -209,6 +232,7 @@ export function saveChoice(
   }
   clearDisallowedCookies(choice);
   setSnapshot({ choice, settingsOpen: false });
+  syncMeta(previous, choice);
 
   if (gtmLoaded && withdrawn) {
     // GTM tags cannot be unloaded: stop GA, then reload into the new state.
@@ -282,8 +306,33 @@ function markOrderTracked(orderId: string): void {
   }
 }
 
-export function trackOrderSaved(s: OrderSummary, orderId: string): void {
-  if (!orderId || orderTracked(orderId)) return;
-  if (!push(orderCreatedPayload(s, orderId))) return;
-  markOrderTracked(orderId);
+/**
+ * Sends order_created once per order id. The promise resolves when GTM has
+ * fired the tags for it, at once when nothing goes to GTM, and after at most
+ * `REDIRECT_WAIT_MS` otherwise (GTM blocked or slow), so a redirect to an
+ * external page can wait for it without ever getting stuck.
+ */
+export function trackOrderSaved(
+  s: OrderSummary,
+  orderId: string
+): Promise<void> {
+  if (!orderId || orderTracked(orderId)) return Promise.resolve();
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      resolve();
+    };
+    if (!push(orderCreatedPayload(s, orderId), finish)) {
+      finish();
+      return;
+    }
+    markOrderTracked(orderId);
+    if (!gtmLoaded) {
+      finish();
+      return;
+    }
+    setTimeout(finish, REDIRECT_WAIT_MS);
+  });
 }

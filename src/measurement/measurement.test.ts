@@ -83,6 +83,10 @@ function consentCookie(analytics: boolean, marketing: boolean, meta: boolean) {
   );
 }
 
+function scripts(part: string): { src?: string }[] {
+  return env.appended.filter((el) => el.src?.includes(part));
+}
+
 function isArgs(entry: unknown): entry is IArguments {
   return Object.prototype.toString.call(entry) === '[object Arguments]';
 }
@@ -197,7 +201,7 @@ describe('changing the choice with GTM loaded', () => {
       _fbp: 'fb.1.1',
     });
     const m = await load();
-    expect(env.appended).toHaveLength(1);
+    expect(scripts('gtm.js')).toHaveLength(1);
     return m;
   }
 
@@ -234,7 +238,7 @@ describe('changing the choice with GTM loaded', () => {
     const before = consentUpdates().length;
     m.saveChoice(true, true, false);
     expect(env.reload).not.toHaveBeenCalled();
-    expect(env.appended).toHaveLength(1);
+    expect(scripts('gtm.js')).toHaveLength(1);
     expect(consentUpdates()).toHaveLength(before + 1);
     expect(consentUpdates().at(-1)?.[2]).toMatchObject({
       analytics_storage: 'granted',
@@ -268,5 +272,104 @@ describe('dry-run outside production', () => {
       ad_storage: 'denied',
     });
     expect(events('begin_checkout')).toHaveLength(0);
+  });
+});
+
+describe('order_created before leaving the site', () => {
+  it('resolves once GTM reports the tags fired', async () => {
+    env = setup('uzsakymas.ecotrip.lt', {
+      ecotrip_consent_v1: consentCookie(true, false, false),
+    });
+    const m = await load();
+    let resolved = false;
+    const sent = m.trackOrderSaved(summary, '777').then(() => {
+      resolved = true;
+    });
+    const [payload] = events('order_created');
+    expect(payload.eventTimeout).toBe(2000);
+    await Promise.resolve();
+    expect(resolved).toBe(false);
+    (payload.eventCallback as () => void)();
+    await sent;
+    expect(resolved).toBe(true);
+  });
+
+  it('resolves after the timeout when GTM never answers', async () => {
+    vi.useFakeTimers();
+    try {
+      env = setup('uzsakymas.ecotrip.lt', {
+        ecotrip_consent_v1: consentCookie(true, false, false),
+      });
+      const m = await load();
+      let resolved = false;
+      const sent = m.trackOrderSaved(summary, '778').then(() => {
+        resolved = true;
+      });
+      await vi.advanceTimersByTimeAsync(1999);
+      expect(resolved).toBe(false);
+      await vi.advanceTimersByTimeAsync(1);
+      await sent;
+      expect(resolved).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('resolves at once without consent or outside production', async () => {
+    env = setup('uzsakymas.ecotrip.lt');
+    let m = await load();
+    await m.trackOrderSaved(summary, '779');
+    env = setup('localhost', {
+      ecotrip_consent_v1: consentCookie(true, false, false),
+    });
+    m = await load();
+    await m.trackOrderSaved(summary, '780');
+  });
+});
+
+describe('Meta Pixel', () => {
+  const PIXEL = '1158726481773480';
+
+  function queue(): unknown[][] {
+    const fbq = env.win.fbq as { queue: unknown[][] } | undefined;
+    return fbq?.queue ?? [];
+  }
+
+  it('starts with Meta consent from the shared cookie, PageView only', async () => {
+    env = setup('uzsakymas.ecotrip.lt', {
+      ecotrip_consent_v1: consentCookie(false, false, true),
+    });
+    await load();
+    expect(scripts('fbevents.js')).toHaveLength(1);
+    expect(queue()).toContainEqual(['init', PIXEL]);
+    expect(queue()).toContainEqual(['trackSingle', PIXEL, 'PageView']);
+    expect(queue()).toContainEqual(['optOut', PIXEL, 'AutomaticMatching']);
+    expect(scripts('gtm.js')).toHaveLength(0);
+  });
+
+  it('stays off without Meta consent and outside production', async () => {
+    env = setup('uzsakymas.ecotrip.lt', {
+      ecotrip_consent_v1: consentCookie(true, true, false),
+    });
+    await load();
+    expect(scripts('fbevents.js')).toHaveLength(0);
+    expect(env.win.fbq).toBeUndefined();
+    env = setup('localhost', {
+      ecotrip_consent_v1: consentCookie(true, true, true),
+    });
+    await load();
+    expect(scripts('fbevents.js')).toHaveLength(0);
+  });
+
+  it('starts on a later grant and is revoked on withdrawal', async () => {
+    env = setup('uzsakymas.ecotrip.lt');
+    const m = await load();
+    m.saveChoice(false, false, true);
+    expect(scripts('fbevents.js')).toHaveLength(1);
+    m.saveChoice(false, false, false);
+    expect(queue()).toEqual([['consent', 'revoke']]);
+    expect(env.dataset.ecotripMeta).toBe('revoked');
+    m.saveChoice(false, false, true);
+    expect(scripts('fbevents.js')).toHaveLength(1);
   });
 });

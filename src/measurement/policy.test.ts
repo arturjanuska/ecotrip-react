@@ -8,6 +8,7 @@ import {
   orderCreatedPayload,
   parseChoice,
   parcelItems,
+  metaPageAllowed,
 } from './policy';
 
 const now = Date.UTC(2026, 10, 19);
@@ -224,5 +225,22 @@ describe('measurement policy', () => {
         currency: '€',
       })
     ).not.toHaveProperty('items');
+  });
+
+  it('metaPageAllowed only on the clean production form page', () => {
+    const base = 'https://uzsakymas.ecotrip.lt/';
+    expect(metaPageAllowed(base, '')).toBe(true);
+    expect(
+      metaPageAllowed(
+        `${base}?utm_source=fb&fbclid=${'a'.repeat(20)}`,
+        'https://ecotrip.lt/'
+      )
+    ).toBe(true);
+    expect(metaPageAllowed(`${base}?email=a@b.lt`, '')).toBe(false);
+    expect(metaPageAllowed(`${base}success?orderId=1`, '')).toBe(false);
+    expect(metaPageAllowed('http://localhost:5173/', '')).toBe(false);
+    expect(metaPageAllowed(base, 'https://ecotrip.lt/?s=search+text')).toBe(
+      false
+    );
   });
 });
