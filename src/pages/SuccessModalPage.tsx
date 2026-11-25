@@ -1,12 +1,18 @@
 import '../styles/modal.css';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import SecondaryButton from '../components/buttons/SecondaryButton';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { trackOrderConfirmationView } from '../measurement/measurement';
 
 const SuccessModalPage = () => {
   const orderId = new URLSearchParams(window.location.search).get('orderId');
 
   const nav = useNavigate();
+
+  useEffect(() => {
+    trackOrderConfirmationView(orderId);
+  }, [orderId]);
 
   const tryAgain = () => {
     nav('/');

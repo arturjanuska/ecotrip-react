@@ -31,14 +31,26 @@ const OPTED_OUT_FEATURES = [
 
 let started = false;
 let owned = false;
+let revoked = false;
 
 function mark(state: string): void {
   document.documentElement.dataset.ecotripMeta = state;
 }
 
-/** Starts the pixel once, only with Meta consent given by the caller. */
-export function startMeta(href: string, referrer: string): void {
-  if (started || !metaPageAllowed(href, referrer)) return;
+/**
+ * Starts the pixel once, only with Meta consent given by the caller. A grant
+ * after a withdrawal on the same page turns the started pixel back on.
+ */
+export function startMeta(href: string): void {
+  if (started) {
+    if (owned && revoked) {
+      revoked = false;
+      (window as MetaWindow).fbq?.('consent', 'grant');
+      mark('requested');
+    }
+    return;
+  }
+  if (!metaPageAllowed(href)) return;
   const win = window as MetaWindow;
   // Never initialise a pixel someone else already loaded.
   if (win.fbq) {
@@ -46,7 +58,9 @@ export function startMeta(href: string, referrer: string): void {
     return;
   }
   const fbq = function (...args: unknown[]) {
-    if (fbq.callMethod) fbq.callMethod(...args);
+    // The SDK's callMethod reads `this`, as in Meta's own snippet.
+    // eslint-disable-next-line prefer-spread
+    if (fbq.callMethod) fbq.callMethod.apply(fbq, args);
     else fbq.queue.push(args);
   } as Fbq;
   win.fbq = fbq;
@@ -83,5 +97,18 @@ export function revokeMeta(): void {
   // Drop a queued PageView if the SDK has not arrived yet.
   if (!fbq.callMethod) fbq.queue = [];
   fbq('consent', 'revoke');
+  revoked = true;
   mark('revoked');
+}
+
+/**
+ * The order confirmation page (/success) is a route change, not a page load,
+ * and the pixel does not follow route changes on its own: send its PageView
+ * here, with the CompleteRegistration conversion.
+ */
+export function trackMetaOrderConfirmation(): void {
+  const fbq = (window as MetaWindow).fbq;
+  if (!owned || revoked || !fbq) return;
+  fbq('trackSingle', META_PIXEL_ID, 'PageView');
+  fbq('trackSingle', META_PIXEL_ID, 'CompleteRegistration');
 }

@@ -227,20 +227,15 @@ describe('measurement policy', () => {
     ).not.toHaveProperty('items');
   });
 
-  it('metaPageAllowed only on the clean production form page', () => {
+  it('metaPageAllowed on any production form page, with any campaign params', () => {
     const base = 'https://uzsakymas.ecotrip.lt/';
-    expect(metaPageAllowed(base, '')).toBe(true);
+    expect(metaPageAllowed(base)).toBe(true);
     expect(
-      metaPageAllowed(
-        `${base}?utm_source=fb&fbclid=${'a'.repeat(20)}`,
-        'https://ecotrip.lt/'
-      )
+      metaPageAllowed(`${base}?gad_source=1&gclid=abc&_gl=1*x&utm_term=fridge`)
     ).toBe(true);
-    expect(metaPageAllowed(`${base}?email=a@b.lt`, '')).toBe(false);
-    expect(metaPageAllowed(`${base}success?orderId=1`, '')).toBe(false);
-    expect(metaPageAllowed('http://localhost:5173/', '')).toBe(false);
-    expect(metaPageAllowed(base, 'https://ecotrip.lt/?s=search+text')).toBe(
-      false
-    );
+    expect(metaPageAllowed(`${base}success?orderId=1`)).toBe(true);
+    expect(metaPageAllowed('http://localhost:5173/')).toBe(false);
+    expect(metaPageAllowed('https://ecotrip.lt/')).toBe(false);
+    expect(metaPageAllowed('not a url')).toBe(false);
   });
 });

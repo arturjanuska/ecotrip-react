@@ -372,4 +372,56 @@ describe('Meta Pixel', () => {
     m.saveChoice(false, false, true);
     expect(scripts('fbevents.js')).toHaveLength(1);
   });
+
+  it('starts on any production URL and any referrer', async () => {
+    env = setup('uzsakymas.ecotrip.lt', {
+      ecotrip_consent_v1: consentCookie(false, false, true),
+    });
+    (env.win.location as { href: string }).href =
+      'https://uzsakymas.ecotrip.lt/?gad_source=1&_gl=1*abc&utm_term=x';
+    (document as unknown as { referrer: string }).referrer =
+      'https://business.facebook.com/events_manager2/test_events?act=1';
+    await load();
+    expect(scripts('fbevents.js')).toHaveLength(1);
+  });
+
+  it('sends PageView and CompleteRegistration once on the confirmation page', async () => {
+    env = setup('uzsakymas.ecotrip.lt', {
+      ecotrip_consent_v1: consentCookie(false, false, true),
+    });
+    const m = await load();
+    const before = queue().length;
+    m.trackOrderConfirmationView('555');
+    expect(queue()).toHaveLength(before);
+    void m.trackOrderSaved(summary, '555');
+    m.trackOrderConfirmationView('555');
+    m.trackOrderConfirmationView('555');
+    expect(queue().slice(before)).toEqual([
+      ['trackSingle', PIXEL, 'PageView'],
+      ['trackSingle', PIXEL, 'CompleteRegistration'],
+    ]);
+  });
+
+  it('sends no confirmation without Meta consent', async () => {
+    env = setup('uzsakymas.ecotrip.lt', {
+      ecotrip_consent_v1: consentCookie(true, true, false),
+    });
+    const m = await load();
+    void m.trackOrderSaved(summary, '556');
+    m.trackOrderConfirmationView('556');
+    expect(env.win.fbq).toBeUndefined();
+  });
+
+  it('turns back on after a withdrawal and a new grant', async () => {
+    env = setup('uzsakymas.ecotrip.lt');
+    const m = await load();
+    m.saveChoice(false, false, true);
+    m.saveChoice(false, false, false);
+    m.saveChoice(false, false, true);
+    expect(queue()).toEqual([
+      ['consent', 'revoke'],
+      ['consent', 'grant'],
+    ]);
+    expect(env.dataset.ecotripMeta).toBe('requested');
+  });
 });
