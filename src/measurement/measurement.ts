@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { choiceCookie, clearingCookies, readChoice } from './consentCookie';
-import { revokeMeta, startMeta } from './meta';
+import { revokeMeta, startMeta, trackMetaOrderConfirmation } from './meta';
 import {
   beginCheckoutPayload,
   cleanPageLocation,
@@ -41,6 +41,8 @@ let beginCheckoutSent = false;
 // begin_checkout asked for before analytics consent; sent once consent starts.
 let pendingBeginCheckout: OrderSummary | null = null;
 const trackedOrders = new Set<string>();
+// Order saved on this page load whose confirmation page Meta has not seen yet.
+let pendingMetaConfirmation: string | null = null;
 
 function setSnapshot(next: Partial<MeasurementSnapshot>): void {
   const merged = { ...snapshot, ...next };
@@ -165,7 +167,7 @@ function push(
 
 function syncMeta(previous: ConsentChoice | null, choice: ConsentChoice) {
   if (choice.meta) {
-    startMeta(window.location.href, document.referrer);
+    startMeta(window.location.href);
   } else if (previous?.meta) {
     revokeMeta();
   }
@@ -316,7 +318,9 @@ export function trackOrderSaved(
   s: OrderSummary,
   orderId: string
 ): Promise<void> {
-  if (!orderId || orderTracked(orderId)) return Promise.resolve();
+  if (!orderId) return Promise.resolve();
+  pendingMetaConfirmation = orderId;
+  if (orderTracked(orderId)) return Promise.resolve();
   return new Promise((resolve) => {
     let done = false;
     const finish = () => {
@@ -335,4 +339,16 @@ export function trackOrderSaved(
     }
     setTimeout(finish, REDIRECT_WAIT_MS);
   });
+}
+
+/**
+ * Called by the confirmation page. Sends Meta's PageView and
+ * CompleteRegistration once, only for an order saved on this page load (a
+ * reload of /success sends nothing more) and only with Meta consent.
+ */
+export function trackOrderConfirmationView(orderId: string | null): void {
+  if (!orderId || orderId !== pendingMetaConfirmation) return;
+  pendingMetaConfirmation = null;
+  if (snapshot.choice?.meta !== true) return;
+  trackMetaOrderConfirmation();
 }
